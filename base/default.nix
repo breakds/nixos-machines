@@ -52,15 +52,16 @@
     nixops
     smbclient    
   ] ++ lib.optionals config.vital.graphical.enable [
-    audacious
-    audacity
-    steam-run-native
-    wesnoth
-    strawberry
-    discord
     feh
     google-chrome
     scrot
-    inkscape    
+    # Move to desktop specific modules
+    # strawberry
+    # audacious
+    # audacity
+    # steam-run-native
+    # wesnoth
+    # inkscape
+    # discord
   ];
 }
