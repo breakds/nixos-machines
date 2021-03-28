@@ -1,22 +1,84 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "flake-utils": {
       "locked": {
-        "lastModified": 1616903901,
-        "narHash": "sha256-eUhQHO3oqoHucPBpSxD1q01RMUAaEVcBcJg1ojT8Ukc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "eab3dcf262cc256d1945e00cc43b6844a7d895b8",
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1616863217,
+        "narHash": "sha256-UI1iem5xpxePEmd3vtOeDZik3aBH1xGLkO1Tn694Fvw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dc2870a606a7a5a6aeb387ddab78e02cbe41924b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "vital-modules": "vital-modules"
+      }
+    },
+    "vital-modules": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "vitalpkgs": "vitalpkgs"
+      },
+      "locked": {
+        "lastModified": 1616956962,
+        "narHash": "sha256-id459krcxa2Yh6SB3oj1UiQijjeF3MonaY5FyVdSDlE=",
+        "owner": "nixvital",
+        "repo": "vital-modules",
+        "rev": "c14d94843e3832552003a3253b7bec48bc8c1920",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixvital",
+        "repo": "vital-modules",
+        "rev": "c14d94843e3832552003a3253b7bec48bc8c1920",
+        "type": "github"
+      }
+    },
+    "vitalpkgs": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1616876754,
+        "narHash": "sha256-tfAdLpuY3onmc3acdXTebui1XN0chW03jrArpRsV2cY=",
+        "owner": "nixvital",
+        "repo": "vitalpkgs",
+        "rev": "10c927df697df54b428f688227e0ff1dd8f027d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixvital",
+        "repo": "vitalpkgs",
+        "rev": "10c927df697df54b428f688227e0ff1dd8f027d1",
+        "type": "github"
       }
     }
   },
