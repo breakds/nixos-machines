@@ -9,14 +9,6 @@
   # Enable to use non-free packages such as nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
-  # By default I want those software definitely.
-  environment.systemPackages = with pkgs; [
-
-
-
-    # Image, Video, Documents and Multimedia
-  ];
-
   users.extraUsers = {
     "breakds" = {
       shell = pkgs.zsh;
@@ -35,7 +27,7 @@
     cgal
 
     # Lisp Development
-    lispPacakges.quicklisp
+    lispPackages.quicklisp
 
     # For Nix Development
     nixpkgs-review
@@ -71,13 +63,4 @@
     scrot
     inkscape    
   ];
-
-  # Enable nix flakes
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
-  };  
 }
-  
