@@ -20,7 +20,8 @@
     # TODO(breakds) texlive needs to be added separately in a module
 
     # Development
-    emacs meld tig cmake clang clang-tools sbcl nodejs-14_x
+    emacs vim meld tig cmake clang clang-tools sbcl nodejs-14_x
+    git gnumake gcc silver-searcher    
     
     # C++ Development
     include-what-you-use
@@ -45,17 +46,26 @@
     gparted
     python3Packages.gdown
     pdftk
+    remmina
+    p7zip
+    unzip
+    arandr
+    ffmpeg
+    zstd 
 
     # Database and cloud
     mysql-client
     awscli2
     nixops
-    smbclient    
+    smbclient
+    nixops
   ] ++ lib.optionals config.vital.graphical.enable [
     feh
     google-chrome
     scrot
     # Move to desktop specific modules
+    # zoom-us
+    # thunderbird     
     # strawberry
     # audacious
     # audacity
