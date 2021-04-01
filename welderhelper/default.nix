@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./router.nix
     ../base
   ];
   
@@ -27,7 +28,7 @@
       useDHCP = false;
       
       # Set DHCP individually for hardware network cards.
-      interfaces.eno1.useDHCP = true;
+      interfaces.eno1.useDHCP = false;
       interfaces.wlp2s0.useDHCP = true;
     };
 
