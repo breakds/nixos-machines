@@ -6,8 +6,8 @@ let cfg = {
       localVlanId = 90;
     };
 
-    vlanUplink = "vlan.wan.${toString cfg.uplinkVlanId}";
-    vlanLocal = "vlan.lan.${toString cfg.localVlanId}";
+    vlanUplink = "vlan.wan";
+    vlanLocal = "vlan.lan";
 
 in {
   networking.networkmanager.enable = lib.mkForce false;
@@ -33,7 +33,7 @@ in {
   networking.vlans = {
     # uplink
     "${vlanUplink}" = {
-      id = cfg.localVlanId;
+      id = cfg.uplinkVlanId;
       interface = cfg.nic;
     };
 
@@ -51,8 +51,8 @@ in {
     # This is going to be the router's IP to internal devices connects
     # to it.
     ipv4.addresses = [ {
-      address = "10.73.77.1";
-      prefixLength = 24;  # Subnet Mask = 10.73.77.0/24
+      address = "10.1.1.1";
+      prefixLength = 24;  # Subnet Mask = 10.1.1.0/24
     } ];
     useDHCP = false;
   };
