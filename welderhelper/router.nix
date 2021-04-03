@@ -6,8 +6,8 @@ let cfg = {
       localVlanId = 90;
     };
 
-    vlanUplink = "vlan.wan";
-    vlanLocal = "vlan.lan";
+    vlanUplink = "wan.${toString cfg.uplinkVlanId}";
+    vlanLocal = "lan.${toString cfg.localVlanId}";
 
 in {
   networking.networkmanager.enable = lib.mkForce false;
@@ -44,6 +44,26 @@ in {
     };
   };
 
+
+  # Topology for the managed switch:
+  #
+  #
+  #
+  #  +-----+-----+-----+
+  #  |  A  |  B  |  C  | <- managed switch
+  #  |     |     |     |
+  #  +--|--+--|--+--|--+  
+  #     |     |     +------------------ Wifi AP/Devices
+  #     |     |
+  #     |     +------------ Modem
+  #   router
+  #
+  # If the vlan ID for wan is 60, and the vlan ID for lan is 90, we
+  # need to configure
+  #
+  # 1. A as a Trunk Port that allows 60 and 90
+  # 2. B as an Access (Untagged) Port with Vlan ID (and PVID) = 60
+  # 3. C as an Access (Untagged) Port with Vlan ID (and PVID) = 90
   networking.interfaces."${cfg.nic}".useDHCP = false;
   # Let the modem "DHCP me" for the uplink VLAN.
   networking.interfaces."${vlanUplink}".useDHCP = true;
