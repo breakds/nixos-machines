@@ -9,7 +9,7 @@
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home?rev=6b28ad77ed02dd51f9d22eafde00ca20917937d6";
+    nixos-home.url = "github:breakds/nixos-home?rev=abc934824c0b212d20bcfaeb60710b3faa57fef9";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
   };
 
