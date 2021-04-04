@@ -64,39 +64,29 @@ in {
     '';
   };
 
-  # NAT (and Firewall)
-  #
-  # Disable NixOS's stock firewall and NAT (by iptables) and use nftables instead.
-  #
-  # 1. Life of a packet
-  #    * input:       packet received by this machine
-  #    * output:      packet originating from this machine leaves it
-  #    * foward:      packet that are being routed by this machine
-  #    * postrouting: packet after being processed leaves this machine
-  # 2. Each chain will have a type
-  #    * filter:  allows you to accept or drop packet
-  #    * nat:     allows you to modify the source IP information
-  networking.firewall.enable = false;
-  networking.nat.enable = false;
-  networking.nftables = {
+  # Firewall
+  networking.firewall = {
     enable = true;
-    # TODO(breakds): Add firewall
-    ruleset = ''
-      define wan = ${vlanUplink}
-      define lan = ${vlanLocal}
-      # Table for the IPv4 NAT
-      table ip nat {
-        chain prerouting {
-          type nat hook prerouting priority 0
-        }
-        chain postrouting {
-          type nat hook postrouting priority 0
-          oifname $wan masquerade
-        }
-      }
-    '';
+    allowPing = true;
+    logRefusedConnections = false;
+    # If rejectPackets = true, refused packets are rejected rather than dropped (ignored). This
+    # means that an ICMP "port unreachable" error message is sent back to the client (or a TCP RST
+    # packet in case of an existing connection). Rejecting packets makes port scanning somewhat
+    # easier.
+    rejectPackets = false;
+    # Traffic coming in from these interfaces will be accepted unconditionally. Traffic from the
+    # loopback (lo) interface will always be accepted.
+    trustedInterfaces = [ vlanLocal ];
+    # Do not perform reverse path filter test on a packet.
+    checkReversePath = false;
   };
-  
+
+  # NAT
+  networking.nat = {
+    enable = true;
+    externalInterface = vlanUplink;
+    internalInterfaces = [ vlanLocal ];
+  };
 
   # Topology for the managed switch:
   #
@@ -125,7 +115,7 @@ in {
     # to it.
     ipv4.addresses = [ {
       address = "10.77.1.1";
-      prefixLength = 24;  # Subnet Mask = 10.1.1.0/24
+      prefixLength = 24;  # Subnet Mask = 255.255.255.0
     } ];
     useDHCP = false;
   };
