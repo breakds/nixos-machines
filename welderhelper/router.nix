@@ -44,6 +44,7 @@ in {
     };
   };
 
+  # Enable DHCP
   services.dhcpd4 = {
     enable = true;
     interfaces = [ vlanLocal ];
@@ -62,6 +63,40 @@ in {
       }
     '';
   };
+
+  # NAT (and Firewall)
+  #
+  # Disable NixOS's stock firewall and NAT (by iptables) and use nftables instead.
+  #
+  # 1. Life of a packet
+  #    * input:       packet received by this machine
+  #    * output:      packet originating from this machine leaves it
+  #    * foward:      packet that are being routed by this machine
+  #    * postrouting: packet after being processed leaves this machine
+  # 2. Each chain will have a type
+  #    * filter:  allows you to accept or drop packet
+  #    * nat:     allows you to modify the source IP information
+  networking.firewall.enable = false;
+  networking.nat.enable = false;
+  networking.nftables = {
+    enable = true;
+    # TODO(breakds): Add firewall
+    ruleset = ''
+      define wan = ${vlanUplink}
+      define lan = ${vlanLocal}
+      # Table for the IPv4 NAT
+      table ip nat {
+        chain prerouting {
+          type nat hook prerouting priority 0
+        }
+        chain postrouting {
+          type nat hook postrouting priority 0
+          oifname $wan masquerade
+        }
+      }
+    '';
+  };
+  
 
   # Topology for the managed switch:
   #
