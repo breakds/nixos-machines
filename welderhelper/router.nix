@@ -6,8 +6,8 @@ let cfg = {
       localVlanId = 90;
     };
 
-    vlanUplink = "wan.${toString cfg.uplinkVlanId}";
-    vlanLocal = "lan.${toString cfg.localVlanId}";
+    vlanUplink = "wan${toString cfg.uplinkVlanId}";
+    vlanLocal = "lan${toString cfg.localVlanId}";
 
 in {
   networking.networkmanager.enable = lib.mkForce false;
