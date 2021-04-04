@@ -119,4 +119,10 @@ in {
     } ];
     useDHCP = false;
   };
+
+  # iperf3 Server for speed/bandwidth testing
+  services.iperf3 = {
+    enable = true;
+    bind = vlanLocal;
+  };
 }
