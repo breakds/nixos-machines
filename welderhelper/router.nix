@@ -48,6 +48,13 @@ in {
   services.dhcpd4 = {
     enable = true;
     interfaces = [ vlanLocal ];
+    machines = [
+      {
+        ethernetAddress = "";
+        hostName = "gilgamesh";
+        ipAddress = "10.77.1.117";
+      }
+    ];
     extraConfig = ''
       option domain-name-servers 1.1.1.1, 8.8.8.8, 8.8.4.4;
       option subnet-mask 255.255.255.0;
@@ -86,6 +93,11 @@ in {
     enable = true;
     externalInterface = vlanUplink;
     internalInterfaces = [ vlanLocal ];
+    forwardPorts = [
+      { sourcePort = 22; destination = "10.77.1.117:22"; }
+      { sourcePort = 80; destination = "10.77.1.117:80"; }
+      { sourcePort = 443; destination = "10.77.1.117:443"; }
+    ];
   };
 
   # Topology for the managed switch:
