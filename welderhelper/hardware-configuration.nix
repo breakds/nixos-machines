@@ -11,6 +11,9 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  # For nic e1000e issue per
+  # https://serverfault.com/questions/193114/linux-e1000e-intel-networking-driver-problems-galore-where-do-i-start/219658#219658
+  boot.kernelParams = [ "pcie_aspm=off" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
