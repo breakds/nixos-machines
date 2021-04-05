@@ -10,7 +10,7 @@ in {
 
     serviceConfig.Type = "simple";
 
-    script = "${wan-online}/bin/wan-online eno1 /tmp/online_state.txt";
+    script = "${wan-online}/bin/wan-online wan60 /tmp/online_state.txt";
   };
 
   systemd.timers.check-wan-oneline = {
