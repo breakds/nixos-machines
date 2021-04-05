@@ -93,6 +93,7 @@ in {
     enable = true;
     externalInterface = vlanUplink;
     internalInterfaces = [ vlanLocal ];
+    internalIPs = [ "10.77.1.0/24" ];
     forwardPorts = [
       { sourcePort = 22; destination = "10.77.1.117:22"; }
       { sourcePort = 80; destination = "10.77.1.117:80"; }
