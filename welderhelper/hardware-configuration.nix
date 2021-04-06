@@ -21,7 +21,7 @@
     #
     # Note that it is very unfortunate we cannot use good features such as gso/gro/tso to offload
     # the burdens from CPU to the NIC, but this actually get things running which is good for now.
-    ${pkgs.ethtool}/bin/ethtool -K eth0 gso off gro off tso off
+    ${pkgs.ethtool}/bin/ethtool -K eno1 gso off gro off tso off
   '';
 
   fileSystems."/" =
