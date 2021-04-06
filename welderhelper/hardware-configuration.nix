@@ -11,10 +11,18 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+
   # For nic e1000e issue per
   # https://serverfault.com/questions/193114/linux-e1000e-intel-networking-driver-problems-galore-where-do-i-start/219658#219658
   boot.kernelParams = [ "pcie_aspm=off" ];
-  boot.extraModulePackages = [ ];
+  networking.localCommands = ''
+    # The commands will run at the end of network setup
+    #
+    # Note that it is very unfortunate we cannot use good features such as gso/gro/tso to offload
+    # the burdens from CPU to the NIC, but this actually get things running which is good for now.
+    ${pkgs.ethtool}/bin/ethtool -K eth0 gso off gro off tso off
+  '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/50becea5-6f4c-4ac8-86a3-9ae65bbf6402";
