@@ -97,8 +97,8 @@ in {
     internalIPs = [ "10.77.1.0/24" ];
     forwardPorts = [
       { sourcePort = 22; destination = "10.77.1.117:22"; loopbackIPs = [ "23.119.127.221" ]; }
-      { sourcePort = 80; destination = "10.77.1.117:80"; }
-      { sourcePort = 443; destination = "10.77.1.117:443"; }
+      { sourcePort = 80; destination = "10.77.1.117:80"; loopbackIPs = [ "23.119.127.221" ]; }
+      { sourcePort = 443; destination = "10.77.1.117:443"; loopbackIPs = [ "23.119.127.221" ]; }
     ];
   };
 
