@@ -139,4 +139,9 @@ in {
     enable = true;
     openFirewall = true;
   };
+
+  # Other helpful tools
+  environment.systemPackages = with pkgs; [
+    tcpdump ethtool
+  ];
 }
