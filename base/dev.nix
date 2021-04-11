@@ -28,5 +28,11 @@
     mysql-client
     awscli2
     nixops
+
+    # Performance Tools
+    sysstat
+    linuxPackages.perf
+    perf-tools # By Brendan Gregg
+    flameGraph
   ];
 }
