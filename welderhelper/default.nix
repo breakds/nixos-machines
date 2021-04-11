@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ./router.nix
-    ./check-wan-online.nix
     ../base
   ];
   
