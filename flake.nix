@@ -5,11 +5,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules?rev=b03455e59353e1eec7950ed7d7a7aaa98530fb10";
+    vital-modules.url = "github:nixvital/vital-modules?rev=2699b2a918d7cb91930387576593b8be462ddff8";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home?rev=abc934824c0b212d20bcfaeb60710b3faa57fef9";
+    nixos-home.url = "github:breakds/nixos-home?rev=a031a60d286686705d78469c4fdee300565c333c";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -21,6 +21,17 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./welderhelper
+        ];
+      };
+
+      zen = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.laptop-lids
+          vital-modules.nixosModules.iphone-connect
+          nixos-home.nixosModules.cassandra-home
+          ./zen
         ];
       };
     };
