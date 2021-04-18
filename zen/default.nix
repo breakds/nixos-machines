@@ -11,7 +11,7 @@
     vital.mainUser = "cassandra";
 
     networking = {
-      hostName = "welderhelper";
+      hostName = "zen";
       hostId = "6b6980fa";
     };    
 
