@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ../base
-    # ../../modules/dev/vscode.nix
   ];
 
   config = {
