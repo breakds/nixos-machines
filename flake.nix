@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules?rev=e7b3fc291d17223b17fa9ea2a525b8ff9747b6f9";
+    vital-modules.url = "github:nixvital/vital-modules?rev=487d27cb47cf2e7c503af687733e529590cf10df";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
@@ -21,6 +21,15 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./welderhelper
+        ];
+      };
+
+      gilgamesh = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          ./gilgamesh
         ];
       };
 
