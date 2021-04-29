@@ -21,6 +21,7 @@
       enable = true;
       xserver.dpi = 100;
       nvidia.enable = true;
+      remote-desktop.enable = true;
     };
     
     environment.systemPackages = with pkgs; [
