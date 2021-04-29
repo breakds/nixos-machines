@@ -14,18 +14,18 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXOS_SYS";
+    { device = "/dev/disk/by-uuid/9acd0067-38d1-45b6-91a0-b1d91e5c1256";
       fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/4BEC-8712";
+      fsType = "vfat";
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/897d746b-9752-4639-9598-cea5cdb2bf75";
       fsType = "btrfs";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/sdb1";
-      fsType = "vfat";
     };
 
   fileSystems."/opt/chiaplot" = {
@@ -37,6 +37,6 @@
     [ { device = "/dev/disk/by-uuid/fcaaa04d-0c2e-469b-9755-eea13aaeb2cd"; }
     ];
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.maxJobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }
