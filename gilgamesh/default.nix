@@ -4,6 +4,20 @@
   imports = [
     ./hardware-configuration.nix
     ../base
+    ./zrw.nix
+    # ../modules/services/samba.nix
+    # ../modules/services/deluge.nix
+    # ../modules/services/nginx.nix
+    # ../modules/services/cgit.nix
+    # ../modules/services/homepage.nix
+    # ../modules/services/gitea.nix
+    # ../modules/services/filerun.nix
+    # ../modules/services/terraria.nix
+    # ../modules/services/jupyter-lab.nix
+    # ../modules/services/nix-serve.nix
+    # ../modules/services/docker-registry.nix
+    # ../modules/dev/python-environment.nix
+    # ../containers/declarative/hydrahead.nix
   ];
 
   config = {
