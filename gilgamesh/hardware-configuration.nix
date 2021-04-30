@@ -28,11 +28,6 @@
       fsType = "btrfs";
     };
 
-  fileSystems."/opt/chiaplot" = {
-    device = "/dev/disk/by-uuid/728dfd8a-2f8f-4322-9d52-b19ade850f1c";
-    fsType = "ext4";
-  };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/fcaaa04d-0c2e-469b-9755-eea13aaeb2cd"; }
     ];
