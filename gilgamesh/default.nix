@@ -5,11 +5,11 @@
     ./hardware-configuration.nix
     ../base
     ./zrw.nix
+    ./homepage.nix
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
     # ../modules/services/nginx.nix
     # ../modules/services/cgit.nix
-    # ../modules/services/homepage.nix
     # ../modules/services/gitea.nix
     # ../modules/services/filerun.nix
     # ../modules/services/terraria.nix
@@ -37,9 +37,53 @@
       nvidia.enable = true;
       remote-desktop.enable = true;
     };
+
+    # +----------------+
+    # | Overlays       |
+    # +----------------+
+
+    nixpkgs.overlays = [
+      (final: prev: {
+        ethminer = final.callPackage ../pkgs/temp/ethminer {};
+        www-breakds-org = final.callPackage ../pkgs/www-breakds-org {};
+      })
+    ];
     
     environment.systemPackages = with pkgs; [
     ];
+
+    # +----------------+
+    # | Services       |
+    # +----------------+
+
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    security.acme = {
+      acceptTerms = true;
+      email = "bds@breakds.org";
+    };
+
+    services.nginx = {
+      enable = true;
+      package = pkgs.nginxMainline;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
+
+      # TODO(breakds): Make this per virtual host.
+      clientMaxBodySize = "500m";
+    };
+
+    services.ethminer = {
+      enable = true;
+      recheckInterval = 500;
+      toolkit = "cuda";
+      wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.gilgamesh3080";
+      pool = "us2.ethermine.org";
+      stratumPort = 4444;
+      maxPower = 340;
+      registerMail = "";
+      rig = "";
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
