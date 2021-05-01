@@ -8,7 +8,6 @@
     ./homepage.nix
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
-    # ../modules/services/gitea.nix
     # ../modules/services/terraria.nix
     # ../modules/services/jupyter-lab.nix
     # ../modules/services/nix-serve.nix
@@ -98,6 +97,13 @@
       workDir = "/home/delegator/filerun";
       port = 5962;
       domain = "files.breakds.org";
+    };
+
+    vital.services.gitea = {
+      enable = true;
+      domain = "git.breakds.org";
+      port = 5965;
+      appName = "Git Repos of Break and Shan";
     };
 
     # This value determines the NixOS release from which the default
