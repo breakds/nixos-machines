@@ -9,7 +9,6 @@
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
     # ../modules/services/gitea.nix
-    # ../modules/services/filerun.nix
     # ../modules/services/terraria.nix
     # ../modules/services/jupyter-lab.nix
     # ../modules/services/nix-serve.nix
@@ -92,6 +91,13 @@
       enable = true;
       domain = "docker.breakds.org";
       port = 5050;
+    };
+
+    vital.services.filerun = {
+      enable = true;
+      workDir = "/home/delegator/filerun";
+      port = 5962;
+      domain = "filerun.breakds.org";
     };
 
     # This value determines the NixOS release from which the default
