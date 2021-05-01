@@ -97,7 +97,7 @@
       enable = true;
       workDir = "/home/delegator/filerun";
       port = 5962;
-      domain = "filerun.breakds.org";
+      domain = "files.breakds.org";
     };
 
     # This value determines the NixOS release from which the default
