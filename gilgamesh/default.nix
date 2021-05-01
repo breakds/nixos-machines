@@ -8,14 +8,11 @@
     ./homepage.nix
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
-    # ../modules/services/nginx.nix
-    # ../modules/services/cgit.nix
     # ../modules/services/gitea.nix
     # ../modules/services/filerun.nix
     # ../modules/services/terraria.nix
     # ../modules/services/jupyter-lab.nix
     # ../modules/services/nix-serve.nix
-    # ../modules/services/docker-registry.nix
     # ../modules/dev/python-environment.nix
     # ../containers/declarative/hydrahead.nix
   ];
@@ -70,7 +67,7 @@
       recommendedProxySettings = true;
 
       # TODO(breakds): Make this per virtual host.
-      clientMaxBodySize = "500m";
+      clientMaxBodySize = "1000m";
     };
 
     services.ethminer = {
@@ -83,6 +80,12 @@
       maxPower = 340;
       registerMail = "";
       rig = "";
+    };
+
+    vital.services.docker-registry = {
+      enable = true;
+      domain = "docker.bareakds.org";
+      port = 5050;
     };
 
     # This value determines the NixOS release from which the default

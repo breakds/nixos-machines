@@ -89,17 +89,17 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1619656028,
-        "narHash": "sha256-5KYneff5j8MknY8BFMJDnph2svZGXtWV78cBjSO1640=",
+        "lastModified": 1619833080,
+        "narHash": "sha256-qc/YmZXVXJ1MNeIKTJtX3Of1moOKHjl4Ob/ZTLBJxG4=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "487d27cb47cf2e7c503af687733e529590cf10df",
+        "rev": "777176f9e789d2543bfb6f66de504d731baaac7f",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "487d27cb47cf2e7c503af687733e529590cf10df",
+        "rev": "777176f9e789d2543bfb6f66de504d731baaac7f",
         "type": "github"
       }
     },

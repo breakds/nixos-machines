@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules?rev=487d27cb47cf2e7c503af687733e529590cf10df";
+    vital-modules.url = "github:nixvital/vital-modules?rev=777176f9e789d2543bfb6f66de504d731baaac7f";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
