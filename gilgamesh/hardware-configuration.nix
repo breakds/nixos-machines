@@ -38,6 +38,16 @@
       fsType = "ext4";
     };
 
+  fileSystems."/opt/chia/plots/1" =
+    { device = "/dev/disk/by-label/chia_plots_1";
+      fsType = "ext4";
+    };
+
+  fileSystems."/opt/chia/plots/2" =
+    { device = "/dev/disk/by-label/chia_plots_2";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/fcaaa04d-0c2e-469b-9755-eea13aaeb2cd"; }
     ];
