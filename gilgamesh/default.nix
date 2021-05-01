@@ -6,9 +6,9 @@
     ../base
     ./zrw.nix
     ./homepage.nix
+    ./terraria.nix
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
-    # ../modules/services/terraria.nix
     # ../modules/services/jupyter-lab.nix
     # ../modules/services/nix-serve.nix
     # ../modules/dev/python-environment.nix
