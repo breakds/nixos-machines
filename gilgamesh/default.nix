@@ -90,7 +90,7 @@
 
     vital.services.docker-registry = {
       enable = true;
-      domain = "docker.bareakds.org";
+      domain = "docker.breakds.org";
       port = 5050;
     };
 
