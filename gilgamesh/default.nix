@@ -108,6 +108,8 @@
 
     vital.services.chia-blockchain = {
       enable = true;
+      plottingDirectory = "/opt/chia/plotting";
+      dotchiaDirectory = "/opt/chia/dotchia";
     };
 
     # This value determines the NixOS release from which the default
