@@ -7,6 +7,7 @@
     ./zrw.nix
     ./homepage.nix
     ./terraria.nix
+    ./chia-helper.nix
     # ../modules/services/samba.nix
     # ../modules/services/deluge.nix
     # ../modules/services/jupyter-lab.nix
