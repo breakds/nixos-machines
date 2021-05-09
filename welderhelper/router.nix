@@ -55,6 +55,11 @@ in {
         hostName = "gilgamesh";
         ipAddress = "10.77.1.117";
       }
+      {
+        ethernetAddress = "B4:2E:99:31:7D:95";
+        hostName = "hardstone";
+        ipAddress = "10.77.1.118";
+      }
     ];
     extraConfig = ''
       option domain-name-servers 1.1.1.1, 8.8.8.8, 8.8.4.4;
