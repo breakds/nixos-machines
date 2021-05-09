@@ -108,7 +108,7 @@
     };
 
     vital.services.chia-blockchain = {
-      enable = true;
+      enable = false;
       plottingDirectory = "/opt/chia/plotting";
       plotsDirectory = "/home/breakds/plots";
       dotchiaDirectory = "/opt/chia/dotchia";

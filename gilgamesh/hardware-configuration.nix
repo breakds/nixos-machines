@@ -28,16 +28,6 @@
       fsType = "btrfs";
     };
 
-  fileSystems."/opt/chia/plotting/ssd" =
-    { device = "/dev/disk/by-label/plotting_ssd";
-      fsType = "ext4";
-    };
-
-  fileSystems."/opt/chia/plotting/nvme" =
-    { device = "/dev/disk/by-label/plotting_nvme";
-      fsType = "ext4";
-    };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/fcaaa04d-0c2e-469b-9755-eea13aaeb2cd"; }
     ];
