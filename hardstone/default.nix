@@ -42,7 +42,7 @@
     # };
 
     services.nginx = {
-      enable = true;
+      enable = false;
       package = pkgs.nginxMainline;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
