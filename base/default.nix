@@ -11,7 +11,7 @@
 
   users.extraUsers = {
     "breakds" = {
-      shell = pkgs.zsh;
+      shell = lib.mkDefault pkgs.zsh;
       useDefaultShell = false;
     };
   };
