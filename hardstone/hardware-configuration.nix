@@ -38,6 +38,16 @@
       fsType = "ext4";
     };
 
+  fileSystems."/var/lib/chia/farm/2" =
+    { device = "/dev/disk/by-label/CHIAFARM2";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/chia/farm/3" =
+    { device = "/dev/disk/by-label/CHIAFARM3";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/2ca4fc6a-7643-4a77-af7f-14a57011ab23"; }
     ];
