@@ -1,59 +1,6 @@
 {
   "nodes": {
-    "chiafan-workforce": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "plotting-simulator": "plotting-simulator"
-      },
-      "locked": {
-        "lastModified": 1620938758,
-        "narHash": "sha256-ikGsJTLf8kt7eTmwtXvGkFx/bVXHb/mY1KPLwTCVLME=",
-        "owner": "chiafan-org",
-        "repo": "chiafan-workforce",
-        "rev": "3808e7bd06427adfee14399a7f1270b2dc8a1889",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chiafan-org",
-        "repo": "chiafan-workforce",
-        "rev": "3808e7bd06427adfee14399a7f1270b2dc8a1889",
-        "type": "github"
-      }
-    },
     "flake-utils": {
-      "locked": {
-        "lastModified": 1619345332,
-        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1620759905,
-        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
       "locked": {
         "lastModified": 1614513358,
         "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
@@ -113,22 +60,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1620764783,
-        "narHash": "sha256-b1jVyjyO79wf1J8vAtkwSwvwVC9QOrn0liMWrqdEzcQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f34eb300b68ea66ef8a2dbc5eec3c86a8270e414",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-20.09",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1616863217,
         "narHash": "sha256-UI1iem5xpxePEmd3vtOeDZik3aBH1xGLkO1Tn694Fvw=",
         "owner": "NixOS",
@@ -143,7 +74,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1620942579,
         "narHash": "sha256-Mg+liMXvZ5pKpexvM8c4DNpLAt1NwgTfaqtoPIPk1ig=",
@@ -157,30 +88,10 @@
         "type": "indirect"
       }
     },
-    "plotting-simulator": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1620927252,
-        "narHash": "sha256-hTYlKS0ZNnR0DWmaxuVWxRxogbIYcIH1y5GbCxIC52M=",
-        "owner": "chiafan-org",
-        "repo": "plotting-simulator",
-        "rev": "54c53c96c907b3e4102a35ca0bdfd6b94fabf00f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chiafan-org",
-        "repo": "plotting-simulator",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "chiafan-workforce": "chiafan-workforce",
         "nixos-home": "nixos-home",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "vital-modules": "vital-modules"
       }
     },
@@ -192,37 +103,37 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1620942928,
-        "narHash": "sha256-AcwRpOZ1epvvwH8zTB/l+q5K4NCF68Rg+UWLyJFgHCc=",
+        "lastModified": 1620945029,
+        "narHash": "sha256-S/Cd25aIeEcncvRT1kFknm+X6D0S2WPiVSybWoU0LnA=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "fac1ab14b2d53708afaba654bd8503fa9456659e",
+        "rev": "3b869265725a61de267116ef3ab182abbe57f542",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "fac1ab14b2d53708afaba654bd8503fa9456659e",
+        "rev": "3b869265725a61de267116ef3ab182abbe57f542",
         "type": "github"
       }
     },
     "vitalpkgs": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_3"
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1620942267,
-        "narHash": "sha256-GWmQfSnw27dGj9VEXg3g8IvXoK9KKCDeMjFb+tIXHIw=",
+        "lastModified": 1620944976,
+        "narHash": "sha256-nAtjhT7Pt+Qv1jvlccCGuxzGKJ+mXBOBJyPxFtlXTns=",
         "owner": "nixvital",
         "repo": "vitalpkgs",
-        "rev": "524a2d704054fa04abcc12705c2b54a71a2a89ff",
+        "rev": "315fc6bd22ee01df568cf411bc64b90370dd15ea",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
         "repo": "vitalpkgs",
-        "rev": "524a2d704054fa04abcc12705c2b54a71a2a89ff",
+        "rev": "315fc6bd22ee01df568cf411bc64b90370dd15ea",
         "type": "github"
       }
     }
