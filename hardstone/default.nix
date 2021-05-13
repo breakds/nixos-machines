@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
     ../base
     ./chia-helper.nix
-    ./chiafan-workforce.nix
   ];
 
   config = {
@@ -50,6 +49,10 @@
       workers = [
         "/plotting/nvme1:/plots/2"
         "/plotting/nvme1:/plots/2"
+        "/plotting/nvme1:/plots/2"
+        "/plotting/nvme1:/plots/2"
+        "/plotting/nvme2:/plots/2"
+        "/plotting/nvme2:/plots/2"
       ];
     };
 
