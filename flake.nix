@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules?rev=246b181f957b2d7a843bc01143145c2c765c090e";
+    vital-modules.url = "github:nixvital/vital-modules?rev=fac1ab14b2d53708afaba654bd8503fa9456659e";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
@@ -52,7 +52,6 @@
         system = "x86_64-linux";
         modules = [
           ({ pkgs, ... }: {
-            nixpkgs.overlays = [ chiafan-workforce.overlay ];
             environment.systemPackages = [ pkgs.python3Packages.chiafan-workforce ];
           })
            vital-modules.nixosModules.foundation
