@@ -11,9 +11,13 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:breakds/nixos-home?rev=a2c05fc7fcac090b756086eba8b0762178391c30";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
+
+    # chiafan-workforce, with the same nixpkgs
+    chiafan-workforce.url = "github:chiafan-org/chiafan-workforce?rev=3808e7bd06427adfee14399a7f1270b2dc8a1889";
+    chiafan-workforce.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, vital-modules, nixos-home, ... }: {
+  outputs = { self, nixpkgs, vital-modules, nixos-home, chiafan-workforce, ... }: {
     nixosConfigurations = {
       welderhelper = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -47,7 +51,11 @@
       hardstone = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          vital-modules.nixosModules.foundation
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [ chiafan-workforce.overlay ];
+            environment.systemPackages = [ pkgs.python3Packages.chiafan-workforce ];
+          })
+           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./hardstone
         ];
@@ -55,3 +63,4 @@
     };
   };
 }
+
