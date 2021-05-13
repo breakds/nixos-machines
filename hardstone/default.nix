@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../base
     ./chia-helper.nix
+    ./chiafan-workforce.nix
   ];
 
   config = {
@@ -41,6 +42,16 @@
     #   acceptTerms = true;
     #   email = "bds@breakds.org";
     # };
+
+    vital.services.chiafan-workforce = {
+      enable = true;
+      farmKey = "8d3e6ed9dc07e3f38fb7321adc3481a95fbdea515f60ff9737c583c5644c6cf83a5e38e9f3e1fc01d43deef0fa1bd0be";
+      poolKey = "ad0dce731a9ef1813dca8498fa37c3abda52ad76795a8327ea883e6aa6ee023f9e06e9a0d5ea1fa3c625261b9da18f12";
+      workers = [
+        "/plotting/nvme1:/plots/2"
+        "/plotting/nvme1:/plots/2"
+      ];
+    };
 
     services.nginx = {
       enable = false;
