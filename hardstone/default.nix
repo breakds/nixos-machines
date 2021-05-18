@@ -51,9 +51,11 @@
         "/plotting/nvme1:/plots/3"
         "/plotting/nvme1:/plots/3"
         "/plotting/nvme1:/plots/3"
+        "/plotting/nvme1:/plots/3"
         "/plotting/nvme2:/plots/3"
         "/plotting/nvme2:/plots/3"
       ];
+      forwardConcurrency = 4;
     };
 
     services.nginx = {
