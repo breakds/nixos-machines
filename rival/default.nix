@@ -14,7 +14,7 @@
       openssh.authorizedKeys.keyFiles = [
         ../data/keys/breakds_samaritan.pub
       ];
-      shell = pkgs.bash;
+      shell = pkgs.zsh;
     };
     
     # Machine-specific networking configuration.
