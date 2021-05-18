@@ -20,6 +20,7 @@
     gparted pass smbclient
   ] ++ lib.optionals config.vital.graphical.enable [
     feh
+    jq
     google-chrome
     scrot
     # Move to desktop specific modules
