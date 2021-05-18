@@ -44,27 +44,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1618809755,
-        "narHash": "sha256-HPmDlEZxXz3LoZXYltcO8arHh8U8ve2cuTJCRo/dBuE=",
+        "lastModified": 1621352528,
+        "narHash": "sha256-Ag+Yp9DnXt/bDUUnKZDlx74N+KjMyR6xLFWDEWN4WYE=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "a2c05fc7fcac090b756086eba8b0762178391c30",
+        "rev": "6c2cd708d73c4efca026d8f90cab9fbc27bf2184",
         "type": "github"
       },
       "original": {
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "a2c05fc7fcac090b756086eba8b0762178391c30",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1616863217,
-        "narHash": "sha256-UI1iem5xpxePEmd3vtOeDZik3aBH1xGLkO1Tn694Fvw=",
+        "lastModified": 1621231671,
+        "narHash": "sha256-JibKd8VVGRCS0fpjkQcMxkCsCJz0qbrDMkf5++OMkyE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dc2870a606a7a5a6aeb387ddab78e02cbe41924b",
+        "rev": "52090c613ad854abb824dcbba20e19bfa3890e91",
         "type": "github"
       },
       "original": {
@@ -89,11 +88,11 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1621022678,
-        "narHash": "sha256-HaZGyqOgkt+bwePnvHhYMPcgaxsTNWL+5xTz7P79U4w=",
+        "lastModified": 1621201785,
+        "narHash": "sha256-rC4zPuZn2XGrAWsg8fpxWvoFVzHLFFqoNQKzgcPoHXA=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "dd709d9348938e484ec20fb49c824f7f9da05982",
+        "rev": "66b90116c8e6221f79649abac5d31eacf657ced2",
         "type": "github"
       },
       "original": {
@@ -110,11 +109,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1621022506,
-        "narHash": "sha256-pbpca5U/pVQ+gG8RTQb6Iyu95DrmK3dLQ+aYZY+1ImM=",
+        "lastModified": 1621201694,
+        "narHash": "sha256-I6qGXJ3EGjnLbp0UvC9sOANfGtlT4wc1bSWp/3M/0O8=",
         "owner": "nixvital",
         "repo": "vitalpkgs",
-        "rev": "9b9368629903409f777dd5f32c8b281146f80ba4",
+        "rev": "560611656b8051382f9693bf4eacf8cad993b7fb",
         "type": "github"
       },
       "original": {
