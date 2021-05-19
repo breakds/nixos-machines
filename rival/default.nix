@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../base
+    ../base/i3-session-breakds.nix
     # ../modules/dev/arduino.nix
   ];
 
