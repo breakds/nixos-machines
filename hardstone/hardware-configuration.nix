@@ -33,23 +33,28 @@
       fsType = "ext4";
     };
 
-  fileSystems."/var/lib/chia/farm/1" =
-    { device = "/dev/disk/by-label/CHIAFARM1";
-      fsType = "ext4";
-    };
-
-  fileSystems."/var/lib/chia/farm/2" =
-    { device = "/dev/disk/by-label/CHIAFARM2";
-      fsType = "ext4";
-    };
-
-  fileSystems."/var/lib/chia/farm/3" =
-    { device = "/dev/disk/by-label/CHIAFARM3";
-      fsType = "ext4";
-    };
-
-  fileSystems."/var/lib/chia/farm/4" =
+  fileSystems."/var/lib/chia/farm/CHIAFARM4" =
     { device = "/dev/disk/by-label/CHIAFARM4";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/chia/farm/CHIAFARM5" =
+    { device = "/dev/disk/by-label/CHIAFARM5";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/chia/farm/F01" =
+    { device = "/dev/disk/by-label/F01";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/chia/farm/F04" =
+    { device = "/dev/disk/by-label/F04";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/chia/farm/F07" =
+    { device = "/dev/disk/by-label/F07";
       fsType = "ext4";
     };
 
