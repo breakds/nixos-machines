@@ -60,6 +60,11 @@ in {
         hostName = "hardstone";
         ipAddress = "10.77.1.118";
       }
+      {
+        ethernetAddress = "34:17:Eb:99:E0:36";
+        hostName = "hobbit1";
+        ipAddress = "10.77.1.119";
+      }
     ];
     extraConfig = ''
       option domain-name-servers 1.1.1.1, 8.8.8.8, 8.8.4.4;
