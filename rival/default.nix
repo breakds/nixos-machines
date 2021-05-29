@@ -33,6 +33,7 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = true;
+      xserver.useCapsAsCtrl = true;
     };
 
     environment.systemPackages = with pkgs; [
