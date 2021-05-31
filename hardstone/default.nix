@@ -37,6 +37,17 @@
     # | Services       |
     # +----------------+
 
+    # For mouting iSCSI disks
+    services.iscsid = {
+      enable = true;
+      initiatorName = "iqn.2021-05.org.linux-iscsi.initiatorhost:hardstone";
+      scanTargets = [{
+        target = "10.77.1.119";
+        port = 3260;
+        type = "sendtargets";
+      }];
+    };
+
     networking.firewall.allowedTCPPorts = [ 80 443 8444 ];
     # security.acme = {
     #   acceptTerms = true;
