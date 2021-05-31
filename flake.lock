@@ -93,7 +93,6 @@
       "inputs": {
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "vital-modules": "vital-modules"
       }
     },
@@ -102,14 +101,15 @@
         "nixpkgs": [
           "nixpkgs"
         ],
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1621461096,
-        "narHash": "sha256-EhC3lThRVP8wQcQr/UcYJinzasibZov9TfZPbQ+KB7g=",
+        "lastModified": 1622485435,
+        "narHash": "sha256-cCo+CoRARnEnoQPPUtI0BU0uz8FMmTu+lZwfyRwXIu4=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "ff6ff94d9c9ec70696dc321860951303705dfcd6",
+        "rev": "f7fc1dca4962041cafddbcdbacf69bbf02cec946",
         "type": "github"
       },
       "original": {
