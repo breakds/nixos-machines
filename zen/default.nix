@@ -26,7 +26,12 @@
       skypeforlinux
       nodejs-12_x
       (yarn.override { nodejs = nodejs-12_x; })
-      nodePackages.create-react-app
+      (nodePackages.create-react-app.override {
+        preRebuild = ''
+            substituteInPlace $(find -type f -name createReactApp.js) \
+                --replace "path.join(root, 'yarn.lock')" "path.join(root, 'yarn.lock')); fs.chmodSync(path.join(root, 'yarn.lock'), 0o644"
+        '';
+      })
     ];
 
     # This value determines the NixOS release from which the default settings
