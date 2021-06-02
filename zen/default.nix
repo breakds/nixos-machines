@@ -23,8 +23,10 @@
 
     environment.systemPackages = with pkgs; [
       gimp peek gnupg pass libreoffice
-      nodejs-12_x
       skypeforlinux
+      nodejs-12_x
+      (yarn.override { nodejs = nodejs-12_x; })
+      nodePackages.create-react-app
     ];
 
     # This value determines the NixOS release from which the default settings
