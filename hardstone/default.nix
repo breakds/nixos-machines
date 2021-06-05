@@ -61,14 +61,14 @@
       poolKey = "ad0dce731a9ef1813dca8498fa37c3abda52ad76795a8327ea883e6aa6ee023f9e06e9a0d5ea1fa3c625261b9da18f12";
       workers = [
         "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/CHIAFARM5"
+        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/F30"
+        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/F31"
         "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/CHIAFARM5"
-        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/CHIAFARM5"
-        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/CHIAFARM5"
-        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/CHIAFARM5"
-        "/var/lib/chia/plotting/nvme2:/var/lib/chia/farm/CHIAFARM5"
+        "/var/lib/chia/plotting/nvme1:/var/lib/chia/farm/F32"
+        "/var/lib/chia/plotting/nvme2:/var/lib/chia/farm/F33"
         "/var/lib/chia/plotting/nvme2:/var/lib/chia/farm/CHIAFARM5"
       ];
-      staggering = 1200;
+      staggering = 900;
       forwardConcurrency = 3;
     };
 
