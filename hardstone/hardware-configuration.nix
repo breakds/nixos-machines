@@ -33,23 +33,17 @@
       fsType = "ext4";
     };
 
-  # fileSystems."/var/lib/chia/farm/CHIAFARM4" =
-  #   { device = "/dev/disk/by-label/CHIAFARM4";
-  #     fsType = "ext4";
-  #     options = [ "auto" "nofail" ];
-  #   };
+  fileSystems."/var/lib/chia/farm/CHIAFARM5" =
+    { device = "/dev/disk/by-label/CHIAFARM5";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
 
-  # fileSystems."/var/lib/chia/farm/CHIAFARM5" =
-  #   { device = "/dev/disk/by-label/CHIAFARM5";
-  #     fsType = "ext4";
-  #     options = [ "auto" "nofail" ];
-  #   };
-
-  # fileSystems."/var/lib/chia/farm/F01" =
-  #   { device = "/dev/disk/by-label/F01";
-  #     fsType = "ext4";
-  #     options = [ "auto" "nofail" ];
-  #   };
+  fileSystems."/var/lib/chia/farm/F32" =
+    { device = "/dev/disk/by-label/F32";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
 
   # fileSystems."/var/lib/chia/farm/F04" =
   #   { device = "/dev/disk/by-label/F04";

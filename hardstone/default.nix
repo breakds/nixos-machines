@@ -39,7 +39,7 @@
 
     # For mouting iSCSI disks
     services.iscsid = {
-      enable = true;
+      enable = false;
       initiatorName = "iqn.2021-05.org.linux-iscsi.initiatorhost:hardstone";
       scanTargets = [{
         target = "10.77.1.119";
