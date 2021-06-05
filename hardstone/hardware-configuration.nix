@@ -39,23 +39,29 @@
       options = [ "auto" "nofail" ];
     };
 
+  fileSystems."/var/lib/chia/farm/F30" =
+    { device = "/dev/disk/by-label/F30";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/var/lib/chia/farm/F31" =
+    { device = "/dev/disk/by-label/F31";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
   fileSystems."/var/lib/chia/farm/F32" =
     { device = "/dev/disk/by-label/F32";
       fsType = "ext4";
       options = [ "auto" "nofail" ];
     };
 
-  # fileSystems."/var/lib/chia/farm/F04" =
-  #   { device = "/dev/disk/by-label/F04";
-  #     fsType = "ext4";
-  #     options = [ "auto" "nofail" ];
-  #   };
-
-  # fileSystems."/var/lib/chia/farm/F07" =
-  #   { device = "/dev/disk/by-label/F07";
-  #     fsType = "ext4";
-  #     options = [ "auto" "nofail" ];
-  #   };
+  fileSystems."/var/lib/chia/farm/F33" =
+    { device = "/dev/disk/by-label/F33";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/2ca4fc6a-7643-4a77-af7f-14a57011ab23"; }
