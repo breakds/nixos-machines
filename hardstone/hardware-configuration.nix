@@ -63,6 +63,39 @@
       options = [ "auto" "nofail" ];
     };
 
+
+  # iSCSI devices
+  
+  fileSystems."/var/lib/chia/farm/F01" =
+    { device = "/dev/disk/by-label/F01";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/var/lib/chia/farm/F04" =
+    { device = "/dev/disk/by-label/F04";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/var/lib/chia/farm/F07" =
+    { device = "/dev/disk/by-label/F07";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/var/lib/chia/farm/F22" =
+    { device = "/dev/disk/by-label/F22";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/var/lib/chia/farm/CHIAFAMR4" =
+    { device = "/dev/disk/by-label/CHIAFARM4";
+      fsType = "ext4";
+      options = [ "auto" "nofail" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/2ca4fc6a-7643-4a77-af7f-14a57011ab23"; }
     ];
