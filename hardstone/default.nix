@@ -39,10 +39,10 @@
 
     # For mouting iSCSI disks
     services.iscsid = {
-      enable = false;
+      enable = true;
       initiatorName = "iqn.2021-05.org.linux-iscsi.initiatorhost:hardstone";
       scanTargets = [{
-        target = "10.77.1.119";
+        target = "10.77.1.119";  # hobbit2
         port = 3260;
         type = "sendtargets";
       }];
