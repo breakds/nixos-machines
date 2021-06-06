@@ -121,11 +121,11 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1622868822,
-        "narHash": "sha256-ftz0e9DSnrvwPZig+qqETU8AI9hSMTd50r3uGRGeBcI=",
+        "lastModified": 1622954397,
+        "narHash": "sha256-kNidRG9a8SNun4ST7jVtOYOtY85Ru929VojTVSqBBKA=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "9e24bb1d9d9e6f6a8ee12e0589004d7fe25088e5",
+        "rev": "a332263d974294bff881d51c6a27e2a08d5a4992",
         "type": "github"
       },
       "original": {
