@@ -15,15 +15,6 @@
 
   outputs = { self, nixpkgs, vital-modules, nixos-home, ... }: {
     nixosConfigurations = {
-      welderhelper = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          nixos-home.nixosModules.breakds-home
-          ./welderhelper
-        ];
-      };
-
       gilgamesh = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
