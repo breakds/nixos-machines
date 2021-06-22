@@ -17,12 +17,9 @@ in {
   # Use llvm 11
   llvmPackages = prev.llvmPackages_11;
 
-  # TODO(breakds): Upgrade this to cuda 11 and make pytorch work.
   cudatoolkit = final.cudatoolkit_11;
 
   # TODO(breakds): Add www.breakds.org
-
-  # TODO(breakds): add texlive
 
   terraria-server = unstablePkgs.terraria-server;
 
