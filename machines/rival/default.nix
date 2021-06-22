@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/i3-session-breakds.nix
-    # ../modules/dev/arduino.nix
   ];
 
   config = {
@@ -25,6 +24,7 @@
 
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
+    vital.programs.arduino.enable = true;
 
     # +----------+
     # | Desktop  |
