@@ -9,6 +9,10 @@
   # Enable to use non-free packages such as nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [
+    (import ./overlays)
+  ];
+
   users.extraUsers = {
     "breakds" = {
       shell = lib.mkDefault pkgs.zsh;
