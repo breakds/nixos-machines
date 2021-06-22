@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../base
+    ../../base
     ./zrw.nix
     ./homepage.nix
     ./terraria.nix
@@ -21,7 +21,7 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_samaritan.pub
       ];
     };
 
@@ -46,8 +46,8 @@
 
     nixpkgs.overlays = [
       (final: prev: {
-        ethminer = final.callPackage ../pkgs/temp/ethminer {};
-        www-breakds-org = final.callPackage ../pkgs/www-breakds-org {};
+        ethminer = final.callPackage ../../pkgs/temp/ethminer {};
+        www-breakds-org = final.callPackage ../../pkgs/www-breakds-org {};
       })
     ];
     

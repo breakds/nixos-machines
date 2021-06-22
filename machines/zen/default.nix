@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../base
+    ../../base
   ];
 
   config = {

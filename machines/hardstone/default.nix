@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../base
+    ../../base
   ];
 
   config = {
@@ -11,7 +11,7 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_samaritan.pub
       ];
       shell = pkgs.bash;
     };

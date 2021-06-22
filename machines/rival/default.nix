@@ -3,8 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../base
-    ../base/i3-session-breakds.nix
+    ../../base
+    ../../base/i3-session-breakds.nix
     # ../modules/dev/arduino.nix
   ];
 
@@ -13,7 +13,7 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_samaritan.pub
       ];
       shell = pkgs.zsh;
     };

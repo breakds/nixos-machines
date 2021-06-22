@@ -20,7 +20,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          ./samaritan
+          ./machines/samaritan
         ];
       };
       
@@ -29,7 +29,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          ./gilgamesh
+          ./machines/gilgamesh
         ];
       };
 
@@ -38,7 +38,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home-laptop
-          ./rival
+          ./machines/rival
         ];
       };
 
@@ -49,7 +49,7 @@
           vital-modules.nixosModules.laptop-lids
           vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
-          ./zen
+          ./machines/zen
         ];
       };
 
@@ -58,7 +58,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          ./hardstone
+          ./machines/hardstone
         ];
       };
     };

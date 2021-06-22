@@ -3,9 +3,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../base
-    ../base/i3-session-breakds.nix
-    ../base/dev/breakds-dev.nix
+    ../../base
+    ../../base/i3-session-breakds.nix
+    ../../base/dev/breakds-dev.nix
     # TODO(breakds): Add connect-iphone
     # TODO(breakds): Add python environment
   ];
@@ -15,7 +15,7 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_samaritan.pub
       ];
     };
 
