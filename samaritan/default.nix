@@ -27,9 +27,11 @@
     vital.graphical = {
       enable = true;
       xserver.dpi = 100;
+      remote-desktop.enable = true;
       nvidia.enable = true;
     };
     
+    vital.pre-installed.level = 5;
     vital.games.steam.enable = true;
 
     # For ROS
