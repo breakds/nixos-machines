@@ -1,8 +1,9 @@
 final: prev:
 
 let unstablePkgs = import (builtins.fetchTarball {
-      # 2021 Jan 03
-      url = https://github.com/NixOS/nixpkgs/tarball/77d190f10931c1d06d87bf6d772bf65346c71777;
+      # 2021 Jun 22
+      url = https://github.com/NixOS/nixpkgs/tarball/bb8c2116dd2d03775c96e0695bfbace7074308b4;
+      sha256 = "152hy6vzwv0nvg38lx1ngdqnqihspg518la6br38pxihl6rfbnp2";
     }) { config.allowUnfree = true; };
 
     pythonOverride = {
@@ -25,5 +26,5 @@ in {
 
   terraria-server = unstablePkgs.terraria-server;
 
-  ethminer = final.callPackage ../../pkgs/ethminer {};
+  ethminer = final.callPackage ../../pkgs/ethminer { cudaSupport = true; };
 }

@@ -1,14 +1,14 @@
-# Note that this is sepcifically for gilgamesh.
-
 {
-  clangStdenv,
+  lib,
+  stdenv,
   fetchFromGitHub,
   opencl-headers,
   cmake,
   jsoncpp,
   boost,
   makeWrapper,
-  cudatoolkit_11,
+  cudatoolkit,
+  cudaSupport,
   mesa,
   ethash,
   opencl-info,
@@ -18,20 +18,16 @@
   cli11
 }:
 
-# Note that this requires clang < 9.0 to build, and currently
-# clangStdenv provides clang 7.1 which satisfies the requirement.
-let stdenv = clangStdenv;
-
-in stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "ethminer";
-  version = "0.19.0.rc";
+  version = "dev-20210622";
 
   src =
     fetchFromGitHub {
       owner = "ethereum-mining";
       repo = "ethminer";
-      rev = "beaeb00184da1567a5f32caf058f93c2a7b11361";
-      sha256 = "1h7y1jsim8ma4fkfh820bk5nvkmbyk8jvpf8qjk5jpgi4m0bb6i4";
+      rev = "ce52c74021b6fbaaddea3c3c52f64f24e39ea3e9";
+      sha256 = "sha256-yTFsN0M3gTF0YhUPP6sOT/DHfSALKyxbuYLEdXUpag0=";
       fetchSubmodules = true;
     };
 
@@ -42,7 +38,11 @@ in stdenv.mkDerivation rec {
     "-DAPICORE=ON"
     "-DETHDBUS=OFF"
     "-DCMAKE_BUILD_TYPE=Release"
-  ];
+  ] ++ (if cudaSupport then [
+    "-DCUDA_PROPAGATE_HOST_FLAGS=off"
+  ] else [
+    "-DETHASHCUDA=OFF" # on by default
+  ]);
 
   nativeBuildInputs = [
     cmake
@@ -55,12 +55,13 @@ in stdenv.mkDerivation rec {
     boost
     opencl-headers
     mesa
-    cudatoolkit_11
     ethash
     opencl-info
     ocl-icd
     openssl
     jsoncpp
+  ] ++ lib.optionals cudaSupport [
+    cudatoolkit
   ];
 
   preConfigure = ''
@@ -71,11 +72,11 @@ in stdenv.mkDerivation rec {
     wrapProgram $out/bin/ethminer --prefix LD_LIBRARY_PATH : /run/opengl-driver/lib
   '';
 
-  meta = with stdenv.lib; {
-    description = "Ethereum miner with OpenCL, CUDA and stratum support";
+  meta = with lib; {
+    description = "Ethereum miner with OpenCL${lib.optionalString cudaSupport ", CUDA"} and stratum support";
     homepage = "https://github.com/ethereum-mining/ethminer";
     platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ nand0p ];
-    license = licenses.gpl2;
+    maintainers = with maintainers; [ atemu ];
+    license = licenses.gpl3Only;
   };
 }
