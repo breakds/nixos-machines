@@ -33,6 +33,7 @@
     
     vital.pre-installed.level = 5;
     vital.games.steam.enable = true;
+    vital.programs.texlive.enable = true;
 
     # For ROS
     networking.firewall.allowedTCPPorts = [ 11311 ];
