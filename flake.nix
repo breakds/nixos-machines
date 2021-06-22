@@ -19,6 +19,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           ./machines/samaritan
         ];
@@ -37,6 +38,8 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.laptop-lids
+          vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home-laptop
           ./machines/rival
         ];
