@@ -37,7 +37,7 @@
     };
 
     environment.systemPackages = with pkgs; [
-      fbreader
+      fbreader zoom-us
     ];
   };
 }

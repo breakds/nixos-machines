@@ -39,7 +39,15 @@
     networking.firewall.allowedTCPPorts = [ 11311 ];
 
     environment.systemPackages = with pkgs; [
-      darktable axel gimp go-ethereum woeusb filezilla
+      gimp
+      go-ethereum
+      filezilla
+      woeusb
+      axel
+      audacious
+      audacity
+      zoom-us
+      thunderbird
     ];
 
     # Eth Mining
