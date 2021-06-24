@@ -25,6 +25,7 @@
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
     vital.programs.arduino.enable = true;
+    vital.programs.modern-utils.enable = true;
 
     # +----------+
     # | Desktop  |
