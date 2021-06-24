@@ -20,7 +20,7 @@
 
     networking = {
       hostName = "samaritan";
-      # Generated via `head -c 8 /etc/machine-id`      
+      # Generated via `head -c 8 /etc/machine-id`
       hostId = "9c4a63a8";
     };
 
@@ -30,7 +30,7 @@
       xserver.dpi = 100;
       nvidia.enable = true;
     };
-    
+
     vital.pre-installed.level = 5;
     vital.games.steam.enable = true;
     vital.programs.texlive.enable = true;
@@ -49,6 +49,7 @@
       audacity
       zoom-us
       thunderbird
+      mullvad-vpn
     ];
 
     # Eth Mining
@@ -63,9 +64,23 @@
       registerMail = "";
       rig = "";
     };
-    
+
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
+
+    # Start Mullvad Service. This is just a service and you will need
+    # to manually start it with
+    #
+    # $ mullvad account set xxxxxxxxxxxxxxx
+    # $ mullvad relay set location us # The location you want to appear you are
+    # $ mullvad connect
+    # $ mullvad disconnect
+    #
+    # Note that you can call
+    # $ mullvad status
+    # to check the status
+    services.mullvad-vpn.enable = true;
+    networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
