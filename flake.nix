@@ -24,6 +24,24 @@
           ./machines/samaritan
         ];
       };
+
+      "horizon.dawn" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          ./machines/horizon/dawn
+        ];
+      };
+
+      "horizon.zero" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home-laptop
+          ./machines/horizon/zero
+        ];
+      };
       
       gilgamesh = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
