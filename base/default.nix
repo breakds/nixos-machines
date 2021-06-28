@@ -13,7 +13,8 @@
     (import ./overlays)
   ];
 
-  users.extraUsers = {
+  # Override the default shell to zsh for breakds
+  users.extraUsers = lib.mkIf (config.vital.mainUser == "breakds") {
     "breakds" = {
       shell = lib.mkDefault pkgs.zsh;
       useDefaultShell = false;
