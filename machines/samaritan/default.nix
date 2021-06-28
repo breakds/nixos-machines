@@ -50,6 +50,7 @@
       zoom-us
       thunderbird
       mullvad-vpn
+      unetbootin
     ];
 
     # Eth Mining
