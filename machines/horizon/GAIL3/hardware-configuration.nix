@@ -23,6 +23,16 @@
       fsType = "vfat";
     };
 
+  fileSystems."/var/lib/dataset" =
+    { device = "/dev/disk/by-label/DATASET";
+      fsType = "ext4";
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-label/NIXOS_HOME";
+      fsType = "ext4";
+    };  
+
   swapDevices =
     [ { device = "/dev/disk/by-label/NIXOS_SWAP"; }
     ];
