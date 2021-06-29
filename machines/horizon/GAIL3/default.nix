@@ -19,10 +19,16 @@
     };
 
     networking = {
-      hostName = "dawn";
+      hostName = "GAIL3";
       # Generated via `head -c 8 /etc/machine-id`
       hostId = "f940bd97";
     };
+
+    # Always use the most up-to-date linux kernel since this machine
+    # has a super new CPU i9-11900KF.
+    #
+    # We can probably remove this when 5.12 becomes the stable kernel.
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     vital.graphical = {
       enable = true;

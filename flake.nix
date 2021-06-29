@@ -25,12 +25,12 @@
         ];
       };
 
-      "horizon.dawn" = nixpkgs.lib.nixosSystem {
+      "horizon.GAIL3" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          ./machines/horizon/dawn
+          ./machines/horizon/GAIL3
         ];
       };
 
