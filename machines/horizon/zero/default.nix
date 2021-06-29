@@ -33,6 +33,7 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
+      xserver.dpi = 120;
       xserver.useCapsAsCtrl = true;
     };
 
