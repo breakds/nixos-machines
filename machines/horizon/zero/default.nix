@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../../base
     ../../../base/i3-session-breakds.nix
+    ../common/vpn.nix
   ];
 
   config = {
