@@ -33,7 +33,7 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = true;
-      xserver.dpi = 100;
+      xserver.dpi = 120;
       nvidia.enable = true;
     };
 
