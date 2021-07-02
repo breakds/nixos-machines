@@ -15,6 +15,7 @@
     networking.hostId = "fe156831";
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
     
     # +----------+
     # | Desktop  |
