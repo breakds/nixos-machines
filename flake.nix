@@ -52,14 +52,14 @@
         ];
       };
 
-      artistic = nixpkgs.lib.nixosSystem {
+      berry = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop-lids
           vital-modules.nixosModules.iphone-connect
-          nixos-home.nixosModules.breakds-home-laptop
-          ./machines/artistic
+          nixos-home.nixosModules.cassandra-home
+          ./machines/berry
         ];
       };
 
