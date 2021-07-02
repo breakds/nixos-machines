@@ -14,6 +14,8 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "fe156831";
 
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    
     # +----------+
     # | Desktop  |
     # +----------+
