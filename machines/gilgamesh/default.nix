@@ -4,16 +4,10 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
-    ./zrw.nix
     ./homepage.nix
-    ./terraria.nix
-    ./chia-helper.nix
-    # ../modules/services/samba.nix
-    # ../modules/services/deluge.nix
-    # ../modules/services/jupyter-lab.nix
-    # ../modules/services/nix-serve.nix
-    # ../modules/dev/python-environment.nix
-    # ../containers/declarative/hydrahead.nix
+    # ./terraria.nix
+    # ../deluge.nix
+    # ../nix-serve.nix
   ];
 
   config = {
@@ -33,26 +27,17 @@
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
 
+    vital.programs = {
+      texlive.enable = false;
+      modern-utils.enable = true;
+    };
+
     vital.graphical = {
       enable = true;
       xserver.dpi = 100;
       nvidia.enable = true;
       remote-desktop.enable = true;
     };
-
-    # +----------------+
-    # | Overlays       |
-    # +----------------+
-
-    nixpkgs.overlays = [
-      (final: prev: {
-        ethminer = final.callPackage ../../pkgs/temp/ethminer {};
-        www-breakds-org = final.callPackage ../../pkgs/www-breakds-org {};
-      })
-    ];
-    
-    environment.systemPackages = with pkgs; [
-    ];
 
     # +----------------+
     # | Services       |
@@ -105,13 +90,6 @@
       domain = "git.breakds.org";
       port = 5965;
       appName = "Git Repos of Break and Shan";
-    };
-
-    vital.services.chia-blockchain = {
-      enable = false;
-      plottingDirectory = "/opt/chia/plotting";
-      plotsDirectory = "/home/breakds/plots";
-      dotchiaDirectory = "/opt/chia/dotchia";
     };
 
     # This value determines the NixOS release from which the default
