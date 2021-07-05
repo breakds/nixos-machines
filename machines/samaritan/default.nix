@@ -35,6 +35,7 @@
     vital.games.steam.enable = true;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
+    vital.programs.accounting.enable = true;
 
     # For ROS
     networking.firewall.allowedTCPPorts = [ 11311 ];
