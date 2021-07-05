@@ -109,7 +109,23 @@
       "inputs": {
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
-        "vital-modules": "vital-modules"
+        "vital-modules": "vital-modules",
+        "www-breakds-org": "www-breakds-org"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1623875721,
+        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     },
     "vital-modules": {
@@ -153,6 +169,27 @@
       "original": {
         "owner": "nixvital",
         "repo": "vitalpkgs",
+        "type": "github"
+      }
+    },
+    "www-breakds-org": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1625521968,
+        "narHash": "sha256-FFBvLipWuF7+Oh0rZPX47arBw/QaH5LCy1uWzNbdr/o=",
+        "owner": "breakds",
+        "repo": "www.breakds.org",
+        "rev": "b209389eddf54b6f9867fbd56bd4fa774e114028",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "www.breakds.org",
         "type": "github"
       }
     }

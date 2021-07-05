@@ -11,9 +11,12 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:breakds/nixos-home";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
+
+    www-breakds-org.url = "github:breakds/www.breakds.org";
+    www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, vital-modules, nixos-home, ... }: {
+  outputs = { self, nixpkgs, vital-modules, nixos-home, ... }@inputs: {
     nixosConfigurations = {
       samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -49,6 +52,13 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./machines/gilgamesh
+          ({
+            nixpkgs.overlays = [
+              (final: prev: {
+                www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
+              })
+            ];
+          })
         ];
       };
 
