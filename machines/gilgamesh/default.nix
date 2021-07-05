@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
+    ../../base/dev/breakds-dev.nix
     ./homepage.nix
     # ./terraria.nix
     # ../deluge.nix
