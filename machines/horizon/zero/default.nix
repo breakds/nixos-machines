@@ -17,16 +17,19 @@
       ];
       shell = pkgs.zsh;
     };
-    
+
     # Machine-specific networking configuration.
     networking.hostName = "zero";
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "26a47390";
 
     vital.pre-installed.level = 5;
-    vital.programs.texlive.enable = true;
-    vital.programs.modern-utils.enable = true;
-    vital.programs.accounting.enable = true;    
+    vital.programs = {
+      vscode.enable = true;
+      texlive.enable = true;
+      modern-utils.enable = true;
+      accounting.enable = true;
+    };
 
     # +----------+
     # | Desktop  |
