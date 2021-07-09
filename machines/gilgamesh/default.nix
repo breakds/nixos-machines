@@ -6,6 +6,7 @@
     ../../base
     ../../base/dev/breakds-dev.nix
     ./homepage.nix
+    ./jupyter-lab.nix
     # ./terraria.nix
     # ../deluge.nix
     # ../nix-serve.nix
@@ -45,6 +46,7 @@
     # +----------------+
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
+    
     security.acme = {
       acceptTerms = true;
       email = "bds@breakds.org";
