@@ -12,4 +12,6 @@
       locations."/".proxyPass = "http://localhost:7777";
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 7777 ];
 }
