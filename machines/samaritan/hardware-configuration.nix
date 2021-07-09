@@ -33,6 +33,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/var/lib/wonder/warehouse" =
+    { device = "/dev/disk/by-label/WONDER_WAREHOUSE";
+      fsType = "ext4";
+    };
+
   fileSystems."/home/breakds/dataset" =
     { device = "/dev/disk/by-uuid/4aa61fc7-9776-4338-98ce-07fbf8fda9ef";
       fsType = "ext4";
