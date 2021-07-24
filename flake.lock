@@ -180,11 +180,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1627170076,
-        "narHash": "sha256-WMdLqgzBAhBtQOe8c5kcx4ZeSxl15WsCzR6tFdK9WAs=",
+        "lastModified": 1627170604,
+        "narHash": "sha256-/hHRHQP4+hp3bGlk81Scbs2qRWQkm1vvjfzogfy5UUw=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "11331061fc43426df168a00d6518758a80a0e025",
+        "rev": "2946aeacd73cf37d690ac7b8a704d3c88b6e9b3d",
         "type": "github"
       },
       "original": {
