@@ -22,6 +22,9 @@
       ffmpeg
       mysql-client
       awscli
+
+      # Customized
+      shuriken
     ];
 
     nix = {

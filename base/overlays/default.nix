@@ -24,4 +24,5 @@ in {
   terraria-server = unstablePkgs.terraria-server;
 
   ethminer = final.callPackage ../../pkgs/ethminer { cudaSupport = true; };
+  shuriken = final.callPackage ../../pkgs/shuriken {};  
 }
