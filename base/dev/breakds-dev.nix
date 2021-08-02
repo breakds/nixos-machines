@@ -21,6 +21,7 @@
       remmina
       ffmpeg
       mysql-client
+      sqlitebrowser
       awscli
 
       # Customized
