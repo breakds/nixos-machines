@@ -23,6 +23,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.iphone-connect
+          vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
           ./machines/samaritan
         ];
@@ -45,7 +46,7 @@
           ./machines/horizon/zero
         ];
       };
-      
+
       gilgamesh = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
