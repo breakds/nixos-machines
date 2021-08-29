@@ -23,6 +23,7 @@
       mysql-client
       sqlitebrowser
       awscli
+      nixops
 
       # Customized
       shuriken
