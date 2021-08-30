@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/dev/breakds-dev.nix
-    ./homepage.nix
     ./jupyter-lab.nix
     # ./terraria.nix
     # ../deluge.nix
@@ -45,25 +44,6 @@
     # | Services       |
     # +----------------+
 
-    # 6006 is for tensorboard
-    networking.firewall.allowedTCPPorts = [ 80 443 6006 ];
-    
-    security.acme = {
-      acceptTerms = true;
-      email = "bds@breakds.org";
-    };
-
-    services.nginx = {
-      enable = true;
-      package = pkgs.nginxMainline;
-      recommendedOptimisation = true;
-      recommendedGzipSettings = true;
-      recommendedProxySettings = true;
-
-      # TODO(breakds): Make this per virtual host.
-      clientMaxBodySize = "1000m";
-    };
-
     services.ethminer = {
       enable = true;
       recheckInterval = 500;
@@ -74,12 +54,6 @@
       maxPower = 340;
       registerMail = "";
       rig = "";
-    };
-
-    vital.services.docker-registry = {
-      enable = true;
-      domain = "docker.breakds.org";
-      port = 5050;
     };
 
     vital.services.filerun = {
@@ -95,6 +69,13 @@
       port = 5965;
       appName = "Git Repos of Break and Shan";
     };
+
+    networking.firewall.allowedTCPPorts = [
+      config.vital.services.filerun.port
+      config.vital.services.gitea.port
+      # 6006 is for tensorboard
+      6006
+    ];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

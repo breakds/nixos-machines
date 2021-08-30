@@ -70,6 +70,21 @@
 
       # TODO(breakds): Make this per virtual host.
       clientMaxBodySize = "1000m";
+
+      virtualHosts = {
+        # TODO(breakds): Migrate filerun to richelieu
+        "files.breakds.org" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/".proxyPass = "http://10.77.1.117:5962";
+        };
+
+        "git.breakds.org" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/".proxyPass = "http://10.77.1.117:5965";
+        };
+      };
     };
 
     vital.services.docker-registry = {
