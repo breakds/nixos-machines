@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/dev/breakds-dev.nix
+    ./homepage.nix
     # ./jupyter-lab.nix
     # ./terraria.nix
     # ../deluge.nix
@@ -53,23 +54,23 @@
     # +----------------+
 
     # 6006 is for tensorboard
-    networking.firewall.allowedTCPPorts = [ 80 443 7777 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
     
-    # security.acme = {
-    #   acceptTerms = true;
-    #   email = "bds@breakds.org";
-    # };
+    security.acme = {
+      acceptTerms = true;
+      email = "bds@breakds.org";
+    };
 
-    # services.nginx = {
-    #   enable = true;
-    #   package = pkgs.nginxMainline;
-    #   recommendedOptimisation = true;
-    #   recommendedGzipSettings = true;
-    #   recommendedProxySettings = true;
+    services.nginx = {
+      enable = true;
+      package = pkgs.nginxMainline;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
 
-    #   # TODO(breakds): Make this per virtual host.
-    #   clientMaxBodySize = "1000m";
-    # };
+      # TODO(breakds): Make this per virtual host.
+      clientMaxBodySize = "1000m";
+    };
 
     # vital.services.docker-registry = {
     #   enable = true;
