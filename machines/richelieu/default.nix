@@ -72,11 +72,11 @@
       clientMaxBodySize = "1000m";
     };
 
-    # vital.services.docker-registry = {
-    #   enable = true;
-    #   domain = "docker.breakds.org";
-    #   port = 5050;
-    # };
+    vital.services.docker-registry = {
+      enable = true;
+      domain = "docker.breakds.org";
+      port = 5050;
+    };
 
     # vital.services.filerun = {
     #   enable = true;
