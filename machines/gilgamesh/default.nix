@@ -71,7 +71,6 @@
     };
 
     networking.firewall.allowedTCPPorts = [
-      config.vital.services.filerun.port
       config.vital.services.gitea.port
       # 6006 is for tensorboard
       6006
