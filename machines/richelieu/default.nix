@@ -72,13 +72,6 @@
       clientMaxBodySize = "1000m";
 
       virtualHosts = {
-        # TODO(breakds): Migrate filerun to richelieu
-        "files.breakds.org" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/".proxyPass = "http://10.77.1.117:5962";
-        };
-
         "git.breakds.org" = {
           enableACME = true;
           forceSSL = true;
@@ -93,12 +86,12 @@
       port = 5050;
     };
 
-    # vital.services.filerun = {
-    #   enable = true;
-    #   workDir = "/home/delegator/filerun";
-    #   port = 5962;
-    #   domain = "files.breakds.org";
-    # };
+    vital.services.filerun = {
+      enable = true;
+      workDir = "/var/lib/filerun";
+      port = 5962;
+      domain = "files.breakds.org";
+    };
 
     # vital.services.gitea = {
     #   enable = true;
