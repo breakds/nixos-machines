@@ -56,13 +56,6 @@
       rig = "";
     };
 
-    # vital.services.filerun = {
-    #   enable = true;
-    #   workDir = "/home/delegator/filerun";
-    #   port = 5962;
-    #   domain = "files.breakds.org";
-    # };
-
     vital.services.gitea = {
       enable = true;
       domain = "git.breakds.org";

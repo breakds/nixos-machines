@@ -70,14 +70,6 @@
 
       # TODO(breakds): Make this per virtual host.
       clientMaxBodySize = "1000m";
-
-      virtualHosts = {
-        "git.breakds.org" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/".proxyPass = "http://10.77.1.117:5965";
-        };
-      };
     };
 
     vital.services.docker-registry = {
@@ -92,13 +84,6 @@
       port = 5962;
       domain = "files.breakds.org";
     };
-
-    # vital.services.gitea = {
-    #   enable = true;
-    #   domain = "git.breakds.org";
-    #   port = 5965;
-    #   appName = "Git Repos of Break and Shan";
-    # };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
