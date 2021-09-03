@@ -14,6 +14,9 @@
 	      "audio"
 	      "plugdev"  # Allow members to mount/umount removable devices via pmount.
       ];
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/jiahaotian_key.pub
+      ];
     };
   };
 }
