@@ -5,8 +5,9 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/dev/breakds-dev.nix
+    ./jiahaotian.nix
     ./homepage.nix
-    # ./jupyter-lab.nix
+    ./jupyter-lab.nix
     # ./terraria.nix
     # ../deluge.nix
     # ../nix-serve.nix
