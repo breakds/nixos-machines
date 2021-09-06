@@ -1,10 +1,13 @@
 final: prev:
 
 let unstablePkgs = import (builtins.fetchTarball {
-      # 2021 Jun 22
-      url = https://github.com/NixOS/nixpkgs/tarball/bb8c2116dd2d03775c96e0695bfbace7074308b4;
-      sha256 = "152hy6vzwv0nvg38lx1ngdqnqihspg518la6br38pxihl6rfbnp2";
-    }) { config.allowUnfree = true; };
+      # 2021 Sep 06
+      url = https://github.com/NixOS/nixpkgs/tarball/4f0bc6d71d1fbabf6e1684035290b65893982da5;
+      sha256 = "1hdz8y0za2wl0693p4gnm36kgsv2wmjshq0p204f34pb5b9bdq0d";
+    }) {
+      config.allowUnfree = true;
+      system = prev.system;
+    };
 
     pythonOverride = {
       pacakgeOverrides = python-final: python-prev: {
@@ -20,9 +23,10 @@ in {
   cudatoolkit = final.cudatoolkit_11;
 
   # TODO(breakds): Add www.breakds.org
-
-  terraria-server = unstablePkgs.terraria-server;
+  tensorboard26 = unstablePkgs.python3Packages.tensorflow-tensorboard;
 
   ethminer = final.callPackage ../../pkgs/ethminer { cudaSupport = true; };
-  shuriken = final.callPackage ../../pkgs/shuriken {};  
+  shuriken = final.callPackage ../../pkgs/shuriken {};
+
+
 }
