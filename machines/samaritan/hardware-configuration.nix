@@ -36,16 +36,20 @@
   fileSystems."/var/lib/wonder/warehouse" =
     { device = "/dev/disk/by-label/WONDER_WAREHOUSE";
       fsType = "ext4";
+      # Do not block booting if the disck is missing
+      options = [ "auto" "nofail" ];
     };
 
   fileSystems."/home/breakds/dataset" =
     { device = "/dev/disk/by-uuid/4aa61fc7-9776-4338-98ce-07fbf8fda9ef";
       fsType = "ext4";
+      options = [ "auto" "nofail" ];
     };
 
   fileSystems."/home/breakds/.local" =
     { device = "/dev/disk/by-uuid/c61704d8-f228-4fdc-9864-544f96882a06";
       fsType = "ext4";
+      options = [ "auto" "nofail" ];
     };
 
   swapDevices =
