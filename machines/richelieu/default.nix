@@ -55,7 +55,7 @@
     # +----------------+
 
     # 6006 is for tensorboard
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [ 80 443 6006 ];
     
     security.acme = {
       acceptTerms = true;
