@@ -22,6 +22,14 @@
       ];
     };
 
+    # Allow sudo without password
+    security.sudo.extraRules = [
+      {
+        users = [ "breakds" ];
+        commands = [ { command = "ALL"; options = [ "NOPASSWD" ];} ];
+      }
+    ];
+
     networking = {
       hostName = "richelieu";
       hostId = "baae7a72";
