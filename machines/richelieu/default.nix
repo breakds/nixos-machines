@@ -94,6 +94,14 @@
       domain = "files.breakds.org";
     };
 
+    services.nginx.virtualHosts = {
+      "hydra.breakds.org" = {
+        enableACME = false;
+        forceSSL = false;          
+        locations."/".proxyPass = "http://fortress:8080";
+      };
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave

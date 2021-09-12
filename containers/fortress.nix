@@ -94,13 +94,18 @@
     # Give evaluator 32 Gigabytes of memory
     systemd.services.hydra-evaluator.environment.GC_INITIAL_HEAP_SIZE = toString (1024*1024*1024*32);
 
+    # su - hydra
+    # $ hydra-create-user alice --full-name 'Alice Q. User' \
+    #    --email-address 'alice@example.org' --password foobar --role admin
     services.hydra = {
       enable = true;
+      # Without this, hydra will try to build everything from scratch instead
+      # taking advantages of everything in the /nix/store already.
       useSubstitutes = true;
       notificationSender = "breakds+hydra@gmail.com";
       port = 8080;
       buildMachinesFiles = [];
-      
+
       hydraURL = "https://hydra.breakds.org";
       # NOTE(breakds): Enable upload_logs_to_binary_cache if needed.
       # NOTE(breakds): Enable server_store_uri when needed
@@ -119,6 +124,9 @@
       # logo = ./hydra/iohk-logo.png;
     };
 
+    users.extraUsers.hydra.openssh.authorizedKeys.keyFiles = [
+      ../data/keys/breakds_samaritan.pub
+    ];
 
     networking.firewall.allowedTCPPorts = [ 8080 ];
   };
