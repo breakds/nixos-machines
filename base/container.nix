@@ -22,4 +22,12 @@
       ../data/keys/breakds_samaritan.pub
     ];
   };
+
+  # Allow the user "operator" to sudo without typing password
+  security.sudo.extraRules = [
+    {
+      users = [ "operator" ];
+      commands = [ { command = "ALL"; options = [ "NOPASSWD" ];} ];
+    }
+  ];
 }
