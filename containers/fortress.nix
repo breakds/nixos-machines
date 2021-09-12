@@ -10,9 +10,13 @@
   ];
 
   config = {
-
     networking = {
       hostName = "fortress";
+    };
+
+    services.httpd = {
+      enable = true;
+      adminAddr = "breakds@gmail.com"
     };
   };
 }
