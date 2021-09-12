@@ -16,7 +16,9 @@
 
     services.httpd = {
       enable = true;
-      adminAddr = "breakds@gmail.com"
+      adminAddr = "breakds@gmail.com";
     };
+
+    networking.firewall.allowedTCPPorts = [ 80 ];    
   };
 }
