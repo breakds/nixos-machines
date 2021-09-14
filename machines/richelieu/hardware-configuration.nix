@@ -25,7 +25,7 @@
 
   # For NAS
   fileSystems."/var/lib/filerun" =
-    { device = "/dev/disk/by-uuid/d29da836-b7c2-46f7-9047-101d30c4f611";
+    { device = "/dev/disk/by-uuid/f98819aa-cd1b-40de-b0b1-371344da8a18";
       fsType = "ext4";
       # Do not panic and continue to boot if this disk is missing.
       options = [ "auto" "nofail" ];      
