@@ -23,6 +23,14 @@
       fsType = "vfat";
     };
 
+  # For NAS
+  fileSystems."/var/lib/filerun" =
+    { device = "/dev/disk/by-uuid/d29da836-b7c2-46f7-9047-101d30c4f611";
+      fsType = "ext4";
+      # Do not panic and continue to boot if this disk is missing.
+      options = [ "auto" "nofail" ];      
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/f77f84ac-4a9f-4cbf-9a4f-720a229dcae2"; }
     ];
