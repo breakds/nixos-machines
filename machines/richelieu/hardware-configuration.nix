@@ -8,23 +8,23 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "megaraid_sas" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "megaraid_sas" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/fb6a692a-641a-43a7-b45e-1442b46adbb8";
+    { device = "/dev/disk/by-uuid/152b7d6e-dfa1-46bd-ab50-14add186ad85";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A4E7-3A57";
+    { device = "/dev/disk/by-uuid/5960-EE5B";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/e1ab8e09-f9c6-4fad-9ff6-3cf3fbca7ab3"; }
+    [ { device = "/dev/disk/by-uuid/f77f84ac-4a9f-4cbf-9a4f-720a229dcae2"; }
     ];
 
   nix.maxJobs = lib.mkDefault 28;
