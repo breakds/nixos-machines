@@ -88,8 +88,7 @@
     };
 
     vital.services.filerun = {
-      # Re-enable when hard drive is ready.
-      enable = false;
+      enable = true;
       workDir = "/var/lib/filerun";
       port = 5962;
       domain = "files.breakds.org";
