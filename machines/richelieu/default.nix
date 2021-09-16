@@ -16,6 +16,8 @@
   config = {
     vital.mainUser = "breakds";
 
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
