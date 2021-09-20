@@ -40,6 +40,7 @@
     };
 
     environment.systemPackages = with pkgs; [
+      dbeaver
       gimp peek gnupg pass libreoffice
       skypeforlinux
       nodejs-14_x
