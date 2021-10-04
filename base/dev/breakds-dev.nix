@@ -34,9 +34,9 @@
       # The following is added to /etc/nix.conf to prevent GC from
       # deleting too many dependencies.
       extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-    '';
+        keep-outputs = true
+        keep-derivations = true
+      '';
     };
   };
 }
