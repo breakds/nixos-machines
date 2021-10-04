@@ -18,6 +18,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "nixos-home",
           "nixpkgs"
         ]
       },
@@ -44,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1630220627,
-        "narHash": "sha256-PvpKgUBlfnP+v0ypBAzfU/BWQsF5dun8UoER+lYZGl0=",
+        "lastModified": 1633362802,
+        "narHash": "sha256-BXcp56Mi0SMrcAk9C3OWBaTl2mofUbmPTG0AEplaoGo=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "1e3fa0ddb2bb0289a3a05002dcb51fd7b1d9bd05",
+        "rev": "ffd0e7b467062261371015427a402637227c84d5",
         "type": "github"
       },
       "original": {
