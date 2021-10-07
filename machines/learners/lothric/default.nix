@@ -14,6 +14,11 @@
       hostId = "db426f38";
     };
 
+    services.ethminer = {
+      wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.lothric3090";
+      maxPower = 330;
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
