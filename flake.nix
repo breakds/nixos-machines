@@ -89,6 +89,15 @@
         ];
       };
 
+      lothric = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          ./machines/learners/lothric
+        ];
+      };
+
       berry = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
