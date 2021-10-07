@@ -15,6 +15,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1629481132,
+        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "997f7efcb746a9c140ce1f13c72263189225f482",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -111,6 +126,7 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "vital-modules": "vital-modules",
+        "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
       }
     },
@@ -171,6 +187,27 @@
         "owner": "nixvital",
         "repo": "vitalpkgs",
         "type": "github"
+      }
+    },
+    "wonder-devops": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1633448156,
+        "narHash": "sha256-XFZbfOU2DZqjLC1oj+S5MB/74Ud39XDbZBtO+nNbnxo=",
+        "ref": "master",
+        "rev": "692321bfe7d6147d0e642352c7939bc43baf2c92",
+        "revCount": 52,
+        "type": "git",
+        "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
       }
     },
     "www-breakds-org": {

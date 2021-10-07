@@ -53,6 +53,7 @@
       thunderbird
       mullvad-vpn
       unetbootin
+      archer
     ];
 
     # Eth Mining

@@ -14,6 +14,9 @@
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
+
+    wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools.git";
+    wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, vital-modules, nixos-home, ... }@inputs: {
@@ -25,6 +28,13 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
+          ({
+            nixpkgs.overlays = [
+              (final: prev: {
+                archer = inputs.wonder-devops.packages."${final.system}".archer;
+              })
+            ];
+          })
           ./machines/samaritan
         ];
       };
