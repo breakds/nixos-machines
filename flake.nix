@@ -28,6 +28,11 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
+
+          (import ./containers/warehouser.nix {
+            inherit (vital-modules.nixosModules) container-foundation;
+          })
+          
           ({
             nixpkgs.overlays = [
               (final: prev: {

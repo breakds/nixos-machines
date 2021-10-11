@@ -57,17 +57,17 @@
     ];
 
     # Eth Mining
-    services.ethminer = {
-      enable = true;
-      recheckInterval = 1000;
-      toolkit = "cuda";
-      wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.samaritan3090";
-      pool = "us2.ethermine.org";
-      stratumPort = 4444;
-      maxPower = 330;
-      registerMail = "";
-      rig = "";
-    };
+    # services.ethminer = {
+    #   enable = true;
+    #   recheckInterval = 1000;
+    #   toolkit = "cuda";
+    #   wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.samaritan3090";
+    #   pool = "us2.ethermine.org";
+    #   stratumPort = 4444;
+    #   maxPower = 330;
+    #   registerMail = "";
+    #   rig = "";
+    # };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
