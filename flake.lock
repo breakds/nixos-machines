@@ -106,17 +106,19 @@
         "vitalpkgs": "vitalpkgs_2"
       },
       "locked": {
-        "lastModified": 1634113445,
-        "narHash": "sha256-9r1FqPikNdr/lsWCVQvVNhKgEDicF9lCJ7NuNS8rENU=",
+        "lastModified": 1634189305,
+        "narHash": "sha256-zMDePmVIQLfoKt9WIxsuKDK64QbxlK/sAgDjbcL7Tok=",
         "ref": "master",
-        "rev": "f40957b6f4fa92daa8c2c098bd6264d9a2913ede",
-        "revCount": 432,
+        "rev": "c07a11bb6498ecfb15782a8ac04b10cf290e1ae7",
+        "revCount": 434,
         "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/butler?tags=v2.1"
+        "url": "ssh://git@github.com/quant-wonderland/butler?tags=v2.1.1"
       },
       "original": {
+        "ref": "master",
+        "rev": "c07a11bb6498ecfb15782a8ac04b10cf290e1ae7",
         "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/butler?tags=v2.1"
+        "url": "ssh://git@github.com/quant-wonderland/butler?tags=v2.1.1"
       }
     },
     "butler-py": {
@@ -1345,11 +1347,11 @@
         "wind-mirrorer": "wind-mirrorer"
       },
       "locked": {
-        "lastModified": 1634118978,
-        "narHash": "sha256-OxpzV9mRMT6PfMeTAhwKJVF2ghvwbFkUnuCJCXJq9P0=",
+        "lastModified": 1634247050,
+        "narHash": "sha256-lyAbjKCVhpyCg3ihIFraxiPd4z/q2zZS+1hVVwvRQwc=",
         "ref": "master",
-        "rev": "7b4bd2c687404dec3a1a12a0aed477f6544577f2",
-        "revCount": 618,
+        "rev": "70e7a752c06458fa247a01ef729e2ab1a60c441a",
+        "revCount": 622,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/deployhub.git"
       },
