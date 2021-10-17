@@ -9,7 +9,7 @@
     ./jupyter-lab.nix
     ./jiahaotian.nix
     ./linxiao.nix    
-    # ./terraria.nix
+    ./terraria.nix
     # ../deluge.nix
     # ../nix-serve.nix
   ];
