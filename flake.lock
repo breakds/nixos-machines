@@ -11,11 +11,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1634107930,
-        "narHash": "sha256-ACpWAg+UOw9KKd06udpOaQle4vLR7sKgvZHZjIcUiAk=",
+        "lastModified": 1634245973,
+        "narHash": "sha256-yV0hUshX53fBn7vQao0wAPPNcPSSrnZFZXHCn9PZ3j8=",
         "ref": "master",
-        "rev": "ede1df7ea44f867f3963c5e1f7b2922a490254cc",
-        "revCount": 482,
+        "rev": "63172a17e647312857529332750c1f3ce8585d4e",
+        "revCount": 490,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/alpha-research"
       },
@@ -290,16 +290,16 @@
         "vitalpkgs": "vitalpkgs_3"
       },
       "locked": {
-        "lastModified": 1634112645,
-        "narHash": "sha256-s3iYZgdBMH99TIzS4GljBJufQqWZ34LURlhzsHuKUxU=",
+        "lastModified": 1634633214,
+        "narHash": "sha256-tn5C9rVIwo7DJHhTvClqqW54oqzbRvTF82pgNmhHwnU=",
         "ref": "master",
-        "rev": "5bad7934240885ac2b7222d1f2ec0fde7844a28a",
-        "revCount": 1057,
+        "rev": "ed15fe003c6773f3b10a5cb70b74cfa804bc470b",
+        "revCount": 1077,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/data-warehouse"
       },
       "original": {
-        "rev": "5bad7934240885ac2b7222d1f2ec0fde7844a28a",
+        "rev": "ed15fe003c6773f3b10a5cb70b74cfa804bc470b",
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/data-warehouse"
       }
@@ -641,11 +641,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631868544,
-        "narHash": "sha256-eUqscjeZ1lRNkVtdTmeMS2hUuAOddsbA/QFpS89qQCk=",
+        "lastModified": 1634630686,
+        "narHash": "sha256-XnQt+QEkYWDTQxDlRhYkg5eGViywww+B0Y4kxguv1e4=",
         "ref": "master",
-        "rev": "3d64cb7207f59709fd9a65ef56976515e5c2e8e4",
-        "revCount": 87,
+        "rev": "9fc7b0a4571cf3c9cdd45d29b93c15f252d5d4e5",
+        "revCount": 90,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/job-dispatcher"
       },
@@ -1347,11 +1347,11 @@
         "wind-mirrorer": "wind-mirrorer"
       },
       "locked": {
-        "lastModified": 1634247050,
-        "narHash": "sha256-lyAbjKCVhpyCg3ihIFraxiPd4z/q2zZS+1hVVwvRQwc=",
+        "lastModified": 1634690573,
+        "narHash": "sha256-l6j7JRoQPiGa0ZBG8ZSdDwwwyiFQ8unaMdbpGb26HlE=",
         "ref": "master",
-        "rev": "70e7a752c06458fa247a01ef729e2ab1a60c441a",
-        "revCount": 622,
+        "rev": "79d5de83af0bb87c50333b03f47214681c991f16",
+        "revCount": 631,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/deployhub.git"
       },
@@ -1368,11 +1368,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1634187935,
-        "narHash": "sha256-GoDkaCLKowrSC9g2QoUOEAjPuVZWIPYuFfhmwE5jKRQ=",
+        "lastModified": 1634535087,
+        "narHash": "sha256-avhyoA1VAgDcgjBJHCFQfKvrwI9gFHHUbAXN7IjB5HE=",
         "ref": "master",
-        "rev": "b00fe9e5c3c712ac1f6194c32b01df8979675663",
-        "revCount": 134,
+        "rev": "bf3210e32b3ea152e26a6cc2160f4e9faf07bd76",
+        "revCount": 142,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
       },
