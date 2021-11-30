@@ -314,19 +314,19 @@
         "vitalpkgs": "vitalpkgs_3"
       },
       "locked": {
-        "lastModified": 1637657720,
-        "narHash": "sha256-7wsZDu6VcjfKxfwC9E2/uAe4KUoCzWgaNMEQJmHziK4=",
+        "lastModified": 1638164249,
+        "narHash": "sha256-5WDfsJFpjKD3EwyrlqpFomvOMl8HTGRHDhTUTb8Tw6Y=",
         "ref": "master",
-        "rev": "e845a8eb30f1d7fb2fc7cac5b25a4d6e53d90430",
-        "revCount": 1231,
+        "rev": "3fa3beaaa7bf11b4690b5da80471b8e33ea9b726",
+        "revCount": 1327,
         "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/data-warehouse?tags=v2.1.4"
+        "url": "ssh://git@github.com/quant-wonderland/data-warehouse?tags=v2.1.6"
       },
       "original": {
         "ref": "master",
-        "rev": "e845a8eb30f1d7fb2fc7cac5b25a4d6e53d90430",
+        "rev": "3fa3beaaa7bf11b4690b5da80471b8e33ea9b726",
         "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/data-warehouse?tags=v2.1.4"
+        "url": "ssh://git@github.com/quant-wonderland/data-warehouse?tags=v2.1.6"
       }
     },
     "flake-utils": {
@@ -1074,11 +1074,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1637222215,
-        "narHash": "sha256-uEJ22eB24wru0T2V9dmnadhpsuQAareiLR7JEXKEBaA=",
+        "lastModified": 1637891000,
+        "narHash": "sha256-jZ4dpbqiSnffp2xfOcANI3iDPfe5laIh+zzRIxX+9ng=",
         "ref": "master",
-        "rev": "825e10d32cb67529ce4436ecd4aed43babc34821",
-        "revCount": 104,
+        "rev": "48c11fbe52ec37b0de23b0ec70000a38e5c5653a",
+        "revCount": 107,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/record-archive"
       },
@@ -1452,11 +1452,11 @@
         "wind-mirrorer": "wind-mirrorer"
       },
       "locked": {
-        "lastModified": 1637897506,
-        "narHash": "sha256-BcyG17UD8kSl/Sbk6X2Z2UV1bVDqFCqa+923ZRmv6/g=",
+        "lastModified": 1638251285,
+        "narHash": "sha256-jA5nYZ70TqLpVLFDc07VJMCP8PPIGrzmjn61b9oVq1U=",
         "ref": "master",
-        "rev": "24a353f1cfe0db8e5d4b73c2483b3ec80367a57f",
-        "revCount": 944,
+        "rev": "61d91e4b2b863c0058c8f0a4f00412338577b87e",
+        "revCount": 965,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/deployhub.git"
       },
@@ -1473,11 +1473,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1637918577,
-        "narHash": "sha256-vgknx0oDoo9hfFl/jdFi1Ha0m5gKO4k/1kMciMRE82Q=",
+        "lastModified": 1638250427,
+        "narHash": "sha256-kxgbXwb9u6u1kqoTF/Jk3s4mni0WzRbTl6YT+5WmzgI=",
         "ref": "master",
-        "rev": "55f0e56d21b8d4fb4037ca94442ec11b7a1026fe",
-        "revCount": 275,
+        "rev": "055ba659cefe88dcd200f1fe8cb266ff0a08c0bf",
+        "revCount": 280,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
       },
