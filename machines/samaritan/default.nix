@@ -89,6 +89,7 @@
 
     serviceContainers.warehouser = {
       mainUser = "breakds";
+      mysqlServerId = 17;
     };
 
     # Disable unified cgroup hierarchy (cgroups v2)
