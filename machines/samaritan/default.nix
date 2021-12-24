@@ -53,7 +53,7 @@
       thunderbird
       mullvad-vpn
       unetbootin
-      archer
+      # archer
       trezor-suite
     ];
 
@@ -87,10 +87,10 @@
     services.mullvad-vpn.enable = true;
     networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
 
-    serviceContainers.warehouser = {
-      mainUser = "breakds";
-      mysqlServerId = 17;
-    };
+    # serviceContainers.warehouser = {
+    #   mainUser = "breakds";
+    #   mysqlServerId = 17;
+    # };
 
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
