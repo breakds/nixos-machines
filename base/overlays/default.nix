@@ -25,8 +25,6 @@ in {
   # TODO(breakds): Add www.breakds.org
   tensorboard26 = unstablePkgs.python3Packages.tensorflow-tensorboard;
 
-  # ethminer = final.callPackage ../../pkgs/ethminer { cudaSupport = true; };
+  ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
   shuriken = final.callPackage ../../pkgs/shuriken {};
-
-
 }

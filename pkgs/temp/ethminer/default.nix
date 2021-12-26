@@ -1,14 +1,22 @@
-# Note that this is sepcifically for gilgamesh.
+# Compared to the ethminer on nixpkgs master, this one uses a
+# different commit from ethminer (master uses 0.19 release)
+#
+# I think the chosen commit fixed a bug so that it can correctly
+# recognize CUDA 11 for ethash. Otherwise as a result it will not drop
+# "compute_30" for CUDA 11 (but CUDA 11 does not have it), and result
+# in compilation failure.
 
 {
-  clangStdenv,
+  lib,
+  stdenv,
   fetchFromGitHub,
   opencl-headers,
   cmake,
   jsoncpp,
-  boost,
+  boost16x,
   makeWrapper,
-  cudatoolkit_11,
+  cudatoolkit,
+  cudaSupport,
   mesa,
   ethash,
   opencl-info,
@@ -18,20 +26,16 @@
   cli11
 }:
 
-# Note that this requires clang < 9.0 to build, and currently
-# clangStdenv provides clang 7.1 which satisfies the requirement.
-let stdenv = clangStdenv;
-
-in stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "ethminer";
-  version = "0.19.0.rc";
+  version = "dev.20210209";
 
   src =
     fetchFromGitHub {
-      owner = "ethereum-mining";
+      owner = "breakds";
       repo = "ethminer";
-      rev = "beaeb00184da1567a5f32caf058f93c2a7b11361";
-      sha256 = "1h7y1jsim8ma4fkfh820bk5nvkmbyk8jvpf8qjk5jpgi4m0bb6i4";
+      rev = "ce52c74021b6fbaaddea3c3c52f64f24e39ea3e9";
+      sha256 = "sha256-yTFsN0M3gTF0YhUPP6sOT/DHfSALKyxbuYLEdXUpag0=";
       fetchSubmodules = true;
     };
 
@@ -42,7 +46,11 @@ in stdenv.mkDerivation rec {
     "-DAPICORE=ON"
     "-DETHDBUS=OFF"
     "-DCMAKE_BUILD_TYPE=Release"
-  ];
+  ] ++ (if cudaSupport then [
+    "-DCUDA_PROPAGATE_HOST_FLAGS=off"
+  ] else [
+    "-DETHASHCUDA=OFF" # on by default
+  ]);
 
   nativeBuildInputs = [
     cmake
@@ -52,15 +60,21 @@ in stdenv.mkDerivation rec {
 
   buildInputs = [
     cli11
-    boost
+    boost16x # 1.7x support is broken, see https://github.com/ethereum-mining/ethminer/issues/2393
     opencl-headers
     mesa
-    cudatoolkit_11
     ethash
     opencl-info
     ocl-icd
     openssl
     jsoncpp
+  ] ++ lib.optionals cudaSupport [
+    cudatoolkit
+  ];
+
+  patches = [
+    # global context library is separated from libethash
+    ./add-global-context.patch
   ];
 
   preConfigure = ''
@@ -71,11 +85,11 @@ in stdenv.mkDerivation rec {
     wrapProgram $out/bin/ethminer --prefix LD_LIBRARY_PATH : /run/opengl-driver/lib
   '';
 
-  meta = with stdenv.lib; {
-    description = "Ethereum miner with OpenCL, CUDA and stratum support";
+  meta = with lib; {
+    description = "Ethereum miner with OpenCL${lib.optionalString cudaSupport ", CUDA"} and stratum support";
     homepage = "https://github.com/ethereum-mining/ethminer";
     platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ nand0p ];
-    license = licenses.gpl2;
+    maintainers = with maintainers; [ atemu ];
+    license = licenses.gpl3Only;
   };
 }
