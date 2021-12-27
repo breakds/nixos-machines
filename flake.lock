@@ -106,10 +106,27 @@
         "type": "github"
       }
     },
+    "nixpkgs2105": {
+      "locked": {
+        "lastModified": 1640283157,
+        "narHash": "sha256-6Ddfop+rKE+Gl9Tjp9YIrkfoYPzb8F80ergdjcq3/MY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dde1557825c5644c869c5efc7448dc03722a8f09",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
+        "nixpkgs2105": "nixpkgs2105",
         "vital-modules": "vital-modules",
         "www-breakds-org": "www-breakds-org"
       }

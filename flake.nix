@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
 
     # Use vital-modules, with the same nixpkgs
     vital-modules.url = "github:nixvital/vital-modules";
@@ -112,14 +113,9 @@
         ];
       };
 
-      berry = nixpkgs.lib.nixosSystem {
+      berry = inputs.nixpkgs2105.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({pkgs, ...}: {
-            # TODO(breakds): This is temporary because displaylink's dependency
-            # edvi is broken for kernel >= 5.15
-            boot.kernelPackages = pkgs.linuxPackages_5_10;
-          })
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop-lids
           vital-modules.nixosModules.iphone-connect
