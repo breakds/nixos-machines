@@ -115,6 +115,11 @@
       berry = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ({pkgs, ...}: {
+            # TODO(breakds): This is temporary because displaylink's dependency
+            # edvi is broken for kernel >= 5.15
+            boot.kernelPackages = pkgs.linuxPackages_5_10;
+          })
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop-lids
           vital-modules.nixosModules.iphone-connect
