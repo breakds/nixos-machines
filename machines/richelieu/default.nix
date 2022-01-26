@@ -8,7 +8,7 @@
     ./homepage.nix
     ./jupyter-lab.nix
     ./jiahaotian.nix
-    ./linxiao.nix    
+    ./linxiao.nix
     ./terraria.nix
     # ../deluge.nix
     # ../nix-serve.nix
@@ -67,7 +67,7 @@
 
     # 6006 is for tensorboard
     networking.firewall.allowedTCPPorts = [ 80 443 6006 ];
-    
+
     security.acme = {
       acceptTerms = true;
       email = "bds@breakds.org";
@@ -97,11 +97,38 @@
       domain = "files.breakds.org";
     };
 
-    services.borgbackup.repos = {
-      orbekk = {
+    services.borgbackup = {
+      repos.orbekk = {
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
         path = [ "/var/lib/borgbackup/orbekk" ];
-      };      
+      };
+      backups.richelieu2dragon = let keyPath = "/home/breakds/.ssh/breakds_samaritan"; in {
+        paths = [ "/var/lib/filerun/user-files/Archive" ];
+        exclude = [];
+        doInit = true;
+        repo = "borg@dragon.orbekk.com:.";
+        encryption = {
+          mode = "repokey-blake2";
+          passCommand = "cat ${keyPath}";
+        };
+        environment = { BORG_RSH = "ssh -i ${keyPath}"; };
+        compression = "auto,lzma";
+        startAt = "daily";
+      };
+    };
+
+    backups.dragon = let keyPath = "/home/breakds/.ssh/breakds_samaritan"; in {
+      paths = [ "/var/lib/filerun/user-files/Archive" ];
+      exclude = [];
+      doInit = true;
+      repo = "borg@dragon.orbekk.com:.";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "cat ${keyPath}";
+      };
+      environment = { BORG_RSH = "ssh -i ${keyPath}"; };
+      compression = "auto,lzma";
+      startAt = "daily";
     };
 
     # This value determines the NixOS release from which the default
