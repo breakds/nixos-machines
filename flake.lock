@@ -911,11 +911,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1640372319,
-        "narHash": "sha256-8x8MgKmgjGteQKCMCSPC6+1k0LngVQ7JoOMi1kiKJIU=",
+        "lastModified": 1644169355,
+        "narHash": "sha256-cy30ymICciHoaV7QOarTxkjaNJAn96t4amE1HBP1IAo=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "7a0d1c547c20fa96bc866b0aeed81140766c5f21",
+        "rev": "5073b1cf779db37781fde2c9e74c2dce7ea8fda4",
         "type": "github"
       },
       "original": {
