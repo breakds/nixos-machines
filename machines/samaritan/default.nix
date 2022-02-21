@@ -6,7 +6,6 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    # TODO(breakds): Add python environment
   ];
 
   config = {
