@@ -1833,11 +1833,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1640590564,
-        "narHash": "sha256-oBXusRxpHRuSL0SPE5ou786eNO8RlP2+V8NUWH5rEYA=",
+        "lastModified": 1645436525,
+        "narHash": "sha256-PDeeMx1v2uzxUJ0aM48/M9orqE9sxwWp9Af1ACpfJjk=",
         "ref": "master",
-        "rev": "fbf68fc35ed9c24b5f1c60033d5a57756f45d3db",
-        "revCount": 316,
+        "rev": "94e1aef97f153a892e26a358327968aa59f83547",
+        "revCount": 398,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
       },
