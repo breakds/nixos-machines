@@ -26,6 +26,12 @@
       ];
     };
 
+    users.users."root" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/breakds_samaritan.pub
+      ];
+    };
+
     # Allow sudo without password
     security.sudo.extraRules = [
       {
