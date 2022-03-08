@@ -104,6 +104,10 @@
       domain = "files.breakds.org";
     };
 
+    nix.trustedUsers = [
+      "root"
+    ];
+
     services.borgbackup = {
       repos.orbekk = {
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
