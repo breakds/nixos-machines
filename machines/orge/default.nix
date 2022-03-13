@@ -43,12 +43,15 @@
         intelBusId = "0:2:0";
         nvidiaBusId = "1:0:0";
       };
+
+      # Nvidia Prime only works with sddm (not gdm).
       xserver = {
         displayManager = "sddm";
         dpi = 100;
       };
     };
 
+    # This laptop's Nvidia Driver needs persistenced set.
     hardware.nvidia = {
       nvidiaPersistenced = true;
     };
@@ -67,6 +70,18 @@
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
     systemd.enableUnifiedCgroupHierarchy = false;
+
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "richelieu";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = 24;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+      ];
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
