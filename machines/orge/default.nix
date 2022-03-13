@@ -45,11 +45,11 @@
       };
       xserver = {
         displayManager = "sddm";
+        dpi = 100;
       };
     };
 
     hardware.nvidia = {
-      modesetting.enable = lib.mkForce false;
       nvidiaPersistenced = true;
     };
 
