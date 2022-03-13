@@ -37,7 +37,8 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
-      nvidia.enable = true;
+      # TODO(breakds): Enable nvidia driver.
+      nvidia.enable = false;
     };
 
     environment.systemPackages = with pkgs; [
