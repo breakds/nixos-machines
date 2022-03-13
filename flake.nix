@@ -150,6 +150,14 @@
         ];
       };
 
+      medea = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          ./machines/medea
+        ];
+      };
+
       # Containers
       fortress = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
