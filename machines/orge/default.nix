@@ -43,6 +43,9 @@
         intelBusId = "0:2:0";
         nvidiaBusId = "1:0:0";
       };
+      xserver = {
+        displayManager = "sddm";
+      };
     };
 
     hardware.nvidia = {
