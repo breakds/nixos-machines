@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -37,8 +37,17 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
-      # TODO(breakds): Enable nvidia driver.
-      nvidia.enable = false;
+      nvidia.enable = true;
+      nvidia.prime = {
+        enable = true;
+        intelBusId = "0:2:0";
+        nvidiaBusId = "1:0:0";
+      };
+    };
+
+    hardware.nvidia = {
+      modesetting.enable = lib.mkForce false;
+      nvidiaPersistenced = true;
     };
 
     environment.systemPackages = with pkgs; [
