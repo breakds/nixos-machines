@@ -22,7 +22,6 @@ in {
 
   cudatoolkit = final.cudatoolkit_11;
 
-  # TODO(breakds): Add www.breakds.org
   tensorboard26 = unstablePkgs.python3Packages.tensorflow-tensorboard;
 
   ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
