@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -24,6 +24,13 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
+      xserver.displayManager = "lightdm";
+    };
+
+    services.xserver.desktopManager = {
+      gnome.enable = lib.mkForce false;
+      surf-display.enable = true;
+      pantheon.enable = true;
     };
 
     vital.pre-installed.level = 5;
