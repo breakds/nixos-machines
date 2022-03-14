@@ -27,11 +27,11 @@
       xserver.displayManager = "lightdm";
     };
 
-    # services.xserver.desktopManager = {
-    #   gnome.enable = lib.mkForce false;
-    #   surf-display.enable = true;
-    #   pantheon.enable = true;
-    # };
+    services.xserver.desktopManager = {
+      gnome.enable = lib.mkForce false;
+      surf-display.enable = true;
+      pantheon.enable = true;
+    };
 
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
