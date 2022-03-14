@@ -29,8 +29,12 @@
 
     services.xserver.desktopManager = {
       gnome.enable = lib.mkForce false;
-      surf-display.enable = true;
       pantheon.enable = true;
+    };
+
+    services.xserver.displayManager = {
+      autoLogin.enable = true;
+      autoLogin.user = "breakds";
     };
 
     vital.pre-installed.level = 5;
