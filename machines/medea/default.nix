@@ -27,11 +27,11 @@
       xserver.displayManager = "lightdm";
     };
 
-    services.xserver.desktopManager = {
-      gnome.enable = lib.mkForce false;
-      surf-display.enable = true;
-      pantheon.enable = true;
-    };
+    # services.xserver.desktopManager = {
+    #   gnome.enable = lib.mkForce false;
+    #   surf-display.enable = true;
+    #   pantheon.enable = true;
+    # };
 
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
@@ -39,6 +39,18 @@
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = false;
     vital.programs.vscode.enable = false;
+
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "richelieu";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = 24;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+      ];
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
