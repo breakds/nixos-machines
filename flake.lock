@@ -1191,6 +1191,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable_11": {
+      "locked": {
+        "lastModified": 1646497237,
+        "narHash": "sha256-Ccpot1h/rV8MgcngDp5OrdmLTMaUTbStZTR5/sI7zW0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "062a0c5437b68f950b081bbfc8a699d57a4ee026",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "062a0c5437b68f950b081bbfc8a699d57a4ee026",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable_2": {
       "locked": {
         "lastModified": 1622437901,
@@ -2123,14 +2139,15 @@
         "flake-utils": "flake-utils_24",
         "nixpkgs": [
           "nixpkgs2105"
-        ]
+        ],
+        "nixpkgs-unstable": "nixpkgs-unstable_11"
       },
       "locked": {
-        "lastModified": 1645436525,
-        "narHash": "sha256-PDeeMx1v2uzxUJ0aM48/M9orqE9sxwWp9Af1ACpfJjk=",
+        "lastModified": 1646974563,
+        "narHash": "sha256-tb3dSZTR42HpwHXewSGghWZzubgmSZlzHCK1t6XZ5+8=",
         "ref": "master",
-        "rev": "94e1aef97f153a892e26a358327968aa59f83547",
-        "revCount": 398,
+        "rev": "eb748185044ed068ed81f370cc277c33ac21f93f",
+        "revCount": 400,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/devops-tools.git"
       },
