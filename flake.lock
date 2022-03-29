@@ -1873,11 +1873,11 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1640382072,
-        "narHash": "sha256-4HtqmXIPidJYoPL4FLDbVQXUDdhH29REXOu+SVMK+4s=",
+        "lastModified": 1648579032,
+        "narHash": "sha256-Bk6G29syqe3ihfSpus+3Ifsxj4rqsGv/Gzq19atuZ5c=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "4131bb2fff53f07193447480448d584495ca1609",
+        "rev": "a799bbbf2914283fbe038774b69ea062d0647da1",
         "type": "github"
       },
       "original": {
