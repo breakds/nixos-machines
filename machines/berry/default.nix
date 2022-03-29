@@ -36,7 +36,7 @@
 
     vital.programs = {
       modern-utils.enable = true;
-      vscode.enable = true;
+      vscode.enable = false; # Use the one from home-manager
     };
 
     environment.systemPackages = with pkgs; [
