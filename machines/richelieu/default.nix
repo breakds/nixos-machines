@@ -10,6 +10,7 @@
     ./jiahaotian.nix
     ./linxiao.nix
     ./hao.nix
+    ./cassandra.nix
     ./terraria.nix
     # ../deluge.nix
     # ../nix-serve.nix
