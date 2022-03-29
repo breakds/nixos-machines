@@ -5,7 +5,9 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./jupyter-lab.nix
     ../common.nix
+    ../cassandra.nix
   ];
 
   config = {
