@@ -13,6 +13,7 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:breakds/nixos-home";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-home.inputs.nixpkgs-2105.follows = "nixpkgs2105";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";

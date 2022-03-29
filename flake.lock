@@ -840,6 +840,28 @@
         "type": "github"
       }
     },
+    "home-manager-2105": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos-home",
+          "nixpkgs-2105"
+        ]
+      },
+      "locked": {
+        "lastModified": 1646616315,
+        "narHash": "sha256-A1g4AjM/4kVWBzfCx9HqCszVFlcsk+C9NHG3X6hRjaI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "454abeb5a891b2b56f10a30f2a846e8341cbfe9b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-21.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "hydra-latest": {
       "inputs": {
         "nix": "nix",
@@ -1077,16 +1099,20 @@
     "nixos-home": {
       "inputs": {
         "home-manager": "home-manager",
+        "home-manager-2105": "home-manager-2105",
         "nixpkgs": [
           "nixpkgs"
+        ],
+        "nixpkgs-2105": [
+          "nixpkgs2105"
         ]
       },
       "locked": {
-        "lastModified": 1647148114,
-        "narHash": "sha256-N5Nx03fOiEVHnY30bdXDFz4lAlYUMXxzXyuq9BAUbrE=",
+        "lastModified": 1648581526,
+        "narHash": "sha256-+QARceoKmWfUkEeFmfmIUGxAWvtebnDUnuTbGXpv2vc=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "a6f04579e453ce09161172a3e6bcb001b3ee1d3a",
+        "rev": "5332f1e35b449d3b53309405d95b715e07b029d3",
         "type": "github"
       },
       "original": {
