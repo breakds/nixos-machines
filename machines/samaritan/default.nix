@@ -87,8 +87,10 @@
     networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
 
     serviceContainers.warehouser = {
-      mainUser = "breakds";
-      mysqlServerId = 17;
+      user = "breakds";
+      mysqlMaster = {
+        slaveId = 17;
+      };
     };
 
     # Disable unified cgroup hierarchy (cgroups v2)

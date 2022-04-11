@@ -20,10 +20,10 @@
 
     wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools.git";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs2105";
-    
-    wonder-deployhub.url = "git+ssh://git@github.com/quant-wonderland/deployhub.git";
-    wonder-deployhub.inputs.nixpkgs.follows = "nixpkgs-unstable";    
-    wonder-deployhub.inputs.devops-tools.follows = "wonder-devops";
+
+    wonder-modules.url =
+      "git+ssh://git@github.com/quant-wonderland/wonder-modules";
+    wonder-modules.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, vital-modules, nixos-home, ... }@inputs: {
@@ -35,15 +35,7 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
-          ({
-            nixpkgs.overlays = [
-              inputs.wonder-deployhub.overlays.data-apps
-              (final: prev: {
-                archer = inputs.wonder-devops.packages."${final.system}".archer;
-              })
-            ];
-          })
-          inputs.wonder-deployhub.nixosModules.warehouser
+          inputs.wonder-modules.nixosModules.warehouser
           ./machines/samaritan
         ];
       };
