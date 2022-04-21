@@ -1,9 +1,9 @@
 final: prev:
 
 let unstablePkgs = import (builtins.fetchTarball {
-      # 2021 Sep 06
-      url = https://github.com/NixOS/nixpkgs/tarball/4f0bc6d71d1fbabf6e1684035290b65893982da5;
-      sha256 = "1hdz8y0za2wl0693p4gnm36kgsv2wmjshq0p204f34pb5b9bdq0d";
+      # 2022 Apr 21
+      url = https://github.com/NixOS/nixpkgs/tarball/bfb6f709c032169ea6fa20e2c4c8741a06d5e018;
+      sha256 = "0r8s252lzn9lyg1k45khmw92z325gnswbdm6klq3ch0i66p8nnx6";
     }) {
       config.allowUnfree = true;
       system = prev.system;
@@ -20,9 +20,8 @@ in {
   # Use llvm 11
   llvmPackages = prev.llvmPackages_11;
 
+  tensorboard28 = unstablePkgs.python3Packages.tensorboard;
   cudatoolkit = final.cudatoolkit_11;
-
-  tensorboard26 = unstablePkgs.python3Packages.tensorflow-tensorboard;
 
   ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
   shuriken = final.callPackage ../../pkgs/shuriken {};

@@ -24,7 +24,7 @@
       sqlitebrowser
       awscli
       nixops
-      tensorboard26
+      tensorboard28
 
       # Customized
       shuriken
