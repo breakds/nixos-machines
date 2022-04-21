@@ -401,11 +401,11 @@
         "nixpkgs": "nixpkgs_16"
       },
       "locked": {
-        "lastModified": 1648170793,
-        "narHash": "sha256-AVacgZYtagx4k9zmebiGnz4EBQLF0hTlMbKcy2y4tWA=",
+        "lastModified": 1649671976,
+        "narHash": "sha256-0F0QH0USWiOMQOtAabISe747P8cKIg55eJjSVCt+DIo=",
         "ref": "master",
-        "rev": "cf016b144ffa85ce8e872ff0af45a914141bfcd1",
-        "revCount": 512,
+        "rev": "181247c6e6bb371b106d54181f6ae2ab0ad9ac6a",
+        "revCount": 515,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/data-pipeline-monitor"
       },
@@ -515,11 +515,11 @@
         "nixpkgs-unstable": "nixpkgs-unstable_10"
       },
       "locked": {
-        "lastModified": 1649118652,
-        "narHash": "sha256-BYgON5um8dBnolJAij+7k8sMaCZPeV/0728oKkhksHo=",
+        "lastModified": 1649651870,
+        "narHash": "sha256-gGetdLDRwMMyL5ukRUyrphnWWlQzsnm70AhHyqJoAGE=",
         "ref": "master",
-        "rev": "61fe2d140dbb5c3e1c3d6e820c9c04d32bdaec51",
-        "revCount": 424,
+        "rev": "63893f2bf60cb2ca705ad9dde774ac8e06368a6f",
+        "revCount": 444,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/devops-tools"
       },
@@ -2405,11 +2405,11 @@
         "vitalpkgs": "vitalpkgs_6"
       },
       "locked": {
-        "lastModified": 1649383082,
-        "narHash": "sha256-0ytiBjq5zndyFoVOzuDluxnUutFHhTfZHIMa9TwXllM=",
+        "lastModified": 1649740457,
+        "narHash": "sha256-Rcoe13rR5ORHtGg5TjRWtK1QC1IKNLELJTeQ7w7V1ag=",
         "ref": "master",
-        "rev": "fed9e0aba5e8fe6d3eaa2ed9b07530ed3e4b0b8b",
-        "revCount": 24,
+        "rev": "f4a59b3b71581bf05b71f42d6b4d135145e4d205",
+        "revCount": 26,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/wonder-foundations"
       },
@@ -2435,11 +2435,11 @@
         "wonder-foundations": "wonder-foundations"
       },
       "locked": {
-        "lastModified": 1649562077,
-        "narHash": "sha256-xSIerjW6QXiBjG/5F7canyHe4GBvhW9Fso7HIhavYtc=",
+        "lastModified": 1649744281,
+        "narHash": "sha256-e+BYT/NGs/aWW/GM7hzyWFbd+A6Wqba8pyKB9VA6WwA=",
         "ref": "master",
-        "rev": "56b4c9c4a4cfc0eebd4f2281157525fab07e6d85",
-        "revCount": 214,
+        "rev": "520e017285b78c83c35a3ba26e0b51aa5a979795",
+        "revCount": 221,
         "type": "git",
         "url": "ssh://git@github.com/quant-wonderland/wonder-modules"
       },
