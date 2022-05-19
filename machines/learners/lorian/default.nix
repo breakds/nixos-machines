@@ -8,6 +8,7 @@
     ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
+    ./jerry.nix
   ];
 
   config = {
