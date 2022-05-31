@@ -5,6 +5,6 @@
     sysstat
     linuxPackages.perf
     perf-tools  # By Brendan Gregg
-    flameGraph
+    flamegraph
   ];
 }
