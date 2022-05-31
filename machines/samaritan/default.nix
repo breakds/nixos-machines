@@ -56,7 +56,7 @@
       trezor-suite
     ];
 
-    # Eth Mining
+    # TODO(breakds): Re-enable ETH Mining
     services.ethminer = {
       enable = false;
       recheckInterval = 1000;

@@ -17,12 +17,6 @@ let unstablePkgs = import (builtins.fetchTarball {
     };
 
 in {
-  # Use llvm 11
-  llvmPackages = prev.llvmPackages_11;
-
-  tensorboard28 = unstablePkgs.python3Packages.tensorboard;
-  cudatoolkit = final.cudatoolkit_11;
-
   ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
   shuriken = final.callPackage ../../pkgs/shuriken {};
 }
