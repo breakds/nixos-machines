@@ -52,13 +52,13 @@
       thunderbird
       mullvad-vpn
       unetbootin
-      archer
+      # archer
       trezor-suite
     ];
 
     # Eth Mining
     services.ethminer = {
-      enable = true;
+      enable = false;
       recheckInterval = 1000;
       toolkit = "cuda";
       wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.samaritan3080";
@@ -86,12 +86,12 @@
     services.mullvad-vpn.enable = true;
     networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
 
-    serviceContainers.warehouser = {
-      enable = true;
-      user = "breakds";
-      enablePromtail = false;
-      enableMysqlReplication = false;
-    };
+    # serviceContainers.warehouser = {
+    #   enable = true;
+    #   user = "breakds";
+    #   enablePromtail = false;
+    #   enableMysqlReplication = false;
+    # };
 
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
