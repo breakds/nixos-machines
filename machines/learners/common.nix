@@ -30,9 +30,9 @@
     vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
 
-    # Eth Mining
+    # TODO(breakds): Re-enable ETH Mining
     services.ethminer = {
-      enable = true;
+      enable = false;
       recheckInterval = 1000;
       toolkit = "cuda";
       pool = "us2.ethermine.org";
