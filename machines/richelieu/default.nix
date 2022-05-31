@@ -79,7 +79,9 @@
 
     security.acme = {
       acceptTerms = true;
-      email = "bds@breakds.org";
+      defaults = {
+        email = "bds@breakds.org";
+      };
     };
 
     services.nginx = {
