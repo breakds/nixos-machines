@@ -13,7 +13,6 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:breakds/nixos-home/dev/22.05";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-home.inputs.nixpkgs-2105.follows = "nixpkgs2105";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
@@ -110,7 +109,7 @@
         ];
       };
 
-      berry = inputs.nixpkgs2105.lib.nixosSystem {
+      berry = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
