@@ -51,6 +51,9 @@
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
       ];
+      settings = {
+        trusted-substituters = [ "richelieu" ];
+      };
     };
   };
 }
