@@ -40,5 +40,17 @@
       registerMail = "";
       rig = "";
     };
+
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "richelieu";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = 24;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+      ];
+    };
   };
 }
