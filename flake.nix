@@ -7,11 +7,11 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=e82ffe7b5f25d781eb52cc07c552899cf6f6547b";    
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules/dev/22.05";
+    vital-modules.url = "github:nixvital/vital-modules";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home/dev/22.05";
+    nixos-home.url = "github:breakds/nixos-home";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";

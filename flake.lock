@@ -1227,28 +1227,6 @@
         "type": "github"
       }
     },
-    "home-manager-2105": {
-      "inputs": {
-        "nixpkgs": [
-          "nixos-home",
-          "nixpkgs-2105"
-        ]
-      },
-      "locked": {
-        "lastModified": 1646616315,
-        "narHash": "sha256-A1g4AjM/4kVWBzfCx9HqCszVFlcsk+C9NHG3X6hRjaI=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "454abeb5a891b2b56f10a30f2a846e8341cbfe9b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-21.05",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "home-manager_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_13"
@@ -1464,23 +1442,20 @@
     "nixos-home": {
       "inputs": {
         "home-manager": "home-manager",
-        "home-manager-2105": "home-manager-2105",
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "nixpkgs-2105": "nixpkgs-2105"
+        ]
       },
       "locked": {
-        "lastModified": 1653973327,
-        "narHash": "sha256-gr98Ysjoz20521yUyjZbTD6UWvLN/bbhs0t9MZpNuu4=",
+        "lastModified": 1654452717,
+        "narHash": "sha256-on77vdwJYOKx0lgzrAgastUIhGQWtf+vnjhISp6RM+Y=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "aa31a54b3a04119b5ad4be1fa6d3e8518feb9ad6",
+        "rev": "6e32c26bf8f785dd84beffaa123de48c6d63e1d1",
         "type": "github"
       },
       "original": {
         "owner": "breakds",
-        "ref": "dev/22.05",
         "repo": "nixos-home",
         "type": "github"
       }
@@ -1626,22 +1601,6 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "46251a79f752ae1d46ef733e8e9760b6d3429da4",
-        "type": "github"
-      }
-    },
-    "nixpkgs-2105": {
-      "locked": {
-        "lastModified": 1645296114,
-        "narHash": "sha256-y53N7TyIkXsjMpOG7RhvqJFGDacLs9HlyHeSTBioqYU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "530a53dcbc9437363471167a5e4762c5fcfa34a1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-21.05",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -2650,16 +2609,15 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1653979802,
+        "lastModified": 1654477475,
         "narHash": "sha256-KgFtZ4fV+++pwiiMUnNJzEgAeqoSZd4O46FmBLh/W5I=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "37abb0f768877c524e98087a2a5542e6fd3e37fb",
+        "rev": "c965d6007215c8a7a0cf2cdf53718796e1e4ab19",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
-        "ref": "dev/22.05",
         "repo": "vital-modules",
         "type": "github"
       }
