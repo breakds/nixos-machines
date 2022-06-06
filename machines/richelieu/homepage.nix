@@ -9,5 +9,15 @@
         root = pkgs.www-breakds-org;
       };
     };
+
+    virtualHosts = {
+      "extorage.breakds.org" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          root = "/var/lib/extorage";
+        };
+      };
+    };
   };
 }
