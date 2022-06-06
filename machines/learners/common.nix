@@ -52,7 +52,7 @@
         }
       ];
       settings = {
-        trusted-substituters = [ "richelieu" ];
+        trusted-substituters = [ "ssh://richelieu.local" ];
       };
     };
   };
