@@ -40,8 +40,8 @@
       nvidia.enable = true;
       nvidia.prime = {
         enable = true;
-        intelBusId = "0:2:0";
-        nvidiaBusId = "1:0:0";
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
       };
 
       # Nvidia Prime only works with sddm (not gdm).
@@ -81,6 +81,9 @@
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
       ];
+      settings = {
+        trusted-substituters = [ "ssh://richelieu.local" ];
+      };
     };
 
     # This value determines the NixOS release from which the default
