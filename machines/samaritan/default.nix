@@ -56,6 +56,12 @@
       trezor-suite
     ];
 
+    nix = {
+      settings = {
+        trusted-substituters = [ "ssh://richelieu.local" ];
+      };
+    };
+
     # TODO(breakds): Re-enable ETH Mining
     services.ethminer = {
       enable = false;
