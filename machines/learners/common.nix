@@ -29,6 +29,7 @@
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
+    vital.programs.machine-learning.enable = true;
 
     # TODO(breakds): Re-enable ETH Mining
     services.ethminer = {
