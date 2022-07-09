@@ -30,6 +30,8 @@
       shuriken
     ];
 
+    programs.nix-ld.enable = true;
+
     nix = {
       # The following is added to /etc/nix.conf to prevent GC from
       # deleting too many dependencies.
