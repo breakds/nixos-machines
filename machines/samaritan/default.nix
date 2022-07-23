@@ -53,7 +53,7 @@
       thunderbird
       mullvad-vpn
       unetbootin
-      # archer
+      archer
       trezor-suite
     ];
 
