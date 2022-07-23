@@ -95,6 +95,11 @@
       clientMaxBodySize = "1000m";
     };
 
+    services.plex = {
+      enable = true;
+      openFirewall = true;
+    };
+
     vital.services.docker-registry = {
       enable = true;
       domain = "docker.breakds.org";
