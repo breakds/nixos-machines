@@ -1,6 +1,7 @@
 { config, lib, ... }:
 
 {
+  # The option dataDir uses the default: /var/lib/plex
   services.plex = {
     enable = true;
     openFirewall = false;  # So that we can disable 32400 and manually whitelist the rest.
