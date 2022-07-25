@@ -13,6 +13,7 @@
     ./jerry.nix
     ./cassandra.nix
     ./terraria.nix
+    ./plex.nix
     # ../deluge.nix
     # ../nix-serve.nix
   ];
@@ -93,11 +94,6 @@
 
       # TODO(breakds): Make this per virtual host.
       clientMaxBodySize = "1000m";
-    };
-
-    services.plex = {
-      enable = true;
-      openFirewall = true;
     };
 
     vital.services.docker-registry = {
