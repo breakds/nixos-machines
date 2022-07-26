@@ -44,6 +44,10 @@
     vital.programs.accounting.enable = false;
     vital.programs.vscode.enable = false;
 
+    environment.systemPackages = with pkgs; [
+      plex-media-player
+    ];
+
     nix = {
       distributedBuilds = true;
       buildMachines = [
