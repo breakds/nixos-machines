@@ -19,5 +19,4 @@ let unstablePkgs = import (builtins.fetchTarball {
 in {
   ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
   shuriken = final.callPackage ../../pkgs/shuriken {};
-  zoom-us = unstablePkgs.zoom-us;
 }
