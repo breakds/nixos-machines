@@ -23,7 +23,7 @@
       mysql-client
       sqlitebrowser
       awscli
-      nixops
+      nixopsUnstable
       python3Packages.tensorboard
 
       # Customized
