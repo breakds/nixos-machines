@@ -58,12 +58,12 @@
     };
 
     declarative = true;
-    dataDir = "/home/breakds/.deluge";
+    dataDir = "/var/lib/deluge";
     openFirewall = true;
-    authFile = "/home/breakds/.config/deluge/auth";
+    authFile = "/var/lib/deluge/auth";
   };
 
-  config.users.extraUsers = {
+  users.extraUsers = {
     "breakds" = {
       extraGroups = [
         "deluge"
