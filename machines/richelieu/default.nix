@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/dev/breakds-dev.nix
-    ./homepage.nix
+    ./web-services.nix
     ./jupyter-lab.nix
     ./jiahaotian.nix
     ./linxiao.nix
