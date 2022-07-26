@@ -47,4 +47,27 @@
       };
     };
   };
+
+  services.deluge = {
+    enable = true;
+
+    web = {
+      enable = true;
+      port = 8112;
+      openFirewall = true;
+    };
+
+    declarative = true;
+    dataDir = "/home/breakds/.deluge";
+    openFirewall = true;
+    authFile = "/home/breakds/.config/deluge/auth";
+  };
+
+  config.users.extraUsers = {
+    "breakds" = {
+      extraGroups = [
+        "deluge"
+      ];
+    };
+  };
 }

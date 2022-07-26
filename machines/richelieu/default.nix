@@ -13,8 +13,7 @@
     ./jerry.nix
     ./cassandra.nix
     ./terraria.nix
-    ./plex.nix
-    # ../deluge.nix
+    ./media.nix
     # ../nix-serve.nix
   ];
 
