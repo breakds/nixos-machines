@@ -2845,11 +2845,11 @@
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1657322961,
-        "narHash": "sha256-Vo+zvC61SqQUlNkPdXwUU9aAyeEWdZubhKAfA3+lWKo=",
+        "lastModified": 1659196779,
+        "narHash": "sha256-kJgST/USGTfgf137+6UzYGhm7ihC/uiSFZ3uukDXKtw=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "cba6833128883dd87ec404084bfe128e88692d4c",
+        "rev": "15a1a1cdf89383d4817fb50edf19a901aebb2cbd",
         "type": "github"
       },
       "original": {
