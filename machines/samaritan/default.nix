@@ -55,6 +55,7 @@
       unetbootin
       archer
       trezor-suite
+      inkscape
     ];
 
     nix = {
