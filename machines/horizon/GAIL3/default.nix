@@ -24,16 +24,10 @@
       hostId = "f940bd97";
     };
 
-    # Always use the most up-to-date linux kernel since this machine
-    # has a super new CPU i9-11900KF.
-    #
-    # We can probably remove this when 5.12 becomes the stable kernel.
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-
     vital.graphical = {
       enable = true;
       remote-desktop.enable = true;
-      xserver.dpi = 120;
+      xserver.dpi = 108;
       nvidia.enable = true;
     };
 
@@ -41,9 +35,6 @@
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
     vital.programs.machine-learning.enable = true;
-
-    # For ROS
-    networking.firewall.allowedTCPPorts = [ 11311 ];
 
     environment.systemPackages = with pkgs; [
       gimp
