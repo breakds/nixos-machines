@@ -14,6 +14,7 @@
     ./cassandra.nix
     ./terraria.nix
     ./media.nix
+    ./tailscale.nix
     # ../nix-serve.nix
   ];
 
