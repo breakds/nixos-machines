@@ -8,6 +8,7 @@
     };
 
     networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
+    networking.firewall.checkReversePath = "loose";
 
     environment.systemPackages = with pkgs; [ tailscale ];
   };
