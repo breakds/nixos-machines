@@ -9,12 +9,11 @@
     ./jupyter-lab.nix
     ./jiahaotian.nix
     ./linxiao.nix
-    ./hao.nix
     ./jerry.nix
     ./cassandra.nix
     ./terraria.nix
     ./media.nix
-    ./tailscale.nix
+    ../../base/tailscale.nix
     # ../nix-serve.nix
   ];
 
