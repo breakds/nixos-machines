@@ -21,6 +21,8 @@
     };
   };
 
+  networking.enableIPv6 = true;
+
   environment.systemPackages = with pkgs; [
     gparted pass samba
   ] ++ lib.optionals config.vital.graphical.enable [
