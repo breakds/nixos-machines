@@ -31,6 +31,14 @@
       options = [ "auto" "nofail" ];      
     };
 
+  # For Deluge
+  fileSystems."/var/lib/deluge/Downloads" =
+    { device = "/dev/disk/by-label/BT_DOWNLOADS";
+      fsType = "ext4";
+      # Do not panic and continue to boot if this disk is missing.
+      options = [ "auto" "nofail" ];      
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/f77f84ac-4a9f-4cbf-9a4f-720a229dcae2"; }
     ];

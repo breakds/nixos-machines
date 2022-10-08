@@ -48,8 +48,10 @@
     };
   };
 
+  # TOOD(breakds): Enable Bittorrent when I get a better idea on how
+  # it works from the networking side.
   services.deluge = {
-    enable = true;
+    enable = false;
 
     web = {
       enable = true;
