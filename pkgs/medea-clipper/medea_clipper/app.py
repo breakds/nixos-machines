@@ -1,4 +1,5 @@
 import click
+import os
 import pyperclip
 from loguru import logger
 from bottle import route, run, template, post, request, redirect, static_file
@@ -75,4 +76,6 @@ def index():
 
 
 if __name__ == "__main__":
+    logger.info("haha!")
+    logger.info(os.getenv("PATH"))
     main()
