@@ -16,7 +16,7 @@
             inherit system;
           };
       in {
-        devShell = pkgs.mkShell rec {
+        devShells.default = pkgs.mkShell rec {
           name = "medea-clipper";
           packages = with pkgs; [ poetry pyright xclip ];
           shellHook = ''
@@ -25,5 +25,7 @@
             export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib/:${pkgs.zlib}/lib/:$LD_LIBRARY_PATH"
           '';
         };
+
+        packages.default = pkgs.callPackage ./default.nix {};
       });
 }
