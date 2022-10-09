@@ -26,6 +26,6 @@
           '';
         };
 
-        packages.default = pkgs.callPackage ./default.nix {};
+        packages.default = pkgs.python3Packages.callPackage ./default.nix {};
       });
 }
