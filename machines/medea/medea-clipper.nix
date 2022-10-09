@@ -5,8 +5,7 @@
     systemd.services.medea-clipper = {
       wantedBy = [ "multi-user.target" ];
       path = [
-        pkgs.medea-clipper
-        pkgs.xclip
+        "${pkgs.xclip}/bin"
       ];
 
       serviceConfig = {
