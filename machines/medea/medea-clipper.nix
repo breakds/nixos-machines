@@ -4,14 +4,13 @@
   config = {
     systemd.services.medea-clipper = {
       wantedBy = [ "multi-user.target" ];
+
       path = [
         "${pkgs.xclip}/bin"
       ];
 
       serviceConfig = {
         Type = "simple";
-        User = "breakds";
-        Group = "breakds";
         ExecStart = "${pkgs.medea-clipper}/bin/app serve --port=33337";
         Restart = "always";
       };
