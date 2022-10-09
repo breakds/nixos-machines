@@ -19,4 +19,5 @@ let unstablePkgs = import (builtins.fetchTarball {
 in {
   ethminer = final.callPackage ../../pkgs/temp/ethminer { cudaSupport = true; };
   shuriken = final.callPackage ../../pkgs/shuriken {};
+  medea-clipper = final.python3Packages.callPackage ../../pkgs/medea-clipper {};
 }
