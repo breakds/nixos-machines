@@ -13,10 +13,10 @@
         Type = "simple";
         User = "breakds";
         Group = "breakds";
-        ExecStart = "${pkgs.medea-clipper}/bin/app serve --port=33377";
+        ExecStart = "${pkgs.medea-clipper}/bin/app serve --port=33337";
         Restart = "always";
       };
     };
-    networking.firewall.allowedTCPPorts = [ 33377 ];
+    networking.firewall.allowedTCPPorts = [ 33337 ];
   };
 }
