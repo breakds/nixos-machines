@@ -6,6 +6,5 @@ poetry2nix.mkPoetryApplication {
     bottle = bottle;
     click = click;
     loguru = loguru;
-    pyperclip = pyperclip;
   });
 }

@@ -1,6 +1,4 @@
 import click
-import os
-import pyperclip
 from loguru import logger
 from bottle import route, run, template, post, request, redirect, static_file
 
@@ -33,9 +31,10 @@ APP_TPL = """
       <tr>
         <td>{{item}}</td>
         <td>
-          <a href="/copy/{{idx}}">
-            <button type="button">Copy</button>
-          </a>
+          <button type="button"
+                  onclick="navigator.clipboard.writeText('{{item}}')">
+            Copy
+          </button>
         </td>
       </tr>
       % end
@@ -61,12 +60,6 @@ def add():
     ENTRIES.append(request.forms.getunicode("content"))
     redirect("/")
 
-@route("/copy/<idx>")
-def copy(idx):
-    idx = int(idx)
-    pyperclip.copy(ENTRIES[idx])
-    redirect("/")
-
 @route("/")
 def index():
     a = 5
@@ -76,6 +69,4 @@ def index():
 
 
 if __name__ == "__main__":
-    logger.info("haha!")
-    logger.info(os.getenv("PATH"))
     main()
