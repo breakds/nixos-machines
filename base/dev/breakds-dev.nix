@@ -25,6 +25,7 @@
       awscli
       nixopsUnstable
       python3Packages.tensorboard
+      pv  # pipe viewer
 
       # Customized
       shuriken
