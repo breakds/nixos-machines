@@ -6,7 +6,7 @@
     ../../../base
     ../../../base/i3-session-breakds.nix
     ../common/vpn.nix
-    ../../../base/tailscale.nix
+    # ../../../base/tailscale.nix
   ];
 
   config = {
