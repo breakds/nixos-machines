@@ -34,7 +34,7 @@
     # TODO(breakds): The following is for 4090. Remove this when
     # upgraded to 22.11.
     hardware.nvidia.package = pkgs.newNvidiaDrivers.latest;  # 520.56.06
-    boot.kernelPackages = pkgs.newLinuxPackages.latest;
+    boot.kernelPackages = pkgs.newLinuxPackages;
 
     nix = {
       distributedBuilds = true;
