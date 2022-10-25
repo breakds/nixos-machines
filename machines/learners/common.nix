@@ -31,17 +31,6 @@
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
 
-    # TODO(breakds): Re-enable ETH Mining
-    services.ethminer = {
-      enable = false;
-      recheckInterval = 1000;
-      toolkit = "cuda";
-      pool = "us2.ethermine.org";
-      stratumPort = 4444;
-      registerMail = "";
-      rig = "";
-    };
-
     nix = {
       distributedBuilds = true;
       buildMachines = [
