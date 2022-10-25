@@ -3,6 +3,7 @@ final: prev:
 let unstablePkgs = import (builtins.fetchTarball {
       # Oct 20 2022
       url = https://github.com/NixOS/nixpkgs/tarball/9a22f2470f21e3320128e50265a8962229da5a85;
+      sha256 = "0iaay9294ar40nnrdi6aya13yr65qjwmy8cmisdraw0rb8m6ww84";
     }) {
       config.allowUnfree = true;
       system = prev.system;
