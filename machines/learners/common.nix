@@ -31,6 +31,8 @@
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
 
+    hardware.nvidia.package = pkgs.newNvidiaDrivers.latest;  # 520.56.06
+
     nix = {
       distributedBuilds = true;
       buildMachines = [
