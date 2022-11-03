@@ -95,7 +95,7 @@
     networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
 
     serviceContainers.warehouser = {
-      enable = true;
+      enable = false;
       user = "breakds";
       enablePromtail = false;
     };
