@@ -3143,11 +3143,11 @@
         "utils": "utils_20"
       },
       "locked": {
-        "lastModified": 1627170604,
-        "narHash": "sha256-/hHRHQP4+hp3bGlk81Scbs2qRWQkm1vvjfzogfy5UUw=",
+        "lastModified": 1667493400,
+        "narHash": "sha256-wKXVI2RanLOyrp5bSWwHOyNeOFW5CN18UXuCF0z1dkA=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "2946aeacd73cf37d690ac7b8a704d3c88b6e9b3d",
+        "rev": "a38254acf54ee0c3f3ce75c0ca89c47c68b68483",
         "type": "github"
       },
       "original": {
