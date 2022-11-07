@@ -27,6 +27,9 @@
       python3Packages.tensorboard
       pv  # pipe viewer
 
+      # System Tools
+      dmidecode
+
       # Customized
       shuriken
     ];
