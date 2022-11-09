@@ -56,7 +56,7 @@
       archer
       trezor-suite
       inkscape
-      element
+      element-desktop
     ];
 
     nix = {
