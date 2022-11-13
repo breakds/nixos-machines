@@ -49,7 +49,6 @@
       thunderbird
       mullvad-vpn
       unetbootin
-      archer
       trezor-suite
       inkscape
       element-desktop
@@ -77,12 +76,6 @@
     # to check the status
     services.mullvad-vpn.enable = true;
     networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
-
-    serviceContainers.warehouser = {
-      enable = false;
-      user = "breakds";
-      enablePromtail = false;
-    };
 
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker

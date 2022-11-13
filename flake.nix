@@ -20,9 +20,9 @@
     wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools.git";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs2105";
 
-    wonder-modules.url =
-      "git+ssh://git@github.com/quant-wonderland/wonder-modules?ref=dev/22.05";
-    wonder-modules.inputs.nixpkgs.follows = "nixpkgs";
+    # wonder-modules.url =
+    #   "git+ssh://git@github.com/quant-wonderland/wonder-modules?ref=dev/22.05";
+    # wonder-modules.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, vital-modules, nixos-home, ... }@inputs: {
@@ -34,7 +34,6 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
-          inputs.wonder-modules.nixosModules.warehouser
           ./machines/samaritan
         ];
       };
@@ -46,7 +45,6 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
-          inputs.wonder-modules.nixosModules.warehouser
           ./machines/malenia
         ];
       };
@@ -66,22 +64,6 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home-laptop
           ./machines/horizon/zero
-        ];
-      };
-
-      gilgamesh = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          nixos-home.nixosModules.breakds-home
-          ./machines/gilgamesh
-          ({
-            nixpkgs.overlays = [
-              (final: prev: {
-                www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
-              })
-            ];
-          })
         ];
       };
 
