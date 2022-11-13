@@ -39,6 +39,18 @@
         ];
       };
 
+      malenia = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.iphone-connect
+          vital-modules.nixosModules.docker
+          nixos-home.nixosModules.breakds-home
+          inputs.wonder-modules.nixosModules.warehouser
+          ./machines/malenia
+        ];
+      };
+
       "horizon.GAIL3" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
