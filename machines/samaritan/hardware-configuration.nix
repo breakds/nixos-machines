@@ -56,8 +56,16 @@
     [ { device = "/dev/disk/by-uuid/4d4162a1-9161-4535-8ab1-2f01e779a7bf"; }
     ];
 
-  nix.maxJobs = lib.mkDefault 20;
+  nix.maxJobs = lib.mkDefault 26;
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+
+  # Processor manufacturers release stability and security updates to the
+  # processor microcode. These updates provide bug fixes that can be critical to
+  # the stability of your system. Without them, you may experience spurious
+  # crashes or unexpected system halts that can be difficult to track down. All
+  # users with an AMD or Intel CPU should install the microcode updates to
+  # ensure system stability.
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # High-DPI console
-  console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  # console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 }
