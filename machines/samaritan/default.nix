@@ -68,7 +68,6 @@
       thunderbird
       mullvad-vpn
       unetbootin
-      archer
       trezor-suite
       inkscape
       element-desktop
