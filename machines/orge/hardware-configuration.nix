@@ -8,21 +8,25 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXOS_ROOT";
+    { device = "/dev/disk/by-uuid/8fc4acb3-5946-452a-a25d-8d0090bb66b8";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIXOS_BOOT";
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/7EC8-64FA";
       fsType = "vfat";
     };
 
-  nix.maxJobs = lib.mkDefault 8;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/0f013488-49fd-428c-a026-cbe8e5fad700"; }
+    ];
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

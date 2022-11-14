@@ -18,9 +18,29 @@
       shell = pkgs.zsh;
     };
 
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+    # Internationalisation
+    i18n.defaultLocale = "en_US.utf8";
+
+    # Enable sound with pipewire.
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
     # Machine-specific networking configuration.
     networking.hostName = "orge";
     networking.hostId = "aab58b7c";
+    networking.useDHCP = lib.mkDefault true;
 
     vital.pre-installed.level = 5;
     vital.games.steam.enable = false;
@@ -36,24 +56,7 @@
 
     vital.graphical = {
       enable = true;
-      remote-desktop.enable = false;
-      nvidia.enable = true;
-      nvidia.prime = {
-        enable = true;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-
-      # Nvidia Prime only works with sddm (not gdm).
-      xserver = {
-        displayManager = "sddm";
-        dpi = 100;
-      };
-    };
-
-    # This laptop's Nvidia Driver needs persistenced set.
-    hardware.nvidia = {
-      nvidiaPersistenced = true;
+      remote-desktop.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -66,10 +69,6 @@
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
-
-    # Disable unified cgroup hierarchy (cgroups v2)
-    # This is to applease nvidia-docker
-    systemd.enableUnifiedCgroupHierarchy = false;
 
     nix = {
       distributedBuilds = true;
@@ -92,6 +91,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "21.11"; # Did you read the comment?
+    system.stateVersion = "22.05"; # Did you read the comment?
   };
 }
