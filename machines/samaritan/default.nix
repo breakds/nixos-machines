@@ -26,7 +26,6 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = true;
-      xserver.dpi = 100;
       nvidia.enable = true;
     };
 
@@ -36,9 +35,6 @@
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = true;
     vital.programs.machine-learning.enable = true;
-
-    # For ROS
-    networking.firewall.allowedTCPPorts = [ 11311 ];
 
     environment.systemPackages = with pkgs; [
       gimp
@@ -65,41 +61,8 @@
       };
     };
 
-    # TODO(breakds): Re-enable ETH Mining
-    services.ethminer = {
-      enable = false;
-      recheckInterval = 1000;
-      toolkit = "cuda";
-      wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.samaritan3080";
-      pool = "us2.ethermine.org";
-      stratumPort = 4444;
-      maxPower = 330;
-      registerMail = "";
-      rig = "";
-    };
-
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
-
-    # Start Mullvad Service. This is just a service and you will need
-    # to manually start it with
-    #
-    # $ mullvad account set xxxxxxxxxxxxxxx
-    # $ mullvad relay set location us # The location you want to appear you are
-    # $ mullvad connect
-    # $ mullvad disconnect
-    #
-    # Note that you can call
-    # $ mullvad status
-    # to check the status
-    services.mullvad-vpn.enable = true;
-    networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
-
-    serviceContainers.warehouser = {
-      enable = false;
-      user = "breakds";
-      enablePromtail = false;
-    };
 
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
@@ -111,6 +74,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "20.03"; # Did you read the comment?
+    system.stateVersion = "22.05"; # Did you read the comment?
   };
 }
