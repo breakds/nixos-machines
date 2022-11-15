@@ -28,6 +28,12 @@
     fsType = "ext4";
   };
 
+  fileSystems."/home/breakds/backup" = {
+    device = "/dev/disk/by-label/BDS_BACKUP";
+    fsType = "ext4";
+    options = [ "auto" "nofail" ];
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
