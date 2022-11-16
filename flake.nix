@@ -107,7 +107,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop-lids
+          vital-modules.nixosModules.laptop
           vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
           ./machines/berry
@@ -118,7 +118,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop-lids
+          vital-modules.nixosModules.laptop
           vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home-laptop
           ./machines/rival
@@ -129,7 +129,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop-lids
+          vital-modules.nixosModules.laptop
           vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home-laptop
           ./machines/orge
