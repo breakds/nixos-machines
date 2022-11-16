@@ -34,6 +34,12 @@
     options = [ "auto" "nofail" ];
   };
 
+  fileSystems."/var/lib/filerun" = {
+    device = "/dev/disk/by-label/NAS_DATA";
+    fsType = "ext4";
+    options = [ "auto" "nofail" ];
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
