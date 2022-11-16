@@ -40,14 +40,14 @@
       distributedBuilds = true;
       buildMachines = [
         {
-          hostName = "richelieu";
+          hostName = "richelieu.local";
           systems = [ "x86_64-linux" "i686-linux" ];
           maxJobs = 24;
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
       ];
       settings = {
-        trusted-substituters = [ "ssh://richelieu" ];
+        trusted-substituters = [ "ssh://richelieu.local" ];
       };
     };
   };
