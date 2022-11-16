@@ -40,7 +40,6 @@
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
-      xserver.dpi = 120;
     };
 
     # This follows olmokramer's solution from this post:
