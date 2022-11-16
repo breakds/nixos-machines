@@ -41,8 +41,13 @@
       enable = true;
       remote-desktop.enable = false;
       xserver.dpi = 120;
-      xserver.useCapsAsCtrl = true;
     };
+
+    services.udev.extraHwdb = ''
+      evdev:input:b0011v0001p0001eAB54*
+        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
+    '';
+    
 
     environment.systemPackages = with pkgs; [
       zoom-us
