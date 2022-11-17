@@ -4,7 +4,6 @@
   imports = [
     ./lisp.nix
     ./perf.nix
-    ./cpp.nix
   ];
 
   config = {
