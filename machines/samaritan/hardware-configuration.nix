@@ -24,7 +24,7 @@
     };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-label/NIXOS_HOME";
+    device = "/dev/disk/by-label/BDS_HOME";
     fsType = "ext4";
   };
 
