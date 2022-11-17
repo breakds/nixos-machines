@@ -53,6 +53,7 @@
 
     environment.systemPackages = with pkgs; [
       zoom-us
+      pavucontrol
     ];
 
     # This value determines the NixOS release from which the default
