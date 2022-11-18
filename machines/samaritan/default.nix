@@ -73,20 +73,22 @@
       element-desktop
     ];
 
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [
-        {
-          hostName = "richelieu.local";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = 24;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-      ];
-      settings = {
-        trusted-substituters = [ "ssh://richelieu.local" ];
-      };
-    };
+    # You are a grown up server, you should build on your own.
+    #
+    # nix = {
+    #   distributedBuilds = true;
+    #   buildMachines = [
+    #     {
+    #       hostName = "richelieu.local";
+    #       systems = [ "x86_64-linux" "i686-linux" ];
+    #       maxJobs = 24;
+    #       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+    #     }
+    #   ];
+    #   settings = {
+    #     trusted-substituters = [ "ssh://richelieu.local" ];
+    #   };
+    # };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
