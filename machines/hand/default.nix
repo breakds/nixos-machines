@@ -31,7 +31,6 @@
     # And probably something else that I did not notice yet.
     boot.kernelPackages = pkgs.newLinuxPackages_6_0;
 
-
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";
 
@@ -82,6 +81,9 @@
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
+
+    # The framework laptop supports fingerprint.
+    services.fprintd.enable = true;
 
     # nix = {
     #   distributedBuilds = true;
