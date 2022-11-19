@@ -23,8 +23,14 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-    # Use the shiny linux kernel 6.0
+    # Use the shiny linux kernel 6.0. With this kernel, the following will become supported
+    #
+    # 1. The HDMI module via the lightning port
+    # 2. The i3 status bar which requires the backlight tuning
+    #
+    # And probably something else that I did not notice yet.
     boot.kernelPackages = pkgs.newLinuxPackages_6_0;
+
 
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";
