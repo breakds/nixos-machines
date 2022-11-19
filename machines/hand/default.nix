@@ -23,6 +23,9 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+    # Use the shiny linux kernel 6.0
+    boot.kernelPackages = pkgs.newLinuxPackages_6_0;
+
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";
 
