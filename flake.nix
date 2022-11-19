@@ -114,6 +114,17 @@
         ];
       };
 
+      hand = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          vital-modules.nixosModules.laptop
+          vital-modules.nixosModules.iphone-connect
+          nixos-home.nixosModules.breakds-home-laptop
+          ./machines/hand
+        ];
+      };
+
       rival = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
