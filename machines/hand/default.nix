@@ -64,7 +64,6 @@
 
     vital.graphical = {
       enable = true;
-      xserver.displayManager = "lightdm";
     };
 
     environment.systemPackages = with pkgs; [
