@@ -62,7 +62,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          nixos-home.nixosModules.breakds-home-laptop
+          nixos-home.nixosModules.breakds-home
           ./machines/horizon/zero
         ];
       };
@@ -122,28 +122,6 @@
           vital-modules.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           ./machines/hand
-        ];
-      };
-
-      rival = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop
-          vital-modules.nixosModules.iphone-connect
-          nixos-home.nixosModules.breakds-home-laptop
-          ./machines/rival
-        ];
-      };
-
-      orge = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop
-          vital-modules.nixosModules.iphone-connect
-          nixos-home.nixosModules.breakds-home-laptop
-          ./machines/orge
         ];
       };
 
