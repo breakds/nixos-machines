@@ -89,20 +89,24 @@
       home.bds.laptopXsession = true;
     };
 
-    # nix = {
-    #   distributedBuilds = true;
-    #   buildMachines = [
-    #     {
-    #       hostName = "richelieu";
-    #       systems = [ "x86_64-linux" "i686-linux" ];
-    #       maxJobs = 24;
-    #       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-    #     }
-    #   ];
-    #   settings = {
-    #     trusted-substituters = [ "ssh://richelieu.local" ];
-    #   };
-    # };
+    # +--------------------+
+    # | Distributed Build  |
+    # +--------------------+    
+
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "richelieu.local";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = 24;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+      ];
+      settings = {
+        trusted-substituters = [ "ssh://richelieu.local" ];
+      };
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
