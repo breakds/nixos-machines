@@ -6,6 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
+    ./display.nix
   ];
 
   config = {
@@ -83,6 +84,10 @@
 
     # The framework laptop supports fingerprint.
     services.fprintd.enable = true;
+
+    home-manager.users."breakds" = {
+      home.bds.laptopXsession = true;
+    };
 
     # nix = {
     #   distributedBuilds = true;

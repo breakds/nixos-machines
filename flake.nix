@@ -120,7 +120,7 @@
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop
           vital-modules.nixosModules.iphone-connect
-          nixos-home.nixosModules.breakds-home-laptop
+          nixos-home.nixosModules.breakds-home
           ./machines/hand
         ];
       };
