@@ -40,6 +40,13 @@
       hostName = "samaritan";
       # Generated via `head -c 8 /etc/machine-id`
       hostId = "9c4a63a8";
+
+      # WakeOnLan. You will need to know the ip and mac of this
+      # machines to be able to wake it. The command that you should
+      # run on the other machine should be:
+      #
+      #     wol -i <ip> <mac>
+      interfaces."enp6s0".wakeOnLan.enable = true;
     };
 
     vital.graphical = {
