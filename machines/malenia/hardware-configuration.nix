@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/BDS_HOME";
+    fsType = "ext4";
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
