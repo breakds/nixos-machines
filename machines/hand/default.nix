@@ -78,6 +78,7 @@
       thunderbird
       trezor-suite
       unetbootin
+      pavucontrol
     ];
 
     services.udev.extraHwdb = ''
