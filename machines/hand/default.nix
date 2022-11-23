@@ -32,6 +32,12 @@
     # And probably something else that I did not notice yet.
     boot.kernelPackages = pkgs.newLinuxPackages_6_0;
 
+    # [HACK] This is a temporary fix to the constant freeze when using emacs. According to the
+    # forum of Framework, this is caused by the PSR in i915. Disabling it will cause the laptop
+    # to be slightly less power efficient. Should definitely remove this when the new kernel
+    # with an updated i915 driver comes.
+    boot.kernelParams = [ "i915.enable_psr=0" ];
+
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";
 
