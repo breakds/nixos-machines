@@ -36,7 +36,12 @@
     # forum of Framework, this is caused by the PSR in i915. Disabling it will cause the laptop
     # to be slightly less power efficient. Should definitely remove this when the new kernel
     # with an updated i915 driver comes.
-    boot.kernelParams = [ "i915.enable_psr=0" ];
+    # boot.kernelParams = [ "i915.enable_psr=0" ];
+
+    # Framework Firmware Update
+    #
+    # sudo fwupdmgr update
+    services.fwupd.enable = true;
 
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";

@@ -4,7 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=e82ffe7b5f25d781eb52cc07c552899cf6f6547b";    
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=e82ffe7b5f25d781eb52cc07c552899cf6f6547b";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Use vital-modules, with the same nixpkgs
     vital-modules.url = "github:nixvital/vital-modules";
@@ -25,7 +27,7 @@
     # wonder-modules.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, vital-modules, nixos-home, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
     nixosConfigurations = {
       samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -117,6 +119,8 @@
       hand = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          # Get the community maintained framework baseline
+          nixos-hardware.nixosModules.framework-12th-gen-intel
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.laptop
           vital-modules.nixosModules.iphone-connect
