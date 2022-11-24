@@ -26,7 +26,7 @@
   networking.enableIPv6 = true;
 
   environment.systemPackages = with pkgs; [
-    gparted pass
+    gparted pass openconnect
   ];
 
   # ------ Part of foundation reimplemented ------
