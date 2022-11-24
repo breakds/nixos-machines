@@ -142,6 +142,7 @@
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
+          nixos-home.nixosModules.breakds-home
           ./machines/pi/armlet
         ];
       };
