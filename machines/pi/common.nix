@@ -12,11 +12,13 @@
     (import ../../base/overlays)
   ];
 
+  # TODO(breakds): Override the default shell to zsh for breakds
   users.extraUsers = lib.mkIf (config.vital.mainUser == "breakds") {
     "breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
       ];
+      shell = lib.mkDefault pkgs.bash;
       useDefaultShell = false;
     };
   };
