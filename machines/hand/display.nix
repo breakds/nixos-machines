@@ -36,6 +36,7 @@
               enable = true;
               position = "0x0";
               mode = "3440x1440";
+              dpi = 100;
             };
           };
         };
