@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=e82ffe7b5f25d781eb52cc07c552899cf6f6547b";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=42aae6fa748a41ced37373fc6d914de512658178";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -135,6 +135,14 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./machines/medea
+        ];
+      };
+
+      armlet = inputs.nixpkgs-unstable.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          nixos-hardware.nixosModules.raspberry-pi-4
+          ./machines/pi/armlet
         ];
       };
 
