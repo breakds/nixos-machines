@@ -28,4 +28,61 @@
   environment.systemPackages = with pkgs; [
     gparted pass
   ];
+
+  # ------ Part of foundation reimplemented ------
+  
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.bash.enableCompletion = true;
+  # TODO(breakds): Figure out how to use GPG.
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryFlavor = "tty";
+  };
+
+  programs.ssh.startAgent = lib.mkDefault false;
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    # Enable X11 Fowarding, can be connected with ssh -Y.
+    forwardX11 = true;
+    # TODO(breakds): Enable this for servers
+    # allowSFTP = config.vital.machineType == "server";
+  };
+
+  services.avahi = {
+    enable = true;
+
+    # Whether to enable the mDNS NSS (Name Service Switch) plugin.
+    # Enabling this allows applications to resolve names in the
+    # `.local` domain.
+    nssmdns = true;
+
+    # Whether to register mDNS address records for all local IP
+    # addresses.
+    publish.enable = true;
+    publish.addresses = true;
+  };
+
+  services.blueman.enable = true;
+
+  nix = {
+    # The following is to enable Nix Flakes
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
+    # Automatically optimize storage spaces /nix/store
+    autoOptimiseStore = true;
+
+    # Automatic garbage collection
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 120d";
+    };
+  };
 }
