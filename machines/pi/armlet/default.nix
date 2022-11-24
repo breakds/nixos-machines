@@ -32,16 +32,11 @@
   # | Users                        |
   # +------------------------------+
 
-  users = {
-    extraUsers."breakds" = {
-      isNormalUser = true;
-      initialHashedPassword = lib.mkDefault "$5$o2c1SrFVg1xK570h$EO3uklJz1y3SbIPJ5zBUdG6ZYNFKoui3EYa5CX/9j0A";
-      home = "/home/breakds";
-      extraGroups = [ "wheel" "neteworkmanager" "audio" "plugdev" ];
-      openssh.authorizedKeys.keyFiles = [
-        ../../../data/keys/breakds_samaritan.pub
-      ];
-    };
+  users.users."breakds" = {
+    openssh.authorizedKeys.keyFiles = [
+      ../../data/keys/breakds_samaritan.pub
+    ];
+    shell = pkgs.zsh;
   };
 
   # +------------------------------+
@@ -50,16 +45,25 @@
   
   environment.systemPackages = with pkgs; [ vim emacs git firefox ];
 
-  services.openssh.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    desktopManager.xfce.enable = true;
-    desktopManager.gnome.enable = true;
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "10.77.1.120";
+        systems = [ "x86_64-linux" "i686-linux" ];
+        maxJobs = 24;
+        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+      }
+    ];
+    settings = {
+      trusted-substituters = [ "ssh://10.77.1.120" ];
+    };
   };
 
+  vital.graphical = {
+    enable = true;
+    xserver.displayManager = "lightdm";
+  };
+  
   system.stateVersion = "22.11"; 
 }
