@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../../base
+    ../common.nix
   ];
 
   # +------------------------------+
@@ -34,13 +34,6 @@
 
   vital.mainUser = "breakds";
   
-  users.users."breakds" = {
-    openssh.authorizedKeys.keyFiles = [
-      ../../data/keys/breakds_samaritan.pub
-    ];
-    shell = pkgs.zsh;
-  };
-
   # +------------------------------+
   # | Service and Package          |
   # +------------------------------+
