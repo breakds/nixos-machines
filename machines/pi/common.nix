@@ -26,7 +26,7 @@
   networking.enableIPv6 = true;
 
   environment.systemPackages = with pkgs; [
-    gparted pass openconnect
+    gparted pass openconnect tmux
   ];
 
   # ------ Part of foundation reimplemented ------
