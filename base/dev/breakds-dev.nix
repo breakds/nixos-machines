@@ -34,6 +34,7 @@
     ];
 
     programs.nix-ld.enable = true;
+    programs.sysdig.enable = true;
 
     nix = {
       # The following is added to /etc/nix.conf to prevent GC from
