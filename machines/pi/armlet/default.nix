@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ../../../base
+  ];
 
   # +------------------------------+
   # | Hardware Related             |
