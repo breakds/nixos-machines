@@ -17,6 +17,12 @@
       ];
     };
 
+    users.users."root" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/breakds_samaritan.pub
+      ];
+    };
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
