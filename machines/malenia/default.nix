@@ -62,11 +62,12 @@
       element-desktop
     ];
 
-    # nix = {
-    #   settings = {
-    #     trusted-substituters = [ "ssh://richelieu.local" ];
-    #   };
-    # };
+    nix = {
+      trustedUsers = [ "root" ];
+      # settings = {
+      #   trusted-substituters = [ "ssh://richelieu.local" ];
+      # };
+    };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
