@@ -118,13 +118,31 @@
       buildMachines = [
         {
           hostName = "richelieu.local";
-          systems = [ "x86_64-linux" "i686-linux" ];
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
           maxJobs = 24;
+          speedFactor = 4;
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+        {
+          hostName = "malenia.local";
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+          maxJobs = 24;
+          speedFactor = 8;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+        {
+          hostName = "localhost";
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+          maxJobs = 12;
+          speedFactor = 2;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
         }
       ];
       settings = {
-        trusted-substituters = [ "ssh://richelieu.local" ];
+        trusted-substituters = [
+          "ssh://richelieu.local"
+          "ssh://malenia.local"
+        ];
       };
     };
 
