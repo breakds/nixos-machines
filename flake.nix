@@ -2,7 +2,7 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=42aae6fa748a41ced37373fc6d914de512658178";
 
@@ -13,7 +13,7 @@
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:breakds/nixos-home/dev/22.11";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
