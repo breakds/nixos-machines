@@ -28,6 +28,20 @@
     fsType = "ext4";
   };
 
+  fileSystems."/var/lib/wonder/warehouse" =
+    { device = "/dev/disk/by-label/WONDER_WAREHOUSE";
+      fsType = "ext4";
+      # Do not block booting if the disck is missing
+      options = [ "auto" "nofail" ];
+    };
+
+  fileSystems."/home/breakds/dataset" =
+    { device = "/dev/disk/by-label/BDS_DATASET";
+      fsType = "ext4";
+      # Do not block booting if the disck is missing
+      options = [ "auto" "nofail" ];
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
