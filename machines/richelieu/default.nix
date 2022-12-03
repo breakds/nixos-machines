@@ -108,9 +108,15 @@
       domain = "files.breakds.org";
     };
 
-    nix.trustedUsers = [
-      "root"
-    ];
+    nix = {
+      settings = {
+        maxJobs = lib.mkDefault 28;
+      };
+      
+      trustedUsers = [
+        "root"
+      ];
+    };
 
     services.borgbackup = {
       repos.orbekk = {

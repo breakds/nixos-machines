@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+g{ config, pkgs, ... }:
 
 {
   imports = [
@@ -59,6 +59,8 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
     };
+
+    nix.settings.maxJobs = lib.mkDefault 8;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

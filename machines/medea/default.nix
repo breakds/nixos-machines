@@ -51,6 +51,11 @@
 
     nix = {
       distributedBuilds = true;
+
+      settings = {
+        maxJobs = lib.mkDefault 4;
+      };
+      
       buildMachines = [
         {
           hostName = "richelieu";

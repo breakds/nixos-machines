@@ -27,6 +27,5 @@
     [ { device = "/dev/disk/by-label/NIXOS_SWAP"; }
     ];
 
-  nix.maxJobs = lib.mkDefault 24;
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

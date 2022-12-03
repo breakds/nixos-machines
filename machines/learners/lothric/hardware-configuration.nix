@@ -27,6 +27,5 @@
     [ { device = "/dev/disk/by-uuid/b96e34e1-2755-4565-b8df-01fbe274e16a"; }
     ];
 
-  nix.maxJobs = lib.mkDefault 24;
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }
