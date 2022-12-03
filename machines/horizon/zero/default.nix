@@ -1,4 +1,4 @@
-g{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -49,7 +49,7 @@ g{ config, pkgs, ... }:
       evdev:input:b0011v0001p0001eAB54*
         KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
     '';
-    
+
 
     environment.systemPackages = with pkgs; [
       zoom-us
