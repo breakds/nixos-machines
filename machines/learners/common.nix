@@ -3,6 +3,7 @@
 {
   imports = [
     ../../base
+    ../../base/build-machines.nix
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
   ];
@@ -30,25 +31,5 @@
     vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
-
-    # TODO(breakds): The following is for 4090. Remove this when
-    # upgraded to 22.11.
-    hardware.nvidia.package = pkgs.newNvidiaDrivers.latest;  # 520.56.06
-    boot.kernelPackages = pkgs.newLinuxPackages;
-
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [
-        {
-          hostName = "richelieu.local";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = 24;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-      ];
-      settings = {
-        trusted-substituters = [ "ssh://richelieu.local" ];
-      };
-    };
   };
 }
