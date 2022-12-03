@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-bottle = "^0.12.*"
+bottle = "^0.12"
 loguru = "^0.6.0"
 click = "^8.1.3"
 
