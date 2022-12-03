@@ -19,7 +19,7 @@
       maxPower = 330;
     };
 
-    nix.settings.maxJobs = lib.mkDefault 24;
+    nix.settings.max-jobs = lib.mkDefault 24;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

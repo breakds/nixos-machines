@@ -60,7 +60,7 @@ g{ config, pkgs, ... }:
       home.bds.laptopXsession = true;
     };
 
-    nix.settings.maxJobs = lib.mkDefault 8;
+    nix.settings.max-jobs = lib.mkDefault 8;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

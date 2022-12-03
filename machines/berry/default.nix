@@ -54,7 +54,7 @@
       })
     ];
 
-    nix.settings.maxJobs = lib.mkDefault 7;
+    nix.settings.max-jobs = lib.mkDefault 7;
 
     # +----------+
     # | VPN      |

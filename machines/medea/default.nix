@@ -53,7 +53,7 @@
       distributedBuilds = true;
 
       settings = {
-        maxJobs = lib.mkDefault 4;
+        max-jobs = lib.mkDefault 4;
       };
       
       buildMachines = [

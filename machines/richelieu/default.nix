@@ -110,8 +110,8 @@
 
     nix = {
       settings = {
-        maxJobs = lib.mkDefault 28;
-        trustedUsers = [
+        max-jobs = lib.mkDefault 28;
+        trusted-users = [
           "root"
         ];
       };
