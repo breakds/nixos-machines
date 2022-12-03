@@ -71,7 +71,6 @@
       },
       "original": {
         "owner": "breakds",
-        "ref": "dev/22.11",
         "repo": "nixos-home",
         "type": "github"
       }
