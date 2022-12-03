@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
+    ../../base/build-machines.nix
     ./medea-clipper.nix
   ];
 
@@ -49,22 +50,18 @@
       plex-media-player
     ];
 
-    nix = {
-      distributedBuilds = true;
+    # +--------------------+
+    # | Distributed Build  |
+    # +--------------------+
 
-      settings = {
-        max-jobs = lib.mkDefault 4;
-      };
-      
-      buildMachines = [
-        {
-          hostName = "richelieu";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = 24;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-      ];
-    };
+    nix.setting.max-jobs = lib.mkDefault 4;
+    nix.buildMachines = {
+      hostName = "localhost";
+      systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+      maxJobs = lib.mkDefault 4;
+      speedFactor = lib.mkDefault 1;
+      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+    }
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
