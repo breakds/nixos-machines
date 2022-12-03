@@ -54,14 +54,14 @@
     # | Distributed Build  |
     # +--------------------+
 
-    nix.setting.max-jobs = lib.mkDefault 4;
-    nix.buildMachines = {
+    nix.settings.max-jobs = lib.mkDefault 4;
+    nix.buildMachines = [{
       hostName = "localhost";
       systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
       maxJobs = lib.mkDefault 4;
       speedFactor = lib.mkDefault 1;
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
-    }
+    }];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
