@@ -111,11 +111,10 @@
     nix = {
       settings = {
         maxJobs = lib.mkDefault 28;
+        trustedUsers = [
+          "root"
+        ];
       };
-      
-      trustedUsers = [
-        "root"
-      ];
     };
 
     services.borgbackup = {

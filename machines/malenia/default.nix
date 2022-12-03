@@ -69,10 +69,9 @@
     ];
 
     nix = {
-      trustedUsers = [ "root" ];
-      # settings = {
-      #   trusted-substituters = [ "ssh://richelieu.local" ];
-      # };
+      settings = {
+        trustedUsers = [ "root" ];
+      };
     };
 
     # Trezor cryptocurrency hardware wallet
