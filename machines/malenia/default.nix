@@ -70,7 +70,7 @@
 
     nix = {
       settings = {
-        truste-users = [ "root" ];
+        trusted-users = [ "root" ];
       };
     };
 
