@@ -6,6 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
+    ../../base/build-machines.nix
     ./display.nix
   ];
 
@@ -111,40 +112,15 @@
 
     # +--------------------+
     # | Distributed Build  |
-    # +--------------------+    
+    # +--------------------+
 
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [
-        {
-          hostName = "richelieu.local";
-          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 24;
-          speedFactor = 4;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-        {
-          hostName = "malenia.local";
-          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 24;
-          speedFactor = 8;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-        {
-          hostName = "localhost";
-          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 12;
-          speedFactor = 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
-        }
-      ];
-      settings = {
-        trusted-substituters = [
-          "ssh://richelieu.local"
-          "ssh://malenia.local"
-        ];
-      };
-    };
+    nix.buildMachines = {
+      hostName = "localhost";
+      systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+      maxJobs = lib.mkDefault 12;
+      speedFactor = lib.mkDefault 2;
+      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+    }
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
