@@ -167,7 +167,7 @@
         (import ./base/overlays)
       ];
     }; in {
-      inherit (pkgs) ethminer;
+      inherit (pkgs) shuriken medea-clipper;
     };
   };
 }

@@ -14,11 +14,6 @@
       hostId = "db426f38";
     };
 
-    services.ethminer = {
-      wallet = "0xcdea2bD3AC8089e9aa02cC6CF5677574f76f0df2.lothric3090";
-      maxPower = 330;
-    };
-
     nix.settings.max-jobs = lib.mkDefault 24;
 
     # This value determines the NixOS release from which the default
