@@ -1,6 +1,6 @@
 # The machine "lothric" is one of the two machine learning stations.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
