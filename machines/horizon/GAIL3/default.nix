@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -13,6 +13,12 @@
     vital.mainUser = "breakds";
 
     users.users."breakds" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../../data/keys/breakds_samaritan.pub
+      ];
+    };
+
+    users.users."root" = {
       openssh.authorizedKeys.keyFiles = [
         ../../../data/keys/breakds_samaritan.pub
       ];
@@ -43,7 +49,15 @@
       thunderbird
     ];
 
-    nix.settings.max-jobs = lib.mkDefault 12;
+    nix = {
+      settings = {
+        max-jobs = lib.mkDefault 14;
+        trusted-users = [
+          "root" "breakds"
+        ];
+      };
+    };
+    
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

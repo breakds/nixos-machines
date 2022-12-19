@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -80,22 +80,30 @@
       element-desktop
     ];
 
-    # You are a grown up server, you should build on your own.
-    #
-    # nix = {
-    #   distributedBuilds = true;
-    #   buildMachines = [
-    #     {
-    #       hostName = "richelieu.local";
-    #       systems = [ "x86_64-linux" "i686-linux" ];
-    #       maxJobs = 24;
-    #       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-    #     }
-    #   ];
-    #   settings = {
-    #     trusted-substituters = [ "ssh://richelieu.local" ];
-    #   };
-    # };
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "gail3";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = 12;
+          speedFactor = 3;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+        {
+          hostName = "localhost";
+          systems = [ "x86_64-linux" "i686-linux" ];
+          maxJobs = lib.mkDefault 12;
+          speedFactor = lib.mkDefault 2;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+        }
+      ];
+      settings = {
+        trusted-substituters = [
+          "ssh://gail3"
+        ];
+      };
+    };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
