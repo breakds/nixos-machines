@@ -3,19 +3,22 @@
 {
   services.grafana = {
     enable = true;
-    addr = "127.0.0.1";
-    domain = "grafana.breakds.org";
-    port = 5810;
+
+    settings.server = {
+      domain = "grafana.breakds.org";
+      http_addr = "127.0.0.1";
+      http_port = 5810;
+    };
   };
 
   services.nginx = {
     virtualHosts = {
-      "${config.services.grafana.domain}" = {
+      "${config.services.grafana.settings.server.domain}" = {
         enableACME = true;
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "https://localhost:${toString config.services.grafana.port}";
+          proxyPass = "https://localhost:${toString config.services.grafana.settings.server.http_port}";
           proxyWebsockets = true;
         };
       };
