@@ -18,7 +18,7 @@
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "https://localhost:${toString config.services.grafana.settings.server.http_port}";
+          proxyPass = "http://localhost:${toString config.services.grafana.settings.server.http_port}";
           proxyWebsockets = true;
         };
       };
