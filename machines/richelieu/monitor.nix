@@ -43,7 +43,7 @@
 
     exporters.node = {
       enable = true;
-      enabledCollectors = [ "systemd" "cpu" ];
+      enabledCollectors = [ "systemd" "cpu" "filesystem" ];
       port = 5821;
     };
 
