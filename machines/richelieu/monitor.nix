@@ -1,6 +1,9 @@
 { config, lib, ... }:
 
 {
+  # NOTE: At the first time you access the grafana instance, the
+  # username and password is both admin. After login you will be
+  # forced to change the password for admin.
   services.grafana = {
     enable = true;
 
