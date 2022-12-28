@@ -10,12 +10,12 @@
 
   services.nginx = {
     virtualHosts = {
-      "${services.grafana.domain}" = {
+      "${config.services.grafana.domain}" = {
         enableACME = true;
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "https://localhost:${toString services.grafana.port}";
+          proxyPass = "https://localhost:${toString config.services.grafana.port}";
           proxyWebsockets = true;
         };
       };
