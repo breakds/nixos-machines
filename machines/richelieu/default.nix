@@ -13,6 +13,7 @@
     ./cassandra.nix
     ./terraria.nix
     ./media.nix
+    ./monitor.nix
     ../../base/tailscale.nix
     # ../nix-serve.nix
   ];
