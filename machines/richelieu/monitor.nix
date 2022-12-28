@@ -12,6 +12,15 @@
       http_addr = "127.0.0.1";
       http_port = 5810;
     };
+
+    provision.datasources.settings.datasources = [
+      {
+        name = "Prometheus";
+        type = "prometheus";
+        access = "proxy";
+        url = "http://localhost:${toString config.services.prometheus.port}";
+      }
+    ];
   };
 
   services.nginx = {
