@@ -39,5 +39,6 @@
         port = 5821;
       };
     };
+    networking.firewall.allowedTCPPorts = [ 5821 ];
   };
 }
