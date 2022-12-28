@@ -43,7 +43,7 @@
 
     exporters.node = {
       enable = true;
-      enabledCollectors = [ "systemd" ];
+      enabledCollectors = [ "systemd" "cpu" ];
       port = 5821;
     };
 
@@ -51,7 +51,7 @@
       {
         job_name = "richelieu";
         static_configs = [{
-          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+          targets = [ "richelieu.local:${toString config.services.prometheus.exporters.node.port}" ];
         }];
       }
     ];
