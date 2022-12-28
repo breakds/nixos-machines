@@ -27,4 +27,24 @@
       };
     };
   };
+
+  services.prometheus = {
+    enable = true;
+    port = 5820;
+
+    exporters.node = {
+      enable = true;
+      enabledCollectors = [ "systemd" ];
+      port = 5821;
+    };
+
+    scrapeConfigs = [
+      {
+        job_name = "richelieu";
+        static_configs = [{
+          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+        }];
+      }
+    ];
+  };
 }
