@@ -31,5 +31,13 @@
     vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
+
+    services.prometheus = {
+      exporters.node = {
+        enable = true;
+        enabledCollectors = [ "systemd" "cpu" "filesystem" ];
+        port = 5821;
+      };
+    };
   };
 }
