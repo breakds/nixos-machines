@@ -51,7 +51,11 @@
       {
         job_name = "richelieu";
         static_configs = [{
-          targets = [ "richelieu.local:${toString config.services.prometheus.exporters.node.port}" ];
+          targets = [
+            "richelieu.local:${toString config.services.prometheus.exporters.node.port}"
+            "lorian.local:5821"
+            "lothric.local:5821"
+          ];
         }];
       }
     ];
