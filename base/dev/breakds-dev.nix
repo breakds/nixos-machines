@@ -22,7 +22,8 @@
       mysql-client
       sqlitebrowser
       awscli
-      nixopsUnstable
+      # TODO(breakds): Re-enable this when the insecure poetry issue is resolved.
+      # nixops_unstable
       python3Packages.tensorboard
       pv  # pipe viewer
 
