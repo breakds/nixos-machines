@@ -19,9 +19,4 @@ let unstablePkgs = import (builtins.fetchTarball {
 in {
   shuriken = final.callPackage ../../pkgs/shuriken {};
   medea-clipper = final.python3Packages.callPackage ../../pkgs/medea-clipper {};
-  # TODO(breakds): Remove this when upgraded to 22.11. Currently we
-  # need 520.56.06 nvidia driver for the RTX 4090.
-  newNvidiaDrivers = unstablePkgs.linuxPackages.nvidiaPackages;
-  newLinuxPackages = unstablePkgs.linuxPackages;
-  newLinuxPackages_6_0 = unstablePkgs.linuxPackages_6_0;
 }
