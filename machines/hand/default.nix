@@ -49,7 +49,7 @@
       STOP_CHARGE_THRESH_BAT0=95
       CPU_SCALING_GOVERNOR_ON_BAT=powersave
       ENERGY_PERF_POLICY_ON_BAT=powersave
-    '';    
+    '';
 
     # Internationalisation
     i18n.defaultLocale = "en_US.utf8";
@@ -93,6 +93,7 @@
       trezor-suite
       unetbootin
       pavucontrol
+      parsec-bin  # For game streaming
     ];
 
     services.udev.extraHwdb = ''
@@ -119,7 +120,7 @@
       systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
       maxJobs = lib.mkDefault 12;
       speedFactor = lib.mkDefault 2;
-      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
     }];
 
     # This value determines the NixOS release from which the default

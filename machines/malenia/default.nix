@@ -66,6 +66,7 @@
       trezor-suite
       inkscape
       element-desktop
+      parsec-bin  # For game streaming
     ];
 
     nix = {
