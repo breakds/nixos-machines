@@ -55,6 +55,7 @@
             "richelieu.local:${toString config.services.prometheus.exporters.node.port}"
             "lorian.local:5821"
             "lothric.local:5821"
+            "armlet.local:5821"
           ];
         }];
       }
