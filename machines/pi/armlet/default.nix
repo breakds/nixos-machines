@@ -59,6 +59,15 @@
     enable = true;
     xserver.displayManager = "lightdm";
   };
-  
+
+  services.prometheus = {
+    exporters.node = {
+      enable = true;
+      enabledCollectors = [ "systemd" "cpu" "filesystem" ];
+      port = 5821;
+    };
+  };
+  networking.firewall.allowedTCPPorts = [ 5821 ];
+
   system.stateVersion = "22.11"; 
 }
