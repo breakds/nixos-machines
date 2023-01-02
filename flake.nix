@@ -85,6 +85,15 @@
         ];
       };
 
+      octavian = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          ./machines/octavian
+        ];
+      };
+
       # The twin leaner, Lothric (Younger Prince)
       lothric = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
