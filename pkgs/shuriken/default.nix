@@ -1,4 +1,10 @@
-{ symlinkJoin, writeShellScriptBin, writers, python3Packages, scrot, xclip }:
+{ symlinkJoin
+, writeShellScriptBin
+, writers
+, python3Packages
+, scrot
+, xclip
+, rsync }:
 
 let git-clean = writeShellScriptBin "git-clean" ''
   # Step 1, Clean up local origin/* that does not exist on remote.
@@ -22,10 +28,19 @@ let git-clean = writeShellScriptBin "git-clean" ''
       echo "./''${rel_path}" | ${xclip}/bin/xclip -selection clipboard
     '';
 
-    power-win = writers.writePython3Bin "power-win" {
+    alf-wandb = writers.writePython3Bin "alf-wandb" {
       libraries = with python3Packages; [
         click
-        numpy
+        wandb
+        loguru
+      ];
+    } (builtins.readFile ./alf-wandb.py);
+
+    power-win = writers.writePython3Bin "power-win" {
+      libraries = [
+        python3Packages.click
+        python3Packages.numpy
+        rsync
       ];
     } ''
       import csv
@@ -151,5 +166,10 @@ in symlinkJoin {
   name = "shuriken";
   version = "1.0.0";
 
-  paths = [ git-clean scrot-org power-win ];
+  paths = [
+    git-clean
+    scrot-org
+    alf-wandb
+    power-win
+  ];
 }
