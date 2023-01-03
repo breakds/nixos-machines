@@ -70,7 +70,7 @@ def compute_local_directory(remote_root_dir, local_host):
     while d.name != "alf_sessions":
         d = d.parent
     relative_path = remote_root_dir.relative_to(d)
-    return Path(f"/home/breakds{HOST_INFO[local_host]['session_root']}"
+    return Path(f"/home/breakds/{HOST_INFO[local_host]['session_root']}"
                 "/alf_sessions", relative_path)
 
 
