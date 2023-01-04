@@ -10,6 +10,7 @@
     ./jiahaotian.nix
     ./linxiao.nix
     ./jerry.nix
+    ./lhh.nix
     ./cassandra.nix
     ./terraria.nix
     ./media.nix
