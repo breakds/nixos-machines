@@ -19,7 +19,7 @@
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
 
-    wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools.git";
+    wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
   };
 
