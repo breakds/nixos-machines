@@ -15,6 +15,7 @@
     ./terraria.nix
     ./media.nix
     ./monitor.nix
+    ./hydra.nix
     ../../base/tailscale.nix
     # ../nix-serve.nix
   ];
