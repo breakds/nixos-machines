@@ -1,6 +1,6 @@
 rec {
   hydra = {
-    url = "https://hydra.breakds.org";
+    domain = "hydra.breakds.org";
     port = 5855;
   };
 }

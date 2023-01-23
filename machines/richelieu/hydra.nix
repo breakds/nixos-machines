@@ -10,7 +10,7 @@ in {
 
   services.hydra = {
     enable = true;
-    hydraURL = hydraInfo.url;
+    hydraURL = "https://${hydraInfo.domain}";
     notificationSender = "bds+hydra@breakds.org";
     buildMachinesFiles = [];
     useSubstitutes = true;
@@ -52,7 +52,21 @@ in {
     "d ${stateDir} 775 hydra hydra -"
     "d ${stateDir}/secret 775 hydra hydra -"
     "d ${stateDir}/secret/hydra_key 775 hydra hydra -"
-  ]
+  ];
+
+  services.nginx = {
+    virtualHosts = {
+      "${hydraInfo.domain}" = {
+        enableACME = true;
+        forceSSL = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:${toString hydraInfo.port}";
+          proxyWebsockets = true;
+        };
+      };
+    };
+  };
 
   nix = {
     distributedBuilds = true;
