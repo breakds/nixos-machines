@@ -1,13 +1,19 @@
 # Credit to KJ Orbekk: https://git.orbekk.com/nixos-config.git/tree/config/hydra.nix
-
+#
+# Notes:
+#
+# 1. In order to have hydra run jobs accessing private github repo,
+#    you will need to setup the ssh keys for the user "hydra".
+#
+# 2. By default the user hydra does not have password so that you
+#    cannot login. You will need to set the password.
+<
 { config, lib, pkgs, ... }:
 let hydraInfo = (import ../../data/service-registry.nix).hydra;
     stateDir = "/var/lib/hydra/state";
 
 
 in {
-  # virtualisation.virtualbox.host.enable = true;
-
   services.hydra = {
     enable = true;
     hydraURL = "https://${hydraInfo.domain}";
