@@ -28,6 +28,20 @@
     [ { device = "/dev/disk/by-uuid/175e2810-1220-45aa-bf3e-e036a4d954c5"; }
     ];
 
+  # The ZFS Array has 15 disks = 3 rows x 5 per row. S/N are shown below.
+  #
+  # +--------------------+   +--------------------+   +--------------------+
+  # |      5PHA9DYD      |   |      5PJ2MNYD      |   |     5PHZPEGD       |
+  # +--------------------+   +--------------------+   +--------------------+
+  # |      5PJ1B6GD      |   |      5PJ24HRD      |   |     5PHAGDZD       |
+  # +--------------------+   +--------------------+   +--------------------+
+  # |      5PHWZXJD      |   |      5PJ2G9ZD      |   |     5PJ2KJVD       |
+  # +--------------------+   +--------------------+   +--------------------+
+  # |      5PHWM6LF      |   |      5PJ1NM3D      |   |     5PHDEM8D       |
+  # +--------------------+   +--------------------+   +--------------------+
+  # |      5PHXP4BD      |   |      5PJ2MADD      |   |     5PHYKU7D       |
+  # +--------------------+   +--------------------+   +--------------------+
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
