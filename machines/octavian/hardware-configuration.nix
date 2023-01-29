@@ -13,6 +13,7 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "VAULT_ROOT" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/57a321f0-3f33-4448-a20b-e7d6edb048f8";
