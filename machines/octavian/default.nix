@@ -79,12 +79,12 @@
       clientMaxBodySize = "1000m";
     };
 
-    vital.services.filerun = {
-      enable = true;
-      workDir = "/var/lib/filerun";
-      port = 5962;
-      domain = "files.breakds.org";
-    };
+    # vital.services.filerun = {
+    #   enable = true;
+    #   workDir = "/var/lib/filerun";
+    #   port = 5962;
+    #   domain = "files.breakds.org";
+    # };
 
     nix = {
       settings = {
