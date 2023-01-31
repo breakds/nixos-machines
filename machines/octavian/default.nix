@@ -90,6 +90,14 @@
       domain = "files.breakds.org";
     };
 
+    vital.services.docker-registry = let
+      info = (import ../../data/service-registry.nix).docker-registry;
+    in {
+      enable = true;
+      domain = info.domain;
+      port = info.port;
+    };
+
     nix = {
       settings = {
         max-jobs = lib.mkDefault 28;

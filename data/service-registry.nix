@@ -7,4 +7,8 @@ rec {
     domain = "shiori.breakds.org";
     port = 5931;
   };
+  docker-registry = {
+    domain = "docker.breakds.org";
+    port = 5050;
+  };
 }
