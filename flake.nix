@@ -87,6 +87,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
+          vital-modules.nixosModules.docker
           ./machines/octavian
           ({
             nixpkgs.overlays = [
