@@ -10,6 +10,7 @@
     ./services/web-services.nix
     ./services/monitor.nix
     ./services/hydra.nix
+    ../../base/tailscale.nix
   ];
 
   config = {
