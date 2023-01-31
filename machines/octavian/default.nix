@@ -8,7 +8,7 @@
 
     # Other modules
     ./services/web-services.nix
-    # ./monitor.nix
+    ./services/monitor.nix
   ];
 
   config = {
