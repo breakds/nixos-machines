@@ -9,6 +9,7 @@
     # Other modules
     ./services/web-services.nix
     ./services/monitor.nix
+    ./services/hydra.nix
   ];
 
   config = {
