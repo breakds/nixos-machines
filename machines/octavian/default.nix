@@ -80,12 +80,7 @@
     };
 
     virtualisation = {
-      podman = {
-        enable = true;
-        dockerCompat = true;
-        defaultNetwork.dnsname.enable = true;
-        extraPackages = [ pkgs.zfs ];
-      };
+      oci-containers.backend = "docker";
     };
 
     vital.services.filerun = {
