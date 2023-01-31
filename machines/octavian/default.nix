@@ -61,27 +61,30 @@
     # | Services       |
     # +----------------+
 
-    # Uncomment below when octavian is upgraded to the main server
-    #
-    # networking.firewall.allowedTCPPorts = [ 80 443 ];
+    security.acme = {
+      acceptTerms = true;
+      defaults = {
+        email = "bds@breakds.org";
+      };
+    };
 
-    # security.acme = {
-    #   acceptTerms = true;
-    #   defaults = {
-    #     email = "bds@breakds.org";
-    #   };
-    # };
+    services.nginx = {
+      enable = true;
+      package = pkgs.nginxMainline;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
 
-    # services.nginx = {
-    #   enable = true;
-    #   package = pkgs.nginxMainline;
-    #   recommendedOptimisation = true;
-    #   recommendedGzipSettings = true;
-    #   recommendedProxySettings = true;
+      # TODO(breakds): Make this per virtual host.
+      clientMaxBodySize = "1000m";
+    };
 
-    #   # TODO(breakds): Make this per virtual host.
-    #   clientMaxBodySize = "1000m";
-    # };
+    vital.services.filerun = {
+      enable = true;
+      workDir = "/var/lib/filerun";
+      port = 5962;
+      domain = "files.breakds.org";
+    };
 
     nix = {
       settings = {
