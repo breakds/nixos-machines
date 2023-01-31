@@ -88,6 +88,13 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           ./machines/octavian
+          ({
+            nixpkgs.overlays = [
+              (final: prev: {
+                www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
+              })
+            ];
+          })
         ];
       };
 
