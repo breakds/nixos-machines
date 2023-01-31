@@ -8,6 +8,10 @@ in {
   #
   # username: shiori
   # password: gopher
+  #
+  # Migration of shiori is simple, just copy its state directory under
+  # /var/lib/shiori (note that this might be a symbolic link to
+  # /var/lib/private/shiori).
   services.shiori = {
     enable = true;
     port = shioriInfo.port;
