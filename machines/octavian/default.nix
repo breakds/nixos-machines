@@ -98,14 +98,24 @@
       port = info.port;
     };
 
+    services.borgbackup = {
+      repos.orbekk = {
+        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
+        path = [ "/var/lib/borgbackup/orbekk" ];
+      };
+    };
+
     nix = {
       settings = {
-        max-jobs = lib.mkDefault 28;
+        max-jobs = lib.mkDefault 12;
         trusted-users = [
           "root"
         ];
       };
     };
+
+
+
 
     # services.borgbackup = {
     #   repos.orbekk = {
