@@ -79,6 +79,15 @@
       clientMaxBodySize = "1000m";
     };
 
+    virtualisation = {
+      podman = {
+        enable = true;
+        dockerCompat = true;
+        defaultNetwork.dnsname.enable = true;
+        extraPackages = [ pkgs.zfs ];
+      };
+    };
+
     vital.services.filerun = {
       enable = true;
       workDir = "/var/lib/filerun";
