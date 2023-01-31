@@ -5,6 +5,9 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/dev/breakds-dev.nix
+
+    # Other modules
+    ./services/web-services.nix
     # ./monitor.nix
   ];
 
