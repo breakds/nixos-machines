@@ -18,10 +18,10 @@
       distributedBuilds = true;
       buildMachines = [
         {
-          hostName = "richelieu.local";
+          hostName = "ocatavian.local";
           systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 24;
-          speedFactor = 4;
+          maxJobs = 12;
+          speedFactor = 6;
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
         {
