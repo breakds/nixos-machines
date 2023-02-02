@@ -63,6 +63,12 @@
     # | Services       |
     # +----------------+
 
+    services.sshguard = {
+      enable = true;
+      detection_time = 600;
+      services = [ "sshd" ];
+    };
+
     security.acme = {
       acceptTerms = true;
       defaults = {
