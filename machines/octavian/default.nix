@@ -16,6 +16,8 @@
   config = {
     vital.mainUser = "breakds";
 
+    services.openssh.passwordAuthentication = false;
+
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
