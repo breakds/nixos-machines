@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
+    ../../users
     ../../base/dev/breakds-dev.nix
 
     # Other modules
