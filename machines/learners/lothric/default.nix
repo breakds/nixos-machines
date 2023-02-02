@@ -14,6 +14,11 @@
       hostId = "db426f38";
     };
 
+    virtualisation.docker = {
+      enable = true;
+      enableNvidia = true;
+    };
+
     nix.settings.max-jobs = lib.mkDefault 24;
 
     # This value determines the NixOS release from which the default
