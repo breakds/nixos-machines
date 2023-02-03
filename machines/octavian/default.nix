@@ -110,6 +110,13 @@
       };
     };
 
+    services.zfs = {
+      autoScrub = {
+        enable = true;
+        interval = "Sun, 02:00";
+      };
+    };
+
     nix = {
       settings = {
         max-jobs = lib.mkDefault 12;
