@@ -11,6 +11,7 @@
     ./services/web-services.nix
     ./services/monitor.nix
     ./services/hydra.nix
+    ./services/media.nix
     ../../base/tailscale.nix
   ];
 
