@@ -31,7 +31,7 @@
     # 2. The i3 status bar which requires the backlight tuning
     #
     # And probably something else that I did not notice yet.
-    boot.kernelPackages = pkgs.linuxPackages_6_0;
+    boot.kernelPackages = pkgs.linuxPackages_6_1;
 
     # [HACK] This is a temporary fix to the constant freeze when using emacs. According to the
     # forum of Framework, this is caused by the PSR in i915. Disabling it will cause the laptop

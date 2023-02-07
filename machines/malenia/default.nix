@@ -27,9 +27,9 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-    # Use the shiny linux kernel 6.0 for the Ryzen 9 7950x.
-    boot.kernelPackages = pkgs.linuxPackages_6_0;
-    hardware.nvidia.package = pkgs.linuxPackages_6_0.nvidiaPackages.stable;
+    # Use the shiny linux kernel 6.1 for the Ryzen 9 7950x.
+    boot.kernelPackages = pkgs.linuxPackages_6_1;
+    hardware.nvidia.package = pkgs.linuxPackages_6_1.nvidiaPackages.stable;
 
     networking = {
       hostName = "malenia";
