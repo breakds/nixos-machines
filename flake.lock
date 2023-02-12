@@ -286,11 +286,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1668028261,
-        "narHash": "sha256-qKrVdD9zGZ7hds8Rv5DFCTIufaxcfmxMzHa4Nny6noo=",
+        "lastModified": 1676224373,
+        "narHash": "sha256-p3nQ5pCcWMHDmQBf/86khMabb205O5HEY4L+BJPvXS8=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "d4a4e0dd3127825768399b4908c246e90e5653b5",
+        "rev": "15b48f8eceed636c6e7acb11b73bd726fae946cb",
         "type": "github"
       },
       "original": {
