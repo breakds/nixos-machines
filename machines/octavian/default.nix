@@ -18,7 +18,7 @@
   config = {
     vital.mainUser = "breakds";
 
-    services.openssh.passwordAuthentication = true;
+    services.openssh.passwordAuthentication = false;
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
