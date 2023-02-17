@@ -68,6 +68,7 @@
       element-desktop
       parsec-bin  # For game streaming
       python3Packages.archer
+      blender
     ];
 
     nix = {
