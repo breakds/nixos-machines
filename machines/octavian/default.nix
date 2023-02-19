@@ -12,6 +12,7 @@
     ./services/monitor.nix
     ./services/hydra.nix
     ./services/media.nix
+    ./services/terraria.nix
     ../../base/tailscale.nix
   ];
 
