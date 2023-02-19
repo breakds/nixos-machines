@@ -53,8 +53,7 @@ in {
 
     scrapeConfigs = [
       {
-        # TODO(breakds): Historic name, should change in the future.
-        job_name = "richelieu";
+        job_name = "kirkwood";
         static_configs = [{
           targets = [
             "octavian.local:${toString config.services.prometheus.exporters.node.port}"

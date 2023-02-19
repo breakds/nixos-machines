@@ -41,7 +41,7 @@
       ];
       settings = {
         trusted-substituters = [
-          "ssh://richelieu.local"
+          "ssh://octavian.local"
           "ssh://malenia.local"
         ];
       };

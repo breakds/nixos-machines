@@ -66,22 +66,6 @@
         ];
       };
 
-      richelieu = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          nixos-home.nixosModules.breakds-home
-          ./machines/richelieu
-          ({
-            nixpkgs.overlays = [
-              (final: prev: {
-                www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
-              })
-            ];
-          })
-        ];
-      };
-
       octavian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
