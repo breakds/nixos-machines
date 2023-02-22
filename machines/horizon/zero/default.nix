@@ -8,6 +8,7 @@
     ../common/vpn.nix
     ../../../base/dev/breakds-dev.nix
     # ../../../base/tailscale.nix
+    ../../../users/lezhao.nix
   ];
 
   config = {

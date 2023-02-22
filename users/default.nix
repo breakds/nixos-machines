@@ -51,6 +51,5 @@
         ../data/keys/lhh.pub
       ];
     };
-    
   };
 }
