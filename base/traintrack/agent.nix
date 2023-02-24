@@ -14,7 +14,7 @@ in {
       type = lib.types.attrs;
       default = {};
       description = lib.mdDoc "Defines the worker for the agent.";
-      example = literalExpression ''
+      example = lib.literalExpression ''
         {
           gpu_id = 0;
           gpu_type = "3080";
@@ -35,7 +35,7 @@ in {
       type = with lib.types; listOf workerConfig;
       default = [];
       description = lib.mdDoc "A list of workers for this agent.";
-      example = literalExpression ''
+      example = lib.literalExpression ''
         [{
           gpu_id = 0;
           gpu_type = "3080";
@@ -58,20 +58,20 @@ in {
       '';
     };
 
-    port = mkOption {
+    port = lib.mkOption {
       description = lib.mdDoc "Traintrack agent API port.";
       default = 5975;
-      type = types.port;
+      type = lib.types.port;
     };
 
-    user = mkOption {
-      type = types.str;
+    user = lib.mkOption {
+      type = lib.types.str;
       default = "breakds";
       description = lib.mdDoc "User account under which the agent runs.";
     };
 
-    group = mkOption {
-      type = types.str;
+    group = lib.mkOption {
+      type = lib.types.str;
       default = "breakds";
       description = lib.mdDoc "Group under which the agent runs.";
     };
