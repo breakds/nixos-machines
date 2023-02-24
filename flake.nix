@@ -100,6 +100,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
           ./machines/learners/lothric
         ];
       };
@@ -110,6 +111,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
           ./machines/learners/lorian
         ];
       };
