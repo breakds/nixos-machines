@@ -177,9 +177,31 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs2105": "nixpkgs2105",
+        "traintrack": "traintrack",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
+      }
+    },
+    "traintrack": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1677224743,
+        "narHash": "sha256-p+8SBCVot93gZRyviSQU8MN6FeyuPs+9W9W7bM1kSEI=",
+        "owner": "breakds",
+        "repo": "traintrack",
+        "rev": "b9a14aeb35eef18821ddc4f1d0ace3e0372785c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "traintrack",
+        "type": "github"
       }
     },
     "utils": {
@@ -198,6 +220,21 @@
       }
     },
     "utils_2": {
+      "locked": {
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_3": {
       "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
@@ -283,7 +320,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils_3"
       },
       "locked": {
         "lastModified": 1676224373,

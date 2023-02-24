@@ -21,9 +21,19 @@
 
     wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
+
+    traintrack.url = "github:breakds/traintrack";
+    traintrack.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
+    nixosModules = {
+      ml-capable = {
+        nixpkgs.overlays = [ inputs.traintrack.overlays.default ];
+        vital.programs.machine-learning.enable = true;
+      };
+    };
+      
     nixosConfigurations = {
       samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -72,6 +82,7 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           vital-modules.nixosModules.docker
+          self.nixosModules.ml-capable
           ./machines/octavian
           ({
             nixpkgs.overlays = [
