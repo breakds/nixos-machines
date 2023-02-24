@@ -100,7 +100,7 @@ in {
       };
 
       environment = {
-        TRAINTRACK_AGENT_PORT = cfg.port;
+        TRAINTRACK_AGENT_PORT = toString cfg.port;
         TRAINTRACK_AGENT_CONFIG = "/etc/traintrack/agent-config.json";
       };
     };
