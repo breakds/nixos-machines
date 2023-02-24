@@ -23,4 +23,10 @@ rec {
     port = 5820;
     nodePort = 5821;
   };
+
+  traintrack = {
+    agent = {
+      port = 5975;
+    };
+  };
 }
