@@ -4,7 +4,7 @@ let cfg = config.services.traintrack-agent;
 
     configFile = pkgs.writeText "agent-config.json" ''
     {
-      "workers": ${builtins.toJson cfg.workers}
+      "workers": ${builtins.toJSON cfg.workers}
     }
     '';
 
