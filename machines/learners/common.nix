@@ -34,7 +34,7 @@
     vital.programs.machine-learning.enable = true;
 
     services.traintrack-agent = {
-      enable = false;
+      enable = true;
       port = 5975;
       user = "breakds";
       group = "breakds";

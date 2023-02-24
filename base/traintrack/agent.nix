@@ -3,15 +3,15 @@
 let cfg = config.services.traintrack-agent;
 
     configFile = pkgs.writeText "agent-config.json" ''
-    {
-      "workers": ${builtins.toJSON cfg.workers}
-    }
+       ${builtins.toJSON cfg.settings}
     '';
 
 in {
   options.services.traintrack-agent = let
     workerConfig = lib.mkOption {
-      type = lib.types.attrs;
+      type = lib.types.submodule {
+        freeformType = lib.types.attrs;
+      };
       default = {};
       description = lib.mdDoc "Defines the worker for the agent.";
       example = lib.literalExpression ''
@@ -31,31 +31,12 @@ in {
   in {
     enable = lib.mkEnableOption "Enable the traintrack agent";
 
-    workers = lib.mkOption {
-      type = with lib.types; listOf workerConfig;
-      default = [];
-      description = lib.mdDoc "A list of workers for this agent.";
-      example = lib.literalExpression ''
-        [{
-          gpu_id = 0;
-          gpu_type = "3080";
-          repos = {
-            Hobot = {
-              path = "/home/breakds/projects/Hobot1";
-              work_dir = "/home/breakds/dataset/alf_sessions";
-            };
-          };
-        }, {
-          gpu_id = 1;
-          gpu_type = "3080";
-          repos = {
-            Hobot = {
-              path = "/home/breakds/projects/Hobot2";
-              work_dir = "/home/breakds/dataset/alf_sessions";
-            };
-          };
-        }]
-      '';
+    settings = lib.mkOption {
+      type = lib.types.submodule {
+        freeformType = lib.types.attrs;
+      };
+      default = { workers = []; };
+      description = "Contents of the agent config file";
     };
 
     port = lib.mkOption {
@@ -89,6 +70,7 @@ in {
       description = "Agent node of traintrack";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.tmux pkgs.git ];
 
       serviceConfig = {
         ExecStart = "${pkgs.traintrack}/bin/agent";
