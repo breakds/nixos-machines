@@ -33,7 +33,7 @@
         vital.programs.machine-learning.enable = true;
       };
     };
-      
+
     nixosConfigurations = {
       samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -42,6 +42,7 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
           ./machines/samaritan
         ];
       };
@@ -54,6 +55,7 @@
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
           ./machines/malenia
         ];
       };
@@ -63,6 +65,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
           ./machines/horizon/GAIL3
         ];
       };
