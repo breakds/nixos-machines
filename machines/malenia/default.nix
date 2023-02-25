@@ -6,6 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
+    ../../base/traintrack/agent.nix    
   ];
 
   config = {
@@ -80,19 +81,27 @@
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
 
-    # Start Mullvad Service. This is just a service and you will need
-    # to manually start it with
-    #
-    # $ mullvad account set xxxxxxxxxxxxxxx
-    # $ mullvad relay set location us # The location you want to appear you are
-    # $ mullvad connect
-    # $ mullvad disconnect
-    #
-    # Note that you can call
-    # $ mullvad status
-    # to check the status
-    services.mullvad-vpn.enable = true;
-    networking.firewall.checkReversePath = "loose";  # This is a temporary hack for mullvad-vpn
+    services.traintrack-agent = {
+      enable = true;
+      port = (import ../../data/service-registry.nix).traintrack.agents.malenia.port;
+      user = "breakds";
+      group = "breakds";
+      settings = {
+        workers = [
+          # Worker 0 with 3080
+          {
+            gpu_id = 0;
+            gpu_type = "3080";
+            repos = {
+              Hobot = {
+                path = "/var/lib/traintrack/agent/Hobot0";
+                work_dir = "/home/breakds/dataset/alf_sessions";
+              };
+            };
+          }
+        ];
+      };
+    };
 
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker

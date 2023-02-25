@@ -26,10 +26,10 @@
       group = "breakds";
       settings = {
         workers = [
-          # Worker 0 with 4090
+          # Worker 0 with 3090
           {
             gpu_id = 0;
-            gpu_type = "4090";
+            gpu_type = "3090";
             repos = {
               Hobot = {
                 path = "/var/lib/traintrack/agent/Hobot0";
