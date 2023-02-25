@@ -19,31 +19,37 @@
       enableNvidia = true;
     };
 
-    services.traintrack-agent.settings = {
-      workers = [
-        # Worker 0 with 3090
-        {
-          gpu_id = 0;
-          gpu_type = "3090";
-          repos = {
-            Hobot = {
-              path = "/home/breakds/projects/Hobot";
-              work_dir = "/home/breakds/dataset/alf_sessions";
+    services.traintrack-agent = {
+      enable = true;
+      port = (import ../../../data/service-registry.nix).traintrack.agents.lothric.port;
+      user = "breakds";
+      group = "breakds";
+      settings = {
+        workers = [
+          # Worker 0 with 4090
+          {
+            gpu_id = 0;
+            gpu_type = "4090";
+            repos = {
+              Hobot = {
+                path = "/var/lib/traintrack/agent/Hobot0";
+                work_dir = "/home/breakds/tmp/alf_sessions";
+              };
             };
-          };
-        }
-        # Worker 1 with 3090      
-        {
-          gpu_id = 1;
-          gpu_type = "3090";
-          repos = {
-            Hobot = {
-              path = "/home/breakds/projects/Hobot1";
-              work_dir = "/home/breakds/dataset/alf_sessions";
+          }
+          # Worker 1 with 3090      
+          {
+            gpu_id = 1;
+            gpu_type = "3090";
+            repos = {
+              Hobot = {
+                path = "/var/lib/traintrack/agent/Hobo1";
+                work_dir = "/home/breakds/tmp/alf_sessions";
+              };
             };
-          };
-        }
-      ];
+          }
+        ];
+      };
     };
 
     nix.settings.max-jobs = lib.mkDefault 24;

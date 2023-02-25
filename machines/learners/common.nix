@@ -33,13 +33,6 @@
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
 
-    services.traintrack-agent = {
-      enable = true;
-      port = 5975;
-      user = "breakds";
-      group = "breakds";
-    };
-
     services.prometheus = {
       exporters.node = {
         enable = true;

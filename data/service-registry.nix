@@ -25,8 +25,16 @@ rec {
   };
 
   traintrack = {
-    agent = {
-      port = 5975;
+    agents = {
+      lothric = { port = 5975; };
+      lorian = { port = 5975; };
+      gail3 = { port = 5975; };
+      samaritan = { port = 5975; };
+      malenia = { port = 5975; };
+      octavian = { port = 5975; };
+    };
+    central = {
+      octavian = { port = 5976; };
     };
   };
 }
