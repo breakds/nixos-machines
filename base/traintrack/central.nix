@@ -7,7 +7,7 @@ let cfg = config.services.traintrack-central;
     '';
 
 in {
-  options.services.traintrack-central {
+  options.services.traintrack-central = {
     enable = lib.mkEnableOption "Enable the traintrack central";
 
     settings = lib.mkOption {
@@ -49,7 +49,7 @@ in {
       description = "Central node of traintrack";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.tmux pkgs.git ];
+      path = [ pkgs.openssh ];
 
       serviceConfig = {
         ExecStart = "${pkgs.traintrack}/bin/central";

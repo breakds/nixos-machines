@@ -42,55 +42,55 @@
         agents = [
           {
             name = "gail3";
-            port = traintrack-registry.gail3.port;
+            port = traintrack-registry.agents.gail3.port;
 
             ssh_uri = "10.40.0.173";
             ssh_port = 22;
             ssh_proxy = "10.77.1.188";  # armlet
             ssh_proxy_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
           {
             name = "samaritan";
-            port = traintrack-registry.samaritan.port;
+            port = traintrack-registry.agents.samaritan.port;
 
             ssh_uri = "10.40.1.52";
             ssh_port = 22;
             ssh_proxy = "10.77.1.188";  # armlet
             ssh_proxy_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
           {
             name = "lothric";
-            port = traintrack-registry.lothric.port;
+            port = traintrack-registry.agents.lothric.port;
 
             ssh_uri = "10.77.1.127";
             ssh_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
           {
             name = "lortian";
-            port = traintrack-registry.lorian.port;
+            port = traintrack-registry.agents.lorian.port;
 
             ssh_uri = "10.77.1.128";
             ssh_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
           {
             name = "octavian";
-            port = traintrack-registry.octavian.port;
+            port = traintrack-registry.agents.octavian.port;
 
             ssh_uri = "localhost";
             ssh_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
           {
             name = "malenia";
-            port = traintrack-registry.malenia.port;
+            port = traintrack-registry.agents.malenia.port;
 
-            ssh_uri = "localhost";
+            ssh_uri = "10.77.1.185";
             ssh_port = 22;
-            ssh_key_file: "/home/breakds/.ssh/breakds_samaritan";
+            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
           }
         ];
       };
