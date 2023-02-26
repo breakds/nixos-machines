@@ -95,5 +95,10 @@
         ];
       };
     };
+
+    environment.systemPackages = [
+      # TODO(breakds): Wrap it with TRAINTRACK_CENTRAL_PORT
+      pkgs.traintrack
+    ];
   };
 }
