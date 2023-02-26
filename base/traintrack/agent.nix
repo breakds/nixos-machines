@@ -7,28 +7,7 @@ let cfg = config.services.traintrack-agent;
     '';
 
 in {
-  options.services.traintrack-agent = let
-    workerConfig = lib.mkOption {
-      type = lib.types.submodule {
-        freeformType = lib.types.attrs;
-      };
-      default = {};
-      description = lib.mdDoc "Defines the worker for the agent.";
-      example = lib.literalExpression ''
-        {
-          gpu_id = 0;
-          gpu_type = "3080";
-          repos = {
-            Hobot = {
-              path = "/home/breakds/projects/Hobot";
-              work_dir = "/home/breakds/dataset/alf_sessions";
-            };
-          };
-        }
-      '';
-    };
-
-  in {
+  options.services.traintrack-agent = {
     enable = lib.mkEnableOption "Enable the traintrack agent";
 
     settings = lib.mkOption {

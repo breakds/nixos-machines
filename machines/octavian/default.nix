@@ -13,8 +13,8 @@
     ./services/hydra.nix
     ./services/media.nix
     ./services/terraria.nix
+    ./services/traintrack.nix
     ../../base/tailscale.nix
-    ../../base/traintrack/agent.nix    
   ];
 
   config = {
@@ -117,28 +117,6 @@
       autoScrub = {
         enable = true;
         interval = "Sun, 02:00";
-      };
-    };
-
-    services.traintrack-agent = {
-      enable = true;
-      port = (import ../../data/service-registry.nix).traintrack.agents.octavian.port;
-      user = "breakds";
-      group = "breakds";
-      settings = {
-        workers = [
-          # Worker 0 with Tesla T4
-          {
-            gpu_id = 0;
-            gpu_type = "Tesla T4";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobot0";
-                work_dir = "/home/breakds/tmp/alf_sessions";
-              };
-            };
-          }
-        ];
       };
     };
 
