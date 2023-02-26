@@ -26,6 +26,7 @@
       # nixops_unstable
       python3Packages.tensorboard
       pv  # pipe viewer
+      asciinema
 
       # System Tools
       dmidecode
