@@ -191,11 +191,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1677367781,
-        "narHash": "sha256-rTddMAIJpxkkdErKuieEoMNrL7WAov4fmRC2a8hICFI=",
+        "lastModified": 1677482652,
+        "narHash": "sha256-4/cwJ1KvJcmMOnIHlYzs5ZsAvSdywNPzR61klcjkb3k=",
         "owner": "breakds",
         "repo": "traintrack",
-        "rev": "b768acb33346584ea617e144fd8a2e268b45139b",
+        "rev": "963ffe6288e97b62e11bed63e5d5f4c5cf35d02b",
         "type": "github"
       },
       "original": {
