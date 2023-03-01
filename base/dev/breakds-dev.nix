@@ -27,6 +27,7 @@
       python3Packages.tensorboard
       pv  # pipe viewer
       asciinema
+      wireshark
 
       # System Tools
       dmidecode
