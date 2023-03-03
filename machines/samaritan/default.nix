@@ -80,6 +80,7 @@
       inkscape
       element-desktop
       rtorrent
+      gst_all_1.gstreamer
     ];
 
     nix = {
