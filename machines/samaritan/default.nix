@@ -79,6 +79,7 @@
       trezor-suite
       inkscape
       element-desktop
+      rtorrent
     ];
 
     nix = {
