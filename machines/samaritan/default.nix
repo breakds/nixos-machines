@@ -107,6 +107,8 @@
       };
     };
 
+    networking.firewall.allowedTCPPorts = [ 16006 ];
+
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
 
