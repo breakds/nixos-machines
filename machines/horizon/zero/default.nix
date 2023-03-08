@@ -26,6 +26,14 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "26a47390";
 
+    # For unitree
+    networking.firewall.allowedUDPPortRanges= [
+      {
+        from = 9200;
+        to = 9210;
+      }
+    ];
+
     vital.pre-installed.level = 5;
     vital.programs = {
       vscode.enable = true;
@@ -55,6 +63,7 @@
     environment.systemPackages = with pkgs; [
       zoom-us
       pavucontrol
+      wireshark
     ];
 
     home-manager.users."breakds" = {
