@@ -28,6 +28,7 @@
       pv  # pipe viewer
       asciinema
       wireshark
+      duckdb
 
       # System Tools
       dmidecode
