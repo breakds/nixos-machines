@@ -52,6 +52,10 @@
       hostId = "e4f0c450";
     };
 
+    # The LLM server
+    networking.firewall.allowedTCPPorts = [ 6062 ];
+    networking.firewall.allowedUDPPorts = [ 6062 ];
+
     vital.pre-installed.level = 5;
 
     vital.programs = {
