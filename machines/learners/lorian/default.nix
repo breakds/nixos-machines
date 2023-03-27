@@ -17,6 +17,10 @@
       hostId = "8e549b2e";
     };
 
+    # The LLM server
+    networking.firewall.allowedTCPPorts = [ 6062 ];
+    networking.firewall.allowedUDPPorts = [ 6062 ];
+
     services.traintrack-agent = {
       enable = true;
       port = (import ../../../data/service-registry.nix).traintrack.agents.lorian.port;
