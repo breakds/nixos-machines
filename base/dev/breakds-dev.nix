@@ -28,6 +28,7 @@
       pv  # pipe viewer
       asciinema
       wireshark
+      websocat
 
       # System Tools
       dmidecode
