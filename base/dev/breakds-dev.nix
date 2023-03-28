@@ -29,6 +29,7 @@
       asciinema
       wireshark
       duckdb
+      websocat
 
       # System Tools
       dmidecode
