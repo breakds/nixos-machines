@@ -30,6 +30,7 @@
       wireshark
       duckdb
       websocat
+      parquet-tools
 
       # System Tools
       dmidecode
