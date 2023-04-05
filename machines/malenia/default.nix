@@ -70,6 +70,7 @@
       parsec-bin  # For game streaming
       python3Packages.archer
       blender
+      openconnect
     ];
 
     nix = {
