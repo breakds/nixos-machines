@@ -19,6 +19,7 @@
       quickserve
       remmina
       ffmpeg
+      vlc
       mysql-client
       sqlitebrowser
       awscli
