@@ -38,7 +38,11 @@
   # | Service and Package          |
   # +------------------------------+
   
-  environment.systemPackages = with pkgs; [ vim emacs git firefox ];
+  environment.systemPackages = with pkgs; [
+    vim emacs git firefox
+    meld dmidecode shuriken asciinema websocat
+    lsd
+  ];
 
   nix = {
     distributedBuilds = true;
