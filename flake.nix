@@ -24,6 +24,9 @@
 
     traintrack.url = "github:breakds/traintrack";
     traintrack.inputs.nixpkgs.follows = "nixpkgs";
+
+    rapit.url = "git+ssh://git@github.com/breakds/rapit";
+    rapit.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
@@ -92,6 +95,7 @@
               (final: prev: {
                 www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
               })
+              inputs.rapit.overlays.default
             ];
           })
         ];

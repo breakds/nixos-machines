@@ -37,4 +37,9 @@ rec {
       octavian = { port = 5976; };
     };
   };
+
+  famass = {
+    domain = "famass.breakds.org";
+    port = 5928;
+  };
 }

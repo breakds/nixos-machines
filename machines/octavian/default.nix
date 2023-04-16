@@ -14,6 +14,7 @@
     ./services/media.nix
     ./services/terraria.nix
     ./services/traintrack.nix
+    ./services/famass.nix
     ../../base/tailscale.nix
   ];
 
