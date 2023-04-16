@@ -204,11 +204,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1681624531,
-        "narHash": "sha256-SScnu5+I3bPkg48Q4VWPJ7OQCnJuPP8aaV5Ou2DixVA=",
+        "lastModified": 1681626829,
+        "narHash": "sha256-uVxSMg1qIJWUHRIvYYxowfUfo5f0ylB97X2tooMIWFw=",
         "ref": "refs/heads/main",
-        "rev": "e8ba3dbc142ec2731bbc766105823a4e4647b434",
-        "revCount": 51,
+        "rev": "dc3d0f186939bb2a54c950653aab5392b03e0d39",
+        "revCount": 54,
         "type": "git",
         "url": "ssh://git@github.com/breakds/rapit"
       },
