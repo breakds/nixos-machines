@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home/breakds/dataset" =
+    { device = "/dev/disk/by-label/NIXOS_DATASET";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/b96e34e1-2755-4565-b8df-01fbe274e16a"; }
     ];
