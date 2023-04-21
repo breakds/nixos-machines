@@ -99,27 +99,35 @@ def app():
 
 
 @app.command()
-@click.argument("run_id", type=str)
+@click.argument("run_ids", type=str, nargs=-1)
 @click.option("-e", "--entity", type=str, default="horizon-robotics-gail")
-def sync(run_id, entity):
+def sync(run_ids, entity):
     api = wandb.Api()
     logger.success("Wandb API initialized.")
 
-    target = None
+    run_ids = set(run_ids)
+
+    targets = []
     for project in api.projects(entity=entity):
         project_path = "/".join(project.path)
         logger.info(f"Searching in project {project_path} ...")
         for run in api.runs(project_path):
-            if run.path[-1] == run_id:
+            if run.path[-1] in run_ids:
                 logger.success(
                     f"Found specified run at project {project_path}")
-                target = run
-                break
-        if target is not None:
+                targets.append(run)
+                run_ids.remove(run.path[-1])
+                if len(run_ids) == 0:
+                    break
+        if len(run_ids) == 0:
             break
 
-    metadata = MetaData(target)
-    sync_root_dir(metadata.host, metadata.root_dir)
+    if len(run_ids) > 0:
+        logger.warning(f"The following IDs are not found: {run_ids}")
+
+    for target in targets:
+        metadata = MetaData(target)
+        sync_root_dir(metadata.host, metadata.root_dir)
 
 
 if __name__ == "__main__":
