@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs?rev=42aae6fa748a41ced37373fc6d914de512658178";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -172,6 +172,17 @@
         system = "x86_64-linux";
         modules = [
           ./containers/fortress.nix
+        ];
+      };
+
+      # How to build this live:
+      # nix build .#nixosConfigurations.liveISO.config.system.build.isoImage
+      liveISO = inputs.nixpkgs-unstable.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # The base image that has gnome.
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+          ./machines/livecd/with-nvidia.nix
         ];
       };
     };
