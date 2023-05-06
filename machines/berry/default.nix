@@ -15,6 +15,13 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "fe156831";
 
+    # NOTE: there is a service called `dlm.service` for displaylink. I am not
+    # pretty sure about the internals, but you will need the service to be
+    # running normal first. After that, you will need to reboot the machine for
+    # displaylink to work.
+    #
+    # Also it seems that displaylink 5.6 is bad. It is reported 5.5 is good, and
+    # 5.6.1 seems to be good too.
     services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
     services.fwupd.enable = true;
     
