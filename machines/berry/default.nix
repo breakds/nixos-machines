@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./displaylink.nix
     ../../base
     ../../base/build-machines.nix
   ];
@@ -16,8 +15,10 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "fe156831";
 
-    # Force using 5.10 as as displaylink does not support linux 6.
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelParams = [
+      
+    ];
     
     # +----------+
     # | Desktop  |
@@ -46,8 +47,8 @@
       gimp peek gnupg pass libreoffice
       skypeforlinux
       multitail
-      nodejs-18_x
-      (yarn.override { nodejs = nodejs-18_x; })
+      nodejs-14_x
+      (yarn.override { nodejs = nodejs-14_x; })
     ];
 
     # +----------+
