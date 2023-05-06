@@ -18,7 +18,6 @@
 
     # Force using 5.10 as as displaylink does not support linux 6.
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    services.xserver.videoDrivers = [ "modesetting" ];
     
     # +----------+
     # | Desktop  |
