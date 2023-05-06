@@ -16,6 +16,7 @@
     networking.hostId = "fe156831";
 
     services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
+    services.fwupd.enable = true;
     
     # +----------+
     # | Desktop  |
