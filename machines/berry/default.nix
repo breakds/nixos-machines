@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./displaylink.nix
     ../../base
     ../../base/build-machines.nix
   ];
