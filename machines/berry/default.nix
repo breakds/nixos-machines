@@ -16,9 +16,9 @@
     networking.hostId = "fe156831";
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    boot.kernelParams = [
-      
-    ];
+    # Force using 5.10 as as displaylink does not support linux 6.
+    boot.kernelPackages = pkgs.linuxPackages_5_10;
+    services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
     
     # +----------+
     # | Desktop  |
