@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
+    ../../base/build-machines.nix
   ];
 
   config = {
@@ -14,7 +15,7 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "fe156831";
 
-    boot.kernelPackages = pkgs.linuxPackages_5_10;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
     
     # +----------+
@@ -44,17 +45,9 @@
       gimp peek gnupg pass libreoffice
       skypeforlinux
       multitail
-      nodejs-14_x
-      (yarn.override { nodejs = nodejs-14_x; })
-      (nodePackages.create-react-app.override {
-        preRebuild = ''
-            substituteInPlace $(find -type f -name createReactApp.js) \
-                --replace "path.join(root, 'yarn.lock')" "path.join(root, 'yarn.lock')); fs.chmodSync(path.join(root, 'yarn.lock'), 0o644"
-        '';
-      })
+      nodejs-18_x
+      (yarn.override { nodejs = nodejs-18_x; })
     ];
-
-    nix.settings.max-jobs = lib.mkDefault 7;
 
     # +----------+
     # | VPN      |
@@ -66,6 +59,18 @@
         autoStart = false;
       };
     };
+
+    # +--------------------+
+    # | Distributed Build  |
+    # +--------------------+
+
+    nix.buildMachines = [{
+      hostName = "localhost";
+      systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+      maxJobs = lib.mkDefault 7;
+      speedFactor = lib.mkDefault 2;
+      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+    }];
 
     # This value determines the NixOS release from which the default settings
     # for stateful data, like file locations and database versions on your
