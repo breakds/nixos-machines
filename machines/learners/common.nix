@@ -11,6 +11,10 @@
   config = {
     vital.mainUser = "breakds";
 
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
