@@ -124,7 +124,7 @@
       };
 
       # The heavy learner
-      lorian = nixpkgs.lib.nixosSystem {
+      radahn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation

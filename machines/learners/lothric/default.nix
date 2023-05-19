@@ -5,6 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../base/build-machines.nix    
     ../common.nix
   ];
 
