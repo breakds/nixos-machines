@@ -23,6 +23,11 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home/breakds/dataset" = {
+    device = "/dev/disk/by-label/BDS_DATASET";
+    fsType = "ext4";
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/feff6d9b-a203-4fee-836f-84bc66aa2f6e"; }
     ];
