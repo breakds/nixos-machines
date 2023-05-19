@@ -101,7 +101,7 @@
         ];
       };
 
-      # The twin leaner, Lothric (Younger Prince)
+      # The twin learner, Lothric (Younger Prince)
       lothric = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -112,7 +112,7 @@
         ];
       };
 
-      # The twin leaner, Lorian (Elder Prince)
+      # The twin learner, Lorian (Elder Prince)
       lorian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -120,6 +120,17 @@
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable
           ./machines/learners/lorian
+        ];
+      };
+
+      # The heavy learner
+      lorian = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          self.nixosModules.ml-capable
+          ./machines/learners/radahn
         ];
       };
 
