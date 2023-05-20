@@ -28,6 +28,11 @@ HOST_INFO = {
         "session_root": "dataset",
     },
 
+    "radahn": {
+        "location": "lab",
+        "session_root": "dataset",
+    },
+
     "GAIL3": {
         "location": "lab",
         "session_root": "tmp",
