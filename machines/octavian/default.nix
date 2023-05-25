@@ -15,6 +15,7 @@
     ./services/terraria.nix
     ./services/traintrack.nix
     ./services/famass.nix
+    ./services/docker-registry.nix
     ../../base/tailscale.nix
   ];
 
@@ -101,14 +102,6 @@
       workDir = "/var/lib/filerun";
       port = 5962;
       domain = "files.breakds.org";
-    };
-
-    vital.services.docker-registry = let
-      info = (import ../../data/service-registry.nix).docker-registry;
-    in {
-      enable = true;
-      domain = info.domain;
-      port = info.port;
     };
 
     services.borgbackup = {
