@@ -42,6 +42,7 @@
 
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;
+    programs.zsh.enable = true;
 
     nix = {
       # The following is added to /etc/nix.conf to prevent GC from
