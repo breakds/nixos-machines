@@ -68,7 +68,7 @@
       inkscape
       element-desktop
       parsec-bin  # For game streaming
-      python3Packages.archer
+      # python3Packages.archer
       blender
       openconnect
     ];

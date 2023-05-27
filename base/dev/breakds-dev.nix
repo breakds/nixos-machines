@@ -31,7 +31,8 @@
       wireshark
       duckdb
       websocat
-      parquet-tools
+      # TODO(brakds): Cannot build at 23.05
+      # parquet-tools
 
       # System Tools
       dmidecode
