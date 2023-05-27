@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs2105.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs2305.url = "github:NixOS/nixpkgs/nixos-23.05";    
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -50,7 +51,7 @@
         ];
       };
 
-      malenia = nixpkgs.lib.nixosSystem {
+      malenia = inputs.nixpkgs2305.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
