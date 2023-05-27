@@ -163,22 +163,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable_3": {
-      "locked": {
-        "lastModified": 1622437901,
-        "narHash": "sha256-ww6EcXDmOgJbx2DOGAW6PbIQK3K/WGCpFYW4yNyP/XM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
-        "type": "github"
-      }
-    },
     "nixpkgs2105": {
       "locked": {
         "lastModified": 1640283157,
@@ -334,15 +318,14 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixpkgs-unstable": "nixpkgs-unstable_2",
         "vitalpkgs": "vitalpkgs"
       },
       "locked": {
-        "lastModified": 1670010971,
-        "narHash": "sha256-Zm9178xrWKR+/EFfvYU98PoDHKXIHKI3DkmaPIF9VWg=",
+        "lastModified": 1685224011,
+        "narHash": "sha256-T6P1w36/lq3X6SnTECJsDMLzjWNvfWxeqsycty8uMUU=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "b6dfbb59ef307fe0b12b52ce6e92aa21b29e64c6",
+        "rev": "9e11a472e1f3ce3ebca59857e493e7530717daf1",
         "type": "github"
       },
       "original": {
@@ -358,7 +341,7 @@
           "vital-modules",
           "nixpkgs"
         ],
-        "nixpkgs-unstable": "nixpkgs-unstable_3"
+        "nixpkgs-unstable": "nixpkgs-unstable_2"
       },
       "locked": {
         "lastModified": 1624379137,

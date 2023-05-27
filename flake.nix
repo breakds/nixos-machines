@@ -54,7 +54,7 @@
       malenia = inputs.nixpkgs2305.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
+          # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
           vital-modules.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
