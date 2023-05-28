@@ -82,7 +82,7 @@
         ];
       };
 
-      octavian = nixpkgs.lib.nixosSystem {
+      octavian = inputs.nixpkgs2305.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
