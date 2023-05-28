@@ -14,7 +14,8 @@
     ./services/media.nix
     ./services/terraria.nix
     ./services/traintrack.nix
-    ./services/famass.nix
+    # TODO(breakds): Fix poetry for 23.05
+    # ./services/famass.nix
     ./services/docker-registry.nix
     ../../base/tailscale.nix
   ];
@@ -22,7 +23,7 @@
   config = {
     vital.mainUser = "breakds";
 
-    services.openssh.passwordAuthentication = false;
+    services.openssh.settings.PasswordAuthentication = false;
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
@@ -107,7 +108,7 @@
     services.borgbackup = {
       repos.orbekk = {
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
-        path = [ "/var/lib/borgbackup/orbekk" ];
+        path = /var/lib/borgbackup/orbekk;
       };
     };
 

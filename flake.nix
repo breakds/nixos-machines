@@ -95,7 +95,7 @@
               (final: prev: {
                 www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
               })
-              inputs.rapit.overlays.default
+              # inputs.rapit.overlays.default
             ];
           })
         ];
