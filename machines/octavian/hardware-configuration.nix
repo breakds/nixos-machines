@@ -16,17 +16,17 @@
   boot.zfs.extraPools = [ "VAULT_ROOT" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/57a321f0-3f33-4448-a20b-e7d6edb048f8";
+    { device = "/dev/disk/by-label/NIXOS_ROOT";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/87B3-DFC6";
+    { device = "/dev/disk/by-label/NIXOS_BOOT";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/175e2810-1220-45aa-bf3e-e036a4d954c5"; }
+    [ { device = "/dev/disk/by-label/NIXOS_SWAP"; }
     ];
 
   # The ZFS Array has 15 disks = 3 rows x 5 per row. S/N are shown below.
