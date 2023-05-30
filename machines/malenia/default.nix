@@ -79,6 +79,9 @@
         trusted-substituters = [
           "ssh://octavian.local"
         ];
+        trusted-public-keys = [
+          "hydra.breakds.org-1:tjJYWEFAcw1avI4+QYWWs8Hm+wvrFiFaB2ennVBHDAQ="
+        ];
       };
     };
 
