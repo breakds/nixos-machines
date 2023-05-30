@@ -76,6 +76,9 @@
     nix = {
       settings = {
         trusted-users = [ "root" ];
+        trusted-substituters = [
+          "ssh://octavian.local"
+        ];
       };
     };
 
