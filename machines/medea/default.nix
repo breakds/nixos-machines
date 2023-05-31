@@ -50,6 +50,8 @@
       plex-media-player
     ];
 
+    programs.zsh.enable = true;
+
     # +--------------------+
     # | Distributed Build  |
     # +--------------------+
