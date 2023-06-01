@@ -5,7 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../base/build-machines.nix    
+    ../../../base/build-machines.nix
     ../common.nix
   ];
 
@@ -38,7 +38,7 @@
               };
             };
           }
-          # Worker 1 with 3090      
+          # Worker 1 with 3090
           {
             gpu_id = 1;
             gpu_type = "3090";

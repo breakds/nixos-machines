@@ -5,7 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../base/build-machines.nix
+    ../../../base/build-machines.nix
     ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
