@@ -2,8 +2,8 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgs2305.url = "github:NixOS/nixpkgs/nixos-23.05";    
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs2211.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -38,7 +38,7 @@
     };
 
     nixosConfigurations = {
-      samaritan = inputs.nixpkgs2305.lib.nixosSystem {
+      samaritan = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -50,7 +50,7 @@
         ];
       };
 
-      malenia = inputs.nixpkgs2305.lib.nixosSystem {
+      malenia = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
@@ -63,7 +63,7 @@
         ];
       };
 
-      "horizon.GAIL3" = inputs.nixpkgs2305.lib.nixosSystem {
+      "horizon.GAIL3" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -73,7 +73,7 @@
         ];
       };
 
-      "horizon.zero" = nixpkgs.lib.nixosSystem {
+      "horizon.zero" = inputs.nixpkgs2211.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -82,7 +82,7 @@
         ];
       };
 
-      octavian = inputs.nixpkgs2305.lib.nixosSystem {
+      octavian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -134,7 +134,7 @@
         ];
       };
 
-      berry = nixpkgs.lib.nixosSystem {
+      berry = inputs.nixpkgs2211.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -145,7 +145,7 @@
         ];
       };
 
-      hand = inputs.nixpkgs2305.lib.nixosSystem {
+      hand = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           # Get the community maintained framework baseline
@@ -158,7 +158,7 @@
         ];
       };
 
-      medea = inputs.nixpkgs2305.lib.nixosSystem {
+      medea = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -188,7 +188,7 @@
 
       # How to build this live:
       # nix build .#nixosConfigurations.liveISO.config.system.build.isoImage
-      liveISO = inputs.nixpkgs-unstable.lib.nixosSystem {
+      liveISO = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           # The base image that has gnome.
