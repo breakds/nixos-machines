@@ -47,7 +47,9 @@
   services.openssh = {
     enable = true;
     # Enable X11 Fowarding, can be connected with ssh -Y.
-    forwardX11 = true;
+    settings = {
+      X11Forwarding = true;
+    };
     # TODO(breakds): Enable this for servers
     # allowSFTP = config.vital.machineType == "server";
   };
@@ -75,8 +77,11 @@
       experimental-features = nix-command flakes
     '';
 
-    # Automatically optimize storage spaces /nix/store
-    autoOptimiseStore = true;
+
+    settings = {
+      # Automatically optimize storage spaces /nix/store
+      auto-optimise-store = true;
+    };
 
     # Automatic garbage collection
     gc = {
