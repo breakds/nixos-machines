@@ -167,7 +167,7 @@
         ];
       };
 
-      armlet = inputs.nixpkgs-unstable.lib.nixosSystem {
+      armlet = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
