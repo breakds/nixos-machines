@@ -32,6 +32,14 @@
     vital.programs.vscode.enable = true;
     vital.programs.machine-learning.enable = true;
 
+    # Hopefully this is effectively ulimit -n 65535
+    security.pam.loginLimits = [{
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "65535";
+    }];
+
     services.prometheus = {
       exporters.node = {
         enable = true;
