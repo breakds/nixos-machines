@@ -87,6 +87,7 @@
       distributedBuilds = true;
       buildMachines = [
         {
+          protocol = "ssh-ng";
           hostName = "gail3";
           systems = [ "x86_64-linux" "i686-linux" ];
           maxJobs = 12;
@@ -94,11 +95,12 @@
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
         {
+          protocol = "ssh-ng";
           hostName = "localhost";
           systems = [ "x86_64-linux" "i686-linux" ];
           maxJobs = lib.mkDefault 12;
           speedFactor = lib.mkDefault 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
       ];
       settings = {
