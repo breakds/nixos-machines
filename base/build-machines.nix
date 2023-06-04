@@ -9,7 +9,7 @@
   #   systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
   #   maxJobs = lib.mkDefault 12;
   #   speedFactor = lib.mkDefault 2;
-  #   supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+  #   supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
   # }
   #
   # You will need to decide the max jobs and speed factor.
@@ -18,6 +18,7 @@
       distributedBuilds = true;
       buildMachines = [
         {
+          protocol = "ssh-ng";
           hostName = "octavian.local";
           systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
           maxJobs = 12;
@@ -25,6 +26,7 @@
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
         {
+          protocol = "ssh-ng";
           hostName = "malenia.local";
           systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
           maxJobs = 24;
@@ -32,11 +34,12 @@
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
         {
+          protocol = "ssh-ng";
           hostName = "localhost";
           systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
           maxJobs = lib.mkDefault 12;
           speedFactor = lib.mkDefault 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
       ];
       settings = {
