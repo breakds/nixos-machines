@@ -73,7 +73,7 @@
         ];
       };
 
-      "horizon.zero" = inputs.nixpkgs2211.lib.nixosSystem {
+      "horizon.zero" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
