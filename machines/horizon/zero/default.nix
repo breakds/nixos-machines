@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../../base
     ../../../base/i3-session-breakds.nix
+    ../../../base/build-machines.nix
     ../common/vpn.nix
     ../../../base/dev/breakds-dev.nix
     # ../../../base/tailscale.nix
@@ -66,34 +67,13 @@
       wireshark
     ];
 
-    home-manager.users."breakds" = {
-      home.bds.laptopXsession = true;
+    vital.distributed-build = {
+      enable = true;
+      location = "lab";
     };
 
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [
-        {
-          hostName = "gail3";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = 12;
-          speedFactor = 3;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-        {
-          hostName = "localhost";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = lib.mkDefault 12;
-          speedFactor = lib.mkDefault 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-      ];
-      settings = {
-        max-jobs = lib.mkDefault 8;
-        trusted-substituters = [
-          "ssh://gail3"
-        ];
-      };
+    home-manager.users."breakds" = {
+      home.bds.laptopXsession = true;
     };
 
     # This value determines the NixOS release from which the default
