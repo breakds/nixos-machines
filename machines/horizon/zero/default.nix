@@ -70,7 +70,43 @@
       home.bds.laptopXsession = true;
     };
 
-    nix.settings.max-jobs = lib.mkDefault 8;
+    nix = {
+      distributedBuilds = true;
+      buildMachines = [
+        {
+          hostName = "gail3";
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+          maxJobs = 12;
+          speedFactor = 3;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+        {
+          hostName = "samaritan";
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+          maxJobs = 24;
+          speedFactor = 3;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+        {
+          hostName = "radahn";
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+          maxJobs = 24;
+          speedFactor = 5;
+          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        }
+      ];
+      settings = {
+        max-jobs = 8;
+        trusted-substituters = [
+          "ssh://gail3"
+          "ssh://gail3.breakds.org"
+          "ssh://samaritan"
+          "ssh://samaritan.breakds.org"
+          "ssh://radahn"
+          "ssh://radahn.breakds.org"
+          "ssh://www.breakds.org"
+        ];
+      };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
