@@ -80,20 +80,6 @@
           speedFactor = 3;
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
-        {
-          hostName = "samaritan";
-          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 24;
-          speedFactor = 3;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-        {
-          hostName = "radahn";
-          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-          maxJobs = 24;
-          speedFactor = 5;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
       ];
       settings = {
         max-jobs = 8;
@@ -107,6 +93,7 @@
           "ssh://www.breakds.org"
         ];
       };
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
