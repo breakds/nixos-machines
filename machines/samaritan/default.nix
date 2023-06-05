@@ -7,6 +7,7 @@
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../base/traintrack/agent.nix
+    ../../base/build-machines.nix
     ./services/monitor.nix
   ];
 
@@ -83,31 +84,9 @@
       rtorrent
     ];
 
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [
-        {
-          protocol = "ssh-ng";
-          hostName = "gail3";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = 12;
-          speedFactor = 3;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-        {
-          protocol = "ssh-ng";
-          hostName = "localhost";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = lib.mkDefault 12;
-          speedFactor = lib.mkDefault 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
-      ];
-      settings = {
-        trusted-substituters = [
-          "ssh://gail3"
-        ];
-      };
+    vital.distributed-build = {
+      enable = true;
+      location = "lab";
     };
 
     networking.firewall.allowedTCPPorts = [ 16006 ];

@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
+    ../../../base/build-machines.nix
   ];
 
   config = {
@@ -55,34 +56,6 @@
         ];
       };
     };
-
-    # Uncomment this if it needs gail3
-    # nix = {
-    #   distributedBuilds = true;
-    #   buildMachines = [
-    #     {
-    #       hostName = "gail3";
-    #       systems = [ "x86_64-linux" "i686-linux" ];
-    #       maxJobs = 12;
-    #       speedFactor = 3;
-    #       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-    #     }
-    #     {
-    #       hostName = "localhost";
-    #       systems = [ "x86_64-linux" "i686-linux" ];
-    #       maxJobs = lib.mkDefault 12;
-    #       speedFactor = lib.mkDefault 2;
-    #       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ]; 
-    #     }
-    #   ];
-    #   settings = {
-    #     trusted-substituters = [
-    #       "ssh://gail3"
-    #     ];
-    #   };
-    # };
-
-    nix.settings.max-jobs = lib.mkDefault 32;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

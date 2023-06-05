@@ -7,7 +7,7 @@
     ../../../base/i3-session-breakds.nix
     ../../../base/dev/breakds-dev.nix
     ../../../base/traintrack/agent.nix
-    # TODO(breakds): Add python environment
+    ../../../base/build-machines.nix
   ];
 
   config = {
@@ -49,15 +49,6 @@
       zoom-us
       thunderbird
     ];
-
-    nix = {
-      settings = {
-        max-jobs = lib.mkDefault 14;
-        trusted-users = [
-          "root" "breakds"
-        ];
-      };
-    };
 
     services.traintrack-agent = {
       enable = true;
