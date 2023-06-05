@@ -75,23 +75,22 @@
       buildMachines = [
         {
           hostName = "gail3";
-          systems = [ "x86_64-linux" "i686-linux" ];
+          systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
           maxJobs = 12;
           speedFactor = 3;
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         }
-        {
-          hostName = "localhost";
-          systems = [ "x86_64-linux" "i686-linux" ];
-          maxJobs = lib.mkDefault 12;
-          speedFactor = lib.mkDefault 2;
-          supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        }
       ];
       settings = {
-        max-jobs = lib.mkDefault 8;
+        max-jobs = 8;
         trusted-substituters = [
           "ssh://gail3"
+          "ssh://gail3.breakds.org"
+          "ssh://samaritan"
+          "ssh://samaritan.breakds.org"
+          "ssh://radahn"
+          "ssh://radahn.breakds.org"
+          "ssh://www.breakds.org"
         ];
       };
     };
