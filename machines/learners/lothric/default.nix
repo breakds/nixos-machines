@@ -53,7 +53,10 @@
       };
     };
 
-    nix.settings.max-jobs = lib.mkDefault 24;
+    vital.distributed-build = {
+      enable = true;
+      location = "homelab";
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

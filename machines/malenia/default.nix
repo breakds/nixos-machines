@@ -6,7 +6,8 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/traintrack/agent.nix    
+    ../../base/traintrack/agent.nix
+    ../../base/build-machines.nix
   ];
 
   config = {
@@ -72,18 +73,6 @@
       blender
       openconnect
     ];
-
-    nix = {
-      settings = {
-        trusted-users = [ "root" ];
-        trusted-substituters = [
-          "ssh://octavian.local"
-        ];
-        trusted-public-keys = [
-          "hydra.breakds.org-1:tjJYWEFAcw1avI4+QYWWs8Hm+wvrFiFaB2ennVBHDAQ="
-        ];
-      };
-    };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;

@@ -115,13 +115,10 @@
     # | Distributed Build  |
     # +--------------------+
 
-    nix.buildMachines = [{
-      hostName = "localhost";
-      systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-      maxJobs = lib.mkDefault 12;
-      speedFactor = lib.mkDefault 2;
-      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-    }];
+    vital.distributed-build = {
+      enable = true;
+      location = "homelab";
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
