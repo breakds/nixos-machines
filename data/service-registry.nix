@@ -42,4 +42,9 @@ rec {
     domain = "famass.breakds.org";
     port = 5928;
   };
+
+  paperless = {
+    domain = "paperless.breakds.org";
+    port = 28981;
+  };
 }
