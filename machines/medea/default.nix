@@ -42,7 +42,6 @@
     vital.pre-installed.level = 5;
     vital.programs.texlive.enable = false;
     vital.programs.modern-utils.enable = true;
-    vital.programs.accounting.enable = false;
     vital.programs.vscode.enable = false;
 
     environment.systemPackages = with pkgs; [

@@ -40,7 +40,6 @@
       vscode.enable = true;
       texlive.enable = true;
       modern-utils.enable = true;
-      accounting.enable = true;
     };
 
     # +----------+

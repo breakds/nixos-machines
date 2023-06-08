@@ -39,6 +39,10 @@
 
       # Customized
       shuriken
+
+      # For accouting
+      beancount
+      fava
     ];
 
     programs.nix-ld.enable = true;

@@ -74,8 +74,6 @@
     vital.programs.arduino.enable = true;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
-    vital.programs.accounting.enable = true;
-    vital.programs.vscode.enable = false;
 
     # +----------+
     # | Desktop  |

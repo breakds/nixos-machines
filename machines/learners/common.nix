@@ -27,7 +27,6 @@
     vital.pre-installed.level = 5;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
-    vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
 
     # Hopefully this is effectively ulimit -n 65535
