@@ -47,4 +47,8 @@ rec {
     domain = "paperless.breakds.org";
     port = 28981;
   };
+
+  sharing = {
+    port = 7478;
+  };
 }
