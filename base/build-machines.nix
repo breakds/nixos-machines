@@ -88,6 +88,7 @@ in {
         trusted-users = [ "nixbuilder" ];
         keep-outputs = true;
         keep-derivations = true;
+        auto-optimise-store = true;
       };
     })
   ];

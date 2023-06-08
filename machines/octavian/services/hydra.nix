@@ -85,7 +85,9 @@ in {
       speedFactor = 4;
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
     }];
-    extraOptions = "auto-optimise-store = true";
+    extraOptions = ''
+      allowed-uris = https://
+    '';
   };
   nixpkgs.config = { allowUnfree = true; };
 }
