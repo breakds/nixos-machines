@@ -35,9 +35,9 @@
     # Hopefully this is effectively ulimit -n 65535
     security.pam.loginLimits = [{
       domain = "*";
-      type = "soft";
+      type = "hard";
       item = "nofile";
-      value = "65535";
+      value = "1048576";
     }];
 
     services.prometheus = {
