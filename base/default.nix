@@ -47,4 +47,11 @@
     "bashrc.local".source = ../data/dotfiles/bashrc.local;
     "inputrc".source = ../data/dotfiles/inputrc;
   };
+
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker;
+    # Enable nvidia-docker if nvidia driver is present.
+    enableNvidia = config.vital.graphical.nvidia.enable;
+  };
 }

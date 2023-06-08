@@ -46,7 +46,6 @@
         modules = [
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
-          vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable
           ./machines/samaritan
@@ -59,7 +58,6 @@
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
-          vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable
           ./machines/malenia
@@ -90,7 +88,6 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          vital-modules.nixosModules.docker
           self.nixosModules.ml-capable
           ./machines/octavian
           ({
