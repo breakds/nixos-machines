@@ -96,6 +96,8 @@
       parsec-bin  # For game streaming
     ];
 
+    # This follows olmokramer's solution from this post:
+    # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
     services.udev.extraHwdb = ''
       evdev:input:b0011v0001p0001eAB83*
         KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL

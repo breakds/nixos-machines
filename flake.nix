@@ -37,6 +37,7 @@
       };
 
       iphone-connect = import ./modules/iphone-connect.nix;
+      laptop = import ./modules/laptop.nix;
     };
 
     nixosConfigurations = {
@@ -140,8 +141,8 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop
-          vital-modules.nixosModules.iphone-connect
+          self.nixosModules.laptop
+          self.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
           ./machines/berry
         ];
@@ -153,8 +154,8 @@
           # Get the community maintained framework baseline
           nixos-hardware.nixosModules.framework-12th-gen-intel
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.laptop
-          vital-modules.nixosModules.iphone-connect
+          self.nixosModules.laptop
+          self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           ./machines/hand
         ];
