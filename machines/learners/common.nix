@@ -25,7 +25,6 @@
     };
 
     vital.pre-installed.level = 5;
-    vital.games.steam.enable = false;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = true;

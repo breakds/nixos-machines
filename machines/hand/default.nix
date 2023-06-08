@@ -71,7 +71,6 @@
     networking.useDHCP = lib.mkDefault true;
 
     vital.pre-installed.level = 5;
-    vital.games.steam.enable = false;
     vital.programs.arduino.enable = true;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;

@@ -38,6 +38,7 @@
 
       iphone-connect = import ./modules/iphone-connect.nix;
       laptop = import ./modules/laptop.nix;
+      steam = import ./modules/steam.nix;
     };
 
     nixosConfigurations = {
@@ -58,6 +59,7 @@
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
+          self.nixosModules.steam
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable
           ./machines/malenia
