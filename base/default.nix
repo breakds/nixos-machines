@@ -41,4 +41,10 @@
     # inkscape
     # discord
   ];
+
+  # Create a better default environment for bash
+  environment.etc = {
+    "bashrc.local".source = ../data/dotfiles/bashrc.local;
+    "inputrc".source = ../data/dotfiles/inputrc;
+  };
 }

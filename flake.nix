@@ -35,6 +35,8 @@
         nixpkgs.overlays = [ inputs.traintrack.overlays.default ];
         vital.programs.machine-learning.enable = true;
       };
+
+      iphone-connect = import ./modules/iphone-connect.nix;
     };
 
     nixosConfigurations = {
@@ -42,7 +44,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.iphone-connect
+          self.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable
@@ -55,7 +57,7 @@
         modules = [
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
-          vital-modules.nixosModules.iphone-connect
+          self.nixosModules.iphone-connect
           vital-modules.nixosModules.docker
           nixos-home.nixosModules.breakds-home
           self.nixosModules.ml-capable

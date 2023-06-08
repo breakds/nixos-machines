@@ -2,21 +2,6 @@
   "nodes": {
     "flake-utils": {
       "locked": {
-        "lastModified": 1620759905,
-        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
@@ -145,22 +130,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable_2": {
-      "locked": {
-        "lastModified": 1622437901,
-        "narHash": "sha256-ww6EcXDmOgJbx2DOGAW6PbIQK3K/WGCpFYW4yNyP/XM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
-        "type": "github"
-      }
-    },
     "nixpkgs2211": {
       "locked": {
         "lastModified": 1685468986,
@@ -283,49 +252,25 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "vitalpkgs": "vitalpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1685233262,
-        "narHash": "sha256-FmHAmmFJAwHqs0XZMX8vlmgV5s+mm6b7Qwg+EnCGSnc=",
+        "lastModified": 1686237345,
+        "narHash": "sha256-Sr9zlF4hLVTchdtBVIoiUtJmoIZPVS5fzESy86KJKXs=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "3541eae7788107033e6d8fe09cbc96a673250356",
+        "rev": "724aa2ddaa22c32b79b787e928e227bd08081ce2",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
         "repo": "vital-modules",
-        "type": "github"
-      }
-    },
-    "vitalpkgs": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "vital-modules",
-          "nixpkgs"
-        ],
-        "nixpkgs-unstable": "nixpkgs-unstable_2"
-      },
-      "locked": {
-        "lastModified": 1624379137,
-        "narHash": "sha256-7PHIkXDQyshOZ2ZWAIIPU61MyimUwepQ7LO5z7SNP2o=",
-        "owner": "nixvital",
-        "repo": "vitalpkgs",
-        "rev": "90396203572cace08be4353d0c59f1b29427120e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixvital",
-        "repo": "vitalpkgs",
         "type": "github"
       }
     },
     "wonder-devops": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
