@@ -29,7 +29,6 @@
     vital.programs.modern-utils.enable = true;
     vital.programs.accounting.enable = true;
     vital.programs.vscode.enable = true;
-    vital.programs.machine-learning.enable = true;
 
     # Hopefully this is effectively ulimit -n 65535
     security.pam.loginLimits = [{

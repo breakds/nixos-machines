@@ -41,7 +41,6 @@
       texlive.enable = true;
       modern-utils.enable = true;
       accounting.enable = true;
-      machine-learning.enable = true;
     };
 
     # +----------+

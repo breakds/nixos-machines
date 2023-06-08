@@ -30,11 +30,9 @@
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
     nixosModules = {
-      ml-capable = {
-        nixpkgs.overlays = [ inputs.traintrack.overlays.default ];
-        vital.programs.machine-learning.enable = true;
+      machine-learning = import ./modules/machine-learning.nix {
+        traintrack = inputs.traintrack;
       };
-
       iphone-connect = import ./modules/iphone-connect.nix;
       laptop = import ./modules/laptop.nix;
       steam = import ./modules/steam.nix;
@@ -47,7 +45,7 @@
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/samaritan
         ];
       };
@@ -60,7 +58,7 @@
           self.nixosModules.iphone-connect
           self.nixosModules.steam
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/malenia
         ];
       };
@@ -70,7 +68,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/horizon/GAIL3
         ];
       };
@@ -89,7 +87,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/octavian
           ({
             nixpkgs.overlays = [
@@ -108,7 +106,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/learners/lothric
         ];
       };
@@ -119,7 +117,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/learners/lorian
         ];
       };
@@ -130,7 +128,7 @@
         modules = [
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
-          self.nixosModules.ml-capable
+          self.nixosModules.machine-learning
           ./machines/learners/radahn
         ];
       };

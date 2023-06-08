@@ -41,7 +41,6 @@
     vital.pre-installed.level = 5;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
-    vital.programs.machine-learning.enable = true;
 
     environment.systemPackages = with pkgs; [
       gimp
