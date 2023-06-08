@@ -188,6 +188,7 @@
 
       # How to build this live:
       # nix build .#nixosConfigurations.liveISO.config.system.build.isoImage
+      # Alternatively, see below (nix build .#liveISO for short).
       liveISO = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -208,6 +209,8 @@
       ];
     }; in {
       inherit (pkgs) shuriken medea-clipper;
+      # nix build .#liveISO will build the ISO image
+      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
     };
   };
 }
