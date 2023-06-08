@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    nixpkgs2211.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -133,7 +132,7 @@
         ];
       };
 
-      berry = inputs.nixpkgs2211.lib.nixosSystem {
+      berry = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
@@ -210,6 +209,13 @@
       inherit (pkgs) shuriken medea-clipper;
       # nix build .#liveISO will build the ISO image
       liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
+    };
+
+    checks."x86_64-linux" = {
+      octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
+      malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
+      hand = self.nixosConfigurations.hand.config.system.build.toplevel;
+      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;      
     };
   };
 }
