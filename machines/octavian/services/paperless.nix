@@ -12,6 +12,9 @@ in {
     consumptionDirIsPublic = true;  # Basically "chmod o+w"
     extraConfig = {
       PAPERLESS_ADMIN_USER = "breakds";
+      PAPERLESS_FILENAME_FORMAT = "{document_type}/{created_year}/{created_month}/{title}";
+      # PAPERLESS_SECRET_KEY=<key>
+      PAPERLESS_URL = "https://${info.domain}";
     };
   };
 
