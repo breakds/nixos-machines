@@ -96,6 +96,18 @@
       };
     };
 
+
+    nix.settings = {
+      trusted-substituters = [
+        "ssh://octavian.local"
+        "ssh-ng://octavian.local"      
+      ];
+      trusted-public-keys = [
+        "hydra.breakds.org-1:tjJYWEFAcw1avI4+QYWWs8Hm+wvrFiFaB2ennVBHDAQ="
+      ];
+    };
+    
+
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
     systemd.enableUnifiedCgroupHierarchy = false;
