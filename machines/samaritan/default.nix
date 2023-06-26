@@ -6,6 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
+    ../../base/dev/realsense.nix
     ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
     ./services/monitor.nix
