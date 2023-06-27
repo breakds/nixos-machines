@@ -7,6 +7,7 @@
     ../../../base/i3-session-breakds.nix
     ../common/vpn.nix
     ../../../base/dev/breakds-dev.nix
+    ../../../base/dev/realsense.nix
     # ../../../base/tailscale.nix
     ../../../users/lezhao.nix
   ];
