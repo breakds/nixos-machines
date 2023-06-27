@@ -64,6 +64,8 @@
 
   services.blueman.enable = true;
 
+  hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+
   nix = {
     # The following is to enable Nix Flakes
     package = pkgs.nixFlakes;
