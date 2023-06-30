@@ -71,6 +71,18 @@
       };
     };
 
+    nix = {
+      settings = {
+        substituters = [
+          "http://radahn.breakds.org:17777"
+          "https://cache.nixos.org/"
+        ];
+        trusted-public-keys = [
+          "binary-cache.radahn-1:/BN5TAzKaOscT3XYoCC/iVcCY4vlpA98BhnX17t558o="
+        ];
+      };
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
