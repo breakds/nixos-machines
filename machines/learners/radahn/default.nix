@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../../base/build-machines.nix
+    ./binary-cache.nix
   ];
 
   config = {
