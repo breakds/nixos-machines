@@ -84,14 +84,12 @@
       ];
       settings = {
         max-jobs = 8;
-        trusted-substituters = [
-          "ssh://gail3"
-          "ssh://gail3.breakds.org"
-          "ssh://samaritan"
-          "ssh://samaritan.breakds.org"
-          "ssh://radahn"
-          "ssh://radahn.breakds.org"
-          "ssh://www.breakds.org"
+        substituters = [
+          "http://radahn.breakds.org:17777"
+          "https://cache.nixos.org/"
+        ];
+        trusted-public-keys = [
+          "binary-cache.radahn-1:/BN5TAzKaOscT3XYoCC/iVcCY4vlpA98BhnX17t558o="
         ];
       };
     };
