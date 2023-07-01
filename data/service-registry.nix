@@ -53,6 +53,7 @@ rec {
   };
 
   syncthing = {
+    # syncthing also reserves 22000 and 21027.
     gui = {
       port = 8384;
     };
