@@ -59,16 +59,6 @@
       location = "homelab";
     };
 
-    nix.settings = {
-      trusted-substituters = [
-        "ssh://octavian.local"
-        "ssh-ng://octavian.local"      
-      ];
-      trusted-public-keys = [
-        "hydra.breakds.org-1:tjJYWEFAcw1avI4+QYWWs8Hm+wvrFiFaB2ennVBHDAQ="
-      ];
-    };
-    
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave

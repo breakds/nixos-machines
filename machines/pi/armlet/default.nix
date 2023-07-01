@@ -44,21 +44,6 @@
     lsd
   ];
 
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "10.77.1.120";
-        systems = [ "x86_64-linux" "i686-linux" ];
-        maxJobs = 24;
-        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-      }
-    ];
-    settings = {
-      trusted-substituters = [ "ssh://10.77.1.120" ];
-    };
-  };
-
   vital.graphical = {
     enable = true;
     xserver.displayManager = "lightdm";
