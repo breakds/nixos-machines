@@ -6,6 +6,7 @@
 let cfg = config.vital.distributed-build;
 
     builder-registry = import ../data/builder-registry.nix;
+    cache-registry = import ../data/cache-registry.nix;
 
     mkBuilder = registryItem: {
       hostName = registryItem.hostName;
@@ -57,14 +58,12 @@ in {
             (lib.attrsets.attrValues builder-registry);
         in builtins.map mkBuilder items;
 
-        settings = {
-          trusted-substituters = [
-            "ssh://octavian.local"
-            "ssh://malenia.local"
-            "ssh://gail3"
-            "ssh://radahn"
-            "ssh://samaritan"
-          ];
+        settings = let
+          selectedCaches = builtins.filter (x: cfg.location == x.location &&
+                                               config.networking.hostName != x.hostname) cache-registry;
+        in {
+          substituters = (builtins.map (x: x.url) selectedCaches) ++ [ "https://cache.nixos.org" ];
+          trusted-public-keys = builtins.map (x: x.publicKey) selectedCaches;
         };
       };
     })
