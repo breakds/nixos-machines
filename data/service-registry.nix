@@ -51,4 +51,8 @@ rec {
   sharing = {
     port = 7478;
   };
+
+  nix-serve = {
+    port = 17777;
+  };
 }

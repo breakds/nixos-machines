@@ -11,6 +11,7 @@
 { config, lib, pkgs, ... }:
 let hydraInfo = (import ../../../data/service-registry.nix).hydra;
     stateDir = "/var/lib/hydra/state";
+    serveInfo = (import ../../../data/service-registry.nix).nix-serve;
 
 in {
   services.hydra = {
@@ -71,6 +72,13 @@ in {
         };
       };
     };
+  };
+
+  services.nix-serve = {
+    enable = true;
+    openFirewall = true;
+    port = serveInfo.port;
+    secretKeyFile = "${stateDir}/secret/hydra_key/hydra.breakds.org-1/secret";
   };
 
   nix = {
