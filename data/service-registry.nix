@@ -52,6 +52,12 @@ rec {
     port = 7478;
   };
 
+  syncthing = {
+    gui = {
+      port = 8384;
+    };
+  };
+
   nix-serve = {
     port = 17777;
   };

@@ -8,6 +8,7 @@
     ../../base/dev/breakds-dev.nix
     ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
+    ../../modules/syncthing.nix
   ];
 
   config = {
