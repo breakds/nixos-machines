@@ -3,6 +3,7 @@
 {
   imports = [
     ../common.nix
+    ../../../base/build-machines.nix
   ];
 
   # +------------------------------+
@@ -58,5 +59,14 @@
   };
   networking.firewall.allowedTCPPorts = [ 5821 ];
 
+  # +--------------------+
+  # | Distributed Build  |
+  # +--------------------+
+
+  vital.distributed-build = {
+    enable = true;
+    location = "homelab";
+  };
+  
   system.stateVersion = "22.11"; 
 }
