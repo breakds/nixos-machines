@@ -8,11 +8,15 @@
 
   # +------------------------------+
   # | Hardware Related             |
-  # +------------------------------+    
+  # +------------------------------+
+
+  # TODO(breakds): fkms-3d cannot be enabled at 23.05 because of a bug:
+  # https://github.com/NixOS/nixos-hardware/issues/631
+  # Therefore, temporarily disable it.
 
   # Enable GPU acceleration
   # hardware.raspberry-pi."4".fkms-3d.enable = true;
-
+  
   hardware.pulseaudio.enable = true;
 
   fileSystems = {
