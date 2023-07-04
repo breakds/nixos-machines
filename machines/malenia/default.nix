@@ -70,6 +70,7 @@
       # python3Packages.archer
       blender
       openconnect
+      yuzu-early-access
     ];
 
     # Trezor cryptocurrency hardware wallet
