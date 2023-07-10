@@ -6,6 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
+    ../../base/dev/sagittarius.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ./display.nix
