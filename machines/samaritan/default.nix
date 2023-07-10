@@ -9,6 +9,7 @@
     ../../base/dev/realsense.nix
     ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
+    ../../modules/syncthing.nix
     ./services/monitor.nix
   ];
 
