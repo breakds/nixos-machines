@@ -8,6 +8,7 @@
 
   config = {
     environment.systemPackages = with pkgs; [
+      cntr
       meld
       tig
       nixpkgs-review
