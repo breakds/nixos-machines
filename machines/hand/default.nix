@@ -9,6 +9,7 @@
     ../../base/dev/sagittarius.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
+    ../../base/dev/realsense.nix
     ./display.nix
   ];
 
