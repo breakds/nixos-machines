@@ -36,6 +36,14 @@ let git-clean = writeShellScriptBin "git-clean" ''
       ];
     } (builtins.readFile ./alf-wandb.py);
 
+    alf-tools = writers.writePython3Bin "alf-tools" {
+      libraries = with python3Packages; [
+        click
+        loguru
+        lark
+      ];
+    } (builtins.readFile ./alf-tools.py);
+
     power-win = writers.writePython3Bin "power-win" {
       libraries = [
         python3Packages.click
@@ -170,6 +178,7 @@ in symlinkJoin {
     git-clean
     scrot-org
     alf-wandb
+    alf-tools
     power-win
   ];
 }
