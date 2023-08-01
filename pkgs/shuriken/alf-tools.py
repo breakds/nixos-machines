@@ -19,7 +19,7 @@ ERROR_PARSER = Lark(r"""
     array_element: number | array
     kv2 : STR ":" value
     dict : "{" [kv2 ("," kv2)*] "}"
-    STR : "'" (LETTER | "_" | "@" | "/")* "'"
+    STR : "'" (LETTER | "_" | "@" | "/" | ".")* "'"
     accessor : CNAME ("." CNAME)*
 
     %import common.INT
@@ -44,7 +44,7 @@ NEST_PARSER = Lark(r"""
     array_element: number | array
     kv2 : STR ":" value
     dict : "{" [kv2 ("," kv2)*] "}"
-    STR : "'" (LETTER | "_" | "@" | "/")* "'"
+    STR : "'" (LETTER | "_" | "@" | "/" | ".")* "'"
     accessor : CNAME ("." CNAME)*
 
     %import common.INT
