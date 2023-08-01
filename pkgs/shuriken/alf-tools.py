@@ -32,6 +32,31 @@ ERROR_PARSER = Lark(r"""
 """, start="error")
 
 
+NEST_PARSER = Lark(r"""
+    nest : object | dict
+    object : CNAME ["(" kv1 ("," kv1)*] ")"
+    kv1 : CNAME "=" value
+    value : object | dict | tuple | nparray | accessor
+    number : NUMBER | SIGNED_NUMBER
+    tuple : "(" [number ("," number)* ","?] ")"
+    nparray : "array(" (array | number) ("," kv1)* ")"
+    array : "[" array_element ["," array_element ]* "]"
+    array_element: number | array
+    kv2 : STR ":" value
+    dict : "{" [kv2 ("," kv2)*] "}"
+    STR : "'" (LETTER | "_" | "@" | "/")* "'"
+    accessor : CNAME ("." CNAME)*
+
+    %import common.INT
+    %import common.NUMBER
+    %import common.SIGNED_NUMBER
+    %import common.CNAME
+    %import common.LETTER
+    %import common.WS
+    %ignore WS
+""", start="nest")
+
+
 def print_object(x, indent: int = 0):
     if x.data.value == "object":
         name = x.children[0]
@@ -70,6 +95,15 @@ def scan(path: str):
     print_object(ast.children[1])
     print(f"---------- {ast.children[2]} items ----------")
     print_object(ast.children[3])
+
+
+@app.command
+@click.argument("path", type=str)
+def print_nest(path: str):
+    with open(path, "r") as f:
+        text = f.read()
+    ast = NEST_PARSER.parse(text)
+    print_object(ast.children[0])
 
 
 if __name__ == "__main__":
