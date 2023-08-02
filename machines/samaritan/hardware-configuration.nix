@@ -28,11 +28,13 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home/breakds/backup" = {
-    device = "/dev/disk/by-label/BDS_BACKUP";
-    fsType = "ext4";
-    options = [ "auto" "nofail" ];
-  };
+  # Temporarily removed.
+  # 
+  # fileSystems."/home/breakds/backup" = {
+  #   device = "/dev/disk/by-label/BDS_BACKUP";
+  #   fsType = "ext4";
+  #   options = [ "auto" "nofail" ];
+  # };
 
   fileSystems."/var/lib/filerun" = {
     device = "/dev/disk/by-label/NAS_DATA";
