@@ -176,6 +176,17 @@
         ];
       };
 
+      hyaku = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # Get the community maintained framework baseline
+          vital-modules.nixosModules.foundation
+          self.nixosModules.laptop
+          nixos-home.nixosModules.horizon-home
+          ./machines/hyaku
+        ];
+      };
+
       # Containers
       fortress = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
