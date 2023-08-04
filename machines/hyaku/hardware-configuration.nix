@@ -27,6 +27,9 @@
     [ { device = "/dev/disk/by-label/NIXOS_SWAP"; }
     ];
 
+  # For SSD
+  services.fstrim.enable = lib.mkDefault true;
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
