@@ -15,7 +15,7 @@
     users.users."horizon" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
-        ../data/keys/lezhao.pub
+        ../../data/keys/lezhao.pub
       ];
     };
 
