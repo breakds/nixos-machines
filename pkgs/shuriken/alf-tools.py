@@ -11,12 +11,12 @@ ERROR_PARSER = Lark(r"""
     error : "Expected:" INT "arrays" object ", Got:" INT "arrays" object "."?
     object : CNAME ["(" kv1 ("," kv1)*] ")"
     kv1 : CNAME "=" value
-    value : object | dict | tuple | nparray | accessor | number
+    value : object | dict | tuple | nparray | accessor | number | array
     number : NUMBER | SIGNED_NUMBER
     tuple : "(" [number ("," number)* ","?] ")"
     nparray : "array(" (array | number) ("," kv1)* ")"
     array : "[" [array_element ("," array_element )*] "]"
-    array_element: number | array
+    array_element: object | number | array | nparray
     kv2 : STR ":" value
     dict : "{" [kv2 ("," kv2)*] "}"
     STR : "'" (LETTER | "_" | "@" | "/" | ".")* "'"
@@ -36,12 +36,12 @@ NEST_PARSER = Lark(r"""
     nest : object | dict
     object : CNAME ["(" kv1 ("," kv1)*] ")"
     kv1 : CNAME "=" value
-    value : object | dict | tuple | nparray | accessor | number
+    value : object | dict | tuple | nparray | accessor | number | array
     number : NUMBER | SIGNED_NUMBER
     tuple : "(" [number ("," number)* ","?] ")"
     nparray : "array(" (array | number) ("," kv1)* ")"
     array : "[" [array_element ("," array_element )*] "]"
-    array_element: number | array
+    array_element: number | array | object | nparray
     kv2 : STR ":" value
     dict : "{" [kv2 ("," kv2)*] "}"
     STR : "'" (LETTER | "_" | "@" | "/" | ".")* "'"
