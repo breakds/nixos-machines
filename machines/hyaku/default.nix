@@ -80,8 +80,8 @@
     # This follows olmokramer's solution from this post:
     # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
     services.udev.extraHwdb = ''
-      evdev:input:b0011v0001p0001eAB54*
-        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
+      evdev:input:b0003v0B05p19B6e0110*
+        KEYBOARD_KEY_70039=leftctrl    # CAPSLOCK -> CTRL
     '';
 
     programs.nix-ld.enable = true;
