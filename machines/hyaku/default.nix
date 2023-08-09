@@ -52,7 +52,7 @@
           nvidiaBusId = "PCI:1:0:0";
         };
       };
-      remote-desktop.enable = false;
+      remote-desktop.enable = true;
     };
 
     vital.pre-installed.level = 5;
