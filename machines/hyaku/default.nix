@@ -67,6 +67,7 @@
       wireshark
       websocat
       shuriken
+      ffmpeg-full
     ];
 
     vital.distributed-build = {
