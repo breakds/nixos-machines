@@ -6,6 +6,9 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     # Use vital-modules, with the same nixpkgs
     vital-modules.url = "github:nixvital/vital-modules";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +38,8 @@
       iphone-connect = import ./modules/iphone-connect.nix;
       laptop = import ./modules/laptop.nix;
       steam = import ./modules/steam.nix;
+
+      horizon-home = import ./users/horizon;
     };
 
     nixosConfigurations = {
@@ -179,10 +184,12 @@
       hyaku = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          # Get the community maintained framework baseline
+          # Unlike the others, the home-manager configuration for hyaku is
+          # managed in this repo.
+          inputs.home-manager.nixosModules.home-manager
+          self.nixosModules.horizon-home
           vital-modules.nixosModules.foundation
           self.nixosModules.laptop
-          nixos-home.nixosModules.horizon-home
           ./machines/hyaku
         ];
       };

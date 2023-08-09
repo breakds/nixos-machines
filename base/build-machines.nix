@@ -16,7 +16,7 @@ let cfg = config.vital.distributed-build;
       systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
       sshUser = "nixbuilder";
-      sshKey = "/home/breakds/.ssh/nixbuilder_malenia";
+      sshKey = "/home/${config.vital.mainUser}/.ssh/nixbuilder_malenia";
       # No publicHostKey specified. Use the local machine's own known hosts.
     };
 
