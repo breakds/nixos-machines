@@ -6,7 +6,6 @@
     ../../base
     ../../base/dev/realsense.nix
     ../../base/build-machines.nix
-    ../../modules/syncthing.nix
   ];
 
   config = {
