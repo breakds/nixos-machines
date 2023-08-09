@@ -26,10 +26,5 @@
     # memory, which should be placed into the self-refresh mode to retain its
     # contents.
     boot.kernelParams = [ "mem_sleep_default=deep" ];
-
-    services.udev.extraHwdb = ''
-      evdev:input:b0011v0001p0001eAB54*
-        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
-    '';
   };
 }
