@@ -6,7 +6,7 @@ in {
   config = {
     services.syncthing = {
       enable = true;
-      dataDir = "/home/breakds/syncthing";
+      dataDir = "/home/${config.vital.mainUser}/syncthing";
       user = "breakds";
       group = "users";
       overrideDevices = true;
@@ -24,6 +24,7 @@ in {
       };
 
       folders = {
+        
         "workspace" = {
           path = "/home/breakds/syncthing/workspace";
           devices = [ "hand" "malenia" "samaritan" ];
@@ -37,6 +38,21 @@ in {
             params.keep = "5";
           };
         };
+
+        "shared_checkpoints" = {
+          path = "/home/${config.vital.mainUser}/dataset/shared_checkpoints";
+          devices = [ "hyaku" "samaritan" ];
+          ignorePerms = true;  # Do not sync the permissions.
+          # Normally the sync is triggered by inotify (watch) so that it does
+          # not need rescan. Still make full rescan happen every hour just to
+          # make sure.
+          rescanInterval = 3600;
+          versioning = {
+            type = "simple";
+            params.keep = "5";
+          };
+        };
+        
       };
     };
   };
