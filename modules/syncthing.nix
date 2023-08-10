@@ -7,7 +7,7 @@ in {
     services.syncthing = {
       enable = true;
       dataDir = "/home/${config.vital.mainUser}/syncthing";
-      user = "breakds";
+      user = config.vital.mainUser;
       group = "users";
       overrideDevices = true;
       overrideFolders = true;
@@ -21,6 +21,7 @@ in {
         "hand" = { id = "HDUZ6E3-ZMKCKOU-H6EYUET-XZ72BBU-547J5H2-BFEZFWM-DRX5YIR-23Z6TAH"; };
         "malenia" = { id = "RO54QTU-EJBHNA6-7IEMT2A-57UBFYH-N2USR7J-UN6A2ZL-G4W4AIV-DUFACAF"; };
         "samaritan" = { id = "FZHRPT7-SBV4Z4N-CHWNHQV-JDWY7N5-64AHNN3-J2HV5EL-EJ6ZY2R-3QOC6AZ"; };
+        "hyaku" = { id = "IM3QX3W-EBXHE36-ZRFK2EI-PO6F5TF-LLRVQO3-JOEXUAU-SG6L43S-EXZFXAD"; };
       };
 
       folders = {
