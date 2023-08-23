@@ -20,11 +20,6 @@
       hostId = "1d53d1f2";
     };
 
-    virtualisation.docker = {
-      enable = true;
-      enableNvidia = true;
-    };
-
     services.traintrack-agent = {
       enable = true;
       port = (import ../../../data/service-registry.nix).traintrack.agents.lothric.port;

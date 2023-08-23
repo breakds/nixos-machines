@@ -50,6 +50,8 @@
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
 
+    vital.oci-tooling.backend = "podman";
+
     environment.systemPackages = with pkgs; [
       gimp
       darktable

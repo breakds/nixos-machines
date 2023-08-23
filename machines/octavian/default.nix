@@ -96,10 +96,6 @@
       clientMaxBodySize = "1000m";
     };
 
-    virtualisation = {
-      oci-containers.backend = "docker";
-    };
-
     vital.services.filerun = {
       enable = true;
       workDir = "/var/lib/filerun";
