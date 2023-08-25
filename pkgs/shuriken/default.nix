@@ -4,7 +4,8 @@
 , python3Packages
 , scrot
 , xclip
-, rsync }:
+, rsync
+, meld }:
 
 let git-clean = writeShellScriptBin "git-clean" ''
   # Step 1, Clean up local origin/* that does not exist on remote.
@@ -37,12 +38,14 @@ let git-clean = writeShellScriptBin "git-clean" ''
     } (builtins.readFile ./alf-wandb.py);
 
     alf-tools = writers.writePython3Bin "alf-tools" {
-      libraries = with python3Packages; [
+      libraries = (with python3Packages; [
         click
         loguru
         lark
-      ];
+      ]) ++ [ meld ];
     } (builtins.readFile ./alf-tools.py);
+
+    alf-oci = writeShellScriptBin "alf-oci" (builtins.readFile ./alf-oci.sh);
 
     power-win = writers.writePython3Bin "power-win" {
       libraries = [
@@ -179,6 +182,7 @@ in symlinkJoin {
     scrot-org
     alf-wandb
     alf-tools
+    alf-oci
     power-win
   ];
 }

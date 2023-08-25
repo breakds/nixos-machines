@@ -1,3 +1,5 @@
+from pathlib import Path
+import subprocess
 import click
 from lark import Lark
 
@@ -104,6 +106,21 @@ def print_nest(path: str):
         text = f.read()
     ast = NEST_PARSER.parse(text)
     print_object(ast.children[0])
+
+
+@app.command
+@click.argument("session1", type=click.Path(exists=True,
+                                            dir_okay=True,
+                                            file_okay=False,
+                                            path_type=Path))
+@click.argument("session2", type=click.Path(exists=True,
+                                            dir_okay=True,
+                                            file_okay=False,
+                                            path_type=Path))
+def diff_configs(session1: Path, session2: Path):
+    config1 = session1 / "config_files"
+    config2 = session2 / "config_files"
+    subprocess.run(["meld", str(config1), str(config2)])
 
 
 if __name__ == "__main__":
