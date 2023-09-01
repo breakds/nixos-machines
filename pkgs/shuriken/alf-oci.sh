@@ -34,6 +34,16 @@ function print_usage() {
 
 function run_docker() {
     local image=$1
+    local as_root=$2
+
+    local uid=$UID
+    local gid=$GID
+
+    if [[ "${as_root}" -eq 1 ]]; then
+        uid=0
+        gid=0
+        ok "login as root"
+    fi
 
     local existing_container=$(docker ps -a \
                                       --filter "name=^/${DEV_CONTAINER_NAME}$" \
@@ -59,7 +69,7 @@ function run_docker() {
 
     docker run --rm -d --name "${DEV_CONTAINER_NAME}" \
            --gpus all \
-           --user $UID:$GID \
+           --user $uid:$gid \
            -v /etc/passwd:/etc/passwd:ro \
            -v /etc/group:/etc/group:ro \
            -v /etc/shadow:/etc/shadow:ro \
@@ -79,6 +89,7 @@ function enter_container() {
 
 function app() {
     local verbos=0
+    local as_root=0
     # TODO(breakds): Initialize image by reading from an environment variable.
     local image=""
 
@@ -91,6 +102,10 @@ function app() {
                 ;;
             -v|--verbose)
                 verbose=1
+                shift
+                ;;
+            -r|--root)
+                as_root=1
                 shift
                 ;;
             *)
@@ -116,7 +131,7 @@ function app() {
     # | Start container    |
     # +--------------------+
 
-    run_docker ${image}
+    run_docker ${image} ${as_root}
 
     # +--------------------+
     # | Enter contaienr    |
