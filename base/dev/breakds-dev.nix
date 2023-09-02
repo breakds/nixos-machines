@@ -44,6 +44,9 @@
       # For accouting
       beancount
       fava
+
+      # For copilot
+      nodejs
     ];
 
     programs.nix-ld.enable = true;
