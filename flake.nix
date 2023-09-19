@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
 
+    nixpkgs-nvidia520.url = "github:NixOS/nixpkgs?rev=c1254eebab9a7257e978af1009d9ba2133befcec";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -40,6 +42,15 @@
       steam = import ./modules/steam.nix;
 
       horizon-home = import ./users/horizon;
+
+      downgrade-to-nvidia520 = {config, lib, pkgs, ...}:
+        let pkgs' = import inputs.nixpkgs-nvidia520 {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            }; in {
+              boot.kernelPackages = pkgs'.linuxPackages;
+              hardware.nvidia.package = pkgs'.linuxPackages.nvidiaPackages.latest;
+            };
     };
 
     nixosConfigurations = {
@@ -50,6 +61,7 @@
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
+          self.nixosModules.downgrade-to-nvidia520
           ./machines/samaritan
         ];
       };
@@ -189,6 +201,7 @@
           self.nixosModules.horizon-home
           vital-modules.nixosModules.foundation
           self.nixosModules.laptop
+          self.nixosModules.downgrade-to-nvidia520
           ./machines/hyaku
         ];
       };

@@ -135,6 +135,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-nvidia520": {
+      "locked": {
+        "lastModified": 1669290932,
+        "narHash": "sha256-U11HnVwMpQZub5mcgbf4EhUKBfPyT+MDf1lGR8hRDV8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c1254eebab9a7257e978af1009d9ba2133befcec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c1254eebab9a7257e978af1009d9ba2133befcec",
+        "type": "github"
+      }
+    },
     "rapit": {
       "inputs": {
         "ml-pkgs": "ml-pkgs",
@@ -163,6 +179,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-nvidia520": "nixpkgs-nvidia520",
         "rapit": "rapit",
         "traintrack": "traintrack",
         "vital-modules": "vital-modules",
