@@ -42,6 +42,7 @@
       steam = import ./modules/steam.nix;
 
       horizon-home = import ./users/horizon;
+      mito-home = import ./users/mito;
 
       downgrade-to-nvidia520 = {config, lib, pkgs, ...}:
         let pkgs' = import inputs.nixpkgs-nvidia520 {
@@ -199,6 +200,7 @@
           # managed in this repo.
           inputs.home-manager.nixosModules.home-manager
           self.nixosModules.horizon-home
+          self.nixosModules.mito-home
           vital-modules.nixosModules.foundation
           self.nixosModules.laptop
           self.nixosModules.downgrade-to-nvidia520
@@ -245,7 +247,7 @@
       octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
       malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
       hand = self.nixosConfigurations.hand.config.system.build.toplevel;
-      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;      
+      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
     };
   };
 }
