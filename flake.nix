@@ -203,7 +203,6 @@
           self.nixosModules.mito-home
           vital-modules.nixosModules.foundation
           self.nixosModules.laptop
-          self.nixosModules.downgrade-to-nvidia520
           ./machines/hyaku
         ];
       };
