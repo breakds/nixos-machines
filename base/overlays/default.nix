@@ -19,4 +19,5 @@ let unstablePkgs = import (builtins.fetchTarball {
 in {
   shuriken = final.callPackage ../../pkgs/shuriken {};
   medea-clipper = final.python3Packages.callPackage ../../pkgs/medea-clipper {};
+  robot-deployment-suite = final.python3Packages.callPackage ../../pkgs/robot-deployment-suite {};
 }

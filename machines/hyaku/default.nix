@@ -71,6 +71,7 @@
       websocat
       shuriken
       ffmpeg-full
+      robot-deployment-suite
     ];
 
     vital.distributed-build = {
