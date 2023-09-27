@@ -56,6 +56,7 @@
 
     environment.systemPackages = with pkgs; [
       zoom-us
+      robot-deployment-suite
     ];
 
     vital.distributed-build = {
