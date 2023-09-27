@@ -193,6 +193,19 @@
         ];
       };
 
+      # Machine for robot deployment, ITX
+      rei = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          self.nixosModules.machine-learning
+          self.nixosModules.downgrade-to-nvidia520
+          ./machines/rei
+        ];
+      };
+
+      # Laptop for robot deployment
       hyaku = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
