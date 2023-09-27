@@ -41,7 +41,7 @@
     networking = {
       hostName = "rei";
       # Generated via `head -c 8 /etc/machine-id`
-      hostId = "9c4a63a8";
+      hostId = "a3460575";
     };
 
     vital.graphical = {
