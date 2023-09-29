@@ -1,3 +1,5 @@
+# Gargoyle the smart display
+
 { lib, config, pkgs, ... }:
 
 {
