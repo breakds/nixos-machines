@@ -34,6 +34,8 @@
       feh
       jq
       google-chrome
+      vivaldi      
+      vivaldi-ffmpeg-codecs # Additional support for proprietary codecs for Vivaldi
       scrot
       # Move to desktop specific modules
       # zoom-us
