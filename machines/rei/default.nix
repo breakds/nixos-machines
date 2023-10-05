@@ -57,6 +57,13 @@
     environment.systemPackages = with pkgs; [
       zoom-us
       robot-deployment-suite
+      # networking tools
+      netcat
+      nmap
+      dig
+      mtr
+      socat
+      ethtool
     ];
 
     vital.distributed-build = {
