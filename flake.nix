@@ -6,6 +6,8 @@
 
     nixpkgs-nvidia520.url = "github:NixOS/nixpkgs?rev=c1254eebab9a7257e978af1009d9ba2133befcec";
 
+    nixpkgs-2311-pre.url = "github:NixOS/nixpkgs?rev=fdd898f8f79e8d2f99ed2ab6b3751811ef683242";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -182,6 +184,7 @@
         ];
       };
 
+      # Raspberry Pi 4B
       armlet = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
@@ -190,6 +193,17 @@
           vital-modules.nixosModules.graphical
           # nixos-home.nixosModules.breakds-home
           ./machines/pi/armlet
+        ];
+      };
+
+      # Raspberry Pi 4B
+      emerald = inputs.nixpkgs-2311-pre.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          nixos-hardware.nixosModules.raspberry-pi-4
+          vital-modules.nixosModules.users
+          vital-modules.nixosModules.graphical
+          ./machines/pi/emerald
         ];
       };
 
