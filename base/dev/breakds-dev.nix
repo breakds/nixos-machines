@@ -47,7 +47,15 @@
 
       # For copilot
       nodejs
+
+      # For writing stuff to SD card
+      etcher
     ];
+
+    # This is for etcher
+    nixpkgs.config.permittedInsecurePackages = [
+      "electron-12.2.3"
+    ];    
 
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;
