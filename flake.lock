@@ -277,11 +277,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1692748897,
-        "narHash": "sha256-/bSuoF/CyK1t9tGVECAKCfCE/lEFueVkA7E7lc0r0Vk=",
+        "lastModified": 1697129213,
+        "narHash": "sha256-+D7Av+1msou47iPOsAlKH6Kv2qZFDtH8XCSQa+gGfLM=",
         "owner": "nixvital",
         "repo": "vital-modules",
-        "rev": "b568f9af9f802e5e97751a396c7bc4efbaa26f5b",
+        "rev": "8c4cea063e8048e4b751c3018e042a2c134a813a",
         "type": "github"
       },
       "original": {

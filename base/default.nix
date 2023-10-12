@@ -49,6 +49,17 @@
       # discord
     ];
 
+    # NOTE: this is renamed to fonts.packages since 23.11.
+    fonts.fonts = with pkgs; [
+      # Add Wenquanyi Microsoft Ya Hei, a nice-looking Chinese font.
+      wqy_microhei
+      # Fira code is a good font for coding
+      fira-code
+      fira-code-symbols
+      font-awesome
+      inconsolata
+    ];
+
     # Create a better default environment for bash
     environment.etc = {
       "bashrc.local".source = ../data/dotfiles/bashrc.local;
