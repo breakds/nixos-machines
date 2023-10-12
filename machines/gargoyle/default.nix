@@ -1,4 +1,4 @@
-# Gargoyle the smart display
+# Gargoyle is a smart display powered by a minisforum Ryzen 4500U mini PC.
 
 { lib, config, pkgs, ... }:
 
@@ -7,7 +7,6 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/build-machines.nix
-    ../../modules/syncthing.nix
   ];
 
   config = {
@@ -39,8 +38,7 @@
 
     networking = {
       hostName = "gargoyle";
-      # Generated via `head -c 8 /etc/machine-id`
-      hostId = "004a3a44";
+      hostId = "bbdf0382";
     };
 
     vital.graphical = {
@@ -54,16 +52,13 @@
 
     environment.systemPackages = with pkgs; [
       zoom-us
+      strawberry
     ];
 
     vital.distributed-build = {
-      enable = false;  # disabled so that we rely only on the WiFi
+      enable = true;
       location = "homelab";
     };
-
-    # Disable unified cgroup hierarchy (cgroups v2)
-    # This is to applease nvidia-docker
-    systemd.enableUnifiedCgroupHierarchy = false;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
