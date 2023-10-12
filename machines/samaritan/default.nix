@@ -81,6 +81,7 @@
       inkscape
       element-desktop
       rtorrent
+      colmena
     ];
 
     vital.distributed-build = {
