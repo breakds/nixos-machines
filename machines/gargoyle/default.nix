@@ -48,11 +48,9 @@
       nvidia.enable = false;
     };
 
-    services.xserver.displayManager.gdm = {
-      settings = {
-        AutomaticLoginEnable = true;
-        AutomaticLogin = "breakds";
-      };
+    services.xserver.displayManager.autoLogin = {
+      enable = true;
+      user = "breakds";
     };
 
     vital.pre-installed.level = 5;
