@@ -18,8 +18,6 @@
       ];
     };
 
-    programs.zsh.enable = true;
-
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -47,6 +45,13 @@
     vital.graphical = {
       enable = true;
       nvidia.enable = false;
+    };
+
+    services.xserver.displayManager.gdm = {
+      settings = {
+        AutomaticLoginEnable = true;
+        AutomaticLogin = "breakds";
+      };
     };
 
     vital.pre-installed.level = 5;
