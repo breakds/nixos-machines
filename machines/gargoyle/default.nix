@@ -13,6 +13,7 @@
     vital.mainUser = "breakds";
 
     users.users."breakds" = {
+      shell = pkgs.bash;
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
       ];
