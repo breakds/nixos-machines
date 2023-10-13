@@ -12,6 +12,8 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  # Allow building aarch64 packages
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4fa202de-50a4-44ab-99f8-1d1ee2d6b3a1";
@@ -29,7 +31,7 @@
   };
 
   # Temporarily removed.
-  # 
+  #
   # fileSystems."/home/breakds/backup" = {
   #   device = "/dev/disk/by-label/BDS_BACKUP";
   #   fsType = "ext4";
