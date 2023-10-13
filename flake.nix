@@ -219,6 +219,16 @@
         ];
       };
 
+      # Smart Display
+      gargoyle = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          nixos-home.nixosModules.breakds-home
+          ./machines/gargoyle
+        ];
+      };
+
       # Laptop for robot deployment
       hyaku = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
