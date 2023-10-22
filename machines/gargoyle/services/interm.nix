@@ -13,8 +13,8 @@ in {
       serviceConfig = {
         ExecStart = "${pkgs.python3Packages.interm}/bin/interm";
         Type = "simple";
-        User = cfg.user;
-        Group = cfg.group;
+        User = "breakds";
+        Group = "users";
         Restart= "on-failure";
         RestartSec = "1s";
       };
