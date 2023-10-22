@@ -57,6 +57,27 @@
         "type": "github"
       }
     },
+    "interm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1697947529,
+        "narHash": "sha256-aF0ldLccUMVgn4Uu6kOrQ+dqggZxIJK7AGxNWZC+Xx4=",
+        "ref": "refs/heads/main",
+        "rev": "1222b76bfb6edb8d5b7654258652a76262a6ebae",
+        "revCount": 15,
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/interm"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/interm"
+      }
+    },
     "ml-pkgs": {
       "inputs": {
         "nixpkgs": [
@@ -173,7 +194,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils"
+        "utils": "utils_2"
       },
       "locked": {
         "lastModified": 1681663328,
@@ -192,6 +213,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "interm": "interm",
         "nixos-hardware": "nixos-hardware",
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
@@ -204,12 +226,27 @@
         "www-breakds-org": "www-breakds-org"
       }
     },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "traintrack": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils_3"
       },
       "locked": {
         "lastModified": 1677816310,
@@ -226,6 +263,24 @@
       }
     },
     "utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
@@ -240,7 +295,7 @@
         "type": "github"
       }
     },
-    "utils_2": {
+    "utils_3": {
       "locked": {
         "lastModified": 1676283394,
         "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
@@ -255,7 +310,7 @@
         "type": "github"
       }
     },
-    "utils_3": {
+    "utils_4": {
       "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
@@ -316,7 +371,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_3"
+        "utils": "utils_4"
       },
       "locked": {
         "lastModified": 1676224373,
