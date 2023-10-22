@@ -2,7 +2,7 @@
 
 let port = (import ../../../data/service-registry.nix).interm.port;
 
-{
+in {
   config = {
     systemd.services.interm = {
       description = "Interface + Terminal";
