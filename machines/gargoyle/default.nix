@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/build-machines.nix
+    ./services/interm.nix
   ];
 
   config = {

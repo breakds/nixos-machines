@@ -62,4 +62,8 @@ rec {
   nix-serve = {
     port = 17777;
   };
+
+  interm = {
+    port = 6337;
+  };
 }

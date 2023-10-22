@@ -32,6 +32,9 @@
 
     rapit.url = "git+ssh://git@github.com/breakds/rapit";
     rapit.inputs.nixpkgs.follows = "nixpkgs";
+
+    interm.url = "git+ssh://git@github.com/breakds/interm";
+    interm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
@@ -223,6 +226,11 @@
       gargoyle = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ({
+            nixpkgs.overlays = [
+              inputs.interm.overlays.default
+            ];
+          })
           vital-modules.nixosModules.foundation
           ./machines/gargoyle
         ];
