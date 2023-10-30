@@ -10,6 +10,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/realsense.nix
+    ../../base/tailscale.nix
     ./display.nix
   ];
 
