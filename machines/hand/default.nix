@@ -17,6 +17,9 @@
   config = {
     vital.mainUser = "breakds";
 
+    # TODO(breakds): Remove this when back to US
+    time.timeZone = "Asia/Shanghai";
+
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
