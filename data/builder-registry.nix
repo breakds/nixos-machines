@@ -26,4 +26,13 @@ rec {
     maxJobs = 32;
     speedFactor = 12;
   };
+
+  "kami" = {
+    hostName = "kami";
+    location = "office";
+    maxJobs = 24;
+    speedFactor = 6;
+    sshUser = "breakds";
+    sshKey = "breakds_samaritan";
+  };
 }

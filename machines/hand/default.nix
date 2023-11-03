@@ -123,7 +123,7 @@
 
     vital.distributed-build = {
       enable = true;
-      location = "homelab";
+      location = "office";
     };
 
     # This value determines the NixOS release from which the default

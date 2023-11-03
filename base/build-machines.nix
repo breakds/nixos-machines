@@ -8,6 +8,9 @@ let cfg = config.vital.distributed-build;
     builder-registry = import ../data/builder-registry.nix;
     cache-registry = import ../data/cache-registry.nix;
 
+    getOrDefault = s: set: default:
+      if builtins.hasAttr s set then builtins.getAttr s set else default;
+
     mkBuilder = registryItem: {
       hostName = registryItem.hostName;
       protocol = "ssh-ng";
@@ -15,8 +18,9 @@ let cfg = config.vital.distributed-build;
       speedFactor = registryItem.speedFactor;
       systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-      sshUser = "nixbuilder";
-      sshKey = "/home/${config.vital.mainUser}/.ssh/nixbuilder_malenia";
+      sshUser = getOrDefault "sshUser" registryItem "nixbuilder";
+      sshKey = let keyFile = getOrDefault "sshKey" registryItem "nixbuilder_malenia";
+               in "/home/${config.vital.mainUser}/.ssh/${keyFile}";
       # No publicHostKey specified. Use the local machine's own known hosts.
     };
 
@@ -38,7 +42,7 @@ in {
     enable = lib.mkEnableOption "Enable using build machines for distributed Nix build";
 
     location = lib.mkOption {
-      type = lib.types.enum [ "homelab" "lab" ];
+      type = lib.types.enum [ "homelab" "lab" "office" ];
       default = "homelab";
       description = ''
         Where the machine is located. It will only use the builders in the same
@@ -84,7 +88,7 @@ in {
       };
 
       nix.settings = {
-        trusted-users = [ "nixbuilder" ];
+        trusted-users = [ "nixbuilder" "breakds" ];
         keep-outputs = true;
         keep-derivations = true;
         auto-optimise-store = true;
