@@ -82,6 +82,7 @@
       element-desktop
       rtorrent
       colmena
+      anki
     ];
 
     vital.distributed-build = {
