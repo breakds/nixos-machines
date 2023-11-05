@@ -71,6 +71,7 @@
       blender
       openconnect
       yuzu-early-access
+      anki
     ];
 
     # Trezor cryptocurrency hardware wallet
