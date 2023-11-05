@@ -17,9 +17,6 @@
   config = {
     vital.mainUser = "breakds";
 
-    # TODO(breakds): Remove this when back to US
-    time.timeZone = "Asia/Shanghai";
-
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
@@ -123,7 +120,7 @@
 
     vital.distributed-build = {
       enable = true;
-      location = "office";
+      location = "homelab";
     };
 
     # This value determines the NixOS release from which the default
