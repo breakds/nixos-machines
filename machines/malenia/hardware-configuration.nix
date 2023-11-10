@@ -35,12 +35,12 @@
       options = [ "auto" "nofail" ];
     };
 
-  # fileSystems."/home/breakds/dataset" =
-  #   { device = "/dev/disk/by-label/BDS_DATASET";
-  #     fsType = "ext4";
-  #     # Do not block booting if the disck is missing
-  #     options = [ "auto" "nofail" ];
-  #   };
+  fileSystems."/home/breakds/dataset" =
+    { device = "/dev/disk/by-label/MALENIA_DATASET";
+      fsType = "ext4";
+      # Do not block booting if the disck is missing
+      options = [ "auto" "nofail" ];
+    };
 
   swapDevices = [ ];
 
