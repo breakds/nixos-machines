@@ -23,6 +23,10 @@
       hostId = "9d5e62c8";
     };
 
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
     vital.graphical = {
       enable = true;
       remote-desktop.enable = false;
@@ -39,6 +43,16 @@
       autoLogin.user = "breakds";
     };
 
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
     vital.pre-installed.level = 5;
     vital.programs.texlive.enable = false;
     vital.programs.modern-utils.enable = true;
@@ -47,8 +61,6 @@
     environment.systemPackages = with pkgs; [
       plex-media-player
     ];
-
-    programs.zsh.enable = true;
 
     # +--------------------+
     # | Distributed Build  |
@@ -65,6 +77,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "21.11"; # Did you read the comment?
+    system.stateVersion = "22.11"; # Did you read the comment?
   };
 }
