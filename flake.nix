@@ -151,6 +151,7 @@
           vital-modules.nixosModules.foundation
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
+          self.nixosModules.downgrade-to-nvidia520
           ./machines/learners/radahn
         ];
       };
