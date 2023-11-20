@@ -65,11 +65,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1697947529,
-        "narHash": "sha256-aF0ldLccUMVgn4Uu6kOrQ+dqggZxIJK7AGxNWZC+Xx4=",
+        "lastModified": 1700441345,
+        "narHash": "sha256-HT0Qpmy5NzwoUbHo4hQrAJ4wSFoHTaLT90OQRebQH88=",
         "ref": "refs/heads/main",
-        "rev": "1222b76bfb6edb8d5b7654258652a76262a6ebae",
-        "revCount": 15,
+        "rev": "c579f373f7677702dc3255617c09b7ddad8ed98b",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://git@github.com/breakds/interm"
       },

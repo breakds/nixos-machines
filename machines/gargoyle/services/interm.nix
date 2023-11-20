@@ -22,6 +22,7 @@ in {
       environment = {
         INTERM_APP_DIST_DIR = "${pkgs.interm-webui}";
         INTERM_PORT = "${toString port}";
+        INTERM_WALLPAPER_DIR = "/home/breakds/Pictures/wallpapers";
       };
     };
   };
