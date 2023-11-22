@@ -72,6 +72,7 @@
       openconnect
       yuzu-early-access
       anki
+      flacon
     ];
 
     # Trezor cryptocurrency hardware wallet
