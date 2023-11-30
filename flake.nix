@@ -10,7 +10,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use vital-modules, with the same nixpkgs
@@ -18,7 +18,7 @@
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:breakds/nixos-home/dev/23.11";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
