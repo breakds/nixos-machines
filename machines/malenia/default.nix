@@ -79,7 +79,8 @@
     services.trezord.enable = true;
 
     services.traintrack-agent = {
-      enable = true;
+      # TODO(breakds): Re-enable traintrack
+      enable = false;
       port = (import ../../data/service-registry.nix).traintrack.agents.malenia.port;
       user = "breakds";
       group = "breakds";

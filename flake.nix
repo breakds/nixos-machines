@@ -20,6 +20,7 @@
     # Use nixos-home, with the same nixpkgs
     nixos-home.url = "github:breakds/nixos-home/dev/23.11";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-home.inputs.home-manager.follows = "home-manager";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
@@ -78,7 +79,8 @@
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
-          self.nixosModules.steam
+          # TODO(breakds): Make steam great again.
+          # self.nixosModules.steam
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/malenia

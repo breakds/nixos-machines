@@ -41,7 +41,7 @@
               xorg.libxcb
 	            libkrb5
 	            nss
-	            qt4
+	            qt5
             ] ++ xorgdeps;
         };
       })

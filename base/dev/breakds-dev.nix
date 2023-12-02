@@ -54,7 +54,7 @@
 
     # This is for etcher
     nixpkgs.config.permittedInsecurePackages = [
-      "electron-12.2.3"
+      "electron-19.1.9"
     ];    
 
     programs.nix-ld.enable = true;
