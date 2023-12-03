@@ -44,6 +44,9 @@
       hostId = "bbdf0382";
     };
 
+    programs.gnupg.agent.enable = lib.mkForce false;
+    programs.ssh.startAgent = lib.mkForce true;
+
     vital.graphical = {
       enable = true;
       nvidia.enable = false;
