@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/build-machines.nix
-    ./nodejs.nix
   ];
 
   config = {
@@ -60,12 +59,6 @@
     };
 
     # TODO(breakds): Add node back
-
-    # NodeJS 14 is now deprecated. This makes sure that we can still use it.
-    nixpkgs.config.permittedInsecurePackages = [
-      "nodejs-14.21.3"
-      "openssl-1.1.1u"
-    ];
 
     environment.systemPackages = with pkgs; [
       firefox

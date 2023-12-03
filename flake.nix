@@ -58,6 +58,19 @@
               boot.kernelPackages = pkgs'.linuxPackages;
               hardware.nvidia.package = pkgs'.linuxPackages.nvidiaPackages.latest;
             };
+
+      # Sadly nodejs-14_x reaches EOL is removed. Here we resurrect it.
+      overlay-nodejs-14 = {config, lib, pkgs, ...}:
+        let pkgs' = import inputs.nixpkgs-nvidia520 {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            }; in {
+              nixpkgs.overlays = [
+                (finale: prev: {
+                  nodejs-14_x = pkgs'.nodejs-14_x;
+                })
+              ];
+            };
     };
 
     nixosConfigurations = {
@@ -176,6 +189,7 @@
           nixos-hardware.nixosModules.common-cpu-amd-pstate
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
+          self.nixosModules.overlay-nodejs-14
           nixos-home.nixosModules.cassandra-home
           ./machines/orchard
         ];
