@@ -172,6 +172,8 @@
       orchard = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
           vital-modules.nixosModules.foundation
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
