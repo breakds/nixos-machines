@@ -169,6 +169,16 @@
         ];
       };
 
+      orchard = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          self.nixosModules.iphone-connect
+          nixos-home.nixosModules.cassandra-home
+          ./machines/orchard
+        ];
+      };
+
       hand = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
