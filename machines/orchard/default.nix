@@ -15,8 +15,28 @@
     # Generated via `head -c 8 /etc/machine-id`
     networking.hostId = "865cf75d";
 
-    services.fwupd.enable = true;
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
+    services.fwupd.enable = true;
+    services.printing.enable = true;
+
+    # +----------+
+    # | Sound    |
+    # +----------+
+
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    
+  
     # +----------+
     # | Desktop  |
     # +----------+
@@ -45,6 +65,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
+      firefox
       dbeaver
       gimp peek gnupg pass libreoffice
       skypeforlinux
