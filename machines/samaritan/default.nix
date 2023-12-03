@@ -96,7 +96,7 @@
     services.trezord.enable = true;
 
     services.traintrack-agent = {
-      enable = true;
+      enable = false;
       port = (import ../../data/service-registry.nix).traintrack.agents.samaritan.port;
       user = "breakds";
       group = "breakds";
