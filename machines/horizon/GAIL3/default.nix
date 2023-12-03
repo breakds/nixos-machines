@@ -50,7 +50,7 @@
     ];
 
     services.traintrack-agent = {
-      enable = true;
+      enable = false;
       port = (import ../../../data/service-registry.nix).traintrack.agents.gail3.port;
       user = "breakds";
       group = "breakds";

@@ -16,7 +16,7 @@
     };
 
     services.traintrack-agent = {
-      enable = true;
+      enable = false;
       port = (import ../../../data/service-registry.nix).traintrack.agents.lothric.port;
       user = "breakds";
       group = "breakds";

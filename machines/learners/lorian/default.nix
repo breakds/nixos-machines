@@ -22,7 +22,7 @@
     networking.firewall.allowedUDPPorts = [ 6062 ];
 
     services.traintrack-agent = {
-      enable = true;
+      enable = false;
       port = (import ../../../data/service-registry.nix).traintrack.agents.lorian.port;
       user = "breakds";
       group = "breakds";
