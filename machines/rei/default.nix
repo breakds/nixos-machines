@@ -9,6 +9,7 @@
     ../../base/dev/realsense.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
+    ../../base/dev/interbotix.nix
   ];
 
   config = {
