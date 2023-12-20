@@ -11,6 +11,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ./services/monitor.nix
+    ../../base/dev/interbotix.nix
   ];
 
   config = {
