@@ -6,6 +6,7 @@
 {
   imports = [
     ../modules/oci-tooling.nix
+    ../modules/priting.nix
   ];
   
   config = {
