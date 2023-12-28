@@ -52,7 +52,7 @@
     };
 
     vital.pre-installed.level = 5;
-    vital.programs.texlive.enable = false;
+    vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
 
     environment.systemPackages = with pkgs; [
