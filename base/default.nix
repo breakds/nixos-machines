@@ -50,8 +50,7 @@
       # discord
     ];
 
-    # NOTE: this is renamed to fonts.packages since 23.11.
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       # Add Wenquanyi Microsoft Ya Hei, a nice-looking Chinese font.
       wqy_microhei
       # Fira code is a good font for coding
