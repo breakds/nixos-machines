@@ -9,6 +9,7 @@
     ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
+    ../../base/dev/realsense.nix
   ];
 
   config = {
