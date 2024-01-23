@@ -50,6 +50,8 @@
 
       # For writing stuff to SD card
       etcher
+
+      nix-index
     ];
 
     # This is for etcher
