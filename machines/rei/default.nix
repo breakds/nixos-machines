@@ -68,7 +68,7 @@
     ];
 
     vital.distributed-build = {
-      enable = false;  # disabled so that we rely only on the WiFi
+      enable = true;  # disabled so that we rely only on the WiFi
       location = "lab";
     };
 
