@@ -10,6 +10,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/interbotix.nix
+    ./horizon.nix
   ];
 
   config = {
