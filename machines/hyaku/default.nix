@@ -8,7 +8,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/interbotix.nix
-    ../../modules/steam.nix
+    # ../../modules/steam.nix
   ];
 
   config = {
