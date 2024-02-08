@@ -82,6 +82,7 @@
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
+          self.nixosModules.flatpak          
           self.nixosModules.downgrade-to-nvidia520
           ./machines/samaritan
         ];
