@@ -80,6 +80,7 @@
     };
 
     networking.firewall.allowedTCPPorts = [ 16006 ];
+    networking.firewall.allowedUDPPorts = [ 8030 ];    
 
     # This follows olmokramer's solution from this post:
     # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
