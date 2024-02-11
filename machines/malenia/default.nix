@@ -52,7 +52,7 @@
     vital.programs.modern-utils.enable = true;
 
     home-manager.users."breakds" = {
-      home.bds.windowManager = "sway";
+      home.bds.windowManager = "i3";
     };
 
     environment.systemPackages = with pkgs; [
