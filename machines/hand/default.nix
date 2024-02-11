@@ -115,6 +115,11 @@
       home.bds.windowManager = "sway";
     };
 
+    security.pam.services.swaylock = {
+      fprintAuth = false;
+    };
+
+
     # +--------------------+
     # | Distributed Build  |
     # +--------------------+
