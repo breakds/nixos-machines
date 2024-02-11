@@ -85,7 +85,7 @@
 
     vital.graphical = {
       enable = true;
-      xserver.dpi = 120;
+      xserver.dpi = 180;
     };
 
     environment.systemPackages = with pkgs; [
