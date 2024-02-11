@@ -12,6 +12,10 @@
     # The XDG portal is used to e.g. prompt a file chooser when you need to open
     # files etc.
     config.common.default = "gtk";
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # Add flathub on start up
