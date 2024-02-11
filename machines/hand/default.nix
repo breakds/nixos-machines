@@ -112,6 +112,7 @@
 
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
+      home.bds.windowManager = "sway";
     };
 
     # +--------------------+

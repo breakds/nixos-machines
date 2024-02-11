@@ -72,6 +72,7 @@ in {
       displayManager.gdm.autoSuspend = false;
       displayManager.sddm.enable = cfg.xserver.displayManager == "sddm";
       displayManager.lightdm.enable = cfg.xserver.displayManager == "lightdm";
+      displayManager.sessionPackages = [ pkgs.sway ];
     };
 
     # Exclude some of the gnome3 packages
