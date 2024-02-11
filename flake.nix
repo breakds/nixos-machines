@@ -40,6 +40,7 @@
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
     nixosModules = {
+      graphical = import ./modules/graphical;
       machine-learning = import ./modules/machine-learning.nix {
         traintrack = inputs.traintrack;
       };
@@ -79,6 +80,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
@@ -93,6 +95,7 @@
         modules = [
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           self.nixosModules.iphone-connect
           # TODO(breakds): Make steam great again.
           # self.nixosModules.steam
@@ -107,6 +110,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/horizon/GAIL3
@@ -117,6 +121,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/octavian
@@ -136,6 +141,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/lothric
@@ -147,6 +153,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/lorian
@@ -158,6 +165,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/radahn
@@ -168,6 +176,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
@@ -181,6 +190,7 @@
           nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
           nixos-hardware.nixosModules.common-cpu-amd-pstate
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           self.nixosModules.iphone-connect
           self.nixosModules.overlay-nodejs-14
           nixos-home.nixosModules.cassandra-home
@@ -194,6 +204,7 @@
           # Get the community maintained framework baseline
           nixos-hardware.nixosModules.framework-12th-gen-intel
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical          
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
@@ -205,6 +216,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
           ./machines/medea
         ];
       };
@@ -215,7 +227,7 @@
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
           vital-modules.nixosModules.users
-          vital-modules.nixosModules.graphical
+          self.nixosModules.graphical          
           # nixos-home.nixosModules.breakds-home
           ./machines/pi/armlet
         ];
@@ -227,7 +239,7 @@
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
           vital-modules.nixosModules.users
-          vital-modules.nixosModules.graphical
+          self.nixosModules.graphical          
           ./machines/pi/emerald
         ];
       };
@@ -237,6 +249,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.downgrade-to-nvidia520
@@ -254,6 +267,7 @@
             ];
           })
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
           ./machines/gargoyle
         ];
       };
@@ -268,6 +282,7 @@
           self.nixosModules.horizon-home
           self.nixosModules.mito-home
           vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
           self.nixosModules.laptop
           ./machines/hyaku
         ];
