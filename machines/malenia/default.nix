@@ -51,6 +51,10 @@
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
 
+    home-manager.users."breakds" = {
+      home.bds.windowManager = "sway";
+    };
+
     environment.systemPackages = with pkgs; [
       gimp
       darktable
