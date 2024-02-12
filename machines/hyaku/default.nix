@@ -72,6 +72,8 @@
       shuriken
       ffmpeg-full
       robot-deployment-suite
+      steam-run-native
+      steam-run
     ];
 
     vital.distributed-build = {
