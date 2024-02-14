@@ -47,6 +47,7 @@
       iphone-connect = import ./modules/iphone-connect.nix;
       laptop = import ./modules/laptop.nix;
       steam = import ./modules/steam.nix;
+      steam-run = import ./modules/steam-run.nix;
       flatpak = import ./modules/flatpak.nix;
 
       horizon-home = import ./users/horizon;
@@ -86,6 +87,7 @@
           self.nixosModules.machine-learning
           self.nixosModules.flatpak          
           self.nixosModules.downgrade-to-nvidia520
+          self.nixosModules.steam-run
           ./machines/samaritan
         ];
       };
@@ -284,6 +286,7 @@
           vital-modules.nixosModules.foundation
           self.nixosModules.graphical
           self.nixosModules.laptop
+          self.nixosModules.steam-run
           ./machines/hyaku
         ];
       };

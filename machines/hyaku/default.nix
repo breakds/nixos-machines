@@ -8,7 +8,6 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/interbotix.nix
-    # ../../modules/steam.nix
   ];
 
   config = {
@@ -72,8 +71,6 @@
       shuriken
       ffmpeg-full
       robot-deployment-suite
-      steam-run-native
-      steam-run
     ];
 
     vital.distributed-build = {
