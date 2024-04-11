@@ -180,6 +180,7 @@
       radahn = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          self.nixosModules.downgrade-to-nvidia520
           vital-modules.nixosModules.foundation
           self.nixosModules.graphical          
           nixos-home.nixosModules.breakds-home
