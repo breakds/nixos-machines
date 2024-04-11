@@ -36,6 +36,9 @@
 
     interm.url = "git+ssh://git@github.com/breakds/interm";
     interm.inputs.nixpkgs.follows = "nixpkgs";
+
+    ml-pkgs.url = "github:nixvital/ml-pkgs";
+    ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
@@ -69,11 +72,21 @@
               config.allowUnfree = true;
             }; in {
               nixpkgs.overlays = [
-                (finale: prev: {
+                (final: prev: {
                   nodejs-14_x = pkgs'.nodejs-14_x;
                 })
               ];
             };
+
+      ai-agents = {config, lib, pkgs, ... }: {
+        nixpkgs.overlays = [
+          inputs.ml-pkgs.overlays.tools
+        ];
+        
+        environment.systemPackages = with pkgs; [
+          python3Packages.aider
+        ];
+      };
     };
 
     nixosConfigurations = {
@@ -88,6 +101,7 @@
           self.nixosModules.flatpak          
           self.nixosModules.downgrade-to-nvidia520
           self.nixosModules.steam-run
+          self.nixosModules.ai-agents          
           ./machines/samaritan
         ];
       };
