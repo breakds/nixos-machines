@@ -80,11 +80,12 @@
 
       ai-agents = {config, lib, pkgs, ... }: {
         nixpkgs.overlays = [
+          inputs.ml-pkgs.overlays.apis
           inputs.ml-pkgs.overlays.tools
         ];
-        
+
         environment.systemPackages = with pkgs; [
-          python3Packages.aider
+          aider
         ];
       };
     };
@@ -98,10 +99,10 @@
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
-          self.nixosModules.flatpak          
+          self.nixosModules.flatpak
           self.nixosModules.downgrade-to-nvidia520
           self.nixosModules.steam-run
-          self.nixosModules.ai-agents          
+          self.nixosModules.ai-agents
           ./machines/samaritan
         ];
       };
@@ -111,10 +112,11 @@
         modules = [
           # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           self.nixosModules.iphone-connect
           # TODO(breakds): Make steam great again.
           # self.nixosModules.steam
+          self.nixosModules.ai-agents
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
@@ -126,7 +128,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/horizon/GAIL3
@@ -137,7 +139,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/octavian
@@ -157,7 +159,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/lothric
@@ -169,7 +171,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/lorian
@@ -182,7 +184,7 @@
         modules = [
           self.nixosModules.downgrade-to-nvidia520
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           ./machines/learners/radahn
@@ -193,7 +195,7 @@
         system = "x86_64-linux";
         modules = [
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.cassandra-home
@@ -207,7 +209,7 @@
           nixos-hardware.nixosModules.common-cpu-amd-raphael-igpu
           nixos-hardware.nixosModules.common-cpu-amd-pstate
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           self.nixosModules.iphone-connect
           self.nixosModules.overlay-nodejs-14
           nixos-home.nixosModules.cassandra-home
@@ -221,7 +223,7 @@
           # Get the community maintained framework baseline
           nixos-hardware.nixosModules.framework-12th-gen-intel
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
@@ -244,7 +246,7 @@
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
           vital-modules.nixosModules.users
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           # nixos-home.nixosModules.breakds-home
           ./machines/pi/armlet
         ];
@@ -256,7 +258,7 @@
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
           vital-modules.nixosModules.users
-          self.nixosModules.graphical          
+          self.nixosModules.graphical
           ./machines/pi/emerald
         ];
       };
