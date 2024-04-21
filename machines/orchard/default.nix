@@ -68,6 +68,7 @@
       multitail
       nodejs-14_x
       (yarn.override { nodejs = nodejs-14_x; })
+      anki
     ];
 
     # +----------+
