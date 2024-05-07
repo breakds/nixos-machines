@@ -30,6 +30,7 @@
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_202405_sep.pub
       ];
     };
 
