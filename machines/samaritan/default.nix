@@ -66,6 +66,7 @@
     vital.programs.modern-utils.enable = true;
 
     environment.systemPackages = with pkgs; [
+      robot-deployment-suite
       gimp
       darktable
       go-ethereum
