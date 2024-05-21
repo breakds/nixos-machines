@@ -21,6 +21,8 @@ in appimageTools.wrapType2 {
     sha256 = "03rqbg8ghlm3yh9yfsfazl836nkwbagfzb05lv7rz2j196wz2j9f";
   };
 
+  extraPkgs = pkgs: with pkgs; [ icu ];
+
   extraInstallCommands = ''
     mkdir -p $out/share/applications
     ln -s ${omniverse-launcher-desktop} $out/share/applications/omniverse-launcher.desktop
