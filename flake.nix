@@ -338,7 +338,7 @@
         (import ./base/overlays)
       ];
     }; in {
-      inherit (pkgs) shuriken medea-clipper robot-deployment-suite;
+      inherit (pkgs) shuriken medea-clipper robot-deployment-suite omniverse-launcher;
       # nix build .#liveISO will build the ISO image
       liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
     };

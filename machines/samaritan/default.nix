@@ -85,6 +85,7 @@
       rtorrent
       colmena
       anki
+      omniverse-launcher
     ];
 
     vital.distributed-build = {

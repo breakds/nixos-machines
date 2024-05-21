@@ -20,4 +20,5 @@ in {
   shuriken = final.callPackage ../../pkgs/shuriken {};
   medea-clipper = final.python3Packages.callPackage ../../pkgs/medea-clipper {};
   robot-deployment-suite = final.python3Packages.callPackage ../../pkgs/robot-deployment-suite {};
+  omniverse-launcher = final.callPackage ../../pkgs/omniverse-launcher/bin.nix {};
 }
