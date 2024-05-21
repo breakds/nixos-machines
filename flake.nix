@@ -100,7 +100,7 @@
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
-          self.nixosModules.downgrade-to-nvidia520
+          # self.nixosModules.downgrade-to-nvidia520
           self.nixosModules.steam-run
           self.nixosModules.ai-agents
           ./machines/samaritan
