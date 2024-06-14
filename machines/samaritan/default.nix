@@ -21,6 +21,9 @@
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
       ];
+      extraGroups = [
+        "dialout"
+      ];
     };
 
     # Bootloader.
