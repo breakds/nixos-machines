@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../users
+    ../../users/dustin.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines.nix
 

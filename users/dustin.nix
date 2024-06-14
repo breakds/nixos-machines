@@ -14,7 +14,7 @@
         ];
 
         openssh.authorizedKeys.keyFiles = [
-          ../../data/keys/dustin.pub
+          ../data/keys/dustin.pub
         ];
       };
     };

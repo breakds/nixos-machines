@@ -9,7 +9,7 @@
     ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
-    ../dustin.nix
+    ../../../users/dustin.nix
   ];
 
   config = {
