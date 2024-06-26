@@ -75,7 +75,6 @@
       # python3Packages.archer
       blender
       openconnect
-      yuzu-early-access
       anki
       flacon
     ];

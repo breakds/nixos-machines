@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./lisp.nix
+    # TODO(breakds): Lisp packages have been redesigned. See 'lisp-modules' in the nixpkgs manual.
+    # ./lisp.nix
     ./perf.nix
   ];
 
@@ -48,16 +49,8 @@
       # For copilot
       nodejs
 
-      # For writing stuff to SD card
-      etcher
-
       nix-index
     ];
-
-    # This is for etcher
-    nixpkgs.config.permittedInsecurePackages = [
-      "electron-19.1.9"
-    ];    
 
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;

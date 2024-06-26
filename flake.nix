@@ -2,15 +2,13 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     nixpkgs-nvidia520.url = "github:NixOS/nixpkgs?rev=c1254eebab9a7257e978af1009d9ba2133befcec";
 
-    nixpkgs-2311-pre.url = "github:NixOS/nixpkgs?rev=fdd898f8f79e8d2f99ed2ab6b3751811ef683242";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use vital-modules, with the same nixpkgs
@@ -18,7 +16,7 @@
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:breakds/nixos-home/dev/24.05";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
     nixos-home.inputs.home-manager.follows = "home-manager";
 
@@ -84,6 +82,7 @@
           inputs.ml-pkgs.overlays.tools
         ];
 
+        # TODO(breakds): Restore aider for 24.05
         environment.systemPackages = with pkgs; [
           aider
         ];
@@ -116,7 +115,7 @@
           self.nixosModules.iphone-connect
           # TODO(breakds): Make steam great again.
           # self.nixosModules.steam
-          self.nixosModules.ai-agents
+          # self.nixosModules.ai-agents
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
@@ -249,17 +248,6 @@
           self.nixosModules.graphical
           # nixos-home.nixosModules.breakds-home
           ./machines/pi/armlet
-        ];
-      };
-
-      # Raspberry Pi 4B
-      emerald = inputs.nixpkgs-2311-pre.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          nixos-hardware.nixosModules.raspberry-pi-4
-          vital-modules.nixosModules.users
-          self.nixosModules.graphical
-          ./machines/pi/emerald
         ];
       };
 
