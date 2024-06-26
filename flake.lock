@@ -138,7 +138,6 @@
       },
       "original": {
         "owner": "breakds",
-        "ref": "dev/24.05",
         "repo": "nixos-home",
         "type": "github"
       }
