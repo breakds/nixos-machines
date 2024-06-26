@@ -49,15 +49,20 @@ in {
     # in the dmenu so that hinder how chrome is being launched.
     services.gnome.gnome-browser-connector.enable = false;
 
+    # Enable touchpad support    
+    services.libinput.enable = true;
+
+    services.displayManager.sddm.enable = cfg.xserver.displayManager == "sddm";
+
     services.xserver = {
       enable = true;
-      layout = "us";
+
+      xkb = {
+        layout = "us";
+      };
 
       # DPI
       dpi = cfg.xserver.dpi;
-
-      # Enable touchpad support
-      libinput.enable = true;
 
       # Default desktop manager: gnome.
       desktopManager.gnome.enable = true;
@@ -70,7 +75,6 @@ in {
       # When using gdm, do not automatically suspend since we want to
       # keep the server running.
       displayManager.gdm.autoSuspend = false;
-      displayManager.sddm.enable = cfg.xserver.displayManager == "sddm";
       displayManager.lightdm.enable = cfg.xserver.displayManager == "lightdm";
     };
 

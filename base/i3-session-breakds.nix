@@ -19,7 +19,7 @@ in {
     fprintAuth = false;
   };
 
-  services.xserver.displayManager = {
+  services.displayManager = {
     sessionPackages = lib.optionals (windowManager == "sway") [ pkgs.sway ];
   };
 }
