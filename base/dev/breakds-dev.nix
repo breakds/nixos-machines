@@ -2,8 +2,7 @@
 
 {
   imports = [
-    # TODO(breakds): Lisp packages have been redesigned. See 'lisp-modules' in the nixpkgs manual.
-    # ./lisp.nix
+    ./lisp.nix
     ./perf.nix
   ];
 
