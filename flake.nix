@@ -101,7 +101,7 @@
           self.nixosModules.flatpak
           # self.nixosModules.downgrade-to-nvidia520
           self.nixosModules.steam-run
-          self.nixosModules.ai-agents
+          # self.nixosModules.ai-agents
           ./machines/samaritan
         ];
       };
