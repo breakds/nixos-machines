@@ -29,6 +29,7 @@
     services.openssh.settings.PasswordAuthentication = false;
 
     users.users."breakds" = {
+      shell = pkgs.bash;
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
         ../../data/keys/breakds_202405_sep.pub
