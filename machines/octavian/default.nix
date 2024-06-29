@@ -85,7 +85,7 @@
 
     vital.graphical = {
       enable = true;
-      # nvidia.enable = true;
+      nvidia.enable = true;
       # remote-desktop.enable = false;
     };
 
