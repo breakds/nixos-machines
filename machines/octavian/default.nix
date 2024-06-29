@@ -85,7 +85,14 @@
 
     vital.graphical = {
       enable = true;
-      # nvidia.enable = true;
+      nvidia = {
+        enable = true;
+        prime = {
+          enable = true;
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";
+        };
+      };
       # remote-desktop.enable = false;
     };
 

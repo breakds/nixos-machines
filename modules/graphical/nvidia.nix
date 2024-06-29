@@ -36,6 +36,11 @@ in {
             The bus ID of the nvidia video card, can be found by "lspci".
           '';
       };
+
+      offload = lib.mkEnableOption ''
+        If true, put the nvidia driver in offload mode. Otherwise it will
+        be in sync mode.
+      '';
     };
   };
 
@@ -48,8 +53,12 @@ in {
       # Nvidia PRIME The card Nvidia 940MX is non-MXM card. Needs special treatment.
       # muxless/non-MXM Optimus cards have no display outputs and show as 3D
       # Controller in lspci output, seen in most modern consumer laptops
-      nvidia.prime.sync.enable = cfg.prime.enable;
       nvidia.modesetting.enable = cfg.prime.enable;
+      nvidia.prime.sync.enable = cfg.prime.enable && !cfg.prime.offload;
+      nvidia.prime.offload = lib.mkIf (cfg.prime.enable && cfg.prime.offload) {
+        enable = true;
+        enableOffloadCmd = true;
+      };
       opengl.driSupport32Bit = true;
 
       # Bus ID of the NVIDIA GPU. You can find it using lspci
