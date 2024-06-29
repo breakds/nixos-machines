@@ -135,12 +135,12 @@
     #   };
     # };
 
-    # services.zfs = {
-    #   autoScrub = {
-    #     enable = true;
-    #     interval = "Sun, 02:00";
-    #   };
-    # };
+    services.zfs = {
+      autoScrub = {
+        enable = true;
+        interval = "Sun, 02:00";
+      };
+    };
 
     nix = {
       settings = {
