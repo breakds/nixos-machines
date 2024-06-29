@@ -10,7 +10,7 @@ in {
     mediaDir = "/var/lib/filerun/user-files/paperless/media";
     consumptionDir = "/var/lib/filerun/user-files/paperless/incoming";
     consumptionDirIsPublic = true;  # Basically "chmod o+w"
-    extraConfig = {
+    settings = {
       PAPERLESS_ADMIN_USER = "breakds";
       PAPERLESS_FILENAME_FORMAT = "{document_type}/{created_year}/{created_month}/{title}";
       # PAPERLESS_SECRET_KEY=<key>
