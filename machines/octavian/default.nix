@@ -18,7 +18,7 @@
     # ./services/traintrack.nix
     # TODO(breakds): Fix poetry for 23.05
     # ./services/famass.nix
-    # ./services/docker-registry.nix
+    ./services/docker-registry.nix
     # ./services/paperless.nix
     # ../../base/tailscale.nix
   ];
