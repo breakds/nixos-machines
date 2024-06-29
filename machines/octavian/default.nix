@@ -4,23 +4,23 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
-    ../../users
-    ../../users/dustin.nix
+    # ../../users
+    # ../../users/dustin.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/build-machines.nix
+    # ../../base/build-machines.nix
 
     # Other modules
-    ./services/web-services.nix
-    ./services/monitor.nix
-    ./services/hydra.nix
-    ./services/media.nix
-    ./services/terraria.nix
+    # ./services/web-services.nix
+    # ./services/monitor.nix
+    # ./services/hydra.nix
+    # ./services/media.nix
+    # ./services/terraria.nix
     # ./services/traintrack.nix
     # TODO(breakds): Fix poetry for 23.05
     # ./services/famass.nix
-    ./services/docker-registry.nix
-    ./services/paperless.nix
-    ../../base/tailscale.nix
+    # ./services/docker-registry.nix
+    # ./services/paperless.nix
+    # ../../base/tailscale.nix
   ];
 
   config = {
@@ -44,7 +44,6 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
     # Allow sudo without password
     security.sudo.extraRules = [
@@ -54,14 +53,28 @@
       }
     ];
 
+    i18n.defaultLocale = "en_US.UTF-8";
+
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+
     networking = {
       hostName = "octavian";
       hostId = "e4f0c450";
+      networkmanager.enable = true;
+      # The LLM server      
+      firewall.allowedTCPPorts = [ 6062 ];
+      firewall.allowedUDPPorts = [ 6062 ];      
     };
-
-    # The LLM server
-    networking.firewall.allowedTCPPorts = [ 6062 ];
-    networking.firewall.allowedUDPPorts = [ 6062 ];
 
     vital.pre-installed.level = 5;
 
@@ -72,9 +85,19 @@
 
     vital.graphical = {
       enable = true;
-      nvidia.enable = true;
-      remote-desktop.enable = false;
+      # nvidia.enable = true;
+      # remote-desktop.enable = false;
     };
+
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    
 
     # +----------------+
     # | Services       |
@@ -128,18 +151,13 @@
       };
     };
 
-    nixpkgs.config.permittedInsecurePackages = [
-      "nix-2.17.1"
-      "electron-19.1.9"      
-    ];    
-
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "22.11"; # Did you read the comment?
-    home-manager.users."breakds".home.stateVersion = "21.05";
+    system.stateVersion = "24.05"; # Did you read the comment?
+    home-manager.users."breakds".home.stateVersion = "24.05";
   };
 }
