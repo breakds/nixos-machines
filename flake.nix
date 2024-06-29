@@ -311,7 +311,7 @@
         system = "x86_64-linux";
         modules = [
           # The base image that has gnome.
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
           ./machines/livecd/with-nvidia.nix
         ];
       };
