@@ -139,8 +139,8 @@
         modules = [
           vital-modules.nixosModules.foundation
           self.nixosModules.graphical
-          nixos-home.nixosModules.breakds-home
-          self.nixosModules.machine-learning
+          # nixos-home.nixosModules.breakds-home
+          # self.nixosModules.machine-learning
           ./machines/octavian
           ({
             nixpkgs.overlays = [
