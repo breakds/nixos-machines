@@ -10,7 +10,7 @@
     # ../../base/build-machines.nix
 
     # Other modules
-    # ./services/web-services.nix
+    ./services/web-services.nix
     # ./services/monitor.nix
     # ./services/hydra.nix
     # ./services/media.nix
@@ -103,12 +103,12 @@
     # | Services       |
     # +----------------+
 
-    # security.acme = {
-    #   acceptTerms = true;
-    #   defaults = {
-    #     email = "bds@breakds.org";
-    #   };
-    # };
+    security.acme = {
+      acceptTerms = true;
+      defaults = {
+        email = "bds@breakds.org";
+      };
+    };
 
     services.nginx = {
       enable = true;
