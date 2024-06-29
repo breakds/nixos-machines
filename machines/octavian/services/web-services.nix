@@ -19,11 +19,12 @@ in {
   
   services.nginx = {
     virtualHosts = {
-      "www.breakds.org" = {
-        enableACME = true;
-        forceSSL = true;
-        root = pkgs.www-breakds-org;
-      };
+      # TODO(breakds): re-enable after www-breakds-org builds
+      # "www.breakds.org" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      #   root = pkgs.www-breakds-org;
+      # };
 
       "extorage.breakds.org" = {
         enableACME = true;
