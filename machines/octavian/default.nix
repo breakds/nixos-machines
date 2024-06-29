@@ -11,10 +11,10 @@
 
     # Other modules
     ./services/web-services.nix
-    # ./services/monitor.nix
+    ./services/monitor.nix
     # ./services/hydra.nix
     # ./services/media.nix
-    # ./services/terraria.nix
+    ./services/terraria.nix
     # ./services/traintrack.nix
     # TODO(breakds): Fix poetry for 23.05
     # ./services/famass.nix
