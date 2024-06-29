@@ -121,19 +121,19 @@
       clientMaxBodySize = "1000m";
     };
 
-    # vital.services.filerun = {
-    #   enable = true;
-    #   workDir = "/var/lib/filerun";
-    #   port = 5962;
-    #   domain = "files.breakds.org";
-    # };
+    vital.services.filerun = {
+      enable = true;
+      workDir = "/var/lib/filerun";
+      port = 5962;
+      domain = "files.breakds.org";
+    };
 
-    # services.borgbackup = {
-    #   repos.orbekk = {
-    #     authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
-    #     path = /var/lib/borgbackup/orbekk;
-    #   };
-    # };
+    services.borgbackup = {
+      repos.orbekk = {
+        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
+        path = /var/lib/borgbackup/orbekk;
+      };
+    };
 
     services.zfs = {
       autoScrub = {
