@@ -3,10 +3,15 @@
 # Notes:
 #
 # 1. In order to have hydra run jobs accessing private github repo,
-#    you will need to setup the ssh keys for the user "hydra".
+#    you will need to setup the ssh keys for the user "hydra". Seems
+#    that they should be put on /var/lib/hydra/.ssh
 #
 # 2. By default the user hydra does not have password so that you
 #    cannot login. You will need to set the password.
+#
+# 3. After login with hydra, run
+#         hydra-create-user breakds --password-prompt --role admin
+#    to create an account. You have to do this with user "hydra"
 
 { config, lib, pkgs, ... }:
 let hydraInfo = (import ../../../data/service-registry.nix).hydra;
