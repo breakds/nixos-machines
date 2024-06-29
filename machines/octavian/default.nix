@@ -7,7 +7,7 @@
     ../../users
     ../../users/dustin.nix
     ../../base/dev/breakds-dev.nix
-    # ../../base/build-machines.nix
+    ../../base/build-machines.nix
 
     # Other modules
     ./services/web-services.nix
