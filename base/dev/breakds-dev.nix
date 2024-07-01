@@ -35,6 +35,9 @@
       # TODO(brakds): Cannot build at 23.05
       # parquet-tools
 
+      # For SD Card and Images
+      usbimager
+
       # System Tools
       dmidecode
 
