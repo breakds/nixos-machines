@@ -8,6 +8,7 @@
 
   config = {
     environment.systemPackages = with pkgs; [
+      neovim
       cntr
       meld
       tig
