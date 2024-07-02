@@ -46,6 +46,7 @@ let git-clean = writeShellScriptBin "git-clean" ''
     } (builtins.readFile ./alf-tools.py);
 
     alf-oci = writeShellScriptBin "alf-oci" (builtins.readFile ./alf-oci.sh);
+    loghard = writeShellScriptBin "loghard" (builtins.readFile ./loghard.sh);
 
     power-win = writers.writePython3Bin "power-win" {
       libraries = [
@@ -184,5 +185,6 @@ in symlinkJoin {
     alf-tools
     alf-oci
     power-win
+    loghard
   ];
 }
