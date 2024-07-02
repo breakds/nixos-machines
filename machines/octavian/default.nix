@@ -84,6 +84,11 @@
       modern-utils.enable = true;
     };
 
+    environment.systemPackages = with pkgs; [
+      lm_sensors
+      smartmontools
+    ];
+
     vital.graphical = {
       enable = true;
       nvidia = {

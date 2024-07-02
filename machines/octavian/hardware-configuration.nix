@@ -26,6 +26,13 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  # Enable this option to support HDD/SSD temperature sensors.
+  hardware.sensor.hddtemp = {
+    enable = true;
+    unit = "C";
+    drives = [ "/dev/disk/by-uuid/f6521164-d262-40a5-b056-5b9060a48e7c" ];
+  };
+
   swapDevices = [ ];
 
   # The ZFS Array has 15 disks = 3 rows x 5 per row. S/N are shown below.
