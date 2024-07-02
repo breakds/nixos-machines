@@ -27,6 +27,7 @@
     vital.mainUser = "breakds";
 
     services.openssh.settings.PasswordAuthentication = false;
+    programs.gnupg.agent.enableSSHSupport = false;
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
