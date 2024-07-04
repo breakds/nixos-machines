@@ -95,7 +95,18 @@
       unetbootin
       pavucontrol
       parsec-bin  # For game streaming
+      xorg.xeyes
     ];
+
+    # With the following, fcitx can work with xwayland (i.e. non-native wayland
+    # windows).
+    environment.sessionVariables = {
+      NIX_PROFILES =
+        "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+      GTK_IM_MODULE = "fcitx";
+      QT_IM_MODULE = "fcitx";
+      XMODIFIERS = "@im=fcitx";
+    };
 
     # This follows olmokramer's solution from this post:
     # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
