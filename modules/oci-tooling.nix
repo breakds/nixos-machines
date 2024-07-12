@@ -28,6 +28,7 @@ in {
     };
 
     virtualisation.oci-containers.backend = cfg.backend;
+    hardware.nvidia-container-toolkit.enable = true;
 
     environment.systemPackages = with pkgs; [
       podman-compose podman-tui
