@@ -12,6 +12,7 @@
     ../../modules/syncthing.nix
     ./services/monitor.nix
     ../../base/dev/interbotix.nix
+    ../../base/dev/alf.nix
   ];
 
   config = {
