@@ -37,6 +37,10 @@
 
     ml-pkgs.url = "github:nixvital/ml-pkgs";
     ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+
+    game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
+    game-solutions.inputs.nixpkgs.follows = "nixpkgs";
+    game-solutions.inputs.ml-pkgs.follows = "ml-pkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, vital-modules, nixos-home, ... }@inputs: {
@@ -147,6 +151,7 @@
               (final: prev: {
                 www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
               })
+              inputs.game-solutions.overlays.kiseki
               # inputs.rapit.overlays.default
             ];
           })

@@ -66,4 +66,9 @@ rec {
   interm = {
     port = 6337;
   };
+
+  kiseki = {
+    domain = "kiseki.breakds.org";
+    port = 28603;
+  };
 }

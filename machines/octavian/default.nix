@@ -20,6 +20,7 @@
     # ./services/famass.nix
     ./services/docker-registry.nix
     ./services/paperless.nix
+    ./services/game-solutions.nix
     ../../base/tailscale.nix
   ];
 
