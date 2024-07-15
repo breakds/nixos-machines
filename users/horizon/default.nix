@@ -48,16 +48,6 @@
         hashKnownHosts = true;
         controlMaster = "auto";
         controlPersist = "10m";
-
-        matchBlocks = {
-          "gail3" = {
-            hostname = "gail3.breakds.org";  # 10.40.0.173
-            user = "nixbuilder";
-            identityFile = "/home/horizon/.ssh/nixbuilder_malenia";
-            forwardX11 = true;
-            forwardX11Trusted = true;
-          };
-        };
       };
     };
   };

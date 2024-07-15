@@ -32,11 +32,6 @@ HOST_INFO = {
         "location": "lab",
         "session_root": "dataset",
     },
-
-    "GAIL3": {
-        "location": "lab",
-        "session_root": "tmp",
-    },
 }
 
 

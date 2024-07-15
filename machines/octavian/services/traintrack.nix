@@ -41,16 +41,6 @@
         schedule_interval = 30;
         agents = [
           {
-            name = "gail3";
-            port = traintrack-registry.agents.gail3.port;
-
-            ssh_uri = "10.40.0.173";
-            ssh_port = 22;
-            ssh_proxy = "10.77.1.188";  # armlet
-            ssh_proxy_port = 22;
-            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
-          }
-          {
             name = "samaritan";
             port = traintrack-registry.agents.samaritan.port;
 

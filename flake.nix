@@ -127,17 +127,6 @@
         ];
       };
 
-      "horizon.GAIL3" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          self.nixosModules.graphical
-          nixos-home.nixosModules.breakds-home
-          self.nixosModules.machine-learning
-          ./machines/horizon/GAIL3
-        ];
-      };
-
       octavian = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

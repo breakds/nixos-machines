@@ -13,13 +13,6 @@ rec {
     speedFactor = 6;
   };
 
-  "GAIL3" = {
-    hostName = "gail3";
-    location = "lab";
-    maxJobs = 14;
-    speedFactor = 8;
-  };
-
   "radahn" = {
     hostName = "radahn";
     location = "lab";
