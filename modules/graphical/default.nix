@@ -49,9 +49,6 @@ in {
     # in the dmenu so that hinder how chrome is being launched.
     services.gnome.gnome-browser-connector.enable = false;
 
-    # Enable touchpad support    
-    services.libinput.enable = true;
-
     services.displayManager.sddm.enable = cfg.xserver.displayManager == "sddm";
 
     services.xserver = {

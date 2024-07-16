@@ -26,5 +26,16 @@
     # memory, which should be placed into the self-refresh mode to retain its
     # contents.
     boot.kernelParams = [ "mem_sleep_default=deep" ];
+
+    # Enable touchpad support
+    services.libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+        disableWhileTyping = true;
+        # one finger = left, two finger = right
+        clickMethod = "clickfinger";
+      };
+    };
   };
 }
