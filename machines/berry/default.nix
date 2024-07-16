@@ -113,6 +113,8 @@
       home.bds.windowManager = "sway";
     };
 
+    services.fwupd.enable = true;
+
     # +--------------------+
     # | Distributed Build  |
     # +--------------------+
