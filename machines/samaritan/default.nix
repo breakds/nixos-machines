@@ -8,7 +8,6 @@
     ../../base/dev/breakds-dev.nix
     ../../base/dev/realsense.nix
     ../../base/traintrack/agent.nix
-    ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ./services/monitor.nix
     ../../base/dev/interbotix.nix
@@ -92,11 +91,6 @@
       omniverse-launcher
     ];
 
-    vital.distributed-build = {
-      enable = true;
-      location = "lab";
-    };
-
     networking.firewall.allowedTCPPorts = [ 16006 ];
     networking.firewall.allowedUDPPorts = [ 8030 ];
 
@@ -128,6 +122,24 @@
     # Disable unified cgroup hierarchy (cgroups v2)
     # This is to applease nvidia-docker
     systemd.enableUnifiedCgroupHierarchy = false;
+
+    nix = {
+      distributedBuilds = true;
+      buildMachines = {
+        hostName = "stormveil.local";
+        protocol = "ssh-ng";
+        systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+        sshUser = "nixbuilder";
+        sshKey = "/var/lib/remote-builders/keys/id_nixbuilder_gail";
+      };
+      settings = {
+        substituters = [ "http://stormveil.local:17777" "https://cache.nixos.org" ];
+        trusted-public-keys = [
+          "binary-cache.stormveil-1:yBmWQh8OPIXRlJBb8l5krit65krNhYcMIdblwsmdXs8="
+        ];
+      };
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
