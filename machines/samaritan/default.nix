@@ -135,7 +135,7 @@
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
       }];
       settings = {
-        substituters = [ "http://10.40.0.52:17777" "https://cache.nixos.org" ];
+        substituters = [ "http://10.40.0.72:17777" "https://cache.nixos.org" ];
         trusted-public-keys = [
           "binary-cache.stormveil-1:yBmWQh8OPIXRlJBb8l5krit65krNhYcMIdblwsmdXs8="
         ];
