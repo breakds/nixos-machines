@@ -4,72 +4,113 @@
   imports = [
     ./hardware-configuration.nix
     ../../base
+    ../../base/i3-session-breakds.nix
+    ../../base/dev/breakds-dev.nix
     ../../base/build-machines.nix
+    ../../modules/syncthing.nix
+    ../../base/tailscale.nix
   ];
 
   config = {
-    vital.mainUser = "cassandra";
+    vital.mainUser = "breakds";
 
-    # Machine-specific networking configuration.
-    networking.hostName = "berry";
-    # Generated via `head -c 8 /etc/machine-id`
+    users.users."breakds" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/breakds_samaritan.pub
+      ];
+      shell = pkgs.zsh;
+    };
+
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    networking.hostName = "nixos"; # Define your hostname.
     networking.hostId = "fe156831";
+    networking.useDHCP = lib.mkDefault true;
 
-    # NOTE: there is a service called `dlm.service` for displaylink. I am not
-    # pretty sure about the internals, but you will need the service to be
-    # running normal first. After that, you will need to reboot the machine for
-    # displaylink to work.
-    #
-    # Also it seems that displaylink 5.6 is bad. It is reported 5.5 is good, and
-    # 5.6.1 seems to be good too.
-    services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
-    services.fwupd.enable = true;
-    
+    # Enable networking
+    networking.networkmanager.enable = true;
+
     # +----------+
     # | Desktop  |
     # +----------+
 
     vital.graphical = {
       enable = true;
-      remote-desktop.enable = false;
-      xserver.dpi = 120;
+      # xserver.dpi = 180;
     };
 
-    # +----------+
-    # | Packages |
-    # +----------+
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.UTF-8";
 
-    vital.pre-installed.level = 5;
-
-    vital.programs = {
-      modern-utils.enable = true;
-      vscode.enable = false; # Use the one from home-manager
+    i18n.extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
     };
 
-    # NodeJS 14 is now deprecated. This makes sure that we can still use it.
-    nixpkgs.config.permittedInsecurePackages = [
-      "nodejs-14.21.3"
-      "openssl-1.1.1u"
-    ];    
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
 
+    # Enable sound with pipewire.
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+    programs.firefox.enable = true;
     environment.systemPackages = with pkgs; [
-      dbeaver
-      gimp peek gnupg pass libreoffice
-      skypeforlinux
-      multitail
-      nodejs-14_x
-      (yarn.override { nodejs = nodejs-14_x; })
+      zoom-us
+      thunderbird
+      trezor-suite
+      unetbootin
+      pavucontrol
+      parsec-bin  # For game streaming
+      xorg.xeyes
     ];
 
-    # +----------+
-    # | VPN      |
-    # +----------+
+    vital.pre-installed.level = 5;
+    vital.programs.arduino.enable = true;
+    vital.programs.texlive.enable = true;
+    vital.programs.modern-utils.enable = true;
 
-    services.openvpn.servers = {
-      MachineSP = {
-        config = "config /home/cassandra/.config/vpn/machine_sp.conf";
-        autoStart = false;
-      };
+    # With the following, fcitx can work with xwayland (i.e. non-native wayland
+    # windows).
+    environment.sessionVariables = {
+      NIX_PROFILES =
+        "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+      GTK_IM_MODULE = "fcitx";
+      QT_IM_MODULE = "fcitx";
+      XMODIFIERS = "@im=fcitx";
+    };
+
+    # This follows olmokramer's solution from this post:
+    # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
+    services.udev.extraHwdb = ''
+      evdev:input:b0011v0001p0001eAB83*
+        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
+    '';
+
+    # Trezor cryptocurrency hardware wallet
+    services.trezord.enable = true;
+
+    # The framework laptop supports fingerprint.
+    services.fprintd.enable = true;
+
+    home-manager.users."breakds" = {
+      home.bds.laptopXsession = true;
+      home.bds.windowManager = "sway";
     };
 
     # +--------------------+
@@ -81,13 +122,12 @@
       location = "homelab";
     };
 
-    # This value determines the NixOS release from which the default settings
-    # for stateful data, like file locations and database versions on your
-    # system were taken. It‘s perfectly fine and recommended to leave this value
-    # at the release version of the first install of this system. Before
-    # changing this value read the documentation for this option (e.g. man
-    # configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "21.05"; # Did you read the comment?
-    home-manager.users."cassandra".home.stateVersion = "21.05";
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "24.05"; # Did you read the comment?
   };
 }
