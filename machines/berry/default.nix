@@ -5,10 +5,10 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/i3-session-breakds.nix
-    ../../base/dev/breakds-dev.nix
+    # ../../base/dev/breakds-dev.nix
     ../../base/build-machines.nix
-    ../../modules/syncthing.nix
-    ../../base/tailscale.nix
+    # ../../modules/syncthing.nix
+    # ../../base/tailscale.nix
   ];
 
   config = {
@@ -20,6 +20,7 @@
       ];
       shell = pkgs.zsh;
     };
+    programs.zsh.enable = true;
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -69,21 +70,21 @@
       pulse.enable = true;
     };
 
-    programs.firefox.enable = true;
-    environment.systemPackages = with pkgs; [
-      zoom-us
-      thunderbird
-      trezor-suite
-      unetbootin
-      pavucontrol
-      parsec-bin  # For game streaming
-      xorg.xeyes
-    ];
+    # programs.firefox.enable = true;
+    # environment.systemPackages = with pkgs; [
+    #   zoom-us
+    #   thunderbird
+    #   trezor-suite
+    #   unetbootin
+    #   pavucontrol
+    #   parsec-bin  # For game streaming
+    #   xorg.xeyes
+    # ];
 
-    vital.pre-installed.level = 5;
-    vital.programs.arduino.enable = true;
-    vital.programs.texlive.enable = true;
-    vital.programs.modern-utils.enable = true;
+    # vital.pre-installed.level = 5;
+    # vital.programs.arduino.enable = true;
+    # vital.programs.texlive.enable = true;
+    # vital.programs.modern-utils.enable = true;
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).
@@ -129,5 +130,6 @@
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "24.05"; # Did you read the comment?
+    home-manager.users."breakds".home.stateVersion = "24.05";
   };
 }
