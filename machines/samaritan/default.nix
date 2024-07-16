@@ -125,16 +125,17 @@
 
     nix = {
       distributedBuilds = true;
-      buildMachines = {
+      buildMachines = [{
         hostName = "stormveil.local";
+        # Note that you need to make sure the user "root" on the local machine to be
+        # able to ssh to "<sshUser>@<hostName>" without password.
+        sshUser = "nixbuilder";
         protocol = "ssh-ng";
         systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        sshUser = "nixbuilder";
-        sshKey = "/var/lib/remote-builders/keys/id_nixbuilder_gail";
-      };
+      }];
       settings = {
-        substituters = [ "http://stormveil.local:17777" "https://cache.nixos.org" ];
+        substituters = [ "http://10.40.0.52:17777" "https://cache.nixos.org" ];
         trusted-public-keys = [
           "binary-cache.stormveil-1:yBmWQh8OPIXRlJBb8l5krit65krNhYcMIdblwsmdXs8="
         ];
