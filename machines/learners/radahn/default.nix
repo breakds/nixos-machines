@@ -8,6 +8,7 @@
     ../common.nix
     ../../../base/build-machines.nix
     ./binary-cache.nix
+    ../../../users/dustin.nix
   ];
 
   config = {
