@@ -7,6 +7,8 @@
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines.nix
+    ../../base/dev/interbotix.nix
+    ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/tailscale.nix
   ];
