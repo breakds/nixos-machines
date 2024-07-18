@@ -67,6 +67,7 @@ in {
                                                config.networking.hostName != x.hostname) cache-registry;
         in {
           substituters = (builtins.map (x: x.url) selectedCaches) ++ [ "https://cache.nixos.org" ];
+          # Be aware of this: https://github.com/NixOS/nix/issues/8271
           trusted-public-keys = builtins.map (x: x.publicKey) selectedCaches;
         };
       };
