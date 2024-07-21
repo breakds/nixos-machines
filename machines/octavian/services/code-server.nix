@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
-let rootDir = "/var/lib/code-server";
+let info = (import ../../../data/service-registry.nix).code-server;
+    rootDir = "/var/lib/code-server";
     dataDir = "${rootDir}/data";
     extensionDir = "${rootDir}/extensions";
 
@@ -13,7 +14,7 @@ in {
       group = "delegator";
       userDataDir = "${dataDir}";
       host = "localhost";
-      port = 4445;
+      port = info.port;
       extraEnvironment = {
         SERVICE_URL = "https://open-vsx.org/vscode/gallery";
         ITEM_URL = "https://open-vsx.org/vscode/item";
@@ -28,7 +29,7 @@ in {
     };
 
     services.nginx.virtualHosts = {
-      "code.breakds.org" = {
+      "${info.domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
