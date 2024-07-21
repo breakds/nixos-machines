@@ -19,7 +19,7 @@ in {
         ITEM_URL = "https://open-vsx.org/vscode/item";
       };
       extraArguments = [
-        "--install-extension=genuitecllc.codetogether"
+        # "--install-extension=genuitecllc.codetogether"
         "--enable-proposed-api=genuitecllc.codetogether"
       ];
     };
