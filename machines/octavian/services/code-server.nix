@@ -14,7 +14,12 @@ in {
       userDataDir = "${dataDir}";
       host = "localhost";
       port = 4445;
+      extraEnvironment = {
+        SERVICE_URL = "https://open-vsx.org/vscode/gallery";
+        ITEM_URL = "https://open-vsx.org/vscode/item";
+      };
       extraArguments = [
+        "--install-extension=genuitecllc.codetogether"
         "--enable-proposed-api=genuitecllc.codetogether"
       ];
     };
