@@ -14,6 +14,9 @@ in {
       userDataDir = "${dataDir}";
       host = "localhost";
       port = 4445;
+      extraArguments = [
+        "--enable-proposed-api=genuitecllc.codetogether"
+      ];
     };
 
     services.nginx.virtualHosts = {
