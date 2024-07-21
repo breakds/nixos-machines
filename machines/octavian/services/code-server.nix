@@ -19,6 +19,9 @@ in {
         ITEM_URL = "https://open-vsx.org/vscode/item";
       };
       extraArguments = [
+        # TODO(breakds): Write a service to install the extensions.
+        # Currently the user has to add installation arugment here and run it once. The server will finish
+        # installation and exit. Then, remove the argument line and start the server again.
         # "--install-extension=genuitecllc.codetogether"
         "--enable-proposed-api=genuitecllc.codetogether"
       ];
