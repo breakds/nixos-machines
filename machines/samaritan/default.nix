@@ -91,8 +91,8 @@
       omniverse-launcher
     ];
 
-    networking.firewall.allowedTCPPorts = [ 16006 ];
-    networking.firewall.allowedUDPPorts = [ 8030 ];
+    networking.firewall.allowedTCPPorts = [ 16006 8100 8110 ];
+    networking.firewall.allowedUDPPorts = [ 8030 8100 8110];
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
