@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./vpn.nix
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
@@ -116,8 +117,6 @@
     };
 
     services.fwupd.enable = true;
-
-    services.expressvpn.enable = true;
 
     # +--------------------+
     # | Distributed Build  |
