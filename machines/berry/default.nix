@@ -117,6 +117,8 @@
 
     services.fwupd.enable = true;
 
+    services.expressvpn.enable = true;
+
     # +--------------------+
     # | Distributed Build  |
     # +--------------------+
