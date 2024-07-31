@@ -301,14 +301,23 @@
       };
 
       # How to build this live:
-      # nix build .#nixosConfigurations.liveISO.config.system.build.isoImage
-      # Alternatively, see below (nix build .#liveISO for short).
-      liveISO = nixpkgs.lib.nixosSystem {
+      # nix build .#nixosConfigurations.liveCD.config.system.build.isoImage
+      # Alternatively, see below (nix build .#liveCD for short).
+      liveCD = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           # The base image that has gnome.
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
           ./machines/livecd/with-nvidia.nix
+        ];
+      };
+
+      liveStandardCD = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # The base image that has gnome.
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
+          ./machines/livecd/standard.nix
         ];
       };
     };
@@ -323,15 +332,16 @@
       ];
     }; in {
       inherit (pkgs) shuriken medea-clipper robot-deployment-suite omniverse-launcher;
-      # nix build .#liveISO will build the ISO image
-      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
+      # nix build .#liveCD will build the ISO image
+      liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
+      liveStandardCD = self.nixosConfigurations.liveStandardCD.config.system.build.isoImage;
     };
 
     checks."x86_64-linux" = {
       octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
       malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
       hand = self.nixosConfigurations.hand.config.system.build.toplevel;
-      liveISO = self.nixosConfigurations.liveISO.config.system.build.isoImage;
+      liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
     };
   };
 }
