@@ -123,24 +123,33 @@
     # This is to applease nvidia-docker
     systemd.enableUnifiedCgroupHierarchy = false;
 
-    nix = {
-      distributedBuilds = true;
-      buildMachines = [{
-        hostName = "stormveil.local";
-        # Note that you need to make sure the user "root" on the local machine to be
-        # able to ssh to "<sshUser>@<hostName>" without password.
-        sshUser = "nixbuilder";
-        protocol = "ssh-ng";
-        systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-      }];
-      settings = {
-        substituters = [ "http://10.40.0.72:17777" "https://cache.nixos.org" ];
-        trusted-public-keys = [
-          "binary-cache.stormveil-1:yBmWQh8OPIXRlJBb8l5krit65krNhYcMIdblwsmdXs8="
-        ];
-      };
+    # +--------------------+
+    # | Distributed Build  |
+    # +--------------------+
+
+    vital.distributed-build = {
+      enable = true;
+      location = "homelab";
     };
+
+    # nix = {
+    #   distributedBuilds = true;
+    #   buildMachines = [{
+    #     hostName = "stormveil.local";
+    #     # Note that you need to make sure the user "root" on the local machine to be
+    #     # able to ssh to "<sshUser>@<hostName>" without password.
+    #     sshUser = "nixbuilder";
+    #     protocol = "ssh-ng";
+    #     systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+    #     supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+    #   }];
+    #   settings = {
+    #     substituters = [ "http://10.40.0.72:17777" "https://cache.nixos.org" ];
+    #     trusted-public-keys = [
+    #       "binary-cache.stormveil-1:yBmWQh8OPIXRlJBb8l5krit65krNhYcMIdblwsmdXs8="
+    #     ];
+    #   };
+    # };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

@@ -103,9 +103,10 @@
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
-          # self.nixosModules.downgrade-to-nvidia520
           self.nixosModules.steam-run
           # self.nixosModules.ai-agents
+          self.nixosModules.overlay-nodejs-14
+          nixos-home.nixosModules.cassandra-home
           ./machines/samaritan
         ];
       };
