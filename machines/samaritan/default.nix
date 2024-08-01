@@ -12,6 +12,7 @@
     ./services/monitor.nix
     ../../base/dev/interbotix.nix
     ../../base/dev/alf.nix
+    ../../users/cassandra.nix
   ];
 
   config = {
