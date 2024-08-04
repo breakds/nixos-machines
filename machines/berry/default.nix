@@ -35,6 +35,8 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
+    time.timeZone = "Asia/Shanghai";
+
     # +----------+
     # | Desktop  |
     # +----------+
@@ -123,8 +125,8 @@
     # +--------------------+
 
     vital.distributed-build = {
-      enable = true;
-      location = "homelab";
+      enable = false;
+      location = "office";
     };
 
     # This value determines the NixOS release from which the default
