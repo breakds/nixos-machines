@@ -22,7 +22,7 @@
     ./services/docker-registry.nix
     ./services/paperless.nix
     ./services/game-solutions.nix
-    ../../base/tailscale.nix
+    ../../base/vpn.nix
   ];
 
   config = {
@@ -156,7 +156,7 @@
         enable = true;
         interval = "Sun, 02:00";
       };
-    };
+    };    
 
     nix = {
       settings = {
@@ -165,6 +165,10 @@
           "root"
         ];
       };
+    };
+
+    vital.vpn = {
+      tailscale = true;
     };
 
     # This value determines the NixOS release from which the default

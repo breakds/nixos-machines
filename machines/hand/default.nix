@@ -10,7 +10,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/realsense.nix
-    ../../base/tailscale.nix
+    ../../base/vpn.nix
     ./display.nix
   ];
 
@@ -110,6 +110,14 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
+    };
+
+    # +--------------------+
+    # | VPN                |
+    # +--------------------+
+    
+    vital.vpn = {
+      tailscale = true;
     };
 
     # +--------------------+

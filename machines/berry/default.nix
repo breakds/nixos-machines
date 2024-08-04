@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./vpn.nix
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
@@ -11,7 +10,7 @@
     ../../base/dev/interbotix.nix
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
-    ../../base/tailscale.nix
+    ../../base/vpn.nix
   ];
 
   config = {
@@ -119,6 +118,15 @@
     };
 
     services.fwupd.enable = true;
+
+    # +--------------------+
+    # | VPN                |
+    # +--------------------+
+    
+    vital.vpn = {
+      clash = true;
+      tailscale = true;
+    };
 
     # +--------------------+
     # | Distributed Build  |
