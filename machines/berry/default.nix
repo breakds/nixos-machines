@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./displaylink.nix
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
@@ -44,6 +45,9 @@
       enable = true;
       # xserver.dpi = 180;
     };
+
+    # Enable displaylink for berry.
+    # services.xserver.videoDrivers = [ "displaylink" ];
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
