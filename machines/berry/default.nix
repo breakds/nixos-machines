@@ -137,6 +137,12 @@
           # };
         };
       };
+      programs.ssh.matchBlocks = {
+        "github.com" = {
+          hostname = "ssh.github.com";
+          port = 443;
+        };
+      };
     };
 
     services.fwupd.enable = true;
