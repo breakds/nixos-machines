@@ -199,6 +199,18 @@
         ];
       };
 
+      brock = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
+          self.nixosModules.laptop
+          self.nixosModules.iphone-connect
+          nixos-home.nixosModules.breakds-home
+          ./machines/brock
+        ];
+      };
+
       orchard = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
