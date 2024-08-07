@@ -43,7 +43,6 @@
 
     vital.graphical = {
       enable = true;
-      # xserver.dpi = 180;
     };
 
     # Enable displaylink for berry.
@@ -119,6 +118,12 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
+      # NOTE(breakds): For Xwayland application (i.e. non wayland-native), we
+      # can use Xft.dpi to scale them. This is superior to using sway's output
+      # scale because that will make the Xwayland application blurry.
+      xresources.properties = {
+        "Xft.dpi" = 120;
+      };
       wayland.windowManager.sway.config = {
         output = {
           eDP-1 = {
