@@ -119,6 +119,19 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
+      wayland.windowManager.sway.config = {
+        output = {
+          eDP-1 = {
+            scale = "1.0";
+            adaptive_sync = "on";
+            # pos = "0 2160";
+          };
+          # DP-3 = {
+          #   scale = "1.0";
+          #   pos = "0 0";
+          # };
+        };
+      };
     };
 
     services.fwupd.enable = true;
