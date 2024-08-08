@@ -118,6 +118,7 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
+      home.bds.location = "chengdu";
       # NOTE(breakds): For Xwayland application (i.e. non wayland-native), we
       # can use Xft.dpi to scale them. This is superior to using sway's output
       # scale because that will make the Xwayland application blurry.
@@ -135,12 +136,6 @@
           #   scale = "1.0";
           #   pos = "0 0";
           # };
-        };
-      };
-      programs.ssh.matchBlocks = {
-        "github.com" = {
-          hostname = "ssh.github.com";
-          port = 443;
         };
       };
     };

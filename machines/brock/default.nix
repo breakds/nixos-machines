@@ -114,6 +114,7 @@
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
+      home.bds.location = "chengdu";
     };
 
     services.fwupd.enable = true;
@@ -125,19 +126,6 @@
     vital.vpn = {
       clash = true;
       tailscale = true;
-    };
-
-    # +--------------------+
-    # | Location Specific  |
-    # +--------------------+
-
-    home-manager.users.breakds = {
-      programs.ssh.matchBlocks = {
-        "github.com" = {
-          hostname = "ssh.github.com";
-          port = 443;
-        };
-      };
     };
 
     # +--------------------+
