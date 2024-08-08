@@ -115,6 +115,9 @@
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
       home.bds.location = "chengdu";
+      xresources.properties = {
+        "Xft.dpi" = 120;
+      };
     };
 
     services.fwupd.enable = true;
