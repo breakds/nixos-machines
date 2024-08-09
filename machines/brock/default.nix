@@ -115,8 +115,11 @@
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
       home.bds.location = "chengdu";
+      # If you are not using a desktop environment such as KDE, Xfce, or other
+      # that manipulates the X settings for you, you can set the desired DPI
+      # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = {
-        "Xft.dpi" = 120;
+        "Xft.dpi" = 125;
       };
     };
 
