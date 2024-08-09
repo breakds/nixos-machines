@@ -25,6 +25,8 @@ rec {
     location = "office";
     maxJobs = 24;
     speedFactor = 6;
+    # Note, the local machine's root should be able to ssh to the remote host
+    # with this user name WITHOUT password.
     sshUser = "breakds";
     sshKey = "breakds_samaritan";
   };
