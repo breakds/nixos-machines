@@ -6,7 +6,7 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/build-machines.nix
+    ../../base/build-machines-v2.nix
     ../../base/dev/interbotix.nix
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
@@ -139,8 +139,8 @@
     # +--------------------+
 
     vital.distributed-build = {
-      enable = false;
-      location = "office";
+      caches = [ "datahub" ];
+      builders = [ "kami" ];
     };
 
     # This value determines the NixOS release from which the default
