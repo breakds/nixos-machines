@@ -21,7 +21,7 @@ rec {
   };
 
   "kami" = {
-    hostName = "kami";
+    hostName = "192.168.110.134";
     location = "office";
     maxJobs = 24;
     speedFactor = 6;

@@ -12,7 +12,7 @@
   };
 
   datahub = {
-    url = "http://datahub:3001";
+    url = "http://192.168.110.223:3001";
     publicKey = "datahub:hJW3R6YQqblRz8cSSaQ92DFrzYzOtG48y6qKbBukwQM=";
     location = "office";
   };
