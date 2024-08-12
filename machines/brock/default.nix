@@ -119,7 +119,7 @@
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = {
-        "Xft.dpi" = 125;
+        "Xft.dpi" = 144;
       };
     };
 
