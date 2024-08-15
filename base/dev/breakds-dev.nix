@@ -36,7 +36,6 @@
       bluetuith  # Bluetooth Manager TUI
       # TODO(brakds): Cannot build at 23.05
       # parquet-tools
-      unison
 
       # For SD Card and Images
       usbimager
