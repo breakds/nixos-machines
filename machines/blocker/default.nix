@@ -11,7 +11,7 @@
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
-    # ./unison.nix
+    ./unison.nix
   ];
 
   config = {
@@ -28,8 +28,8 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "brock"; # Define your hostname.
-    networking.hostId = "20669241";
+    networking.hostName = "blocker"; # Define your hostname.
+    networking.hostId = "47039c94";
     networking.useDHCP = lib.mkDefault true;
 
     # Enable networking
@@ -85,8 +85,6 @@
     ];
 
     vital.pre-installed.level = 5;
-    vital.programs.arduino.enable = true;
-    vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
@@ -98,16 +96,6 @@
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
     };
-
-    # This follows olmokramer's solution from this post:
-    # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
-    services.udev.extraHwdb = ''
-      evdev:input:b0011v0001p0001eAB83*
-        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
-    '';
-
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
 
     # The framework laptop supports fingerprint.
     services.fprintd.enable = true;

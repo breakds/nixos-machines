@@ -211,6 +211,18 @@
         ];
       };
 
+      # Temporary working machine in Chengdu
+      blocker = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
+          self.nixosModules.iphone-connect
+          nixos-home.nixosModules.breakds-home
+          ./machines/blocker
+        ];
+      };
+
       orchard = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
