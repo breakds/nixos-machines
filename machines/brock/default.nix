@@ -11,7 +11,7 @@
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
-    # ./unison.nix
+    ./unison.nix
   ];
 
   config = {
@@ -77,15 +77,12 @@
     programs.firefox.enable = true;
     environment.systemPackages = with pkgs; [
       zoom-us
-      thunderbird
-      trezor-suite
       unetbootin
       pavucontrol
       xorg.xeyes
     ];
 
     vital.pre-installed.level = 5;
-    vital.programs.arduino.enable = true;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
 
@@ -98,16 +95,6 @@
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
     };
-
-    # This follows olmokramer's solution from this post:
-    # https://discourse.nixos.org/t/configuring-caps-lock-as-control-on-console/9356/2
-    services.udev.extraHwdb = ''
-      evdev:input:b0011v0001p0001eAB83*
-        KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
-    '';
-
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
 
     # The framework laptop supports fingerprint.
     services.fprintd.enable = true;
