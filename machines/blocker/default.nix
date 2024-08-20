@@ -78,7 +78,6 @@
     environment.systemPackages = with pkgs; [
       zoom-us
       thunderbird
-      trezor-suite
       unetbootin
       pavucontrol
       xorg.xeyes
