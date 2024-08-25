@@ -451,11 +451,11 @@
         "utils": "utils_6"
       },
       "locked": {
-        "lastModified": 1724570823,
-        "narHash": "sha256-IFg9D6Xca4ujhiHUGCFGvLe7m6EBEI0y7wFtMB+QgHQ=",
+        "lastModified": 1724571244,
+        "narHash": "sha256-GJgiNPv0cjFWYqjj/xmwQ0AXvYVtZnlYTIOvhcoWedM=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "5090f3b1984bc2179cae5ffa1d76eac99194292d",
+        "rev": "107f64bd056283de9878cbc84b57e8fd40d3a408",
         "type": "github"
       },
       "original": {
