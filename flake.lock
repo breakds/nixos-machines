@@ -267,6 +267,21 @@
         "type": "github"
       }
     },
+    "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "traintrack": {
       "inputs": {
         "nixpkgs": [
@@ -370,12 +385,15 @@
       }
     },
     "utils_6": {
+      "inputs": {
+        "systems": "systems_3"
+      },
       "locked": {
-        "lastModified": 1623875721,
-        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
@@ -433,11 +451,11 @@
         "utils": "utils_6"
       },
       "locked": {
-        "lastModified": 1676224373,
-        "narHash": "sha256-p3nQ5pCcWMHDmQBf/86khMabb205O5HEY4L+BJPvXS8=",
+        "lastModified": 1724570823,
+        "narHash": "sha256-IFg9D6Xca4ujhiHUGCFGvLe7m6EBEI0y7wFtMB+QgHQ=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "15b48f8eceed636c6e7acb11b73bd726fae946cb",
+        "rev": "5090f3b1984bc2179cae5ffa1d76eac99194292d",
         "type": "github"
       },
       "original": {
