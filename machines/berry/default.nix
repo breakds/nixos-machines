@@ -12,6 +12,7 @@
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
+    ../../modules/steam.nix
   ];
 
   config = {
