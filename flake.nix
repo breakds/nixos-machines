@@ -88,7 +88,7 @@
 
         # TODO(breakds): Restore aider for 24.05
         environment.systemPackages = with pkgs; [
-          aider
+          aider-chat
         ];
       };
     };
@@ -195,6 +195,7 @@
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ai-agents
           ./machines/berry
         ];
       };
@@ -219,6 +220,7 @@
           self.nixosModules.graphical
           self.nixosModules.iphone-connect
           nixos-home.nixosModules.breakds-home
+          self.nixosModules.ai-agents
           ./machines/blocker
         ];
       };
