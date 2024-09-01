@@ -28,6 +28,7 @@
     };
 
     networking.enableIPv6 = true;
+    networking.usePredictableInterfaceNames = true;
 
     environment.systemPackages = with pkgs; [
       gparted pass samba
