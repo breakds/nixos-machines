@@ -86,7 +86,6 @@
           inputs.ml-pkgs.overlays.tools
         ];
 
-        # TODO(breakds): Restore aider for 24.05
         environment.systemPackages = with pkgs; [
           aider-chat
         ];
@@ -104,7 +103,7 @@
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
           self.nixosModules.steam-run
-          # self.nixosModules.ai-agents
+          self.nixosModules.ai-agents
           self.nixosModules.overlay-nodejs-14
           nixos-home.nixosModules.cassandra-home
           ./machines/samaritan
@@ -120,7 +119,7 @@
           self.nixosModules.iphone-connect
           # TODO(breakds): Make steam great again.
           # self.nixosModules.steam
-          # self.nixosModules.ai-agents
+          self.nixosModules.ai-agents
           nixos-home.nixosModules.breakds-home
           self.nixosModules.machine-learning
           self.nixosModules.flatpak
@@ -207,6 +206,7 @@
           self.nixosModules.graphical
           self.nixosModules.laptop
           self.nixosModules.iphone-connect
+          self.nixosModules.ai-agents
           nixos-home.nixosModules.breakds-home
           ./machines/brock
         ];
