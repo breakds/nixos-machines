@@ -64,6 +64,16 @@
     # Enable CUPS to print documents.
     services.printing.enable = true;
 
+    # Quick Sync Video (hardware accelerated media conversion for Intel)
+    # See https://wiki.nixos.org/wiki/Intel_Graphics
+    # Also note, hardware.opengl will rename to `hardware.graphics` in 24.11
+    hardware.opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        onevpl-intel-gpu  # NOTE: will rename to vpl-gpu-rt
+      ];
+    };
+
     # Enable sound with pipewire.
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
