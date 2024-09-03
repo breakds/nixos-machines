@@ -16,6 +16,12 @@
             "ssh://ares//home/breakds/projects/research-incubator"
           ];
         };
+        "numpandas" = {
+          roots = [
+            "/home/breakds/projects/quant/numpandas"
+            "ssh://ares//home/breakds/projects/numpandas"
+          ];
+        };
       };
     };
   };
