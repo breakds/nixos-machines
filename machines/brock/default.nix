@@ -11,7 +11,7 @@
     ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
-    ./unison.nix
+    # ./unison.nix
   ];
 
   config = {
@@ -35,7 +35,7 @@
     # Enable networking
     networking.networkmanager.enable = true;
 
-    time.timeZone = "Asia/Shanghai";
+    time.timeZone = "America/Los_Angeles";
 
     # +----------+
     # | Desktop  |
