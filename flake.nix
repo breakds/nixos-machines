@@ -274,23 +274,6 @@
         ];
       };
 
-      # Laptop for robot deployment
-      hyaku = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          # Unlike the others, the home-manager configuration for hyaku is
-          # managed in this repo.
-          inputs.home-manager.nixosModules.home-manager
-          self.nixosModules.horizon-home
-          self.nixosModules.mito-home
-          vital-modules.nixosModules.foundation
-          self.nixosModules.graphical
-          self.nixosModules.laptop
-          self.nixosModules.steam-run
-          ./machines/hyaku
-        ];
-      };
-
       # Containers
       fortress = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
