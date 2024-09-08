@@ -26,11 +26,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1722209904,
-        "narHash": "sha256-cRTWh/Jp8ixgqmAugyi31xI3VC1sY0gvafjb1QBzrj8=",
+        "lastModified": 1725839479,
+        "narHash": "sha256-L6XXuyTUadhzL3ew0zdKmBPWWmk3FXUNhVVvTnTB7Dg=",
         "ref": "refs/heads/main",
-        "rev": "02e9bd71c7db08d331a326dd5fcf0c5b50fdaa02",
-        "revCount": 78,
+        "rev": "c2e1b442052b3665cb04dd905ab9a77503b16032",
+        "revCount": 80,
         "type": "git",
         "url": "ssh://git@github.com/breakds/game-solutions"
       },
