@@ -106,9 +106,6 @@
       XMODIFIERS = "@im=fcitx";
     };
 
-    # The framework laptop supports fingerprint.
-    services.fprintd.enable = true;
-
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.windowManager = "sway";
