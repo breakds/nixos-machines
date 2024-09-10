@@ -11,7 +11,6 @@
     ../../modules/syncthing.nix
     ../../base/dev/realsense.nix
     ../../base/vpn.nix
-    ./display.nix
   ];
 
   config = {
