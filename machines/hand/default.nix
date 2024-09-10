@@ -7,7 +7,7 @@
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../base/dev/sagittarius.nix
-    ../../base/build-machines.nix
+    ../../base/build-machines-v2.nix
     ../../modules/syncthing.nix
     ../../base/dev/realsense.nix
     ../../base/vpn.nix
@@ -125,8 +125,8 @@
     # +--------------------+
 
     vital.distributed-build = {
-      enable = true;
-      location = "homelab";
+      caches = [ "octavian" ];
+      builders = [ "octavian" "malenia" ];
     };
 
     # This value determines the NixOS release from which the default

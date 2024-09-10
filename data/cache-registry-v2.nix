@@ -1,5 +1,5 @@
 {
-  ocatavian = {
+  octavian = {
     url = "http://10.77.1.130:17777";
     publicKey = "hydra.breakds.org-1:tjJYWEFAcw1avI4+QYWWs8Hm+wvrFiFaB2ennVBHDAQ=";
     location = "homelab";
