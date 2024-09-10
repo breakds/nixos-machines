@@ -115,6 +115,12 @@
       xresources.properties = {
         "Xft.dpi" = 144;
       };
+      # Set the default scale to 1.0.
+      wayland.windowManager.sway.config.output = {
+        "eDP-1" = {
+          scale = 1.0;
+        };
+      };
     };
 
     # +--------------------+
