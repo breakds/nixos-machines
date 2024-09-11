@@ -125,8 +125,8 @@
     # +--------------------+
     
     vital.vpn = {
-      clash = true;
-      tailscale = true;
+      clash = false;
+      tailscale = false;
     };
 
     # +--------------------+
