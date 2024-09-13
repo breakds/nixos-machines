@@ -9,8 +9,8 @@ rec {
   "octavian" = {
     hostName = "octavian.local";
     location = "homelab";    
-    maxJobs = 12;
-    speedFactor = 6;
+    maxJobs = 24;
+    speedFactor = 10;
   };
 
   "radahn" = {
