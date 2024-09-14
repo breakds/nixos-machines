@@ -28,6 +28,14 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  fileSystems."/home/breakds/dataset/wonder" = {
+    # /dev/nvme0n1p1
+    device = "/dev/disk/by-uuid/c8fa5475-1436-460f-8ea3-3d18b88a6eaf";
+    fsType = "ext4";
+    neededForBoot = false;
+    options = [ "nofail" ];
+  };
+
   # Enable this option to support HDD/SSD temperature sensors.
   hardware.sensor.hddtemp = {
     enable = true;
