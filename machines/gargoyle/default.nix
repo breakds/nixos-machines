@@ -42,7 +42,8 @@
     networking = {
       hostName = "gargoyle";
       hostId = "bbdf0382";
-      # Enable WiFi for KDE
+      # Enable WiFi for KDE. With the following the network icon will
+      # show on the system tray.
       networkmanager = {
         enable = lib.mkDefault true;
         wifi.backend = lib.mkForce "iwd";
@@ -66,6 +67,7 @@
     services.desktopManager.plasma6 = {
       enable = true;
     };
+    programs.kdeconnect.enable = true;
 
     environment.systemPackages = with pkgs; [
       zoom-us
