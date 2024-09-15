@@ -47,22 +47,19 @@
     programs.gnupg.agent.enable = lib.mkForce false;
     programs.ssh.startAgent = lib.mkForce true;
 
-    vital.graphical = {
-      enable = true;
-      nvidia.enable = false;
-    };
-
-    services.xserver.displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "breakds";
-      };
-      job.preStart = "sleep 5";
-    };
-
     vital.pre-installed.level = 5;
     vital.programs.texlive.enable = false;
     vital.programs.modern-utils.enable = true;
+
+    # KDE
+    services.xserver.enable = true;
+    services.displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    services.desktopManager.plasma6 = {
+      enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
       zoom-us

@@ -252,7 +252,6 @@
             ];
           })
           vital-modules.nixosModules.foundation
-          self.nixosModules.graphical
           ./machines/gargoyle
         ];
       };
