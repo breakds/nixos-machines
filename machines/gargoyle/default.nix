@@ -42,6 +42,12 @@
     networking = {
       hostName = "gargoyle";
       hostId = "bbdf0382";
+      # Enable WiFi for KDE
+      networkmanager = {
+        enable = lib.mkDefault true;
+        wifi.backend = lib.mkForce "iwd";
+      };
+      wireless.iwd.enable = lib.mkForce true;
     };
 
     programs.gnupg.agent.enable = lib.mkForce false;
