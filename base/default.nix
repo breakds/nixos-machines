@@ -32,21 +32,10 @@
 
     environment.systemPackages = with pkgs; [
       gparted pass samba
-    ] ++ lib.optionals config.vital.graphical.enable [
       feh
       jq
       google-chrome
       scrot
-      # Move to desktop specific modules
-      # zoom-us
-      # thunderbird     
-      # strawberry
-      # audacious
-      # audacity
-      # steam-run-native
-      # wesnoth
-      # inkscape
-      # discord
     ];
 
     fonts.packages = with pkgs; [
