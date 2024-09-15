@@ -23,11 +23,6 @@ HOST_INFO = {
         "session_root": "tmp",
     },
 
-    "samaritan": {
-        "location": "lab",
-        "session_root": "dataset",
-    },
-
     "radahn": {
         "location": "lab",
         "session_root": "dataset",

@@ -37,19 +37,9 @@
       user = "breakds";
       group = "breakds";
       settings = {
-        default_blacklist = [ "samaritan" "octavian" "malenia" ];
+        default_blacklist = [ "octavian" "malenia" ];
         schedule_interval = 30;
         agents = [
-          {
-            name = "samaritan";
-            port = traintrack-registry.agents.samaritan.port;
-
-            ssh_uri = "10.40.1.52";
-            ssh_port = 22;
-            ssh_proxy = "10.77.1.188";  # armlet
-            ssh_proxy_port = 22;
-            ssh_key_file = "/home/breakds/.ssh/breakds_samaritan";
-          }
           {
             name = "lothric";
             port = traintrack-registry.agents.lothric.port;

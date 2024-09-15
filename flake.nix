@@ -93,23 +93,6 @@
     };
 
     nixosConfigurations = {
-      samaritan = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          self.nixosModules.graphical
-          self.nixosModules.iphone-connect
-          nixos-home.nixosModules.breakds-home
-          self.nixosModules.machine-learning
-          self.nixosModules.flatpak
-          self.nixosModules.steam-run
-          self.nixosModules.ai-agents
-          self.nixosModules.overlay-nodejs-14
-          nixos-home.nixosModules.cassandra-home
-          ./machines/samaritan
-        ];
-      };
-
       malenia = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

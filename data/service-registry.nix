@@ -28,7 +28,6 @@ rec {
     agents = {
       lothric = { port = 5975; };
       lorian = { port = 5975; };
-      samaritan = { port = 5975; };
       malenia = { port = 5975; };
       octavian = { port = 5975; };
     };
