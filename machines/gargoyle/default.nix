@@ -70,7 +70,13 @@
     # with KDE connect, there will be a prompt which is annoying. For
     # now just use X11.
     programs.kdeconnect.enable = true;
-    services.displayManager.defaultSession = "plasmax11";
+    services.displayManager = {
+      defaultSession = "plasmax11";
+      autoLogin = {
+        enable = true;
+        user = "breakds";
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       zoom-us
