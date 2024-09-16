@@ -35,6 +35,7 @@
       feh
       jq
       google-chrome
+      tor-browser-bundle-bin
       scrot
     ];
 
