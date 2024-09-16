@@ -62,11 +62,13 @@
     services.xserver.enable = true;
     services.displayManager.sddm = {
       enable = true;
-      wayland.enable = true;
     };
     services.desktopManager.plasma6 = {
       enable = true;
     };
+    # Note that for wayland, every time when you try to take control
+    # with KDE connect, there will be a prompt which is annoying. For
+    # now just use X11.
     programs.kdeconnect.enable = true;
 
     environment.systemPackages = with pkgs; [
