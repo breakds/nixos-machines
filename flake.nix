@@ -208,15 +208,6 @@
         ];
       };
 
-      medea = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          vital-modules.nixosModules.foundation
-          self.nixosModules.graphical
-          ./machines/medea
-        ];
-      };
-
       # Raspberry Pi 4B
       armlet = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";

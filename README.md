@@ -7,7 +7,6 @@ This repository contains the NixOS configurations for all my machines. Given the
 2. **Ryzen CPU + Nvidia GPU Workstation:** [rei](machines/rei)
 3. **Raspberry Pi:** [armlet](machines/pi/armlet)
 4. **Threadripper CPU + Multi Nvidia GPU Workstation:** [radahn](machines/learners/radahn)
-5. **Intel NUC:** [medea](machines/medea)
-6. **ZFS NAS Server:** [octavian](machines/octavian)
+5. **ZFS NAS Server:** [octavian](machines/octavian)
 
 Additionally, you can find a Live CD configuration here: [livecd](machines/livecd).
