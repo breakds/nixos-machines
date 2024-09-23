@@ -295,10 +295,11 @@
         (import ./base/overlays)
       ];
     }; in {
-      inherit (pkgs) shuriken medea-clipper robot-deployment-suite omniverse-launcher;
+      inherit (pkgs) shuriken robot-deployment-suite omniverse-launcher;
       # nix build .#liveCD will build the ISO image
       liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
       liveStandardCD = self.nixosConfigurations.liveStandardCD.config.system.build.isoImage;
+      clickhouse-config = pkgs.callPackage ./modules/clickhouse/config.nix {};
     };
 
     checks."x86_64-linux" = {
