@@ -38,6 +38,12 @@
       ];
     };
 
+    users.users."borg" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/kj.pub
+      ];
+    };
+
     users.users."root" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_samaritan.pub
