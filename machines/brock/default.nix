@@ -134,8 +134,8 @@
     # +--------------------+
 
     vital.distributed-build = {
-      caches = [ "datahub" ];
-      builders = [ "kami" ];
+      caches = [ "octavian" ];
+      builders = [ "octavian" "malenia" ];
     };
 
     # This value determines the NixOS release from which the default
