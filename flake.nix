@@ -167,6 +167,22 @@
         ];
       };
 
+      ghostberry = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # Get the community maintained thinkpad x1-nano baseline
+          # nixos-hardware.nixosModules.lenovo-thinkpad-x1-nano-gen1
+          vital-modules.nixosModules.foundation
+          self.nixosModules.graphical
+          self.nixosModules.laptop
+          self.nixosModules.iphone-connect
+          nixos-home.nixosModules.breakds-home
+          self.nixosModules.ai-agents
+          ./machines/ghostberry
+        ];
+      };
+
+
       brock = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
