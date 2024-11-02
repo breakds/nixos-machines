@@ -126,12 +126,15 @@
           eDP-1 = {
             scale = "1.0";
             adaptive_sync = "on";
-            # pos = "0 2160";
+            # Only used as the relative position when DP-1 is not plugged in.
+            # Note that negative positions does not behave correctly so that we
+            # should try to make all of them non-negative here.
+            pos = "3840 1080";
           };
-          # DP-3 = {
-          #   scale = "1.0";
-          #   pos = "0 0";
-          # };
+          DP-1 = {
+            scale = "1.0";
+            pos = "0 0";
+          };
         };
       };
     };
