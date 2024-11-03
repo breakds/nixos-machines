@@ -54,6 +54,7 @@
       nodejs
 
       nix-index
+      dbeaver-bin
     ];
 
     programs.nix-ld.enable = true;
