@@ -7,7 +7,8 @@
     ./hardware-configuration.nix
     ../../../base/build-machines.nix
     ../common.nix
-    ../../../users/xiaozhu.nix    
+    ../../../users/xiaozhu.nix
+    ../../../users/mujun.nix
   ];
 
   config = {

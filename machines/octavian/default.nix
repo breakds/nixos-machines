@@ -6,6 +6,7 @@
     ../../base
     ../../users
     ../../users/xiaozhu.nix
+    ../../users/mujun.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines.nix
 
