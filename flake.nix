@@ -90,14 +90,18 @@
           aider-chat
         ];
       };
+
+      overlay-wonder-devops = {config, lib, pkgs, ... }: {
+        nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
+      };
     };
 
     nixosConfigurations = {
       malenia = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          # ({ nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ]; })
           vital-modules.nixosModules.foundation
+          self.nixosModules.overlay-wonder-devops
           self.nixosModules.graphical
           self.nixosModules.iphone-connect
           # TODO(breakds): Make steam great again.
