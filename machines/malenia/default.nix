@@ -10,6 +10,7 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/realsense.nix
+    ./clickhouse
   ];
 
   config = {
@@ -81,6 +82,12 @@
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
+
+    services.clickhouse-wonder = {
+      enable = true;
+      # TODO(breakds): Migrate this to dataset directory.
+      workDir = "/home/breakds/dataset/clickhouse";
+    };
 
     services.traintrack-agent = {
       # TODO(breakds): Re-enable traintrack
