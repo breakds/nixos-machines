@@ -8,6 +8,8 @@ let cfg = config.services.clickhouse-wonder;
       tcpPort = ports.tcp;
       httpPort = ports.http;
       workDir = cfg.workDir;
+      backupName = cfg.backup.name;
+      backupPath = cfg.backup.path;
     };
 
 in {
@@ -27,8 +29,10 @@ in {
 
     backup = mkOption {
       type = types.submodule {
-        name = mkOption { type = types.str; };
-        path = mkOption { type = types.str; };
+        options = {
+          name = mkOption { type = types.str; };
+          path = mkOption { type = types.str; };
+        };
       };
       description = ''
         Configures the clickhouse backup file directory and name.
@@ -62,7 +66,7 @@ in {
     systemd.tmpfiles.rules = [
       "d ${cfg.workDir} 775 ${cfg.user} ${cfg.group} -"
     ];
-    
+
     systemd.services.clickhouse = {
       description = "ClickHouse server for wonderland";
 
