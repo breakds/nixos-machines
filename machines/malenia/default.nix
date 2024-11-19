@@ -9,6 +9,7 @@
     ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
+    ../../modules/localsend.nix
     ../../base/dev/realsense.nix
     ./clickhouse
   ];
@@ -77,7 +78,7 @@
       blender
       openconnect
       anki
-      flacon
+      flacon     # audiofile encoder
     ];
 
     # Trezor cryptocurrency hardware wallet

@@ -81,4 +81,8 @@ rec {
       http = 27003;
     };
   };
+
+  localsend = {
+    port = 53317;
+  };
 }
