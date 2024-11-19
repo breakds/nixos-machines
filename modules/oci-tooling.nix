@@ -18,7 +18,6 @@ in {
   config = {
     virtualisation.docker = {
       enable = cfg.backend == "docker";
-      enableNvidia = enableNvidia;
     };
 
     virtualisation.podman = {
