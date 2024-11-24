@@ -70,6 +70,7 @@
         ./modules/part.nix
         ./machines/malenia/part.nix
         ./machines/octavian/part.nix
+        ./machines/learners/part.nix
       ];
 
       # System agnostic attributes such as nixosModules and overlays.
