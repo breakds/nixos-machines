@@ -66,9 +66,13 @@
     #   imagemagick
     #   steam-run-native
     # ];
+    
     programs.steam = {
       enable = true;
+      # remotePlay.openFirewall = true;
+      # dedicatedServer.openFirewall = true;
     };
+    
     hardware.opengl = {
       driSupport = true;
       driSupport32Bit = true;
