@@ -3,7 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
     nixpkgs-nvidia520.url = "github:NixOS/nixpkgs?rev=c1254eebab9a7257e978af1009d9ba2133befcec";
 
@@ -45,8 +47,7 @@
   };
 
   outputs =
-    { self, flake-parts, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    { self, flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } {
       # Uncomment the following line to enable debug, e.g. in nix repl.
       # See https://flake.parts/debug
 
@@ -57,18 +58,48 @@
         "aarch64-linux"
       ];
 
-      perSystem =
-        { config, pkgs, ... }: {
-          # This enables running `nix fmt` over all the nix files.
-          formatter = pkgs.nixfmt-classic;
-          packages = {
-            shuriken = pkgs.callPackage ./pkgs/shuriken {};
-          };
+      perSystem = { config, pkgs, ... }: {
+        # This enables running `nix fmt` over all the nix files.
+        formatter = pkgs.nixfmt-classic;
+        packages = {
+          shuriken = pkgs.callPackage ./pkgs/shuriken {};
         };
+      };
+
+      imports = [
+        ./machines/malenia/part.nix
+      ];
 
       # System agnostic attributes such as nixosModules and overlays.
       flake = {
         overlays.base = final: prev: { shriken = final.callPackage ./pkgs/shuriken { }; };
+
+        nixosModules = {
+          graphical = import ./modules/graphical;
+          iphone-connect = import ./modules/iphone-connect.nix;
+          machine-learning = import ./modules/machine-learning.nix;
+          flatpak = import ./modules/flatpak.nix;
+          steam = import ./modules/steam.nix;
+
+          wonder-devops = {config, lib, pkgs, ... }: {
+            nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
+          };
+
+          ai-agents = {config, lib, pkgs, ... }: {
+            nixpkgs.overlays = [
+              inputs.ml-pkgs.overlays.apis
+              inputs.ml-pkgs.overlays.tools
+            ];
+
+            environment.systemPackages = with pkgs; [
+              aider-chat
+            ];
+          };
+
+          overlay-wonder-devops = {config, lib, pkgs, ... }: {
+            nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
+          };
+        };
       };
     };
 }
