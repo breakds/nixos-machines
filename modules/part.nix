@@ -9,6 +9,7 @@ in {
     machine-learning = import ./machine-learning.nix;
     flatpak = import ./flatpak.nix;
     steam = import ./steam.nix;
+    laptop = import ./laptop.nix;
 
     wonder-devops = {config, lib, pkgs, ... }: {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
