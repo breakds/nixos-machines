@@ -79,7 +79,6 @@
       openconnect
       anki
       flacon     # audiofile encoder
-      clickhouse-backup
     ];
 
     # Trezor cryptocurrency hardware wallet
@@ -90,7 +89,7 @@
       # TODO(breakds): Migrate this to dataset directory.
       workDir = "/home/breakds/dataset/clickhouse";
       backup = {
-        name = "backups";
+        name = "backups1";
         path = "/var/lib/wonder/warehouse/clickhouse/ClickHouseBackup";
       };
     };
