@@ -67,39 +67,13 @@
       };
 
       imports = [
+        ./modules/part.nix
         ./machines/malenia/part.nix
       ];
 
       # System agnostic attributes such as nixosModules and overlays.
       flake = {
         overlays.base = final: prev: { shriken = final.callPackage ./pkgs/shuriken { }; };
-
-        nixosModules = {
-          graphical = import ./modules/graphical;
-          iphone-connect = import ./modules/iphone-connect.nix;
-          machine-learning = import ./modules/machine-learning.nix;
-          flatpak = import ./modules/flatpak.nix;
-          steam = import ./modules/steam.nix;
-
-          wonder-devops = {config, lib, pkgs, ... }: {
-            nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
-          };
-
-          ai-agents = {config, lib, pkgs, ... }: {
-            nixpkgs.overlays = [
-              inputs.ml-pkgs.overlays.apis
-              inputs.ml-pkgs.overlays.tools
-            ];
-
-            environment.systemPackages = with pkgs; [
-              aider-chat
-            ];
-          };
-
-          overlay-wonder-devops = {config, lib, pkgs, ... }: {
-            nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
-          };
-        };
       };
     };
 }
