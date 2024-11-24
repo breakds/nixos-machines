@@ -59,7 +59,11 @@
 
       perSystem =
         { config, pkgs, ... }: {
+          # This enables running `nix fmt` over all the nix files.
           formatter = pkgs.nixfmt-classic;
+          packages = {
+            shuriken = pkgs.callPackage ./pkgs/shuriken {};
+          };
         };
 
       # System agnostic attributes such as nixosModules and overlays.
