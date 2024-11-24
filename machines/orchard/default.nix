@@ -62,7 +62,7 @@
 
     environment.systemPackages = with pkgs; [
       firefox
-      dbeaver
+      dbeaver-bin
       gimp peek gnupg pass libreoffice
       skypeforlinux
       multitail

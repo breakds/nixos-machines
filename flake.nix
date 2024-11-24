@@ -71,6 +71,13 @@
         ./machines/malenia/part.nix
         ./machines/octavian/part.nix
         ./machines/learners/part.nix
+        ./machines/ghostberry/part.nix
+        ./machines/brock/part.nix
+        ./machines/orchard/part.nix
+        # ./machines/pi/part.nix
+        ./machines/rei/part.nix
+        ./machines/livecd/part.nix
+        ./containers/part.nix
       ];
 
       # System agnostic attributes such as nixosModules and overlays.

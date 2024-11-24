@@ -7,10 +7,8 @@
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
-    ../../base/dev/interbotix.nix
     # ../../modules/syncthing.nix
     ../../base/vpn.nix
-    ../../modules/steam.nix
   ];
 
   config = {

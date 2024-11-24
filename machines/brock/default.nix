@@ -8,7 +8,6 @@
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
     ../../base/dev/interbotix.nix
-    ../../modules/steam-run.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
     # ./unison.nix
