@@ -7,7 +7,6 @@
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../base/dev/realsense.nix
-    ../../base/dev/stereolabs.nix    
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../base/dev/interbotix.nix
