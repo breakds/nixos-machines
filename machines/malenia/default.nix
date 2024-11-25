@@ -9,7 +9,6 @@
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
-    ../../base/dev/realsense.nix
     ./clickhouse
   ];
 

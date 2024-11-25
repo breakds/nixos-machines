@@ -8,7 +8,6 @@
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
     ../../modules/syncthing.nix
-    ../../base/dev/realsense.nix
     ../../base/vpn.nix
   ];
 
