@@ -51,5 +51,30 @@ in {
         '';
       };
     })
+
+    # If the machine is a builder (the hostname is in the builder reigstry),
+    # prepare it as a builder by tuning some of the nix settings.
+    (lib.mkIf (builtins.hasAttr config.networking.hostName builder-registry) {
+      users = {
+        groups.nixbuilder = {};
+        users.nixbuilder = {
+          createHome = false;
+          isSystemUser = true;
+          openssh.authorizedKeys.keyFiles = [
+            ../data/keys/breakds_samaritan.pub
+            ../data/keys/nixbuilder_malenia.pub
+          ];
+          useDefaultShell = true;
+          group = "nixbuilder";
+        };
+      };
+
+      nix.settings = {
+        trusted-users = [ "nixbuilder" "breakds" ];
+        keep-outputs = true;
+        keep-derivations = true;
+        auto-optimise-store = true;
+      };
+    })
   ];
 }
