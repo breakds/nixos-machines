@@ -17,7 +17,6 @@
     ./services/media.nix
     # ./services/code-server.nix
     # ./services/terraria.nix
-    # ./services/traintrack.nix
     # TODO(breakds): Fix poetry for 23.05
     # ./services/famass.nix
     ./services/docker-registry.nix

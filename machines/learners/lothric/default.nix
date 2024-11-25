@@ -17,39 +17,6 @@
       hostId = "db426f38";
     };
 
-    services.traintrack-agent = {
-      enable = false;
-      port = (import ../../../data/service-registry.nix).traintrack.agents.lothric.port;
-      user = "breakds";
-      group = "breakds";
-      settings = {
-        workers = [
-          # Worker 0 with 3090
-          {
-            gpu_id = 0;
-            gpu_type = "3090";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobot0";
-                work_dir = "/home/breakds/tmp/alf_sessions";
-              };
-            };
-          }
-          # Worker 1 with 3090
-          {
-            gpu_id = 1;
-            gpu_type = "3090";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobo1";
-                work_dir = "/home/breakds/tmp/alf_sessions";
-              };
-            };
-          }
-        ];
-      };
-    };
-
     vital.distributed-build = {
       enable = true;
       location = "homelab";

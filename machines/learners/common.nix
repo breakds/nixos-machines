@@ -5,7 +5,6 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/traintrack/agent.nix
   ];
 
   config = {

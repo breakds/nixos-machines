@@ -6,7 +6,6 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/traintrack/agent.nix
     ../../base/build-machines.nix
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
@@ -91,29 +90,6 @@
       backup = {
         name = "backups1";
         path = "/var/lib/wonder/warehouse/clickhouse/ClickHouseBackup";
-      };
-    };
-
-    services.traintrack-agent = {
-      # TODO(breakds): Re-enable traintrack
-      enable = false;
-      port = (import ../../data/service-registry.nix).traintrack.agents.malenia.port;
-      user = "breakds";
-      group = "breakds";
-      settings = {
-        workers = [
-          # Worker 0 with 3080
-          {
-            gpu_id = 0;
-            gpu_type = "3080";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobot0";
-                work_dir = "/home/breakds/dataset/alf_sessions";
-              };
-            };
-          }
-        ];
       };
     };
 

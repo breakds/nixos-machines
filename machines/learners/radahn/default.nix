@@ -20,39 +20,6 @@
       hostId = "1d53d1f2";
     };
 
-    services.traintrack-agent = {
-      enable = false;
-      port = (import ../../../data/service-registry.nix).traintrack.agents.lothric.port;
-      user = "breakds";
-      group = "breakds";
-      settings = {
-        workers = [
-          # Worker 0 with 4090
-          {
-            gpu_id = 0;
-            gpu_type = "4090";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobot0";
-                work_dir = "/home/breakds/tmp/alf_sessions";
-              };
-            };
-          }
-          # Worker 1 with 4090
-          {
-            gpu_id = 1;
-            gpu_type = "4090";
-            repos = {
-              Hobot = {
-                path = "/var/lib/traintrack/agent/Hobo1";
-                work_dir = "/home/breakds/tmp/alf_sessions";
-              };
-            };
-          }
-        ];
-      };
-    };
-
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave

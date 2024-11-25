@@ -24,6 +24,7 @@ rec {
     nodePort = 5821;
   };
 
+  # Deprecated
   traintrack = {
     agents = {
       lothric = { port = 5975; };
