@@ -4,7 +4,7 @@
   boot.isContainer = true;
   services.openssh = {
     enable = lib.mkDefault true;
-    passwordAuthentication = false;
+    settings.passwordAuthentication = false;
   };
 
   users.extraUsers.operator = {
