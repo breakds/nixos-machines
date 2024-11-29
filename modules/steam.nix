@@ -72,10 +72,5 @@
       # remotePlay.openFirewall = true;
       # dedicatedServer.openFirewall = true;
     };
-    
-    hardware.opengl = {
-      driSupport = true;
-      driSupport32Bit = true;
-    };
   };
 }

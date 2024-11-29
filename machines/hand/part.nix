@@ -14,7 +14,7 @@ in {
       self.nixosModules.laptop
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.ai-agents
+      # self.nixosModules.ai-agents
       self.nixosModules.steam
       self.nixosModules.flatpak
     ];

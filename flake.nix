@@ -2,7 +2,7 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -11,15 +11,15 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use vital-modules, with the same nixpkgs
-    vital-modules.url = "github:nixvital/vital-modules";
+    vital-modules.url = "github:nixvital/vital-modules/dev/24.11";
     vital-modules.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:breakds/nixos-home/dev/24.11";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
     nixos-home.inputs.home-manager.follows = "home-manager";
 

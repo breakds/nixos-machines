@@ -42,7 +42,6 @@
     i18n.defaultLocale = "en_US.utf8";
 
     # Enable sound with pipewire.
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

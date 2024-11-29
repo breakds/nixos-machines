@@ -77,7 +77,7 @@ in {
 
     # Exclude some of the gnome3 packages
     programs.geary.enable = false;    
-    environment.gnome.excludePackages = with pkgs.gnome3; [
+    environment.gnome.excludePackages = with pkgs; [
       epiphany
       gnome-software
       gnome-characters
@@ -87,7 +87,5 @@ in {
       packages = [ pkgs.wqy_microhei pkgs.terminus_font  ];
       font = "ter-132n";
     };
-
-    hardware.opengl.setLdLibraryPath = true;
   };
 }

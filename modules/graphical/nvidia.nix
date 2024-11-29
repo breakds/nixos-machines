@@ -59,7 +59,6 @@ in {
         enable = true;
         enableOffloadCmd = true;
       };
-      opengl.driSupport32Bit = true;
 
       # Bus ID of the NVIDIA GPU. You can find it using lspci
       nvidia.prime.nvidiaBusId = cfg.prime.nvidiaBusId;
