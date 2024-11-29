@@ -12,7 +12,7 @@ in {
       
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.ai-agents
+      # self.nixosModules.ai-agents
       self.nixosModules.steam
       self.nixosModules.machine-learning
       self.nixosModules.flatpak

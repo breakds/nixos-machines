@@ -50,6 +50,7 @@ in {
     services.xserver.displayManager.gdm.wayland = false;
 
     hardware = {
+      nvidia.open = true;  # For using nvidia drivers >= 560
       # Nvidia PRIME The card Nvidia 940MX is non-MXM card. Needs special treatment.
       # muxless/non-MXM Optimus cards have no display outputs and show as 3D
       # Controller in lspci output, seen in most modern consumer laptops
