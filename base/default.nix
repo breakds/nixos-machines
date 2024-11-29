@@ -40,13 +40,11 @@
     ];
 
     fonts.packages = with pkgs; [
+      # Use patched fonts for coding
+      (nerdfonts.override { fonts = [ "FiraCode" "Inconsolata" "JetBrainsMono" ]; })
       # Add Wenquanyi Microsoft Ya Hei, a nice-looking Chinese font.
       wqy_microhei
-      # Fira code is a good font for coding
-      fira-code
-      fira-code-symbols
       font-awesome
-      inconsolata
     ];
 
     # Create a better default environment for bash
