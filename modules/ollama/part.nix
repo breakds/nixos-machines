@@ -3,7 +3,9 @@
 {
   flake.nixosModules = {
     ollama = { config, lib, pkgs, ... }: {
-      config = {
+      config = let
+        lanExposed = config.services.ollama.host == "0.0.0.0";
+      in {
         nixpkgs.overlays = [
           (final: prev: let
             unstable = import inputs.nixpkgs-unstable {
@@ -14,6 +16,7 @@
             })
         ];
 
+        # Also install the package itself for client command line (REPL).
         environment.systemPackages = with pkgs; [
           ollama
         ];
@@ -25,16 +28,16 @@
           port = 11434;
           acceleration = if (builtins.elem "nvidia" config.services.xserver.videoDrivers)
                          then "cuda" else null;
+          openFirewall = lanExposed;
         };
 
         services.nextjs-ollama-llm-ui = {
           enable = true;
           port = 11436;
+          hostname = config.services.ollama.host;
         };
 
-        networking.firewall = let
-          exposeUI = config.services.nextjs-ollama-llm-ui.hostname == "0.0.0.0";
-        in lib.mkIf exposeUI { allowedTCPPorts = [ config.services.nextjs-ollama-llm-ui.port ]; };
+        networking.firewall = lib.mkIf lanExposed { allowedTCPPorts = [ config.services.nextjs-ollama-llm-ui.port ]; };
       };
     };
   };
