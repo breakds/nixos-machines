@@ -3,6 +3,10 @@
 let self = inputs.self;
 
 in {
+  imports = [
+    ./ollama/part.nix
+  ];
+  
   flake.nixosModules = {
     graphical = import ./graphical;
     iphone-connect = import ./iphone-connect.nix;
@@ -23,21 +27,6 @@ in {
 
       environment.systemPackages = with pkgs; [
         aider-chat
-      ];
-    };
-
-    ollama = { config, lib, pkgs, ... }: {
-      nixpkgs.overlays = [
-        (final: prev: let
-          unstable = import inputs.nixpkgs-unstable {
-            system = prev.system;
-          }; in {
-            inherit (unstable) ollama ollama-cuda;
-          })
-      ];
-
-      environment.systemPackages = with pkgs; [
-        ollama
       ];
     };
 
