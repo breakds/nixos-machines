@@ -162,7 +162,9 @@
         enable = true;
         interval = "Sun, 02:00";
       };
-    };    
+    };
+
+    services.nextjs-ollama-llm-ui.hostname = "0.0.0.0";
 
     nix = {
       settings = {
