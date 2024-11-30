@@ -17,6 +17,8 @@ in {
       self.nixosModules.machine-learning
       self.nixosModules.flatpak
       self.nixosModules.wonder-devops
+
+      self.nixosModules.ollama
     ];
   };
 }

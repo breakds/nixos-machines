@@ -26,6 +26,21 @@ in {
       ];
     };
 
+    ollama = { config, lib, pkgs, ... }: {
+      nixpkgs.overlays = [
+        (final: prev: let
+          unstable = import inputs.nixpkgs-unstable {
+            system = prev.system;
+          }; in {
+            inherit (unstable) ollama ollama-cuda;
+          })
+      ];
+
+      environment.systemPackages = with pkgs; [
+        ollama
+      ];
+    };
+
     overlay-wonder-devops = {config, lib, pkgs, ... }: {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
     };
