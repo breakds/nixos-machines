@@ -31,9 +31,15 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-    # Use the shiny linux kernel 6.1 for the Ryzen 9 7950x.
-    boot.kernelPackages = pkgs.linuxPackages_6_1;
-    hardware.nvidia.package = pkgs.linuxPackages_6_1.nvidiaPackages.stable;
+    # Enable sound with pipewire.
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
 
     networking = {
       hostName = "malenia";

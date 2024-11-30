@@ -47,7 +47,7 @@ in {
           sshUser = if builtins.hasAttr "sshUser" x then x.sshUser else "nixbuilder";
         }) selectedBuilders;
         extraOptions = ''
-          builders-use-substitutes = true          
+          builders-use-substitutes = true
         '';
       };
     })
