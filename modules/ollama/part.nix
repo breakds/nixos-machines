@@ -39,7 +39,7 @@
           environment = {
             # OLLAMA_BASE_URLS is a ";"-separated list. If you have multiple
             # here, open webui will be able to load-balance them.
-            OLLAMA_BASE_URLS = "http://octavian.local:11434";
+            OLLAMA_BASE_URLS = "http://127.0.0.1:11434";
             WEBUI_AUTH = "False";
             ANONYMIZED_TELEMETRY = "False";
             DO_NOT_TRACK = "True";
