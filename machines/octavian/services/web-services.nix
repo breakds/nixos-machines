@@ -41,6 +41,15 @@ in {
           proxyPass = "http://localhost:${toString shioriInfo.port}";
         };
       };
+
+      "llm.breakds.org" = lib.mkIf config.services.open-webui.enable {
+        enableACME = true;
+        forceSSL = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.open-webui.port}";
+        };
+      };
     };
   };
 

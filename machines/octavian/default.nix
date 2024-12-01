@@ -164,12 +164,7 @@
       };
     };
 
-    services.ollama = {
-      host = "0.0.0.0";
-      environmentVariables = {
-        OLLAMA_ORIGINS = "http://octavian.local:11436";  # For CORS
-      };
-    };
+    services.ollama.host = "0.0.0.0";
 
     nix = {
       settings = {
