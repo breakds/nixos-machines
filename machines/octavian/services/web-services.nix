@@ -54,4 +54,8 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+
+  services.open-webui.environment = {
+    CORS_ALLOW_ORIGIN = "https://llm.breakds.org";
+  };
 }
