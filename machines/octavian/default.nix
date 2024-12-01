@@ -170,7 +170,6 @@
         OLLAMA_ORIGINS = "http://octavian.local:11436";  # For CORS
       };
     };
-    services.nextjs-ollama-llm-ui.ollamaUrl = "http://octavian.local:11434";
 
     nix = {
       settings = {

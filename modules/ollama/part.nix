@@ -31,13 +31,20 @@
           openFirewall = lanExposed;
         };
 
-        services.nextjs-ollama-llm-ui = {
+        services.open-webui = {
           enable = true;
+          host = "0.0.0.0";
           port = 11436;
-          hostname = config.services.ollama.host;
+          openFirewall = lanExposed;
+          environment = {
+            # OLLAMA_BASE_URLS is a ";"-separated list. If you have multiple
+            # here, open webui will be able to load-balance them.
+            OLLAMA_BASE_URLS = "http://octavian.local:11434";
+            WEBUI_AUTH = "False";
+            ANONYMIZED_TELEMETRY = "False";
+            DO_NOT_TRACK = "True";
+          };
         };
-
-        networking.firewall = lib.mkIf lanExposed { allowedTCPPorts = [ config.services.nextjs-ollama-llm-ui.port ]; };
       };
     };
   };
