@@ -83,6 +83,7 @@
       openconnect
       anki
       flacon     # audiofile encoder
+      pavucontrol
     ];
 
     # Trezor cryptocurrency hardware wallet
