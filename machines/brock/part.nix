@@ -12,7 +12,6 @@ in {
       
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.ai-agents
       self.nixosModules.flatpak
     ];
   };

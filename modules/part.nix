@@ -19,17 +19,6 @@ in {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
     };
 
-    ai-agents = {config, lib, pkgs, ... }: {
-      nixpkgs.overlays = [
-        inputs.ml-pkgs.overlays.apis
-        inputs.ml-pkgs.overlays.tools
-      ];
-
-      environment.systemPackages = with pkgs; [
-        aider-chat
-      ];
-    };
-
     overlay-wonder-devops = {config, lib, pkgs, ... }: {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
     };
