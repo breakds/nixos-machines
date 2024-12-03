@@ -84,6 +84,7 @@
       anki
       flacon     # audiofile encoder
       pavucontrol
+      aider-chat
     ];
 
     # Trezor cryptocurrency hardware wallet
