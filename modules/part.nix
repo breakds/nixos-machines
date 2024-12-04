@@ -28,8 +28,8 @@ in {
       config = {
         vital.distributed-build = {
           caches = [ "octavian" ];
-          builders = [ "octavian" ] ++ lib.optionals (
-            config.networking.hostName != "malenia") [ "malenia" ] ;
+          builders = lib.optionals (config.networking.hostName != "malenia") [
+            "octavian" "malenia" ] ;
         };
       };
     };
