@@ -11,6 +11,7 @@ in {
       inputs.nixos-home.nixosModules.breakds-home
       
       self.nixosModules.graphical
+      self.nixosModules.builder-cache-valley
       self.nixosModules.iphone-connect
       self.nixosModules.steam
       self.nixosModules.machine-learning

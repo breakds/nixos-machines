@@ -15,12 +15,23 @@ in {
     steam = import ./steam.nix;
     laptop = import ./laptop.nix;
 
-    wonder-devops = {config, lib, pkgs, ... }: {
+    wonder-devops = { config, lib, pkgs, ... }: {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
     };
 
-    overlay-wonder-devops = {config, lib, pkgs, ... }: {
+    overlay-wonder-devops = { config, lib, pkgs, ... }: {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
+    };
+
+    builder-cache-valley = { config, lib, pkgs, ... }: {
+      imports = [ ../base/build-machines-v2.nix ];
+      config = {
+        vital.distributed-build = {
+          caches = [ "octavian" ];
+          builders = [ "octavian" ] ++ lib.optionals (
+            config.networking.hostName != "malenia") [ "malenia" ] ;
+        };
+      };
     };
   };
 }
