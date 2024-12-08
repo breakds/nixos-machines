@@ -7,13 +7,7 @@
         lanExposed = config.services.ollama.host == "0.0.0.0";
       in {
         nixpkgs.overlays = [
-          (final: prev: let
-            unstable = import inputs.nixpkgs-unstable {
-              system = prev.system;
-              config.allowUnfree = true;
-            }; in {
-              inherit (unstable) ollama ollama-cuda;
-            })
+          inputs.ml-pkgs.overlays.gen-ai
         ];
 
         # Also install the package itself for client command line (REPL).
