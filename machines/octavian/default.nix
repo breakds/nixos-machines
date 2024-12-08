@@ -152,7 +152,9 @@
 
     services.borgbackup = {
       repos.orbekk = {
-        authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwihuH10KLW3zuHGz31f54PXFzspKhIdCKIWR5iBcBq" ];
+        authorizedKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKtA1xBORJKbH5roaYL2hmNraTCj0xYU4jEtvX8P6rAd root@dragon"
+        ];
         path = /var/lib/borgbackup/orbekk;
       };
     };
