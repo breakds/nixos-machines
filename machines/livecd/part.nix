@@ -26,6 +26,12 @@ in {
         ./standard.nix
       ];
     };
-    
+  };
+
+  perSystem = { config, lib, ... }: {
+    packages = {
+      liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
+      liveStandardCD = self.nixosConfigurations.liveStandardCD.config.system.build.isoImage;
+    };
   };
 }
