@@ -72,7 +72,7 @@
         ./machines/hand/part.nix
         ./machines/brock/part.nix
         ./machines/orchard/part.nix
-        # ./machines/pi/part.nix
+        ./machines/pi/part.nix
         ./machines/rei/part.nix
         ./machines/livecd/part.nix
         ./containers/part.nix

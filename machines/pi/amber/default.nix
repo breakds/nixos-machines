@@ -3,7 +3,7 @@
 {
   imports = [
     ../common.nix
-    ../../../base/build-machines.nix
+    ../../../base/build-machines-v2.nix
   ];
 
   # +------------------------------+
@@ -12,8 +12,6 @@
 
   # Enable GPU acceleration
   hardware.raspberry-pi."4".fkms-3d.enable = true;
-  
-  hardware.pulseaudio.enable = true;
 
   fileSystems = {
     "/" = {
@@ -24,8 +22,8 @@
   };
 
   networking = {
-    hostName = "armlet";
-    hostId = "ecb44699";
+    hostName = "amber";
+    hostId = "918a9607";
     useDHCP = lib.mkDefault true;
   };
 
@@ -64,9 +62,9 @@
   # +--------------------+
 
   vital.distributed-build = {
-    enable = true;
-    location = "homelab";
+    caches = [ "octavian" ];
+    builders = [ "octavian" "malenia" ];
   };
   
-  system.stateVersion = "22.11"; 
+  system.stateVersion = "23.11"; 
 }

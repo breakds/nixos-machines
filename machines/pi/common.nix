@@ -34,11 +34,9 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.bash.completion.enable = true;
-  # TODO(breakds): Figure out how to use GPG.
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "tty";
   };
 
   programs.ssh.startAgent = lib.mkDefault false;
@@ -54,7 +52,7 @@
     # Whether to enable the mDNS NSS (Name Service Switch) plugin.
     # Enabling this allows applications to resolve names in the
     # `.local` domain.
-    nssmdns = true;
+    nssmdns4 = true;
 
     # Whether to register mDNS address records for all local IP
     # addresses.
@@ -67,8 +65,6 @@
   hardware.raspberry-pi."4".apply-overlays-dtmerge.enable = true;
 
   nix = {
-    # The following is to enable Nix Flakes
-    package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
