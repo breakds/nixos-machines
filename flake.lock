@@ -130,11 +130,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733617323,
-        "narHash": "sha256-Lsx4h7M0oSM1m0cqksjgF5psS5Trbz1L4DArx8yfQ9o=",
+        "lastModified": 1734125871,
+        "narHash": "sha256-DPavIEHJxw2mcz6d9nPXIH43rS0DeanhMLHk9DC2Vfk=",
         "owner": "nixvital",
         "repo": "ml-pkgs",
-        "rev": "82b43da28eaa032c3198b164beee2478c0ec2d38",
+        "rev": "0154517756f9428993ea57086d8ffd45915c4933",
         "type": "github"
       },
       "original": {
