@@ -167,6 +167,7 @@
     };
 
     services.ollama.host = "0.0.0.0";
+    services.personax-discord-bot.enable = true;
 
     nix = {
       settings = {

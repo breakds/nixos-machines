@@ -41,6 +41,11 @@
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";
     game-solutions.inputs.ml-pkgs.follows = "ml-pkgs";
+
+    personax.url = "git+ssh://git@github.com/breakds/PersonaX";
+    personax.inputs.nixpkgs.follows = "nixpkgs";
+    personax.inputs.ml-pkgs.follows = "ml-pkgs";
+    personax.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =

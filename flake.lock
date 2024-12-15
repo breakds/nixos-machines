@@ -239,6 +239,32 @@
         "type": "github"
       }
     },
+    "personax": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "ml-pkgs": [
+          "ml-pkgs"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734303414,
+        "narHash": "sha256-CTOWsJA1My/A/G2n/rGiPku/R5fnB7RspEyMFeLzjJQ=",
+        "ref": "refs/heads/main",
+        "rev": "f3a7396e2c5557dbc57576545361bd90a4b6c641",
+        "revCount": 57,
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/PersonaX"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/PersonaX"
+      }
+    },
     "rapit": {
       "inputs": {
         "ml-pkgs": "ml-pkgs_2",
@@ -272,6 +298,7 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "nixpkgs-nvidia520": "nixpkgs-nvidia520",
+        "personax": "personax",
         "rapit": "rapit",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",

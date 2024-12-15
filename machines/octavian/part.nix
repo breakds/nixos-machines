@@ -25,6 +25,7 @@ in {
       self.nixosModules.first-party-software
 
       self.nixosModules.ollama
+      inputs.personax.nixosModules.personax
     ];
   };
 }
