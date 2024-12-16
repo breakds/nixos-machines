@@ -1,13 +1,13 @@
 rec {
   "malenia" = {
-    hostName = "malenia.local";
+    hostName = "10.77.1.185";
     location = "homelab";
     maxJobs = 24;
     speedFactor = 12;
   };
 
   "octavian" = {
-    hostName = "octavian.local";
+    hostName = "10.77.1.131";
     location = "homelab";    
     maxJobs = 24;
     speedFactor = 10;
