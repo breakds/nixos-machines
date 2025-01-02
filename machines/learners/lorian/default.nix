@@ -19,8 +19,7 @@
     };
 
     # The LLM server
-    networking.firewall.allowedTCPPorts = [ 6062 ];
-    networking.firewall.allowedUDPPorts = [ 6062 ];
+    services.ollama.host = "0.0.0.0";
 
     vital.distributed-build = {
       enable = true;

@@ -80,9 +80,6 @@
       hostName = "octavian";
       hostId = "e4f0c450";
       networkmanager.enable = true;
-      # The LLM server      
-      firewall.allowedTCPPorts = [ 6062 ];
-      firewall.allowedUDPPorts = [ 6062 ];      
     };
 
     vital.pre-installed.level = 5;
