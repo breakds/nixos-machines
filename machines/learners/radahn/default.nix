@@ -6,14 +6,15 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
-    ../../../base/build-machines.nix
-    ./binary-cache.nix
   ];
 
   config = {
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+    # The LLM server
+    services.ollama.host = "0.0.0.0";
 
     networking = {
       hostName = "radahn";

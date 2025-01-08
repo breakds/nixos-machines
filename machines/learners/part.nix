@@ -42,6 +42,7 @@ in {
       
         self.nixosModules.graphical
         self.nixosModules.machine-learning
+        self.nixosModules.ollama
       ];
     };
   };
