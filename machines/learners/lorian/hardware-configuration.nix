@@ -31,6 +31,4 @@
   swapDevices =
     [ { device = "/dev/disk/by-label/swap"; }
     ];
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

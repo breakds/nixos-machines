@@ -44,5 +44,7 @@
       };
     };
     networking.firewall.allowedTCPPorts = [ 5821 ];
+
+    powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   };
 }
