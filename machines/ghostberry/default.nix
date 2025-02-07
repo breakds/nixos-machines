@@ -8,6 +8,7 @@
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
     # ../../modules/syncthing.nix
+    ../../modules/localsend.nix    
     ../../base/vpn.nix
   ];
 
@@ -144,7 +145,6 @@
     # +--------------------+
     
     vital.vpn = {
-      clash = true;
       tailscale = true;
     };
 
