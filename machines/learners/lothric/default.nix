@@ -5,7 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../../base/build-machines.nix
+    ../../../base/build-machines-v2.nix
     ../common.nix
     ../../../users/xiaozhu.nix
     ../../../users/mujun.nix
@@ -18,8 +18,8 @@
     };
 
     vital.distributed-build = {
-      enable = true;
-      location = "homelab";
+      caches = [ "datahub" ];
+      builders = [];   # Do it yourself.
     };
 
     # This value determines the NixOS release from which the default
