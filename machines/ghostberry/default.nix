@@ -154,7 +154,7 @@
 
     vital.distributed-build = {
       caches = [ "datahub" ];
-      builders = [ "kami" ];
+      builders = [];
     };
 
     # +--------------------+
