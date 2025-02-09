@@ -15,6 +15,7 @@ in {
       self.nixosModules.iphone-connect
       self.nixosModules.steam
       self.nixosModules.flatpak
+      self.nixosModules.goose-ai
     ];
   };
 }

@@ -5,6 +5,7 @@ let self = inputs.self;
 in {
   imports = [
     ./ollama/part.nix
+    ./agents/part.nix
   ];
   
   flake.nixosModules = {
