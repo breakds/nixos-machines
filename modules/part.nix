@@ -6,6 +6,7 @@ in {
   imports = [
     ./ollama/part.nix
     ./agents/part.nix
+    ./extra-mounts/part.nix
   ];
   
   flake.nixosModules = {

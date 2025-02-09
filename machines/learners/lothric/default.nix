@@ -17,6 +17,9 @@
       hostId = "db426f38";
     };
 
+    # The LLM server
+    services.ollama.host = "0.0.0.0";
+
     vital.distributed-build = {
       caches = [ "datahub" ];
       builders = [];   # Do it yourself.
