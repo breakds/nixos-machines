@@ -16,6 +16,7 @@ in {
       self.nixosModules.steam
       self.nixosModules.flatpak
       self.nixosModules.goose-ai
+      self.nixosModules.wonder-datahub
     ];
   };
 }
