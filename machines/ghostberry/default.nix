@@ -27,7 +27,7 @@
     boot.loader.efi.canTouchEfiVariables = true;
 
     networking.hostName = "ghostberry"; # Define your hostname.
-    networking.hostId = "fe156831";
+    networking.hostId = "77e89fba";
     networking.useDHCP = lib.mkDefault true;
 
     # Enable networking
