@@ -32,7 +32,7 @@ rec {
   };
 
   "lothric" = {
-    hostName = "lothric.local";
+    hostName = "192.168.110.30";
     location = "office";
     maxJobs = 24;
     speedFactor = 7;
