@@ -37,5 +37,28 @@
         clickMethod = "clickfinger";
       };
     };
+
+    # Enable powertop's auto tuning. This runs at startup and makes your battery
+    # life happy.
+    powerManagement.powertop.enable = true;
+
+    services.thermald.enable = true;
+
+    services.power-profiles-daemon.enable = false;  # Turn off, conflict with tlp.
+    services.tlp = {
+      enable = true;
+      settings = { # sudo tlp-stat or tlp-stat -s or sudo tlp-stat -p
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 0;
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+        START_CHARGE_THRESH_BAT0 = 75;
+        STOP_CHARGE_THRESH_BAT0 = 81;
+      };
+    };
   };
 }
