@@ -42,6 +42,7 @@
 
       # System Tools
       dmidecode
+      powertop
 
       # Customized
       shuriken
