@@ -71,6 +71,11 @@ rec {
     port = 28603;
   };
 
+  rsu-taxer = {
+    domain = "tax.breakds.org";
+    port = 31415;
+  };
+
   code-server = {
     domain = "code.breakds.org";
     port = 4445;

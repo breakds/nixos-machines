@@ -300,9 +300,33 @@
         "nixpkgs-nvidia520": "nixpkgs-nvidia520",
         "personax": "personax",
         "rapit": "rapit",
+        "rsu-taxer": "rsu-taxer",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
+      }
+    },
+    "rsu-taxer": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741467125,
+        "narHash": "sha256-9HaLvmeEsE9TJh7zVzuk9fbMvyInvTu+YjFvFrLi0ww=",
+        "owner": "breakds",
+        "repo": "rsu-taxer",
+        "rev": "7f69bf06e05af719b790389db4ce030ca6f9ef3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "rsu-taxer",
+        "type": "github"
       }
     },
     "systems": {

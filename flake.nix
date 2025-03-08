@@ -42,6 +42,10 @@
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";
     game-solutions.inputs.ml-pkgs.follows = "ml-pkgs";
 
+    rsu-taxer.url = "github:breakds/rsu-taxer";
+    rsu-taxer.inputs.nixpkgs.follows = "nixpkgs";
+    rsu-taxer.inputs.flake-parts.follows = "flake-parts";
+
     personax.url = "git+ssh://git@github.com/breakds/PersonaX";
     personax.inputs.nixpkgs.follows = "nixpkgs";
     personax.inputs.ml-pkgs.follows = "ml-pkgs";

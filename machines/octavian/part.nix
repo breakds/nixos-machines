@@ -9,6 +9,7 @@ in {
         www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
       })
       inputs.game-solutions.overlays.kiseki
+      inputs.rsu-taxer.overlays.default
       # inputs.rapit.overlays.default
     ];
   };
