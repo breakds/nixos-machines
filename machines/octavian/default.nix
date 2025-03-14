@@ -165,7 +165,7 @@
     };
 
     services.ollama.host = "0.0.0.0";
-    services.open-webui.environment.OLLAMA_BASE_URLS = "https://lorian.local:11434";
+    services.open-webui.environment.OLLAMA_BASE_URLS = "http://lorian.local:11434";
     services.personax-discord-bot.enable = true;
 
     nix = {
