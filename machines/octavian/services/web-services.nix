@@ -48,6 +48,7 @@ in {
 
         locations."/" = {
           proxyPass = "http://localhost:${toString config.services.open-webui.port}";
+          proxyWebsockets = true;
         };
       };
     };
