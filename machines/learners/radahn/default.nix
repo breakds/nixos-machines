@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common.nix
+    ../../../base/build-machines-v2.nix
   ];
 
   config = {

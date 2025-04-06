@@ -29,7 +29,7 @@ in {
       imports = [ ../base/build-machines-v2.nix ];
       config = {
         vital.distributed-build = {
-          caches = [ "octavian" ];
+          caches = [ "octavian" "radahn" ];
           builders = lib.optionals (config.networking.hostName != "malenia") [
             "octavian" "malenia" ] ;
         };
