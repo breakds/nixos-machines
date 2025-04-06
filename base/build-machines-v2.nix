@@ -33,7 +33,12 @@ in {
         substituters = builtins.map (x: x.url) selectedCaches ++ [
           "https://cache.nixos.org"
         ];
-        trusted-public-keys = builtins.map (x: x.publicKey) selectedCaches;
+
+        # Here, we add all the keys instead of only the selected caches, so that
+        # in case we want to manually add a substituter in the command line, we
+        # can do that.
+        trusted-public-keys = lib.attrsets.mapAttrsToList (
+          host: properties: properties.publicKey) cache-registry;
       };
     })
 

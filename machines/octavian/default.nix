@@ -8,7 +8,7 @@
     ../../users/xiaozhu.nix
     ../../users/mujun.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/build-machines.nix
+    ../../base/build-machines-v2.nix
 
     # Other modules
     ./services/web-services.nix
