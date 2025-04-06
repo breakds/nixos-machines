@@ -29,7 +29,11 @@ in {
       imports = [ ../base/build-machines-v2.nix ];
       config = {
         vital.distributed-build = {
-          caches = [ "octavian" "radahn" ];
+          # Note that although "radahn" is not in the list by default, it is
+          # always possible to manually specify it by
+          #
+          # --extra-substituters "http://10.77.1.35:17777"
+          caches = [ "octavian" ];
           builders = lib.optionals (config.networking.hostName != "malenia") [
             "octavian" "malenia" ] ;
         };
