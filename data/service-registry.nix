@@ -91,4 +91,8 @@ rec {
   localsend = {
     port = 53317;
   };
+
+  n8n = {
+    port = 45678;
+  };
 }
