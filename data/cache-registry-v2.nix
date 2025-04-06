@@ -6,7 +6,7 @@
   };
 
   radahn = {
-    url = "http://radahn.breakds.org:17777";
+    url = "http://10.77.1.35:17777";
     publicKey = "binary-cache.radahn-1:/BN5TAzKaOscT3XYoCC/iVcCY4vlpA98BhnX17t558o=";
     location = "lab";
   };
