@@ -9,7 +9,7 @@
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
     ./clickhouse
-    ./n8n
+    # ./n8n
   ];
 
   config = {

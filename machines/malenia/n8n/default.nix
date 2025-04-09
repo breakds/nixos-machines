@@ -17,7 +17,7 @@ in {
       settings = {
         port = "${toString info.port}";
         generic.timezone = "America/Los_Angeles";
-        executitions.concurrency = {
+        executions.concurrency = {
           productionLimit = 12;
           evaluationLimit = 12;
         };
