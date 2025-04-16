@@ -35,7 +35,7 @@
     interm.url = "git+ssh://git@github.com/breakds/interm";
     interm.inputs.nixpkgs.follows = "nixpkgs";
 
-    ml-pkgs.url = "github:nixvital/ml-pkgs";
+    ml-pkgs.url = "github:nixvital/ml-pkgs/archive/24.11";
     ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";

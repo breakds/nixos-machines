@@ -5,6 +5,7 @@ let self = inputs.self;
 in {
   flake.nixosModules.first-party-software = {
     nixpkgs.overlays = [
+      inputs.ml-pkgs.overlays.tools
       (final: prev: {
         www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
       })
@@ -27,6 +28,7 @@ in {
 
       self.nixosModules.ollama
       inputs.personax.nixosModules.personax
+      self.nixosModules.temporal
     ];
   };
 }
