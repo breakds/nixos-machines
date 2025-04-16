@@ -40,6 +40,6 @@ in {
       };
     };
 
-    temporal = import ./temporal;
+    temporal = import ./temporal/dev-server.nix;
   };
 }

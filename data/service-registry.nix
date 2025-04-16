@@ -98,14 +98,8 @@ rec {
 
   temporal = {
     ports = {
-      pprof = 7936;
       api = 7233;
-      api-membership = 6933;
-      api-http = 7243;
-      matching = 7235;
-
       ui = 8233;
-      metrics = 9100;
     };
     uid = 823;
     gid = 823;
