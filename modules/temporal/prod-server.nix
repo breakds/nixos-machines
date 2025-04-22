@@ -7,6 +7,13 @@ let cfg = config.services.temporal;
     stateDir = "/var/lib/temporal";
     configDir = "${stateDir}/config";
 
+    yaml = pkgs.formats.yaml { };
+    prod-ui-config = yaml.generate "production-ui.yaml" {
+      enableUi = true;
+      temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
+      port = cfg.ports.ui;
+    };
+
 in {
   options.services.temporal = with lib; {
     enable = mkEnableOption "Enable Temporal dev server";
@@ -71,7 +78,7 @@ in {
       "d ${stateDir} 755 ${user} ${group} -"
       "d ${configDir} 755 ${user} ${group} -"
       "L+ ${configDir}/production.yaml - - - - ${./production.yaml}"
-      "L+ ${configDir}/production-ui.yaml - - - - ${./production-ui.yaml}"
+      "L+ ${configDir}/production-ui.yaml - - - - ${prod-ui-config}"
     ];
 
     systemd.services.temporal = {
