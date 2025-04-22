@@ -56,7 +56,7 @@ services:
 
   worker:
     rpc:
-      membershipPort: 6939
+      membershipPort: 6940
 
 clusterMetadata:
   enableGlobalNamespace: false
