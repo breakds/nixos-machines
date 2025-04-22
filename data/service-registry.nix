@@ -100,6 +100,16 @@ rec {
     ports = {
       api = 7233;
       ui = 8233;
+
+      # Inter-service ports
+      pprof = 7236;
+      frontendMembership = 7237;
+      frontendHttp = 7238;
+      matching = 7239;
+      matchingMembership = 7240;
+      history = 7241;
+      historyMembership = 7242;
+      worker = 7243;
     };
     uid = 823;
     gid = 823;

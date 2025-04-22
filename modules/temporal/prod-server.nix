@@ -13,10 +13,15 @@ let cfg = config.services.temporal;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
       port = cfg.ports.ui;
     };
+    prod-config = yaml.generate "production.yaml" (
+      import ./prod-config.nix {
+        inherit stateDir;
+        inherit (cfg) ports;
+      });
 
 in {
   options.services.temporal = with lib; {
-    enable = mkEnableOption "Enable Temporal dev server";
+    enable = mkEnableOption "Enable Temporal prod server";
 
     host = mkOption {
       type = types.str;
@@ -39,12 +44,56 @@ in {
           default = registry.ports.ui;
           description = "The port on which the Temporal Web UI listens.";
         };
+        options.pprof = mkOption {
+          type = types.port;
+          default = registry.ports.pprof;
+          description = "The port for pprof (performance monitoring)";
+        };
+        # Temporal’s server uses a Ringpop gossip protocol for peer discovery;
+        # each node listens on its configured membershipPort to join and
+        # maintain the cluster ring.
+        options.frontendMembership = mkOption {
+          type = types.port;
+          default = registry.ports.frontendMembership;
+          description = "For Ringpop gossip protocol, frontend service";
+        };
+        options.frontendHttp = mkOption {
+          type = types.port;
+          default = registry.ports.frontendHttp;
+          description = "Similar to ports.api but using HTTP instead of Grpc";
+        };
+        options.matching = mkOption {
+          type = types.port;
+          default = registry.ports.matching;
+          description = "Main port for the matching service";
+        };
+        options.matchingMembership = mkOption {
+          type = types.port;
+          default = registry.ports.matchingMembership;
+          description = "For Ringpop gossip protocol, matching service";
+        };
+        options.history = mkOption {
+          type = types.port;
+          default = registry.ports.history;
+          description = "Main port for the history service";
+        };
+        options.historyMembership = mkOption {
+          type = types.port;
+          default = registry.ports.historyMembership;
+          description = "For Ringpop gossip protocol, history service";
+        };
+        options.worker = mkOption {
+          type = types.port;
+          default = registry.ports.worker;
+          description = "Main port for the worker service";
+        };
+        
       };
       default = {
-        api = registry.ports.api;
-        ui = registry.ports.ui;
+        inherit (registry.ports) api ui pprof frontendMembership frontendHttp
+          matching matchingMembership history historyMembership worker;
       };
-      description = "Specify the ports for components of the temporal dev server.";
+      description = "Specify the ports for components of the temporal service.";
     };
 
     namespaces = mkOption {
@@ -77,7 +126,7 @@ in {
     systemd.tmpfiles.rules = [
       "d ${stateDir} 755 ${user} ${group} -"
       "d ${configDir} 755 ${user} ${group} -"
-      "L+ ${configDir}/production.yaml - - - - ${./production.yaml}"
+      "L+ ${configDir}/production.yaml - - - - ${prod-config}"
       "L+ ${configDir}/production-ui.yaml - - - - ${prod-ui-config}"
     ];
 
