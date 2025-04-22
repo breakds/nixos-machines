@@ -55,11 +55,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    ids.uids.temporal = registry.uid;
-    ids.gids.temporal = registry.gid;
-
     users.groups."${group}" = {
-      gid = config.ids.gids.temporal;
+      gid = registry.gid;
     };
 
     users.users."${user}" = {
@@ -67,7 +64,7 @@ in {
       group = group;
       home = stateDir;
       useDefaultShell = true;
-      uid = config.ids.uids.temporal;
+      uid = registry.uid;
     };
 
     systemd.tmpfiles.rules = [
