@@ -131,11 +131,11 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1744699484,
-        "narHash": "sha256-RYFiZ7lfhvYdov/vygcLnUyB/TTh93m2t3stwS2cgA4=",
+        "lastModified": 1745290803,
+        "narHash": "sha256-vj7plX6t8QFFx0dSRqhzjKAeJXzNP8ljaX0HxYea8MM=",
         "owner": "nixvital",
         "repo": "ml-pkgs",
-        "rev": "4731e33344c79eea5cc908ca9048b402c118f5d9",
+        "rev": "fe276703441f042460c0e43da34e2d7ddc2023aa",
         "type": "github"
       },
       "original": {

@@ -11,6 +11,11 @@ in {
       inputs.nixos-home.nixosModules.breakds-home
 
       self.nixosModules.graphical
+
+      ({
+        nixpkgs.overlays = [ inputs.ml-pkgs.overlays.tools ];
+      })
+
       self.nixosModules.temporal
     ];
   };
