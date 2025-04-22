@@ -69,7 +69,7 @@ clusterMetadata:
       initialFailoverVersion: 1
       rpcName: "frontend"
       rpcAddress: "localhost:7233"
-      httpAddress: "localhost:8233"
+      httpAddress: "localhost:7232"
 
 dcRedirectionPolicy:
   # No cross data center replication
