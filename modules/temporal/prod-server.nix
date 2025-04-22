@@ -74,6 +74,7 @@ in {
       "d ${stateDir} 755 ${user} ${group} -"
       "d ${configDir} 755 ${user} ${group} -"
       "L+ ${configDir}/production.yaml - - - - ${./production.yaml}"
+      "L+ ${configDir}/production-ui.yaml - - - - ${./production-ui.yaml}"
     ];
 
     systemd.services.temporal = {
@@ -98,6 +99,27 @@ in {
               --service history \
               --service matching \
               --service worker
+        '';
+      };
+    };
+
+    systemd.services.temporal-ui = {
+      # See https://docs.temporal.io/temporal-service
+      description = "Temporal service UI";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "temporal.service" ];
+      serviceConfig = {
+        Type = "simple";
+        User = user;
+        Group = group;
+        WorkingDirectory = stateDir;
+        DynamicUser = false;
+        ExecStart = ''
+          ${pkgs.temporal-ui-server}/bin/server \
+              --env production-ui \
+              --root ${stateDir} \
+              --config "config" \
+              start
         '';
       };
     };

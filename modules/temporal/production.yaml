@@ -40,7 +40,7 @@ services:
       grpcPort: 7233
       membershipPort: 6933
       bindOnIP: '0.0.0.0'
-      httpPort: 8233
+      httpPort: 7232
 
   matching:
     rpc:
@@ -56,7 +56,7 @@ services:
 
   worker:
     rpc:
-      membershipPort: 6939      
+      membershipPort: 6939
 
 clusterMetadata:
   enableGlobalNamespace: false
