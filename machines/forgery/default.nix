@@ -97,6 +97,7 @@
 
     services.temporal = {
       enable = true;
+      namespaces = [ "factorai-dev" "factorai" ];
     };
 
     networking.firewall.allowedTCPPorts = [

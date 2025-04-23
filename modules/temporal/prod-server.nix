@@ -13,6 +13,10 @@ let cfg = config.services.temporal;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
       port = cfg.ports.ui;
     };
+
+    # https://docs.temporal.io/self-hosted-guide/defaults
+    #
+    # Update those defaults if we want finer control.
     prod-config = yaml.generate "production.yaml" (
       import ./prod-config.nix {
         inherit stateDir;
@@ -87,7 +91,7 @@ in {
           default = registry.ports.worker;
           description = "Main port for the worker service";
         };
-        
+
       };
       default = {
         inherit (registry.ports) api ui pprof frontendMembership frontendHttp
@@ -134,6 +138,7 @@ in {
       # See https://docs.temporal.io/temporal-service
       description = "A single Temporal Service";
       wantedBy = [ "multi-user.target" ];
+      wants = [ "temporal-namespaces.service" ];
       after = [ "network.target" ];
       serviceConfig = {
         Type = "simple";
@@ -175,6 +180,25 @@ in {
               start
         '';
       };
+    };
+
+    systemd.services.temporal-namespaces = {
+      description = "Initialize Temporal namespaces";
+      # Ensure it follows the main temporal service
+      partOf = [ "temporal.service" ];
+      after  = [ "temporal.service" ];
+      # binds into temporal.service lifecycle
+      wantedBy = [ "temporal.service" ];
+      serviceConfig = {
+        Type    = "oneshot";
+        ExecStartPre = "sleep 3";
+      };
+      script = lib.concatStringsSep "\n" (map
+        (x: ''
+           ${pkgs.temporal-cli}/bin/temporal operator \
+               --address "localhost:${toString cfg.ports.api}" \
+               namespace create -n ${x}
+         '') ([ "default" ] ++ cfg.namespaces));
     };
   };
 }
