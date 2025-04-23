@@ -191,7 +191,7 @@ in {
       wantedBy = [ "temporal.service" ];
       serviceConfig = {
         Type    = "oneshot";
-        ExecStartPre = "sleep 3";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
       };
       script = lib.concatStringsSep "\n" (map
         (x: ''
