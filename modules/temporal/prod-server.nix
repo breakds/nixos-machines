@@ -7,7 +7,9 @@ let cfg = config.services.temporal;
     stateDir = "/var/lib/temporal";
     configDir = "${stateDir}/config";
 
+    # Generate production YAMLs from Nix values
     yaml = pkgs.formats.yaml { };
+
     prod-ui-config = yaml.generate "production-ui.yaml" {
       enableUi = true;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
@@ -31,11 +33,12 @@ in {
       type = types.str;
       default = "127.0.0.1";
       description = ''
-        The ip to bind. Bind to 0.0.0.0 if you want to expose the service
-        to clients that are not on localhost.
+        IP address where Temporal binds its services.
+        Use 0.0.0.0 to expose externally.
       '';
     };
 
+    # Sub-module for all required ports
     ports = mkOption {
       type = types.submodule {
         options.api = mkOption {
@@ -97,15 +100,15 @@ in {
         inherit (registry.ports) api ui pprof frontendMembership frontendHttp
           matching matchingMembership history historyMembership worker;
       };
-      description = "Specify the ports for components of the temporal service.";
+      description = "Ports for Temporal server components.";
     };
 
     namespaces = mkOption {
       type = types.listOf types.str;
       default = [];
       description = ''
-          Specify namespaces that should be pre-created (namespace
-          \"default\" is always created).
+        List of Temporal namespaces to ensure exist.
+        The built-in "default" namespace is always created.
       '';
       example = [
         "my-namespace"
@@ -135,9 +138,11 @@ in {
       uid = registry.uid;
     };
 
+    # Ensure directories & symlink YAML configs
     systemd.tmpfiles.rules = [
       "d ${stateDir} 755 ${user} ${group} -"
       "d ${configDir} 755 ${user} ${group} -"
+      # Link generated YAMLs into /var/lib/temporal/config
       "L+ ${configDir}/production.yaml - - - - ${prod-config}"
       "L+ ${configDir}/production-ui.yaml - - - - ${prod-ui-config}"
     ];
