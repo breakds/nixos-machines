@@ -197,6 +197,9 @@ in {
         (x: ''
            ${pkgs.temporal-cli}/bin/temporal operator \
                --address "localhost:${toString cfg.ports.api}" \
+               namespace describe -n ${x} > /dev/null 2>&1 || \
+           ${pkgs.temporal-cli}/bin/temporal operator \
+               --address "localhost:${toString cfg.ports.api}" \
                namespace create -n ${x}
          '') ([ "default" ] ++ cfg.namespaces));
     };
