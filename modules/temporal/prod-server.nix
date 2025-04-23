@@ -112,6 +112,14 @@ in {
         "my-other-namespace"
       ];
     };
+
+    openFirewall = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Whether to open the ports api (frontend grpc) and ui in the firewall.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -203,5 +211,10 @@ in {
                namespace create -n ${x}
          '') ([ "default" ] ++ cfg.namespaces));
     };
+
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [
+      cfg.ports.api
+      cfg.ports.ui
+    ];
   };
 }
