@@ -14,6 +14,10 @@ let cfg = config.services.temporal;
       enableUi = true;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
       port = cfg.ports.ui;
+      cors = {
+        cookieInsecure = true;
+        allowOrigins = [ "*" ];
+      };
     };
 
     # https://docs.temporal.io/self-hosted-guide/defaults
@@ -35,6 +39,16 @@ in {
       description = ''
         IP address where Temporal binds its services.
         Use 0.0.0.0 to expose externally.
+      '';
+    };
+
+    domains = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      example = [ "http://localhost:3000" ];
+      description = ''
+        Use this field to provide a list of domains that are authorized to
+        access the UI Server APIs.
       '';
     };
 
