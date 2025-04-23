@@ -1,17 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  services.temporal-dev-server = {
+  services.temporal = {
     enable = true;
     host = "0.0.0.0";
-    namespaces = [
-      "factorai-dev"
-      "general-dev"
-    ];
+    namespaces = [ "general-dev" "factorai-dev" "beancounting" ];
+    openFirewall = true;
   };
-
-  networking.firewall.allowedTCPPorts = [
-    config.services.temporal-dev-server.ports.api
-    config.services.temporal-dev-server.ports.ui
-  ];
 }

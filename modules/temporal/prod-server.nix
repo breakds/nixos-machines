@@ -22,7 +22,7 @@ let cfg = config.services.temporal;
     prod-config = yaml.generate "production.yaml" (
       import ./prod-config.nix {
         inherit stateDir;
-        inherit (cfg) ports;
+        inherit (cfg) host ports;
       });
 
 in {

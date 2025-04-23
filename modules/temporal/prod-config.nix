@@ -1,4 +1,4 @@
-{ stateDir, ports }:
+{ stateDir, ports, host ? "127.0.0.1" }:
 
 {
   log = {
@@ -55,7 +55,7 @@
       rpc = {
         grpcPort       = ports.api;
         membershipPort = ports.frontendMembership;
-        bindOnIP       = "0.0.0.0";
+        bindOnIP       = "${host}";
         httpPort       = ports.frontendHttp;
       };
     };
