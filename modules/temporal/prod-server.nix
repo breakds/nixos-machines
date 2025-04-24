@@ -220,7 +220,7 @@ in {
       wantedBy = [ "temporal.service" ];
       serviceConfig = {
         Type    = "oneshot";
-        ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
       };
       script = lib.concatStringsSep "\n" (map
         (x: ''
