@@ -14,10 +14,6 @@ let cfg = config.services.temporal;
       enableUi = true;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
       port = cfg.ports.ui;
-      cors = {
-        cookieInsecure = true;
-        allowOrigins = [ "*" ];
-      };
     };
 
     # https://docs.temporal.io/self-hosted-guide/defaults
@@ -39,16 +35,6 @@ in {
       description = ''
         IP address where Temporal binds its services.
         Use 0.0.0.0 to expose externally.
-      '';
-    };
-
-    domains = mkOption {
-      type = types.listOf types.str;
-      default = [];
-      example = [ "http://localhost:3000" ];
-      description = ''
-        Use this field to provide a list of domains that are authorized to
-        access the UI Server APIs.
       '';
     };
 
@@ -137,6 +123,18 @@ in {
         Whether to open the ports api (frontend grpc) and ui in the firewall.
       '';
     };
+
+    allowInsecureCookie = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        When set to "true", it instructs the UI server to mark its
+        CSRF-protection cookie as not requiring the Secure attribute, allowing
+        the cookie to be set and sent over plain HTTP connections instead of
+        HTTPS. Required if you intended to make the service available via HTTP
+        and used only internally.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -206,6 +204,10 @@ in {
               --config "config" \
               start
         '';
+      };
+
+      environment = {
+        TEMPORAL_CSRF_COOKIE_INSECURE = toString cfg.allowInsecureCookie;
       };
     };
 
