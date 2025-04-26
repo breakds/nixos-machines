@@ -22,7 +22,6 @@
     ./services/docker-registry.nix
     ./services/paperless.nix
     ./services/game-solutions.nix
-    ./services/rsu-taxer.nix
     ./services/temporal.nix
     ./services/bcounting.nix
     ../../base/vpn.nix
