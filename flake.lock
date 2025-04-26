@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745692761,
-        "narHash": "sha256-N7kjvEXgn8Db4GVRBqMZuXv8Bukcyl+TvX5gl19ofI4=",
+        "lastModified": 1745693214,
+        "narHash": "sha256-WPVsVLBO8WQLLrfK5WzhtnDV42iQ5555FH0UVkDRueI=",
         "ref": "refs/heads/main",
-        "rev": "4bafdd18269349c658b2c218a27c173e1d711ed9",
-        "revCount": 283,
+        "rev": "b1ca592b7c648e7b8488d4ab8197eaa24670fd79",
+        "revCount": 285,
         "type": "git",
         "url": "ssh://git@github.com/breakds/beancounting"
       },
