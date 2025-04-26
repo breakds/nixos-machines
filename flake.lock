@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745693214,
-        "narHash": "sha256-WPVsVLBO8WQLLrfK5WzhtnDV42iQ5555FH0UVkDRueI=",
+        "lastModified": 1745703555,
+        "narHash": "sha256-2ylm0GyBuOi1Jk7DSqdS87bc+BhtyCweWvephRs3Qus=",
         "ref": "refs/heads/main",
-        "rev": "b1ca592b7c648e7b8488d4ab8197eaa24670fd79",
-        "revCount": 285,
+        "rev": "28723b68447c7fb5ad2f10fd0ae69dc980de93cb",
+        "revCount": 286,
         "type": "git",
         "url": "ssh://git@github.com/breakds/beancounting"
       },
@@ -157,11 +157,11 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1745354002,
-        "narHash": "sha256-YIpFixVIKzyZ/IXQ8J7YyMbwxkix+UrdB1azMI1JLVA=",
+        "lastModified": 1745702658,
+        "narHash": "sha256-yBzILsd5n7tG0KGfrQyOuCexpYVwyF3DCbGUO+bIWuo=",
         "owner": "nixvital",
         "repo": "ml-pkgs",
-        "rev": "074714bf26330bf0dee0251c4f877d877c597151",
+        "rev": "a2d8580a6c18dd376a619c6b2540cee3b0db5dec",
         "type": "github"
       },
       "original": {
