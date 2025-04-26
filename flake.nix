@@ -50,6 +50,11 @@
     personax.inputs.nixpkgs.follows = "nixpkgs";
     personax.inputs.ml-pkgs.follows = "ml-pkgs";
     personax.inputs.flake-parts.follows = "flake-parts";
+
+    beancounting.url = "git+ssh://git@github.com/breakds/beancounting";
+    beancounting.inputs.nixpkgs.follows = "nixpkgs";
+    beancounting.inputs.flake-parts.follows = "flake-parts";
+    beancounting.inputs.ml-pkgs.follows = "ml-pkgs";
   };
 
   outputs =

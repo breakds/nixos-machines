@@ -1,5 +1,31 @@
 {
   "nodes": {
+    "beancounting": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "ml-pkgs": [
+          "ml-pkgs"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1745649598,
+        "narHash": "sha256-V1ITngUGOQbO5ICjRqGLUCshnY8qJSVUXJ2ywJhyTC0=",
+        "ref": "refs/heads/main",
+        "rev": "d76748c03b949c897e0b911c03803cfee955ea5c",
+        "revCount": 282,
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/beancounting"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/beancounting"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -307,6 +333,7 @@
     },
     "root": {
       "inputs": {
+        "beancounting": "beancounting",
         "flake-parts": "flake-parts",
         "game-solutions": "game-solutions",
         "home-manager": "home-manager",

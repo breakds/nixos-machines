@@ -17,6 +17,7 @@ in {
       })
 
       self.nixosModules.temporal
+      inputs.beancounting.nixosModules.bcounting
     ];
   };
 }
