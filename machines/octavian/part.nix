@@ -21,6 +21,7 @@ in {
       ./.
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
+      inputs.beancounting.nixosModules.bcounting
 
       self.nixosModules.graphical
       self.nixosModules.machine-learning
