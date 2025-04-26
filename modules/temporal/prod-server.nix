@@ -14,6 +14,9 @@ let cfg = config.services.temporal;
       enableUi = true;
       temporalGrpcAddress = "127.0.0.1:${toString cfg.ports.api}";
       port = cfg.ports.ui;
+      cors = {
+        cookieInsecure = cfg.allowInsecureCookie;
+      };
     };
 
     # https://docs.temporal.io/self-hosted-guide/defaults
@@ -207,7 +210,7 @@ in {
       };
 
       environment = {
-        TEMPORAL_CSRF_COOKIE_INSECURE = toString cfg.allowInsecureCookie;
+        TEMPORAL_CSRF_COOKIE_INSECURE = "true";
       };
     };
 
