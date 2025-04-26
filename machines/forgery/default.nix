@@ -96,12 +96,12 @@
     };
 
     services.temporal = {
-      enable = true;
+      enable = false;
       namespaces = [ "factorai-dev" "factorai" ];
     };
 
     services.bcounting-collectors = {
-      enable = true;
+      enable = false;
       temporal = "octavian.local:7233";
       parallel = 4;
       cron.amazon = "CRON_TZ=America/Los_Angeles 0 3 * * *";
