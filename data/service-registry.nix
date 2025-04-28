@@ -91,6 +91,10 @@ rec {
     port = 45678;
   };
 
+  rustdesk-server = {
+    ports = [21115 21116 21117 21118 21119];
+  };
+
   temporal = {
     domain = "temporal.breakds.net";
     ports = {
