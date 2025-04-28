@@ -11,6 +11,11 @@ in {
     allowInsecureCookie = true;
   };
 
+  # security.acme.certs = {
+  #   "${registry.domain}" = {
+  #   };
+  # };
+
   services.nginx = {
     virtualHosts = {
       "${registry.domain}" = {

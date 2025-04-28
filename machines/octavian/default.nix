@@ -131,11 +131,6 @@
       };
     };
 
-    services.certbot = {
-      enable = true;
-      agreeTerms = true;
-    };
-
     services.nginx = {
       enable = true;
       package = pkgs.nginxMainline;

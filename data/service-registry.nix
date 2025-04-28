@@ -92,7 +92,7 @@ rec {
   };
 
   temporal = {
-    domain = "temporal.breakds.org";
+    domain = "temporal.breakds.net";
     ports = {
       api = 7233;
       ui = 8233;
