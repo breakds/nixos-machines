@@ -41,5 +41,6 @@ in {
     };
 
     temporal = import ./temporal;
+    glance = import ./glance;
   };
 }

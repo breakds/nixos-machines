@@ -17,7 +17,7 @@ let unstablePkgs = import (builtins.fetchTarball {
     };
 
 in {
-  inherit (unstablePkgs) n8n;
+  inherit (unstablePkgs) n8n glance;
   
   shuriken = final.callPackage ../../pkgs/shuriken {};
   robot-deployment-suite = final.python3Packages.callPackage ../../pkgs/robot-deployment-suite {};

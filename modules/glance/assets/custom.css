@@ -1,0 +1,41 @@
+/* Make our list horizontal & remove default bullets */
+.streaming-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+/* Stack icon above label, center-aligned */
+.streaming-links ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1rem 1rem 0;   /* space between items */
+}
+
+/* Enlarge the SimpleIcons or SVG icon */
+/* 1. Bigger icons via the <img> */
+.streaming-links ul li div img {
+  width: 5rem;        /* increase as needed */
+  height: 5rem;
+  object-fit: contain;
+  pointer-events: none; /* so clicks pass through to the <a> */
+}
+
+/* Style the link itself and push label underneath */
+.streaming-links ul li a {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  display: block;
+}
+
+/* Optional hover effect */
+.streaming-links ul li a:hover {
+  opacity: 0.8;
+}

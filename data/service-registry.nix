@@ -114,4 +114,9 @@ rec {
     uid = 823;
     gid = 823;
   };
+
+  glance = {
+    domain = "home.breakds.net";
+    port = 7010;
+  };
 }
