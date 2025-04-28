@@ -11,14 +11,26 @@ in {
     allowInsecureCookie = true;
   };
 
-  # security.acme.certs = {
-  #   "${registry.domain}" = {
-  #   };
-  # };
+  security.acme.certs = {
+    "${registry.domain}" = {
+      dnsProvider = "cloudflare";
+      group = config.services.nginx.group;
+      # What is in the files?
+      #
+      # CLOUDFLARE_EMAIL=...
+      # CLOUDFLARE_API_KEY=... 
+      environmentFile = "/home/breakds/certs/cloudflare.env";
+    };
+  };
 
   services.nginx = {
     virtualHosts = {
       "${registry.domain}" = {
+        addSSL = true;
+        # NOTE: Instead of `enableACME`, this directly refer the certificate in
+        # `security.acme.certs`. This is because the domain here is only used
+        # locally.
+        useACMEHost = "${registry.domain}";
         locations."/" = {
           proxyPass = "http://localhost:${toString registry.ports.ui}";
           proxyWebsockets = true;
