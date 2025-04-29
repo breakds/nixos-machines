@@ -36,12 +36,26 @@ let clock = {
       cache = "1m";
       title = "Host Services";
       sites = [
-        { title = "Jellyfin";    url = "https://yourdomain.com/"; icon = "si:jellyfin"; }
-        { title = "Gitea";       url = "https://yourdomain.com/"; icon = "si:gitea"; }
-        { title = "qBittorrent"; url = "https://yourdomain.com/"; icon = "si:qbittorrent"; }
-        { title = "Immich";      url = "https://yourdomain.com/"; icon = "si:immich"; }
-        { title = "AdGuard Home";url = "https://yourdomain.com/"; icon = "si:adguard"; }
-        { title = "Vaultwarden"; url = "https://yourdomain.com/"; icon = "si:vaultwarden"; }
+        { title = "FileRun"; url = "https://files.breakds.org/";
+          icon = "/assets/filerun.png"; }
+        { title = "Blog"; url = "https://www.breakds.org/";
+          icon = "/assets/tech_blog.png"; }
+        { title = "Ollama"; url = "https://llm.breakds.org/";
+          icon = "si:ollama"; }
+        { title = "Docker"; url = "https://docker.breakds.org/";
+          icon = "si:docker"; }
+        { title = "Hydra"; url = "https://hydra.breakds.org/";
+          icon = "/assets/nixos.svg"; }
+        { title = "Plex"; url = "https://plex.breakds.org/";
+          icon = "/assets/plex.svg"; }
+        { title = "Grafana"; url = "https://grafana.breakds.org/";
+          icon = "/assets/grafana.svg"; }
+        { title = "Paperless"; url = "https://paperless.breakds.org/";
+          icon = "/assets/paperless.svg"; }
+        { title = "Temporal"; url = "https://temporal.breakds.net/";
+          icon = "/assets/temporal.png"; }
+        { title = "Kiseki"; url = "https://kiseki.breakds.org/";
+          icon = "/assets/kiseki.png"; }
       ];
     };
 
