@@ -45,6 +45,10 @@
       remote-desktop.enable = false;
     };
 
+    # Using rustdesk for remote desktop. For compatibility it should
+    # remain in X.
+    services.xserver.displayManager.gdm.wayland = lib.mkForce false;
+
     # +----------+
     # | Packages |
     # +----------+
