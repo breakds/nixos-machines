@@ -36,6 +36,7 @@
 
     ml-pkgs.url = "github:nixvital/ml-pkgs/archive/24.11";
     ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+    ml-pkgs.inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
 
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";

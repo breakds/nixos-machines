@@ -65,8 +65,8 @@
       gimp peek gnupg pass libreoffice
       skypeforlinux
       multitail
-      nodejs-14_x
-      (yarn.override { nodejs = nodejs-14_x; })
+      nodejs
+      yarn
       anki
       rustdesk-flutter
     ];
