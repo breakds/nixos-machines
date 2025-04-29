@@ -8,7 +8,6 @@ let registry = (import ../../data/service-registry.nix).glance;
 
 in {
   services.glance = {
-    enable = true;
     settings = {
       server = {
         host = "0.0.0.0";

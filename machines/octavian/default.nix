@@ -24,6 +24,7 @@
     ./services/game-solutions.nix
     ./services/temporal.nix
     ./services/bcounting.nix
+    ./services/glance.nix
     ../../base/vpn.nix
   ];
 
