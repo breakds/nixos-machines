@@ -11,7 +11,6 @@
       relayHosts = [ "127.0.0.1:21117" ];
     };
     signal.extraArgs = [
-      "--mask" "10.77.1.0/24"
       "-M" "33554432"  # Larger UDP buffer
     ];
     openFirewall = true;
