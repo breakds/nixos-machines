@@ -20,6 +20,7 @@
       hugo
       quickserve
       remmina
+      rustdesk-flutter
       ffmpeg
       vlc
       mysql-client
