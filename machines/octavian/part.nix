@@ -29,6 +29,7 @@ in {
       self.nixosModules.ollama
       inputs.personax.nixosModules.personax
       self.nixosModules.temporal
+      self.nixosModules.glance
     ];
   };
 }
