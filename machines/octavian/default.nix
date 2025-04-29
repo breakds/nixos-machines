@@ -25,6 +25,7 @@
     ./services/temporal.nix
     ./services/bcounting.nix
     ./services/glance.nix
+    ./services/rustdesk.nix
     ../../base/vpn.nix
   ];
 
