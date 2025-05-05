@@ -14,6 +14,32 @@ in {
     ];
   };
 
+  flake.nixosModules.karakeep = {config, pkgs, lib, ... }: {
+    imports = [
+      "${inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/karakeep.nix"
+    ];
+
+    config = let registry = (import ../../data/service-registry.nix).karakeep; in {
+      services.karakeep = {
+        enable = true;
+        meilisearch.enable = true;
+        browser.enable = true;
+        browser.port = registry.ports.browser;
+        extraEnvironment = {
+          PORT = "${toString registry.ports.ui}";
+          DISABLE_SIGNUPS = "true";
+          DISABLE_NEW_RELEASE_CHECK = "true";
+        };
+      };
+
+      services.nginx.virtualHosts."${registry.domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".proxyPass = "http://localhost:${toString registry.ports.ui}";
+      };
+    };
+  };
+
   flake.nixosConfigurations.octavian = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
@@ -30,6 +56,7 @@ in {
       inputs.personax.nixosModules.personax
       self.nixosModules.temporal
       self.nixosModules.glance
+      self.nixosModules.karakeep
     ];
   };
 }

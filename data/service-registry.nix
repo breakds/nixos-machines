@@ -119,4 +119,13 @@ rec {
     domain = "home.breakds.net";
     port = 7010;
   };
+
+  karakeep = {
+    domain = "karakeep.breakds.org";
+    ports = {
+      ui = 7020;
+      browser = 7021;
+      meilisearch = 7700;
+    };
+  };
 }
