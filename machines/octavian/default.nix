@@ -26,6 +26,7 @@
     ./services/bcounting.nix
     ./services/glance.nix
     ./services/rustdesk.nix
+    ./services/karakeep.nix
     ../../base/vpn.nix
   ];
 
