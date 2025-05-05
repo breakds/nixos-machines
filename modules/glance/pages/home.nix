@@ -56,6 +56,8 @@ let clock = {
           icon = "/assets/temporal.png"; }
         { title = "Kiseki"; url = "https://kiseki.breakds.org/";
           icon = "/assets/kiseki.png"; }
+        { title = "Karakeep"; url = "https://karakeep.breakds.org/";
+          icon = "/assets/karakeep.svg"; }
       ];
     };
 
