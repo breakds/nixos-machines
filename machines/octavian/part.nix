@@ -20,6 +20,12 @@ in {
     ];
 
     config = let registry = (import ../../data/service-registry.nix).karakeep; in {
+      nixpkgs.overlays = [
+        (final: prev: {
+          karakeep = final.callPackage "${inputs.nixpkgs-unstable}/pkgs/by-name/ka/karakeep/package.nix" {};
+        })
+      ];
+
       services.karakeep = {
         enable = true;
         meilisearch.enable = true;
