@@ -1,19 +1,9 @@
-{config, pkgs, nixpkgs-unstable, lib, ... }:
+{config, pkgs, lib, ... }:
 
 let registry = (import ../../../data/service-registry.nix).karakeep;
 
 in {
-  imports = [
-    "${nixpkgs-unstable}/nixos/modules/services/web-apps/karakeep.nix"
-  ];
-
   config = {
-    nixpkgs.overlays = [
-      (final: prev: {
-        karakeep = final.callPackage "${nixpkgs-unstable}/pkgs/by-name/ka/karakeep/package.nix" {};
-      })
-    ];
-
     services.karakeep = {
       enable = true;
       meilisearch.enable = true;
