@@ -8,7 +8,7 @@
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
-    ./clickhouse
+    # ./clickhouse
     # ./n8n
   ];
 
@@ -90,15 +90,15 @@
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
 
-    services.clickhouse-wonder = {
-      enable = true;
-      # TODO(breakds): Migrate this to dataset directory.
-      workDir = "/home/breakds/dataset/clickhouse";
-      backup = {
-        name = "backups1";
-        path = "/var/lib/wonder/warehouse/clickhouse/ClickHouseBackup";
-      };
-    };
+    # services.clickhouse-wonder = {
+    #   enable = true;
+    #   # TODO(breakds): Migrate this to dataset directory.
+    #   workDir = "/home/breakds/dataset/clickhouse";
+    #   backup = {
+    #     name = "backups1";
+    #     path = "/var/lib/wonder/warehouse/clickhouse/ClickHouseBackup";
+    #   };
+    # };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
