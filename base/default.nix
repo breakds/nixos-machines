@@ -40,8 +40,10 @@
     ];
 
     fonts.packages = with pkgs; [
-      # Use patched fonts for coding
-      (nerdfonts.override { fonts = [ "FiraCode" "Inconsolata" "JetBrainsMono" ]; })
+      # Use nerd-fonts for coding
+      nerd-fonts.fira-code
+      nerd-fonts.inconsolata
+      nerd-fonts.jetbrains-mono
       # Add Wenquanyi Microsoft Ya Hei, a nice-looking Chinese font.
       wqy_microhei
       font-awesome
