@@ -1,9 +1,18 @@
 {config, pkgs, lib, ... }:
 
-let registry = (import ../../../data/service-registry.nix).karakeep;
+let
+  registry = (import ../../../data/service-registry.nix).karakeep;
+  meili = (import ../../../data/service-registry.nix).meilisearch;
 
 in {
   config = {
+    services.meilisearch = {
+      enable = true;
+      listenPort = meili.port;
+      listenAddress = "127.0.0.1";
+      dumplessUpgrade = true;
+    };
+    
     services.karakeep = {
       enable = true;
       meilisearch.enable = true;

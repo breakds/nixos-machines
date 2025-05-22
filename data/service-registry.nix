@@ -110,12 +110,15 @@ rec {
     port = 7010;
   };
 
+  meilisearch = {
+    port = 7700;
+  };
+
   karakeep = {
     domain = "karakeep.breakds.org";
     ports = {
       ui = 7020;
       browser = 7021;
-      meilisearch = 7700;
     };
   };
 }
