@@ -2,7 +2,7 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -10,7 +10,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use vital-modules, with the same nixpkgs
@@ -34,9 +34,8 @@
     interm.url = "git+ssh://git@github.com/breakds/interm";
     interm.inputs.nixpkgs.follows = "nixpkgs";
 
-    ml-pkgs.url = "github:nixvital/ml-pkgs/archive/24.11";
+    ml-pkgs.url = "github:nixvital/ml-pkgs/archive/25.05";
     ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
-    ml-pkgs.inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
 
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";
