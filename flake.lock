@@ -170,31 +170,6 @@
         "type": "github"
       }
     },
-    "ml-pkgs_2": {
-      "inputs": {
-        "nixpkgs": [
-          "rapit",
-          "nixpkgs"
-        ],
-        "utils": [
-          "rapit",
-          "utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1680966883,
-        "narHash": "sha256-vL03G4G5R23MjtV/lUpdDDdlf0XjnpTo3DERtQRvc/Y=",
-        "owner": "nixvital",
-        "repo": "ml-pkgs",
-        "rev": "8a2ddd434119c9bdc1aa08bdc2e65d43a0b42c56",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixvital",
-        "repo": "ml-pkgs",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1720737798,
@@ -292,28 +267,6 @@
         "url": "ssh://git@github.com/breakds/PersonaX"
       }
     },
-    "rapit": {
-      "inputs": {
-        "ml-pkgs": "ml-pkgs_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils_3"
-      },
-      "locked": {
-        "lastModified": 1681663328,
-        "narHash": "sha256-h01tq13WVLRq00p/uc0hrWocZX1Dmacd2yfvqpapA7s=",
-        "ref": "refs/heads/main",
-        "rev": "cf59ce50a4fe890b467c7c7490cbffe54611617a",
-        "revCount": 56,
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/rapit"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/rapit"
-      }
-    },
     "root": {
       "inputs": {
         "beancounting": "beancounting",
@@ -327,7 +280,6 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "personax": "personax",
-        "rapit": "rapit",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
@@ -415,21 +367,6 @@
       }
     },
     "utils_3": {
-      "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_4": {
       "inputs": {
         "systems": "systems_3"
       },
@@ -493,7 +430,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_4"
+        "utils": "utils_3"
       },
       "locked": {
         "lastModified": 1724584698,

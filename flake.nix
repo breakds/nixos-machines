@@ -28,9 +28,6 @@
     wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
 
-    rapit.url = "git+ssh://git@github.com/breakds/rapit";
-    rapit.inputs.nixpkgs.follows = "nixpkgs";
-
     interm.url = "git+ssh://git@github.com/breakds/interm";
     interm.inputs.nixpkgs.follows = "nixpkgs";
 
