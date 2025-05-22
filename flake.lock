@@ -254,11 +254,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734474203,
-        "narHash": "sha256-imQjgcLMT+fg/U+dPH7bSdab5NZw/IMa312Kmf3dYGM=",
+        "lastModified": 1747946360,
+        "narHash": "sha256-CP1Q37ye82weM06wnBPHvn51MNho0hamNOKZAXSvOzc=",
         "ref": "refs/heads/main",
-        "rev": "12c8a1df026cd01ab3f349eacf21185bca26525a",
-        "revCount": 64,
+        "rev": "57b7af6a64be0e34327395abc5d8b453a0ee3d52",
+        "revCount": 114,
         "type": "git",
         "url": "ssh://git@github.com/breakds/PersonaX"
       },

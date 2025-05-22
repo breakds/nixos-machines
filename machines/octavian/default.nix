@@ -168,7 +168,7 @@
 
     services.ollama.host = "0.0.0.0";
     services.open-webui.environment.OLLAMA_BASE_URLS = "http://10.77.1.128:11434";  # lorian
-    # services.personax-discord-bot.enable = true;
+    services.personax-discord-bot.enable = true;
 
     nix = {
       settings = {

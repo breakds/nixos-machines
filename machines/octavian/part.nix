@@ -27,7 +27,7 @@ in {
       self.nixosModules.first-party-software
 
       self.nixosModules.ollama
-      # inputs.personax.nixosModules.personax
+      inputs.personax.nixosModules.personax
       self.nixosModules.temporal
       self.nixosModules.glance
     ];
