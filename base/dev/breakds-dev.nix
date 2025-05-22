@@ -19,7 +19,6 @@
       graphicsmagick
       pdftk
       hugo
-      quickserve
       remmina
       rustdesk-flutter
       ffmpeg
