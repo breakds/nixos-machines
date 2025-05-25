@@ -23,12 +23,13 @@ in {
     enable = true;
     hydraURL = "https://${hydraInfo.domain}";
     notificationSender = "bds+hydra@breakds.org";
-    buildMachinesFiles = [];
+    buildMachinesFiles = [];  # No external build machines other than octavian itself.
     useSubstitutes = true;
     port = hydraInfo.port;
     extraConfig = ''
       store-uri = file:///nix/store?secret-key=/opt/secret/hydra_key/hydra.breakds.org-1/secret
     '';
+    logo = ../../../data/logos/hydra.png;
   };
 
   networking.firewall.allowedTCPPorts = [ hydraInfo.port ];
