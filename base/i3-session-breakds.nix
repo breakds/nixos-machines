@@ -22,4 +22,6 @@ in {
   services.displayManager = {
     sessionPackages = lib.optionals (windowManager == "sway") [ pkgs.sway ];
   };
+
+  programs.i3lock.enable = true;
 }
