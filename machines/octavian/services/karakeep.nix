@@ -8,6 +8,11 @@ in {
   config = {
     services.meilisearch = {
       enable = true;
+      # Explicitly set the meilisearch version, because the service
+      # default is an older version if the stateVersion is older than
+      # 25.05. I have already manually done the migration so nothing
+      # to worry about.
+      package = pkgs.meilisearch;
       listenPort = meili.port;
       listenAddress = "127.0.0.1";
       dumplessUpgrade = true;
