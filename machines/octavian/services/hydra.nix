@@ -99,9 +99,11 @@ in {
       speedFactor = 4;
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
     }];
-    extraOptions = ''
-      allowed-uris = https://
-    '';
+    settings.allowed-uris = [
+      "github:"
+      "git+https://github.com/"
+      "git+ssh://github.com/"
+    ];
   };
   nixpkgs.config = { allowUnfree = true; };
 }
