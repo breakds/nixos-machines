@@ -5,7 +5,6 @@ let self = inputs.self;
 in {
   imports = [
     ./ollama/part.nix
-    ./agents/part.nix
     ./extra-mounts/part.nix
   ];
   
@@ -42,5 +41,6 @@ in {
 
     temporal = import ./temporal;
     glance = import ./glance;
+    gooseit = import ./gooseit.nix;
   };
 }

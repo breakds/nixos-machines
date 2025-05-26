@@ -14,7 +14,7 @@ in {
 
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.goose-ai
+      self.nixosModules.gooseit
     ];
   };
 }

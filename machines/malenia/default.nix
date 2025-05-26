@@ -87,6 +87,8 @@
       aider-chat
     ];
 
+    programs.gooseit.enable = true;
+
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
 
