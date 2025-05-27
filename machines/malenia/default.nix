@@ -80,6 +80,7 @@
       parsec-bin  # For game streaming
       # python3Packages.archer
       blender
+      bambu-studio
       openconnect
       anki
       flacon     # audiofile encoder
