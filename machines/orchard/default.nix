@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../base/build-machines.nix
-    ./services/redis.nix
+    ./services/voyage.nix
   ];
 
   config = {
