@@ -67,7 +67,6 @@
       firefox
       dbeaver-bin
       gimp peek gnupg pass libreoffice
-      skypeforlinux
       multitail
       nodejs
       yarn
