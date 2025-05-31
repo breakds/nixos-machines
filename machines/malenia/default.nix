@@ -88,7 +88,10 @@
       aider-chat
     ];
 
-    programs.gooseit.enable = true;
+    programs.gooseit = {
+      enable = true;
+      model = "deepseek-r1:8b";
+    };
 
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
