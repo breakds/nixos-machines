@@ -34,6 +34,14 @@
       fsType = "ext4";
     };
 
+  # Bind /var/lib/private to /mnt/states
+  fileSystems."/var/lib/private" = {
+    device = "/mnt/states/private";
+    fsType = "none";
+    options = [ "bind" ];
+    depends = [ "/mnt/states/private" "/var/lib" ];
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
