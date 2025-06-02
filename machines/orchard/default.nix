@@ -23,6 +23,12 @@
     services.fwupd.enable = true;
     services.printing.enable = true;
 
+    users.users."cassandra" = {
+      openssh.authorizedKeys.keyFiles = [
+        ../../data/keys/cassandra_zen.pub
+      ];
+    };
+
     # +----------+
     # | Sound    |
     # +----------+
