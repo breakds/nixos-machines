@@ -18,7 +18,6 @@ in {
       self.nixosModules.flatpak
       self.nixosModules.wonder-devops
       self.nixosModules.gooseit
-      self.nixosModules.ollama      
     ];
   };
 }

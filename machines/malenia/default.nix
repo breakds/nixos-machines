@@ -86,6 +86,7 @@
       flacon     # audiofile encoder
       pavucontrol
       aider-chat
+      vllm
     ];
 
     programs.gooseit.enable = true;
