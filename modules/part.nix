@@ -33,8 +33,7 @@ in {
           #
           # --extra-substituters "http://10.77.1.35:17777"
           caches = [ "octavian" ];
-          builders = lib.optionals (config.networking.hostName != "malenia") [
-            "octavian" "malenia" ] ;
+          builders = lib.optionals (config.networking.hostName != "malenia") [ "octavian" ] ;
         };
       };
     };
