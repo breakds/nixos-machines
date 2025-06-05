@@ -30,11 +30,4 @@ rec {
     sshUser = "breakds";
     sshKey = "breakds_samaritan";
   };
-
-  "lothric" = {
-    hostName = "192.168.110.30";
-    location = "office";
-    maxJobs = 24;
-    speedFactor = 7;
-  };
 }

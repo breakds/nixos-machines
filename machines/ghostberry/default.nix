@@ -150,7 +150,7 @@
 
     vital.distributed-build = {
       caches = [ "datahub" ];
-      builders = [ "lothric" ];
+      builders = [ "octavian" ];
     };
 
     # +--------------------+

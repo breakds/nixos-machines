@@ -5,21 +5,6 @@ let self = inputs.self;
 in {
   flake.nixosConfigurations = {
 
-    # Twin learner #1
-    lothric = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./lothric
-        inputs.vital-modules.nixosModules.foundation
-        inputs.nixos-home.nixosModules.breakds-home
-      
-        self.nixosModules.graphical
-        self.nixosModules.machine-learning
-        self.nixosModules.ollama
-        self.nixosModules.wonder-datahub
-      ];
-    };
-
     # Twin learner #2
     lorian = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

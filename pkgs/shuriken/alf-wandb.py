@@ -18,11 +18,6 @@ HOST_INFO = {
         "session_root": "tmp",
     },
 
-    "lothric": {
-        "location": "homelab",
-        "session_root": "tmp",
-    },
-
     "radahn": {
         "location": "lab",
         "session_root": "dataset",
