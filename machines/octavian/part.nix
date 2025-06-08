@@ -30,6 +30,7 @@ in {
       inputs.personax.nixosModules.personax
       self.nixosModules.temporal
       self.nixosModules.glance
+      self.nixosModules.prometheus-exporters
     ];
   };
 }

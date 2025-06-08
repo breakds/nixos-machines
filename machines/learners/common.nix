@@ -36,14 +36,7 @@
       value = "1048576";
     }];
 
-    services.prometheus = {
-      exporters.node = {
-        enable = true;
-        enabledCollectors = [ "systemd" "cpu" "filesystem" ];
-        port = 5821;
-      };
-    };
-    networking.firewall.allowedTCPPorts = [ 5821 ];
+    services.prometheus.exporters.node.enable = true;
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   };

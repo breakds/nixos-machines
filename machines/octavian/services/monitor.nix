@@ -44,21 +44,15 @@ in {
   services.prometheus = {
     enable = true;
     port = prometheusInfo.port;
-
-    exporters.node = {
-      enable = true;
-      enabledCollectors = [ "systemd" "cpu" "filesystem" ];
-      port = prometheusInfo.nodePort;
-    };
-
+    exporters.node.enable = true;
     scrapeConfigs = [
       {
         job_name = "kirkwood";
         static_configs = [{
           targets = [
-            "octavian.local:${toString config.services.prometheus.exporters.node.port}"
-            "lorian.local:5821"
-            "armlet.local:5821"
+            "octavian.local:${toString prometheusInfo.exporters.node.port}"
+            "lorian.local:${toString prometheusInfo.exporters.node.port}"
+            "armlet.local:${toString prometheusInfo.exporters.node.port}"
           ];
         }];
       }

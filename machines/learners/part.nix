@@ -12,8 +12,9 @@ in {
         ./lorian
         inputs.vital-modules.nixosModules.foundation
         inputs.nixos-home.nixosModules.breakds-home
-      
+
         self.nixosModules.graphical
+        self.nixosModules.prometheus-exporters
         self.nixosModules.machine-learning
         self.nixosModules.ollama
       ];
@@ -26,8 +27,9 @@ in {
         ./radahn
         inputs.vital-modules.nixosModules.foundation
         inputs.nixos-home.nixosModules.breakds-home
-      
+
         self.nixosModules.graphical
+        self.nixosModules.prometheus-exporters        
         self.nixosModules.machine-learning
         self.nixosModules.ollama
       ];

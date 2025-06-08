@@ -22,6 +22,7 @@ in {
         inputs.vital-modules.nixosModules.users
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
         self.nixosModules.graphical
+        self.nixosModules.prometheus-exporters
       ];
     };
   };

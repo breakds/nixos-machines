@@ -16,7 +16,14 @@ rec {
 
   prometheus = {
     port = 5820;
-    nodePort = 5821;
+    exporters = {
+      node.port = 5821;
+      zfs.port = 5822;      
+      nginx.port = 5823;
+      nvidia-gpu.port = 5824;
+      unbound.port = 5825;
+      dnsmasq.port = 5826;
+    };
   };
 
   # Deprecated
