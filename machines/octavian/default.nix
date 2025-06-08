@@ -12,7 +12,7 @@
 
     # Other modules
     ./services/web-services.nix
-    ./services/monitor.nix
+    ./services/monitor
     ./services/hydra.nix
     ./services/media.nix
     # ./services/code-server.nix
