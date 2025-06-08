@@ -24,6 +24,9 @@ in {
           url = "http://localhost:${toString config.services.prometheus.port}";
         }
       ];
+
+      # Note: not using provision for reproducible dashboards and alerts at this
+      # moment, but their jsons are committed anyway for future improvements.
     };
 
     services.nginx = {
