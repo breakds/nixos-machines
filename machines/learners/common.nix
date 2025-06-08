@@ -36,7 +36,10 @@
       value = "1048576";
     }];
 
-    services.prometheus.exporters.node.enable = true;
+    services.prometheus.exporters = {
+      node.enable = true;
+      nvidia-gpu.enable = true;
+    };
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   };

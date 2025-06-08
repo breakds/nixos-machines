@@ -20,6 +20,11 @@ in {
         ];
         disabledCollectors = [ "zfs" ];  # Use the standalone zfs exporter instead.
       };
+
+      nvidia-gpu = {
+        inherit (prometheus.exporters.nvidia-gpu) port;
+        openFirewall = true;
+      };
     };
   };
 }
