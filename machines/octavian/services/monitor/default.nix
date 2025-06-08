@@ -35,10 +35,12 @@ in {
         }
 
         {
+          # Just use this dashboard
+          # https://grafana.com/grafana/dashboards/14574-nvidia-gpu-metrics/
           job_name = "gpu";
           static_configs = [{
             targets = [
-              # e.g. `xh localhost:5821/metrics` to see what is being collected
+              # e.g. `xh localhost:5824/metrics` to see what is being collected
               "octavian.local:${toString nvidiaExporterPort}"
               "lorian.local:${toString nvidiaExporterPort}"
               "radahn.local:${toString nvidiaExporterPort}"
