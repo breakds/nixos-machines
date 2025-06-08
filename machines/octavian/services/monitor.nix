@@ -52,7 +52,7 @@ in {
           targets = [
             "octavian.local:${toString prometheusInfo.exporters.node.port}"
             "lorian.local:${toString prometheusInfo.exporters.node.port}"
-            "armlet.local:${toString prometheusInfo.exporters.node.port}"
+            "radahn.local:${toString prometheusInfo.exporters.node.port}"
           ];
         }];
       }
