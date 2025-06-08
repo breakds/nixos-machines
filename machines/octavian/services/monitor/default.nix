@@ -20,6 +20,7 @@ in {
           job_name = "kirkwood";
           static_configs = [{
             targets = [
+              # e.g. `xh localhost:5821/metrics` to see what is being collected
               "octavian.local:${toString nodeExporterPort}"
               "lorian.local:${toString nodeExporterPort}"
               "radahn.local:${toString nodeExporterPort}"
