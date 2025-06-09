@@ -127,4 +127,9 @@ rec {
       browser = 7021;
     };
   };
+
+  atuin = {
+    domain = "atuin.breakds.org";
+    port = 7077;
+  };
 }

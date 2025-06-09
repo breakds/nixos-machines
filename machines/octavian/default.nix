@@ -25,6 +25,7 @@
     ./services/glance.nix
     ./services/rustdesk.nix
     ./services/karakeep.nix
+    ./services/atuin.nix
     ../../base/vpn.nix
   ];
 
