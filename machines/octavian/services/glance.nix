@@ -30,9 +30,9 @@ in {
           proxyPass = "http://localhost:${toString port}";
           proxyWebsockets = true;
           extraConfig = ''
-          allow 10.77.1.0/24;
-          deny all;
-        '';
+            allow 10.77.1.0/24;
+            deny all;
+          '';
         };
       };
     };
