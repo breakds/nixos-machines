@@ -42,7 +42,6 @@
 
     vital.graphical = {
       enable = true;
-      # xserver.dpi = 180;
     };
 
     # Select internationalisation properties.
@@ -112,16 +111,18 @@
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = {
-        "Xft.dpi" = 120;
+        "Xft.dpi" = 100;
       };
     };
 
     services.fwupd.enable = true;
 
+    services.prometheus.exporters.node.enable = true;
+
     # +--------------------+
     # | VPN                |
     # +--------------------+
-    
+
     vital.vpn = {
       clash = false;
       tailscale = false;

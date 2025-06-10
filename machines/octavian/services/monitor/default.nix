@@ -5,12 +5,12 @@ let
   prometheusInfo = service-registry.prometheus;
   nodeExporterPort = prometheusInfo.exporters.node.port;
   nvidiaExporterPort = prometheusInfo.exporters.nvidia-gpu.port;
-  
+
 in {
   imports = [
     ./grafana
   ];
-  
+
   config = {
     services.prometheus = {
       enable = true;
@@ -20,7 +20,7 @@ in {
         node.enable = true;
         nvidia-gpu.enable = true;
       };
-      
+
       scrapeConfigs = [
         {
           job_name = "kirkwood";
@@ -30,6 +30,7 @@ in {
               "octavian.local:${toString nodeExporterPort}"
               "lorian.local:${toString nodeExporterPort}"
               "radahn.local:${toString nodeExporterPort}"
+              "brock.local:${toString nodeExporterPort}"
             ];
           }];
         }

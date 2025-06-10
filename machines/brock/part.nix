@@ -9,10 +9,11 @@ in {
       ./.
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
-      
+
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
       self.nixosModules.flatpak
+      self.nixosModules.prometheus-exporters
     ];
   };
 }
