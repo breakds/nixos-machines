@@ -8,7 +8,7 @@ in {
     services.atuin = {
       inherit (registry) port;
       enable = true;
-      openRegistration = true;
+      openRegistration = false;
     };
 
     services.nginx.virtualHosts."${registry.domain}" = {
