@@ -3,6 +3,7 @@
 let info = (import ../data/service-registry.nix).syncthing;
 
 in {
+  # TODO(breakds): Move this to home-manager
   config = {
     services.syncthing = {
       enable = true;
@@ -27,7 +28,7 @@ in {
         folders = {
           "workspace" = {
             path = "/home/breakds/syncthing/workspace";
-            devices = [ "hand" "malenia" ];
+            devices = [ "hand" "malenia" "brock" ];
             ignorePerms = true;  # Do not sync the permissions.
             # Normally the sync is triggered by inotify (watch) so that it does
             # not need rescan. Still make full rescan happen every hour just to
