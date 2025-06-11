@@ -9,6 +9,7 @@
   config = {
     environment.systemPackages = with pkgs; [
       ripgrep
+      btop
       neovim
       cntr
       meld
