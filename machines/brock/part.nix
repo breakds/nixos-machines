@@ -14,6 +14,7 @@ in {
       self.nixosModules.iphone-connect
       self.nixosModules.flatpak
       self.nixosModules.prometheus-exporters
+      self.nixosModules.syncthing      
     ];
   };
 }
