@@ -93,6 +93,8 @@
     # Trezor cryptocurrency hardware wallet
     services.trezord.enable = true;
 
+    services.prometheus.exporters.node.enable = true;
+
     # services.clickhouse-wonder = {
     #   enable = true;
     #   # TODO(breakds): Migrate this to dataset directory.

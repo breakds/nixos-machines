@@ -31,6 +31,7 @@ in {
               "lorian.local:${toString nodeExporterPort}"
               "radahn.local:${toString nodeExporterPort}"
               "brock.local:${toString nodeExporterPort}"
+              "malenia.local:${toString nodeExporterPort}"
             ];
           }];
         }
