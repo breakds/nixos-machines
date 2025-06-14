@@ -49,6 +49,16 @@ in {
             ];
           }];
         }
+
+        {
+          job_name = "hydra";
+          metrics_path = "/job/ml-pkgs/main/gen-ai/prometheus";
+          static_configs = [{
+            targets = [
+              "hydra.breakds.org"
+            ];
+          }];
+        }
       ];
     };
   };
