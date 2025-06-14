@@ -52,12 +52,21 @@ in {
 
         {
           job_name = "hydra";
-          metrics_path = "/job/ml-pkgs/main/gen-ai/prometheus";
-          static_configs = [{
-            targets = [
-              "hydra.breakds.org"
-            ];
+          relabel_configs = [{
+            source_labels = [ "project" "jobset" "job" ];
+            regex = "(.+);(.+);(.+)";  # Capture the labels above
+            replacement = "/job/\${1}/\${2}/\${3}/prometheus"; # Use the captured labels
+            # "__metrics_path__" instruct scraper to use the replacement instead.
+            target_label = "__metrics_path__";
           }];
+          static_configs = let mkTarget = { project, jobset ? "main", job }: {
+            targets = [ "hydra.breakds.org" ];
+            labels = { inherit project jobset job; };
+          }; in [
+            (mkTarget { project = "ml-pkgs"; job = "gen-ai"; })
+            (mkTarget { project = "ml-pkgs"; job = "tools"; })
+            (mkTarget { project = "nixos-machines"; job = "octavian"; })
+          ];
         }
       ];
     };
