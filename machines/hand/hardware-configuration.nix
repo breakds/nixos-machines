@@ -35,6 +35,6 @@
   # networking.interfaces.enp0s13f0u1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+  hardware.cpu.amd.updateMicrocode = true;
 }

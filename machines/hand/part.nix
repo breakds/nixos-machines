@@ -9,13 +9,14 @@ in {
       ./.
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
-      inputs.nixos-hardware.nixosModules.framework-12th-gen-intel
+      inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
 
       self.nixosModules.laptop
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
       self.nixosModules.steam
       self.nixosModules.flatpak
+      self.nixosModules.localsend
     ];
   };
 }

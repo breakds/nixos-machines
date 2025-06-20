@@ -43,5 +43,6 @@ in {
     glance = import ./glance;
     gooseit = import ./gooseit.nix;
     prometheus-exporters = import ./prometheus/exporters.nix;
+    localsend = import ./localsend.nix;
   };
 }
