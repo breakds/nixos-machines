@@ -37,6 +37,11 @@
       google-chrome
       tor-browser-bundle-bin
       scrot
+      dmenu
+      firefox
+      arandr
+      vim
+      git
     ];
 
     fonts.packages = with pkgs; [

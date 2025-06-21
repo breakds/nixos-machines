@@ -38,7 +38,7 @@
   # +------------------------------+
   
   environment.systemPackages = with pkgs; [
-    vim emacs git firefox
+    vim git firefox
     meld dmidecode shuriken asciinema websocat
     lsd
   ];

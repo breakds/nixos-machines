@@ -60,8 +60,6 @@
     # | Packages |
     # +----------+
 
-    vital.pre-installed.level = 5;
-
     vital.programs = {
       texlive.enable = false;
       modern-utils.enable = true;

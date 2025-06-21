@@ -9,18 +9,18 @@
   config = {
     environment.systemPackages = with pkgs; [
       ripgrep
-      btop
+      silver-searcher
+      rsync
+      wget
+      pinentry
       neovim
       cntr
       meld
       tig
       nixpkgs-review
-      ledger
       graphviz
       graphicsmagick
       pdftk
-      hugo
-      remmina
       rustdesk-flutter
       ffmpeg
       vlc
@@ -29,22 +29,29 @@
       awscli
       # TODO(breakds): Re-enable this when the insecure poetry issue is resolved.
       # nixops_unstable
-      python3Packages.tensorboard
+      tmux
+      fd
+
       pv  # pipe viewer
       asciinema
       wireshark
       duckdb
       websocat
-      bluetuith  # Bluetooth Manager TUI
-      # TODO(brakds): Cannot build at 23.05
-      # parquet-tools
-
-      # For SD Card and Images
-      usbimager
+      bluetuith
 
       # System Tools
       dmidecode
       powertop
+      lsof
+      btop
+      pciutils
+      usbutils
+      inetutils
+      file
+      p7zip
+      unzip
+      zstd
+      meld
 
       # Customized
       shuriken
@@ -53,12 +60,12 @@
       beancount
       fava
 
-      # For copilot
-      nodejs
-
       nix-index
       dbeaver-bin
-    ];
+    ] ++ (let
+      hasHM = config ? home-manager && config.home-manager.users ? "breakds";
+      isWayland = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
+    in [(if isWayland then pkgs.emacs-pgtk else pkgs.emacs)]);
 
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;

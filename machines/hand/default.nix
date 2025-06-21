@@ -49,7 +49,6 @@
     networking.hostId = "c5f97ee3";
     networking.useDHCP = lib.mkDefault true;
 
-    vital.pre-installed.level = 5;
     vital.programs.arduino.enable = true;
     vital.programs.texlive.enable = true;
     vital.programs.modern-utils.enable = true;
@@ -70,6 +69,7 @@
       pavucontrol
       parsec-bin  # For game streaming
       xorg.xeyes
+      emacs-pgtk
     ];
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
