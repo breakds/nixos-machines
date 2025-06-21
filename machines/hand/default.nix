@@ -69,9 +69,14 @@
       pavucontrol
       parsec-bin  # For game streaming
       xorg.xeyes
-      oculante
-      sioyek
     ];
+
+    xdg.mime = {
+      enable = true;
+      addedAssociations = {
+        "application/pdf" = "sioyek.desktop";
+      };
+    };
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).
