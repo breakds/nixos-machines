@@ -69,7 +69,8 @@
       pavucontrol
       parsec-bin  # For game streaming
       xorg.xeyes
-      emacs-pgtk
+      oculante
+      sioyek
     ];
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
