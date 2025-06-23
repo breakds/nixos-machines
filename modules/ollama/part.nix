@@ -39,6 +39,10 @@
             WEBUI_AUTH = "True";
             ANONYMIZED_TELEMETRY = "False";
             DO_NOT_TRACK = "True";
+            # A saner set of default parameters.
+            OLLAMA_CONTEXT_LENGTH = "32768";
+            OLLAMA_FLASH_ATTENTION = "True";
+            OLLAMA_KV_CACHE_TYPE = "q4_0";
           };
         };
       };
