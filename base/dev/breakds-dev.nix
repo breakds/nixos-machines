@@ -62,6 +62,9 @@
 
       nix-index
       dbeaver-bin
+
+      # C++
+      clang
     ] ++ (let
       hasHM = config ? home-manager && config.home-manager.users ? "breakds";
       isWayland = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
