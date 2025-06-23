@@ -125,7 +125,7 @@
 
     programs.gooseit = {
       enable = true;
-      model = "mistral-small3.2:latest";
+      model = "qwen3:30b";
     };
 
     # +--------------------+

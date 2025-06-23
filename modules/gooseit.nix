@@ -32,7 +32,7 @@ in {
         export GOOSE_PROVIDER=${cfg.provider}
         export GOOSE_MODEL=${cfg.model}
         export OLLAMA_HOST=${cfg.ollamaHost}
-        goose run -t "$1"
+        goose run -t "Please help me $1"
       '')
     ];
   };
