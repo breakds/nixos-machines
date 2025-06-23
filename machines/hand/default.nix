@@ -124,6 +124,7 @@
     # +--------------------+
 
     programs.gooseit = {
+      enable = true;
       model = "mistral-small3.2:latest";
     };
 
