@@ -17,6 +17,7 @@ in {
       self.nixosModules.steam
       self.nixosModules.flatpak
       self.nixosModules.localsend
+      self.nixosModules.gooseit
     ];
   };
 }

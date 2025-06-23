@@ -120,9 +120,17 @@
     };
 
     # +--------------------+
+    # | Agent              |
+    # +--------------------+
+
+    programs.gooseit = {
+      model = "mistral-small3.2:latest";
+    };
+
+    # +--------------------+
     # | VPN                |
     # +--------------------+
-    
+
     vital.vpn = {
       tailscale = true;
     };
