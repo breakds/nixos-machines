@@ -9,7 +9,7 @@ in {
       ./.
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
-      
+
       self.nixosModules.graphical
       self.nixosModules.builder-cache-valley
       self.nixosModules.iphone-connect
@@ -19,6 +19,7 @@ in {
       self.nixosModules.wonder-devops
       self.nixosModules.gooseit
       self.nixosModules.prometheus-exporters
+      self.nixosModules.ollama
     ];
   };
 }
