@@ -13,9 +13,9 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # TODO: Need latest right now, but may not need this when the official kernel
-  # version bumped.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # TODO: Need latest right now, but may not need this when the
+  # official kernel version bumped.
+  boot.kernelPackages = pkgs.linuxPackages_6_15;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/1f2b4bed-7e9c-4066-a6f0-acb22a4b0542";
