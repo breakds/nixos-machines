@@ -61,11 +61,14 @@
       beancount
       fava
 
-      nix-index
       dbeaver-bin
 
       # C++
       clang
+
+      # Nix specific
+      nix-index
+      nix-init
     ] ++ (let
       hasHM = config ? home-manager && config.home-manager.users ? "breakds";
       isWayland = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
