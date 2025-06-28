@@ -93,6 +93,7 @@
         liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
         octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
         malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
+        hand = self.nixosConfigurations.hand.config.system.build.toplevel;
       };
     };
 }

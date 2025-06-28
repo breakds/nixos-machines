@@ -52,6 +52,7 @@
       unzip
       zstd
       meld
+      lm_sensors
 
       # Customized
       shuriken
@@ -73,7 +74,6 @@
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;
     programs.zsh.enable = true;
-    programs.sharing.enable = true;  # Will open 7478 port
 
     nix = {
       # The following is added to /etc/nix.conf to prevent GC from
