@@ -2,17 +2,17 @@
 
 {
   config.users.extraUsers = {
-    # 2080 Le Zhao
-    "lezhao" = {
+    # 2081 Le Zhao
+    "lx" = {
       isNormalUser = true;
-	    home = "/home/lezhao";
-      uid = 2080;
-	    description = "Le Zhao";
+	    home = "/home/lx";
+      uid = 2081;
+	    description = "Xin Li";
       extraGroups = [
         "wheel"
       ];
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/lezhao.pub
+        ../data/keys/lx.pub
       ];
     };
   };

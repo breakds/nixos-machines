@@ -10,6 +10,7 @@
     ../common.nix
     ../cassandra.nix
     ../../../users/xiaozhu.nix
+    ../../../users/xin.nix
   ];
 
   config = {
