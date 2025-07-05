@@ -3,23 +3,18 @@
 {
   flake.nixosModules = {
     ollama = { config, lib, pkgs, ... }: {
-      imports = [
-        inputs.self.nixosModules.unstable-overlay
-      ];
-
       config = let
         lanExposed = config.services.ollama.host == "0.0.0.0";
       in {
         # Also install the package itself for client command line (REPL).
         environment.systemPackages = with pkgs; [
-          unstable.ollama
+          ollama
         ];
 
         # This is configured to serve from 127.0.0.1, so that only this machine
         # itself can use it.
         services.ollama = {
           enable = true;
-          package = pkgs.unstable.ollama;
           port = 11434;
           acceleration = if (builtins.elem "nvidia" config.services.xserver.videoDrivers)
                          then "cuda" else null;

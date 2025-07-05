@@ -8,6 +8,7 @@ in {
     # Twin learner #2
     lorian = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit (inputs) nixpkgs-unstable; };
       modules = [
         ./lorian
         inputs.vital-modules.nixosModules.foundation
@@ -24,6 +25,7 @@ in {
     # Heavy Learner
     radahn = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit (inputs) nixpkgs-unstable; };
       modules = [
         ./radahn
         inputs.vital-modules.nixosModules.foundation

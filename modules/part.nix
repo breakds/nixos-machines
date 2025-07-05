@@ -39,16 +39,6 @@ in {
       };
     };
 
-    unstable-overlay = { config, lib, pkgs, ... }: {
-      nixpkgs.overlays = [
-        (final: prev: {
-          unstable = import inputs.nixpkgs-unstable {
-            inherit (final) system config;
-          };
-        })
-      ];
-    };
-
     syncthing = import ./syncthing.nix;
     temporal = import ./temporal;
     glance = import ./glance;
