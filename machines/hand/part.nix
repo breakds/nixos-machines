@@ -11,6 +11,7 @@ in {
       inputs.nixos-home.nixosModules.breakds-home
       inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
 
+      self.nixosModules.base-overlays
       self.nixosModules.laptop
       self.nixosModules.graphical
       self.nixosModules.iphone-connect

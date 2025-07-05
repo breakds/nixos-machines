@@ -22,6 +22,7 @@ in {
       inputs.nixos-home.nixosModules.breakds-home
       inputs.beancounting.nixosModules.bcounting
 
+      self.nixosModules.base-overlays
       self.nixosModules.graphical
       self.nixosModules.machine-learning
       self.nixosModules.first-party-software

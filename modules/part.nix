@@ -9,6 +9,7 @@ in {
   ];
   
   flake.nixosModules = {
+    base-overlays = import ./base-overlays.nix;
     graphical = import ./graphical;
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;

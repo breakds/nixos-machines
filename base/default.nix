@@ -15,10 +15,6 @@
     # Enable to use non-free packages such as nvidia drivers
     nixpkgs.config.allowUnfree = true;
 
-    nixpkgs.overlays = [
-      (import ./overlays)
-    ];
-
     # Override the default shell to zsh for breakds
     users.extraUsers = lib.mkIf (config.vital.mainUser == "breakds") {
       "breakds" = {
