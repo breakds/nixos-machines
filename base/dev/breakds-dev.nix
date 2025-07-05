@@ -69,6 +69,10 @@
       # Nix specific
       nix-index
       nix-init
+
+      # Agent
+      gemini-cli
+      claude-code
     ] ++ (let
       hasHM = config ? home-manager && config.home-manager.users ? "breakds";
       isWayland = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
