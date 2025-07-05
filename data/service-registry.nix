@@ -132,4 +132,9 @@ rec {
     domain = "atuin.breakds.org";
     port = 7077;
   };
+
+  home-assistant = {
+    domain = "hast.breakds.org";
+    port = 7123;
+  };
 }
