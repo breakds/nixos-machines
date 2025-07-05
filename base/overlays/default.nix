@@ -20,6 +20,4 @@ in {
   inherit (unstablePkgs) n8n glance;
   
   shuriken = final.callPackage ../../pkgs/shuriken {};
-  robot-deployment-suite = final.python3Packages.callPackage ../../pkgs/robot-deployment-suite {};
-  omniverse-launcher = final.callPackage ../../pkgs/omniverse-launcher/bin.nix {};
 }
