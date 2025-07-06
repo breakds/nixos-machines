@@ -40,6 +40,7 @@ in {
       "mqtt"
       "esphome"
       "xiaomi"
+      "xiaomi_aqara"
       "nest"
       "tuya"
     ];
