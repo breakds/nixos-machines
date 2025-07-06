@@ -3,6 +3,8 @@
 let registry = (import ../../../data/service-registry.nix).home-assistant;
 
 in {
+  # NOTE: When starting a fresh instance, you will need to click "CREATE MY
+  # SMART HOME" and set up your username and password.
   services.home-assistant = {
     enable = true;
     openFirewall = true;
@@ -32,6 +34,7 @@ in {
 
     extraPackages = python-pkgs: with python-pkgs; [
       psycopg2       # PostgreSQL support
+      gtts           # Google's TTS
     ];
   };
 
