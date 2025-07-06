@@ -63,6 +63,9 @@ in {
       yeelight
       ibeacon-ble
       pyipp
+      grpcio          # For Nest
+      grpcio-tools    # For Nest
+      grpcio-status   # For Nest
     ];
   };
 
