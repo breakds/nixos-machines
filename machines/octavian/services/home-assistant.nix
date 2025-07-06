@@ -29,6 +29,7 @@ in {
     };
 
     extraComponents = [
+      "mqtt"
       "esphome"
       "xiaomi"
       "nest"
@@ -39,6 +40,18 @@ in {
       psycopg2       # PostgreSQL support
       gtts           # Google's TTS
       aiousbwatcher  # USB
+      radios
+      pymetno
+      pychromecast
+      xiaomi-ble
+      pyxiaomigateway
+      python-miio
+      miauth
+      androidtvremote2
+      spotifyaio
+      rachiopy
+      yeelight
+      ibeacon-ble
     ];
   };
 
