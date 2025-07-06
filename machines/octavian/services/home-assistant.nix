@@ -10,6 +10,8 @@ in {
     openFirewall = true;
 
     config = {
+      default_config = {};
+
       http = {
         server_host = "0.0.0.0";
         server_port = registry.port;
@@ -27,6 +29,7 @@ in {
     };
 
     extraComponents = [
+      "esphome"
       "xiaomi"
       "nest"
       "tuya"
