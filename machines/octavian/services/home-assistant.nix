@@ -43,6 +43,7 @@ in {
       "xiaomi_aqara"
       "nest"
       "tuya"
+      "yi"
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
