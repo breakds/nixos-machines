@@ -26,6 +26,7 @@
     ./services/rustdesk.nix
     ./services/karakeep.nix
     ./services/atuin.nix
+    ./services/home-assistant.nix
     ../../base/vpn.nix
   ];
 
