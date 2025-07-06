@@ -62,6 +62,7 @@ in {
       rachiopy
       yeelight
       ibeacon-ble
+      pyipp
     ];
   };
 
