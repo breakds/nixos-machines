@@ -7,14 +7,19 @@ in {
   # SMART HOME" and set up your username and password.
   services.home-assistant = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
 
     config = {
       default_config = {};
 
       http = {
-        server_host = "0.0.0.0";
+        server_host = "127.0.0.1";
         server_port = registry.port;
+        use_x_forwarded_for = true;
+        trusted_proxies = [
+          "127.0.0.1"
+          "::1"
+        ];
       };
 
       # Basic configuration
@@ -25,6 +30,9 @@ in {
         unit_system = "metric";
         temperature_unit = "C";
         time_zone = "America/Los_Angeles";
+        # external_url ensures HA issues links and cookies matching your public
+        # domain so the Companion app’s login flow callbacks hit the right address.
+        external_url = "https://${registry.domain}";
       };
     };
 
@@ -55,9 +63,12 @@ in {
     ];
   };
 
-  # services.nginx.virtualHosts."${registry.domain}" = {
-  #   enableACME = true;
-  #   forceSSL = true;
-  #   locations."/".proxyPass = "http://localhost:${toString registry.port}";
-  # };
+  services.nginx.virtualHosts."${registry.domain}" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:${toString registry.port}";
+      proxyWebsockets = true;
+    };
+  };
 }
