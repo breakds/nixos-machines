@@ -35,6 +35,7 @@ in {
     extraPackages = python-pkgs: with python-pkgs; [
       psycopg2       # PostgreSQL support
       gtts           # Google's TTS
+      aiousbwatcher  # USB
     ];
   };
 
