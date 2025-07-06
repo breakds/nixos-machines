@@ -44,6 +44,7 @@ in {
       "nest"
       "tuya"
       "yi"
+      "bthome"
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
