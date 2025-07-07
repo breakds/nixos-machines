@@ -45,6 +45,7 @@ in {
       "tuya"
       "yi"
       "bthome"
+      "ecovacs"
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
