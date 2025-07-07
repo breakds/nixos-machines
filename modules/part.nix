@@ -45,5 +45,6 @@ in {
     gooseit = import ./gooseit.nix;
     prometheus-exporters = import ./prometheus/exporters.nix;
     localsend = import ./localsend.nix;
+    claude-code = import ./claude-code;
   };
 }

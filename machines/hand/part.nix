@@ -19,7 +19,10 @@ in {
       self.nixosModules.steam
       self.nixosModules.flatpak
       self.nixosModules.localsend
+
+      # Development Assistants
       self.nixosModules.gooseit
+      self.nixosModules.claude-code
     ];
   };
 }
