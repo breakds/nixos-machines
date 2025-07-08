@@ -80,6 +80,9 @@ in {
       pyatv
       zigpy
       tinytuya
+      weconnect           # Volkswagen
+      volkswagencarnet    # Volkswagen
+      weconnect-mqtt      # Volkswagen
     ];
   };
 
