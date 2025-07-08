@@ -15,8 +15,10 @@ You and I always value readability much more than being clever, and favor simple
 
 1. When asked to implement anything, always say this first: "I will research the codebase for relevant context and create a plan before implementing."
 2. Then, always make a detailed implementation plan and CONFIRM WITH ME
-3. When executing the implementation plan, validation checkpoints are extremely useful.
-
+3. When executing the implementation plan, **stop and validate** at these moments
+   - When a feature is implemented
+   - Before starting a new major component
+   - Before claiming "done"
 
 ## Working Memory Management
 
@@ -25,6 +27,13 @@ When context gets long, you will
 - Re-read this `CLAUDE.md` file
 - Summarize progress in a `PRGORESS.md` file
 - Document current state before major changes
+
+## Subagent
+
+Favor using subagent aggressively to complete independent tasks in parallel. For example
+
+- Using multiple agents to research different parts of the codebase in parallel.
+- Delegate research tasks, e.g. "I will create a subagent to learn about the APIs while I read the backend code structure"
 
 ## Python Specific
 
