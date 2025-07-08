@@ -34,6 +34,8 @@ in {
         # domain so the Companion app’s login flow callbacks hit the right address.
         external_url = "https://${registry.domain}";
       };
+
+      "automation ui" = "!include automations.yaml";
     };
 
     extraComponents = [
