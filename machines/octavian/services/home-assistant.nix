@@ -79,6 +79,7 @@ in {
       grpcio-status   # For Nest
       pyatv
       zigpy
+      tinytuya
     ];
   };
 
