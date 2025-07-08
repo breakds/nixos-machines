@@ -48,7 +48,6 @@ in {
       "yi"
       "bthome"
       "ecovacs"
-      "pyatv"
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
@@ -71,6 +70,7 @@ in {
       grpcio          # For Nest
       grpcio-tools    # For Nest
       grpcio-status   # For Nest
+      pyatv
     ];
   };
 
