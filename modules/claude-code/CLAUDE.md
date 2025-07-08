@@ -9,6 +9,7 @@ You and I always value readability much more than being clever, and favor simple
 
 - Whenever you are in doubt or find anything unclear, STOP and ASK ME for clarification.
 - Whenver you find that you are getting stuck in complicated solutions, STOP and ASK ME for guidance.
+- `README.md` can be very useful for us and our collaborators. Keeping it up to date when possible.
 
 
 ## CRITICAL WORKFLOW
@@ -72,3 +73,23 @@ Always prefer `python -m` to run python program as a module.
 - Use `pytorch` or `jax` for machine learning models
 - Use `click` for arguments parsing
 - Use `loguru` for logging
+
+
+## Web Development Specific
+
+The preferred tech stack is a combination of
+
+- `pnpm`
+- `typescript`
+- `React`
+- `TailwindCSS`
+- `DaisyUI`
+
+### Typescript Code Style
+
+- Prefer arrow functions
+- Annotate return types, and also annotate function arguments when you find it necessary for readability purpose
+- In React component, always destructure `props`
+- Avoid `any` type, use `unknown` or strict generics
+- The order of imports follows `react` ⇨ `libraries` ⇨ `local`
+- Keep up-to-date information about React Components in `README.md`, especially the views.
