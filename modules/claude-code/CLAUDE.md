@@ -41,8 +41,6 @@ Favor using subagent aggressively to complete independent tasks in parallel. For
 
 Most of our projects use `flake.nix` to manage the reproducible development environment. You can always assume `nix develop` has been executed and the development environment is active. No `pip`, `uv`, `poetry` etc at all.
 
-Unless explicitly specified, we are using python 3.12+.
-
 ### Imports
 
 Prefer specific imports, e.g. `from pydantic import BaseModel`.
@@ -61,6 +59,12 @@ Always prefer `python -m` to run python program as a module.
 - You are I prefer using the built-in `unittest`.
 - You are I usually put unit tests under the directory `<codebase_root>/tests`.
 - You are I prefer running tests with `python -m unittest`. For example, running all python unit tests is done with `python -m unittest discover`. NEVER run tests automatically unless explicitly asked.
+
+### Styles
+
+- Unless explicitly specified, we are using python 3.12+
+- For type annotations, use `dict`, `list`, etc instead of `Dict` and `List`
+- Encourage the usage of `match` when you see appropriate
 
 ### Preferred Libraries
 
