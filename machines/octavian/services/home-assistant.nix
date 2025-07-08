@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
-let registry = (import ../../../data/service-registry.nix).home-assistant;
+let
+  registry = (import ../../../data/service-registry.nix).home-assistant;
+  haPkgs = config.services.home-assistant.package.python.pkgs;
 
 in {
   # NOTE: When starting a fresh instance, you will need to click "CREATE MY
@@ -53,6 +55,8 @@ in {
     customComponents = with pkgs.home-assistant-custom-components; [
       tuya_local
       xiaomi_gateway3
+    ] ++ [
+      (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix {})
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
