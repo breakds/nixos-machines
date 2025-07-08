@@ -78,6 +78,7 @@ in {
       grpcio-tools    # For Nest
       grpcio-status   # For Nest
       pyatv
+      zigpy
     ];
   };
 
