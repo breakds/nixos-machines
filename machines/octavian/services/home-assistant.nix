@@ -46,6 +46,7 @@ in {
       "yi"
       "bthome"
       "ecovacs"
+      "pyatv"
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
