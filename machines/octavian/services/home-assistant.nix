@@ -50,6 +50,13 @@ in {
       "ecovacs"
     ];
 
+    customComponents = with pkgs.home-assistant-custom-components; [
+      tuya_local
+      volkswagen_we_connect_id
+      volkswagencarnet
+      xiaomi_gateway3
+    ];
+
     extraPackages = python-pkgs: with python-pkgs; [
       psycopg2       # PostgreSQL support
       gtts           # Google's TTS

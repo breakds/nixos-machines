@@ -7,7 +7,7 @@
       unstable = import nixpkgs-unstable {
         inherit (final) system config;
       };
-      inherit (unstable) n8n glance gemini-cli claude-code ollama;
+      inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components;
       shuriken = final.callPackage ../pkgs/shuriken {};
     })
   ];
