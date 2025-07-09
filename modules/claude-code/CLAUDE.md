@@ -11,6 +11,10 @@ You and I always value readability much more than being clever, and favor simple
 - Whenver you find that you are getting stuck in complicated solutions, STOP and ASK ME for guidance.
 - `README.md` can be very useful for us and our collaborators. Keeping it up to date when possible.
 
+### Dependencies
+
+I tend to avoid introducing too many dependencies, and I always maintain them via nix development environment by myself. Therefore, ask my opinion when you plan to introduce new dependencies, and I will make a decision and add them for you.
+
 
 ## CRITICAL WORKFLOW
 
