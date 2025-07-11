@@ -19,6 +19,7 @@ in {
       self.nixosModules.steam
       self.nixosModules.flatpak
       self.nixosModules.localsend
+      self.nixosModules.builder-cache-valley
 
       # Development Assistants
       self.nixosModules.gooseit

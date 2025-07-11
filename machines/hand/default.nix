@@ -6,7 +6,6 @@
     ../../base
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/build-machines-v2.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
   ];
