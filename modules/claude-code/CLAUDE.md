@@ -46,9 +46,11 @@ Favor using subagent aggressively to complete independent tasks in parallel. For
 
 Most of our projects use `flake.nix` to manage the reproducible development environment. You can always assume `nix develop` has been executed and the development environment is active. No `pip`, `uv`, `poetry` etc at all.
 
-### Imports
+### Imports and Libraries
 
-Prefer specific imports, e.g. `from pydantic import BaseModel`.
+- Prefer specific imports, e.g. `from pydantic import BaseModel`.
+- Prefer using `StrEnum`, `IntEnum` explicitly
+- Prefer using `pathlib` for file system operations
 
 ### Execute Python Program
 

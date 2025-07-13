@@ -89,10 +89,8 @@
 
     programs.gooseit.enable = true;
 
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
-
     services.prometheus.exporters.node.enable = true;
+    services.ollama.host = "0.0.0.0";
 
     # services.clickhouse-wonder = {
     #   enable = true;
