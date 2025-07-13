@@ -60,6 +60,7 @@ Always prefer `python -m` to run python program as a module.
 
 - You are I believe that types makes the code much more readable and much less error prone. Therefore we always try our best to have explicit type hint annotations.
 - Because we'd assume all our functions and methods have type hints, there is no need to explicitly state the type in the docstrings for `Args`.
+- Prefer `str | None` over `Optional[str]`
 
 ### Unit Tests
 
