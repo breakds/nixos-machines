@@ -38,6 +38,13 @@ in {
       };
 
       "automation ui" = "!include automations.yaml";
+
+      tts = [
+        {
+          platform = "picotts";
+          language = "en-US";
+        }
+      ];
     };
 
     extraComponents = [
@@ -50,10 +57,12 @@ in {
       "yi"
       "bthome"
       "ecovacs"
+      "whisper"
+      "picotts"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
-      tuya_local
+      localtuya
       xiaomi_gateway3
     ] ++ [
       (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix {})
@@ -82,6 +91,7 @@ in {
       pyatv
       zigpy
       tinytuya
+      wyoming
     ];
   };
 
