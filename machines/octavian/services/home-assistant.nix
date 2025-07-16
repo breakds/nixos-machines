@@ -38,13 +38,6 @@ in {
       };
 
       "automation ui" = "!include automations.yaml";
-
-      tts = [
-        {
-          platform = "picotts";
-          language = "en-US";
-        }
-      ];
     };
 
     extraComponents = [
@@ -58,7 +51,7 @@ in {
       "bthome"
       "ecovacs"
       "whisper"
-      "picotts"
+      "elevenlabs"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
@@ -92,6 +85,7 @@ in {
       zigpy
       tinytuya
       wyoming
+      elevenlabs
     ];
   };
 
