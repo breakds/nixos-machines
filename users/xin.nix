@@ -5,12 +5,9 @@
     # 2081 Le Zhao
     "lx" = {
       isNormalUser = true;
-	    home = "/home/lx";
+      home = "/home/lx";
       uid = 2081;
-	    description = "Xin Li";
-      extraGroups = [
-        "wheel"
-      ];
+      description = "Xin Li";
       openssh.authorizedKeys.keyFiles = [
         ../data/keys/lx.pub
       ];

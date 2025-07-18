@@ -5,8 +5,7 @@
     ./hardware-configuration.nix
     ../../base
     ../../users
-    ../../users/xiaozhu.nix
-    ../../users/mujun.nix
+    ../../users/xin.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
 
