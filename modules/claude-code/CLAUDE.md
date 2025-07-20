@@ -56,6 +56,10 @@ Most of our projects use `flake.nix` to manage the reproducible development envi
 
 Always prefer `python -m` to run python program as a module.
 
+### Private Members
+
+All private members of the class will be prefixed with `_`, including both member variables and member methods; encouraging using `@property` or `@cached_property` to expose members to public.
+
 ### Type Annotation
 
 - You are I believe that types makes the code much more readable and much less error prone. Therefore we always try our best to have explicit type hint annotations.
