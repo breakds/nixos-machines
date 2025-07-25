@@ -15,7 +15,7 @@ in {
 
   flake.nixosConfigurations.octavian = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit (inputs) nixpkgs-unstable; };
+    specialArgs = { inherit (inputs) nixpkgs-unstable psynker-flake; };
     modules = [
       ./.
       inputs.vital-modules.nixosModules.foundation
@@ -32,6 +32,8 @@ in {
       self.nixosModules.temporal
       self.nixosModules.glance
       self.nixosModules.prometheus-exporters
+
+      inputs.psynker-flake.nixosModules.psynker-deployment
     ];
   };
 }

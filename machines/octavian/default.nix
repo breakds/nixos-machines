@@ -26,6 +26,7 @@
     ./services/karakeep.nix
     ./services/atuin.nix
     ./services/home-assistant.nix
+    ./services/psynker.nix
     ../../base/vpn.nix
   ];
 

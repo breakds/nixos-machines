@@ -47,6 +47,10 @@
     beancounting.inputs.nixpkgs.follows = "nixpkgs";
     beancounting.inputs.flake-parts.follows = "flake-parts";
     beancounting.inputs.ml-pkgs.follows = "ml-pkgs";
+
+    psynker-flake.url = "git+ssh://git@github.com/psynk-ai/psynker";
+    psynker-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    psynker-flake.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =

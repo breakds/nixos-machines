@@ -170,6 +170,31 @@
         "type": "github"
       }
     },
+    "ml-pkgs_2": {
+      "inputs": {
+        "flake-parts": [
+          "psynker-flake",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "psynker-flake",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752991984,
+        "narHash": "sha256-+Oxzn59tVyKfma4xnHuCC7wYJQg44RKJ5MPj/hSdtgU=",
+        "owner": "nixvital",
+        "repo": "ml-pkgs",
+        "rev": "7188e5d6ae41aeed7865d7ee8d50ad2573858dc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixvital",
+        "repo": "ml-pkgs",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1750431636,
@@ -267,6 +292,56 @@
         "url": "ssh://git@github.com/breakds/PersonaX"
       }
     },
+    "psynk-ui": {
+      "inputs": {
+        "flake-parts": [
+          "psynker-flake",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "psynker-flake",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753457172,
+        "narHash": "sha256-z1dtYWky3FJOAYcvGldC6lfbY4tFjP34UNI0JosTpRQ=",
+        "ref": "refs/heads/main",
+        "rev": "e42e26ea56acc7e12557da279e5bbc5562f1589b",
+        "revCount": 141,
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/psynk-ui"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/psynk-ui"
+      }
+    },
+    "psynker-flake": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "ml-pkgs": "ml-pkgs_2",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "psynk-ui": "psynk-ui"
+      },
+      "locked": {
+        "lastModified": 1753472511,
+        "narHash": "sha256-TCJD1EoepHaLPdujLlbzypeoZ33rBPbNeR1UqD7p070=",
+        "ref": "refs/heads/main",
+        "rev": "2eeaa99a395b20123576cd00a4f2acbc372e521b",
+        "revCount": 163,
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/psynker"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/psynker"
+      }
+    },
     "root": {
       "inputs": {
         "beancounting": "beancounting",
@@ -280,6 +355,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "personax": "personax",
+        "psynker-flake": "psynker-flake",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
