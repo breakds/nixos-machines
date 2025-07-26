@@ -304,11 +304,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753457189,
-        "narHash": "sha256-yDXj5a4xboSchPB9YJQctcK3/eJvP4ZFv0TRVN7Uys0=",
+        "lastModified": 1753489635,
+        "narHash": "sha256-+TFDBgkHhM7sFMI9i3bB3OMfje/o3WziAfR+pj772f0=",
         "ref": "s3",
-        "rev": "253d42585966a4d5152e7e593eedb60180fff884",
-        "revCount": 142,
+        "rev": "ffae87207584ecca90cbc62833c93dce4b8943f5",
+        "revCount": 147,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynk-ui"
       },
@@ -330,11 +330,11 @@
         "psynk-ui": "psynk-ui"
       },
       "locked": {
-        "lastModified": 1753473246,
-        "narHash": "sha256-zRR7lgel0SJFkspJuA3hAv/CILhiw2N5vEjqy6jcNfs=",
+        "lastModified": 1753489908,
+        "narHash": "sha256-wqm8g9DUFytlBNsZF7vZGeM9ZFs/HMdB4ALmFSkCbro=",
         "ref": "s3",
-        "rev": "bc850dec2dda47a5229a8149359c56f4b7fc2cdd",
-        "revCount": 168,
+        "rev": "08d6d68eead6495bb9dcee9923d8e3dbbc182785",
+        "revCount": 175,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynker"
       },
