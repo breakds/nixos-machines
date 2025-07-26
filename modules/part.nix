@@ -9,7 +9,22 @@ in {
   ];
   
   flake.nixosModules = {
-    base-overlays = import ./base-overlays.nix;
+    base-overlays = { config, lib, pkgs, ... }: {
+      nixpkgs.overlays = [
+        (final: prev: rec {
+          unstable = import inputs.nixpkgs-unstable {
+            inherit (final) system config;
+            overlays = [
+              inputs.psynker-flake.overlays.default
+            ];
+          };
+          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker;
+          shuriken = final.callPackage ../pkgs/shuriken {};
+        })
+      ];
+    };
+
+    
     graphical = import ./graphical;
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;
