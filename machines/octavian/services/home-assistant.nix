@@ -52,6 +52,8 @@ in {
       "ecovacs"
       "whisper"
       "elevenlabs"
+      "wyoming"
+      "piper"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
