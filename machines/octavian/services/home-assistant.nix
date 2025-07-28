@@ -99,4 +99,32 @@ in {
       proxyWebsockets = true;
     };
   };
+
+  services.wyoming = let wyoming-registry = (import ../../../data/service-registry.nix).wyoming;
+  in {
+    piper.servers.default = {
+      enable = true;
+      voice = "en-us-ryan-high";
+      uri = "tcp://0.0.0.0:${toString wyoming-registry.piper.port}";
+    };
+
+    faster-whisper.servers.default = {
+      enable = true;
+      model = "turbo";
+      device = "cuda";
+      language = "en";
+      beamSize = 5;
+      uri = "tcp://0.0.0.0:${toString wyoming-registry.faster-whisper.port}";
+      initialPrompt = ''
+        The user is talking to its AI assistant in his or her home.
+      '';
+    };
+
+    openwakeword = {
+      enable = true;
+      uri = "tcp://0.0.0.0:${toString wyoming-registry.openwakeword.port}";
+      preloadModels = [ "ok_nabu" "hey_jarvis" "hey_mycroft" ];
+      threshold = 0.9;
+    };
+  };
 }

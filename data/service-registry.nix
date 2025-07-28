@@ -137,4 +137,10 @@ rec {
     domain = "hast.breakds.org";
     port = 7123;
   };
+
+  wyoming = {
+    piper.port = 10200;
+    faster-whisper.port = 10300;
+    openwakeword.port = 10400;
+  };
 }
