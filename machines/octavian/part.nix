@@ -34,6 +34,7 @@ in {
       self.nixosModules.prometheus-exporters
 
       inputs.psynker-flake.nixosModules.psynker-deployment
+      inputs.www-psynk-ai.nixosModules.www-psynk-ai
     ];
   };
 }

@@ -360,7 +360,8 @@
         "psynker-flake": "psynker-flake",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
-        "www-breakds-org": "www-breakds-org"
+        "www-breakds-org": "www-breakds-org",
+        "www-psynk-ai": "www-psynk-ai"
       }
     },
     "systems": {
@@ -522,6 +523,29 @@
         "owner": "breakds",
         "repo": "www.breakds.org",
         "type": "github"
+      }
+    },
+    "www-psynk-ai": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753894104,
+        "narHash": "sha256-bAXCQQusqqX2gY9b330YasplOxe+RrF0XUnsL31tTOg=",
+        "ref": "refs/heads/main",
+        "rev": "d0f146a73f74d44fd59e25bcbb76b102c041481a",
+        "revCount": 30,
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/www.psynk.ai"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/psynk-ai/www.psynk.ai"
       }
     }
   },

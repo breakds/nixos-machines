@@ -51,6 +51,10 @@
     psynker-flake.url = "git+ssh://git@github.com/psynk-ai/psynker?ref=s3";
     psynker-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     psynker-flake.inputs.flake-parts.follows = "flake-parts";
+
+    www-psynk-ai.url = "git+ssh://git@github.com/psynk-ai/www.psynk.ai";
+    www-psynk-ai.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    www-psynk-ai.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
