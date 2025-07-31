@@ -27,6 +27,7 @@
     ./services/atuin.nix
     ./services/home-assistant.nix
     ./services/psynker.nix
+    ./services/solar-assistant.nix
     ../../base/vpn.nix
   ];
 
