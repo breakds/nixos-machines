@@ -9,16 +9,17 @@ in {
   # SMART HOME" and set up your username and password.
   services.home-assistant = {
     enable = true;
-    openFirewall = false;
+    openFirewall = true;
 
     config = {
       default_config = {};
 
       http = {
-        server_host = "127.0.0.1";
+        server_host = "0.0.0.0";
         server_port = registry.port;
         use_x_forwarded_for = true;
         trusted_proxies = [
+          "0.0.0.0"
           "127.0.0.1"
           "::1"
         ];
