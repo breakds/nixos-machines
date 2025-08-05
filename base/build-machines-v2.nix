@@ -39,6 +39,8 @@ in {
         # can do that.
         trusted-public-keys = lib.attrsets.mapAttrsToList (
           host: properties: properties.publicKey) cache-registry;
+
+        trusted-users = [ "root" "breakds" ];
       };
     })
 
@@ -75,7 +77,7 @@ in {
       };
 
       nix.settings = {
-        trusted-users = [ "nixbuilder" "breakds" ];
+        trusted-users = [ "nixbuilder" "breakds" "root" ];
         keep-outputs = true;
         keep-derivations = true;
         auto-optimise-store = true;
