@@ -70,6 +70,7 @@
       # Nix specific
       nix-index
       nix-init
+      cachix
 
       # Agent
       gemini-cli
