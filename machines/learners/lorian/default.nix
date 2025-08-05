@@ -5,7 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../../base/build-machines.nix
+    ../../../base/build-machines-v2.nix
     ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
@@ -21,11 +21,6 @@
 
     # The LLM server
     services.ollama.host = "0.0.0.0";
-
-    vital.distributed-build = {
-      enable = true;
-      location = "homelab";
-    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
