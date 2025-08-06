@@ -170,31 +170,6 @@
         "type": "github"
       }
     },
-    "ml-pkgs_2": {
-      "inputs": {
-        "flake-parts": [
-          "psynker-flake",
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "psynker-flake",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752991984,
-        "narHash": "sha256-+Oxzn59tVyKfma4xnHuCC7wYJQg44RKJ5MPj/hSdtgU=",
-        "owner": "nixvital",
-        "repo": "ml-pkgs",
-        "rev": "7188e5d6ae41aeed7865d7ee8d50ad2573858dc2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixvital",
-        "repo": "ml-pkgs",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1750431636,
@@ -304,16 +279,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1753672980,
-        "narHash": "sha256-Dy4DanF3My7iMu7w6VQF1vPMmzuCoapQw+CpU10V2SQ=",
-        "ref": "s3",
-        "rev": "ab32863eb6198d6c3b56b0fcc0e348912a7324cd",
-        "revCount": 148,
+        "lastModified": 1754497454,
+        "narHash": "sha256-ON+VuiDi/CcGrAqa0/AEPVDjIQce8+teuvdxqCMox40=",
+        "ref": "refs/heads/main",
+        "rev": "9de8257932f146728b513cb839e286525632e035",
+        "revCount": 158,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynk-ui"
       },
       "original": {
-        "ref": "s3",
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynk-ui"
       }
@@ -323,23 +297,22 @@
         "flake-parts": [
           "flake-parts"
         ],
-        "ml-pkgs": "ml-pkgs_2",
         "nixpkgs": [
           "nixpkgs-unstable"
         ],
         "psynk-ui": "psynk-ui"
       },
       "locked": {
-        "lastModified": 1753673046,
-        "narHash": "sha256-kkcONsBEJVAP0Q0JS+2vPq/GVJZaVxxaw34UN1wnYz8=",
-        "ref": "s3",
-        "rev": "859258d6a8b162035b5aebbbce18ec6a6c17381e",
-        "revCount": 176,
+        "lastModified": 1754498696,
+        "narHash": "sha256-iDaDBVW2P73dlttjq8aUKWlHDDLMubPI2GXnGoigTww=",
+        "ref": "release/foriris",
+        "rev": "d589204dba68add20b0c2abbc198b2ce9bbcdfcf",
+        "revCount": 252,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynker"
       },
       "original": {
-        "ref": "s3",
+        "ref": "release/foriris",
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynker"
       }
