@@ -4,6 +4,5 @@
   services.psynker = {
     enable = true;
     port = 9119;
-    domain = "psynkrec.breakds.org";
   };
 }

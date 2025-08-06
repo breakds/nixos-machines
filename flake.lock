@@ -303,11 +303,11 @@
         "psynk-ui": "psynk-ui"
       },
       "locked": {
-        "lastModified": 1754498696,
-        "narHash": "sha256-iDaDBVW2P73dlttjq8aUKWlHDDLMubPI2GXnGoigTww=",
+        "lastModified": 1754501655,
+        "narHash": "sha256-Re/pcauFgIL+cvzMW2hlwdp2ud0Zb1zMdkmXqxUNjzM=",
         "ref": "release/foriris",
-        "rev": "d589204dba68add20b0c2abbc198b2ce9bbcdfcf",
-        "revCount": 252,
+        "rev": "1aff3a0c086e2d3c3cf6cb3dc4828c4cc84f1f00",
+        "revCount": 253,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/psynker"
       },
