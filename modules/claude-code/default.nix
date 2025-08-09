@@ -12,6 +12,7 @@
         ".claude/CLAUDE.md".source = ./CLAUDE.md;
         ".claude/settings.json".source = ./settings.json;
         ".claude/commands/prime.md".source = ./commands/prime.md;
+        ".claude/commands/python-ready.md".source = ./commands/python-ready.md;
       };
     };
   };
