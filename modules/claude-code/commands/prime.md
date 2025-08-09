@@ -5,6 +5,8 @@ Use the command `lsd --tree` to get an overview of the project's code structure.
 - Read the `README.md` if exist
 - Read the `flake.nix` if exist
 - Files which you think are important
+  - For python project, read `pyproject.toml` if exist
+  - For javascript and typescript project, read `package.json` if exist
 
 ## Goal
 
