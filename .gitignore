@@ -2,3 +2,4 @@ result
 .aider*
 .envrc
 .direnv
+.claude/settings.local.json
