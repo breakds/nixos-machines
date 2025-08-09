@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "claude-opus-4-1-20250805",
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(cat:*)",
+      "Bash(python -m:*)",
+      "Bash(lsd:*)",
+      "WebFetch(domain:*)"
+    ],
+    "deny": [
+      "Read(./.envrc.local)"
+    ]
+  }
+}
