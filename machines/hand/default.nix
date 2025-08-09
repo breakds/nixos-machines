@@ -68,6 +68,7 @@
       pavucontrol
       parsec-bin  # For game streaming
       xorg.xeyes
+      freecad
     ];
 
     xdg.mime = {
