@@ -12,7 +12,8 @@
       "Bash(cat:*)",
       "Bash(python -m:*)",
       "Bash(lsd:*)",
-      "WebFetch(domain:*)"
+      "WebFetch(domain:github.com)",
+      "mcp__serena"
     ],
     "deny": [
       "Read(./.envrc.local)"
