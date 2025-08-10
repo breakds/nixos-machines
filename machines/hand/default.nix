@@ -69,6 +69,7 @@
       parsec-bin  # For game streaming
       xorg.xeyes
       freecad
+      serena
     ];
 
     xdg.mime = {

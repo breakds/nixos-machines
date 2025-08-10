@@ -21,6 +21,7 @@ in {
           inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
+        inputs.ml-pkgs.overlays.gen-ai
       ];
     };
 
