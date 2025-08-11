@@ -112,7 +112,7 @@ in {
     faster-whisper.servers.default = {
       enable = true;
       model = "medium.en";
-      device = "auto";
+      device = "cuda";
       language = "en";
       beamSize = 5;
       uri = "tcp://0.0.0.0:${toString wyoming-registry.faster-whisper.port}";
