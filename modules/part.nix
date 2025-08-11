@@ -13,12 +13,17 @@ in {
       nixpkgs.overlays = [
         (final: prev: rec {
           unstable = import inputs.nixpkgs-unstable {
-            inherit (final) system config;
+            inherit (final) system;
+            config = {
+              allowUnfree = true;
+              cudaSupport = true;
+              cudaForwardcompat = true;
+            };
             overlays = [
               inputs.psynker-flake.overlays.default
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker;
+          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker wyoming-faster-whisper;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
         inputs.ml-pkgs.overlays.gen-ai
