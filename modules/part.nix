@@ -18,6 +18,7 @@ in {
               allowUnfree = true;
               cudaSupport = true;
               cudaForwardcompat = true;
+              cudaCapabilities = [ "7.5" "8.6" "8.9" "12.0" ];
             };
             overlays = [
               inputs.psynker-flake.overlays.default
