@@ -91,6 +91,10 @@ in {
       wyoming
       elevenlabs
       ollama
+
+      # Weather
+      accuweather
+      pyopenweathermap
     ];
   };
 
