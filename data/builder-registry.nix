@@ -9,7 +9,7 @@ rec {
   "octavian" = {
     hostName = "10.77.1.131";
     location = "homelab";    
-    maxJobs = 24;
+    maxJobs = 8;
     speedFactor = 10;
   };
 
