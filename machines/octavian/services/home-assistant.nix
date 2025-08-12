@@ -55,6 +55,7 @@ in {
       "elevenlabs"
       "wyoming"
       "piper"
+      "ollama"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
@@ -89,6 +90,7 @@ in {
       tinytuya
       wyoming
       elevenlabs
+      ollama
     ];
   };
 
