@@ -257,32 +257,6 @@
         "type": "github"
       }
     },
-    "personax": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "ml-pkgs": [
-          "ml-pkgs"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1747946360,
-        "narHash": "sha256-CP1Q37ye82weM06wnBPHvn51MNho0hamNOKZAXSvOzc=",
-        "ref": "refs/heads/main",
-        "rev": "57b7af6a64be0e34327395abc5d8b453a0ee3d52",
-        "revCount": 114,
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/PersonaX"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/PersonaX"
-      }
-    },
     "psynk-ui": {
       "inputs": {
         "flake-parts": [
@@ -345,7 +319,6 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "personax": "personax",
         "psynker-flake": "psynker-flake",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
