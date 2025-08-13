@@ -31,17 +31,15 @@
     interm.url = "git+ssh://git@github.com/breakds/interm";
     interm.inputs.nixpkgs.follows = "nixpkgs";
 
-    ml-pkgs.url = "github:nixvital/ml-pkgs/archive/25.05";
-    ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+    ml-pkgs.url = "github:nixvital/ml-pkgs";
+    ml-pkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";
-    game-solutions.inputs.ml-pkgs.follows = "ml-pkgs";
 
     beancounting.url = "git+ssh://git@github.com/breakds/beancounting";
     beancounting.inputs.nixpkgs.follows = "nixpkgs";
     beancounting.inputs.flake-parts.follows = "flake-parts";
-    beancounting.inputs.ml-pkgs.follows = "ml-pkgs";
 
     psynker-flake.url = "git+ssh://git@github.com/psynk-ai/psynker?ref=release/foriris";
     psynker-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";

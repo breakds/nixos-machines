@@ -21,13 +21,13 @@ in {
               cudaCapabilities = [ "7.5" "8.6" "8.9" "12.0" ];
             };
             overlays = [
+              inputs.ml-pkgs.overlays.gen-ai
               inputs.psynker-flake.overlays.default
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker wyoming-faster-whisper;
+          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker wyoming-faster-whisper serena;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
-        inputs.ml-pkgs.overlays.gen-ai
       ];
     };
 

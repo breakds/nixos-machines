@@ -5,9 +5,7 @@
         "flake-parts": [
           "flake-parts"
         ],
-        "ml-pkgs": [
-          "ml-pkgs"
-        ],
+        "ml-pkgs": "ml-pkgs",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -49,6 +47,28 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
+          "game-solutions",
+          "ml-pkgs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730504689,
+        "narHash": "sha256-hgmguH29K2fvs9szpq2r3pz2/8cJd2LPS+b4tfNFCwE=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "506278e768c2a08bec68eb62932193e341f55c90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": [
           "ml-pkgs",
           "nixpkgs"
         ]
@@ -84,9 +104,7 @@
     },
     "game-solutions": {
       "inputs": {
-        "ml-pkgs": [
-          "ml-pkgs"
-        ],
+        "ml-pkgs": "ml-pkgs_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -150,22 +168,70 @@
     },
     "ml-pkgs": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": [
+          "beancounting",
+          "flake-parts"
+        ],
         "nixpkgs": [
+          "beancounting",
           "nixpkgs"
-        ]
+        ],
+        "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1754953671,
-        "narHash": "sha256-ztdZzGZH47GIrFrtcQnhHef3bCOV++5n9FlqaXnIt1I=",
+        "lastModified": 1752590169,
+        "narHash": "sha256-IFn6DjQ3UefGsBB72KxImGQM8KU8cIA+KSssnFfdIXg=",
         "owner": "nixvital",
         "repo": "ml-pkgs",
-        "rev": "e17017403964c2f7012216ba8fe669507dcfbf01",
+        "rev": "7b4057e69f8920a663d1ec6ffe2eaeb23442d4d0",
         "type": "github"
       },
       "original": {
         "owner": "nixvital",
-        "ref": "archive/25.05",
+        "ref": "archive/24.11",
+        "repo": "ml-pkgs",
+        "type": "github"
+      }
+    },
+    "ml-pkgs_2": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "game-solutions",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754953512,
+        "narHash": "sha256-zxq4SQQg+6IHkf+W39Yb4dhd/DH7kRQUNN12L5toTBA=",
+        "owner": "nixvital",
+        "repo": "ml-pkgs",
+        "rev": "647c65ff10fdadd8ab262498f3ad017b22aac0b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixvital",
+        "repo": "ml-pkgs",
+        "type": "github"
+      }
+    },
+    "ml-pkgs_3": {
+      "inputs": {
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754953512,
+        "narHash": "sha256-zxq4SQQg+6IHkf+W39Yb4dhd/DH7kRQUNN12L5toTBA=",
+        "owner": "nixvital",
+        "repo": "ml-pkgs",
+        "rev": "647c65ff10fdadd8ab262498f3ad017b22aac0b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixvital",
         "repo": "ml-pkgs",
         "type": "github"
       }
@@ -226,6 +292,22 @@
       }
     },
     "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1743583204,
+        "narHash": "sha256-F7n4+KOIfWrwoQjXrL2wD9RhFYLs2/GGe/MQY1sSdlE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2c8d3f48d33929642c1c12cd243df4cc7d2ce434",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable_2": {
       "locked": {
         "lastModified": 1754725699,
         "narHash": "sha256-iAcj9T/Y+3DBy2J0N+yF9XQQQ8IEb5swLFzs23CdP88=",
@@ -314,11 +396,11 @@
         "game-solutions": "game-solutions",
         "home-manager": "home-manager",
         "interm": "interm",
-        "ml-pkgs": "ml-pkgs",
+        "ml-pkgs": "ml-pkgs_3",
         "nixos-hardware": "nixos-hardware",
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-unstable": "nixpkgs-unstable_2",
         "psynker-flake": "psynker-flake",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
