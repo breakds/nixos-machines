@@ -95,6 +95,10 @@ in {
       # Weather
       accuweather
       pyopenweathermap
+
+      # Calendar
+      gcal-sync
+      oauth2client
     ];
   };
 
