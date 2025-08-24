@@ -18,5 +18,10 @@
     "deny": [
       "Read(./.envrc.local)"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/custom-scripts/statusline-script.sh",
+    "padding": 0
   }
 }
