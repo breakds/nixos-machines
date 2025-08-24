@@ -23,5 +23,25 @@
     "type": "command",
     "command": "~/.claude/custom-scripts/statusline-script.sh",
     "padding": 0
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "pw-play ~/.claude/sound/cartoon-tiptoe-marimba-om-fx-1-00-03.mp3"
+        }]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "pw-play ~/.claude/sound/notification-digital-ting-vadi-sound-1-00-00.mp3"
+        }]
+      }
+    ]
   }
 }
