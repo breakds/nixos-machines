@@ -70,6 +70,7 @@
       xorg.xeyes
       freecad
       serena
+      obs-studio
     ];
 
     xdg.mime = {
