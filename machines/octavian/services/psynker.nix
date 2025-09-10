@@ -1,8 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.psynker = {
-    enable = true;
-    port = 9119;
+  services.nginx.virtualHosts."cradle.psynk.ai" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://10.77.1.56:9119";
+      proxyWebsockets = true;
+    };
   };
 }

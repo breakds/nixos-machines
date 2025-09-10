@@ -22,7 +22,6 @@ in {
             };
             overlays = [
               inputs.ml-pkgs.overlays.gen-ai
-              inputs.psynker-flake.overlays.default
             ];
           };
           inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker wyoming-faster-whisper serena;

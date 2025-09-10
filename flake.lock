@@ -339,56 +339,6 @@
         "type": "github"
       }
     },
-    "psynk-ui": {
-      "inputs": {
-        "flake-parts": [
-          "psynker-flake",
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "psynker-flake",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754497454,
-        "narHash": "sha256-ON+VuiDi/CcGrAqa0/AEPVDjIQce8+teuvdxqCMox40=",
-        "ref": "refs/heads/main",
-        "rev": "9de8257932f146728b513cb839e286525632e035",
-        "revCount": 158,
-        "type": "git",
-        "url": "ssh://git@github.com/psynk-ai/psynk-ui"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/psynk-ai/psynk-ui"
-      }
-    },
-    "psynker-flake": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "psynk-ui": "psynk-ui"
-      },
-      "locked": {
-        "lastModified": 1754501655,
-        "narHash": "sha256-Re/pcauFgIL+cvzMW2hlwdp2ud0Zb1zMdkmXqxUNjzM=",
-        "ref": "release/foriris",
-        "rev": "1aff3a0c086e2d3c3cf6cb3dc4828c4cc84f1f00",
-        "revCount": 253,
-        "type": "git",
-        "url": "ssh://git@github.com/psynk-ai/psynker"
-      },
-      "original": {
-        "ref": "release/foriris",
-        "type": "git",
-        "url": "ssh://git@github.com/psynk-ai/psynker"
-      }
-    },
     "root": {
       "inputs": {
         "beancounting": "beancounting",
@@ -401,7 +351,6 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
-        "psynker-flake": "psynker-flake",
         "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org",

@@ -41,10 +41,6 @@
     beancounting.inputs.nixpkgs.follows = "nixpkgs";
     beancounting.inputs.flake-parts.follows = "flake-parts";
 
-    psynker-flake.url = "git+ssh://git@github.com/psynk-ai/psynker?ref=release/foriris";
-    psynker-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    psynker-flake.inputs.flake-parts.follows = "flake-parts";
-
     www-psynk-ai.url = "git+ssh://git@github.com/psynk-ai/www.psynk.ai";
     www-psynk-ai.inputs.flake-parts.follows = "flake-parts";
   };
