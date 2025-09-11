@@ -30,7 +30,6 @@ in {
       ];
     };
 
-    
     graphical = import ./graphical;
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;
@@ -67,5 +66,6 @@ in {
     prometheus-exporters = import ./prometheus/exporters.nix;
     localsend = import ./localsend.nix;
     claude-code = import ./claude-code;
+    qmk = import ./qmk.nix;
   };
 }
