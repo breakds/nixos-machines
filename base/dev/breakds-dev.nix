@@ -34,6 +34,7 @@
       # nixops_unstable
       tmux
       fd
+      pandoc
 
       pv  # pipe viewer
       asciinema
