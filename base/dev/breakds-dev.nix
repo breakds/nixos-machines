@@ -35,6 +35,7 @@
       tmux
       fd
       pandoc
+      marksman  # Markdown Language Server
 
       pv  # pipe viewer
       asciinema
