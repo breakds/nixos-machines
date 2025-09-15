@@ -6,6 +6,7 @@
     ../../base
     ../../users
     ../../users/xin.nix
+    ../../users/toph.nix
     ../../base/dev/breakds-dev.nix
     ../../base/build-machines-v2.nix
 

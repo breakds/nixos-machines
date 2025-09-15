@@ -2,13 +2,13 @@
 
 {
   config.users.extraUsers = {
-    "lx" = {
+    "toph" = {
       isNormalUser = true;
-      home = "/home/lx";
-      uid = 2081;
-      description = "Xin Li";
+      home = "/home/toph";
+      uid = 2084;
+      description = "Chris Toph";
       openssh.authorizedKeys.keyFiles = [
-        ../data/keys/lx.pub
+        ../data/keys/toph.pub
       ];
     };
   };

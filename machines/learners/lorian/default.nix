@@ -9,7 +9,6 @@
     ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
-    ../../../users/xiaozhu.nix
     ../../../users/xin.nix
   ];
 
