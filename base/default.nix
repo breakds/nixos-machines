@@ -49,11 +49,5 @@
       wqy_microhei
       font-awesome
     ];
-
-    # Create a better default environment for bash
-    environment.etc = {
-      "bashrc.local".source = ../data/dotfiles/bashrc.local;
-      "inputrc".source = ../data/dotfiles/inputrc;
-    };
   };
 }
