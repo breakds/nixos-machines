@@ -1,0 +1,20 @@
+profile = "gpt5"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+experimental_use_exec_command_tool = true
+
+[sandbox_workspace_write]
+network_access = false
+
+[profiles.gpt5]
+model = "gpt-5-codex"
+model_reasoning_effort = "medium"
+
+[shell_environment_policy]
+inherit = "core"
+
+[tui]
+notifications = true
+
+[tools]
+web_search = true

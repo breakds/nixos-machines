@@ -24,7 +24,7 @@ in {
               inputs.ml-pkgs.overlays.gen-ai
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code ollama home-assistant-custom-components psynker wyoming-faster-whisper serena;
+          inherit (unstable) n8n glance gemini-cli claude-code codex ollama home-assistant-custom-components psynker wyoming-faster-whisper serena;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
       ];
@@ -65,8 +65,7 @@ in {
     gooseit = import ./gooseit.nix;
     prometheus-exporters = import ./prometheus/exporters.nix;
     localsend = import ./localsend.nix;
-    claude-code = import ./claude-code;
-    gpt-codex = import ./gpt-codex;
+    coding-agent = import ./coding-agent;
     qmk = import ./qmk.nix;
   };
 }
