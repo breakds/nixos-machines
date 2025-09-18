@@ -7,7 +7,7 @@ in {
     ./ollama/part.nix
     ./extra-mounts/part.nix
   ];
-  
+
   flake.nixosModules = {
     base-overlays = { config, lib, pkgs, ... }: {
       nixpkgs.overlays = [
@@ -66,6 +66,7 @@ in {
     prometheus-exporters = import ./prometheus/exporters.nix;
     localsend = import ./localsend.nix;
     claude-code = import ./claude-code;
+    gpt-codex = import ./gpt-codex;
     qmk = import ./qmk.nix;
   };
 }

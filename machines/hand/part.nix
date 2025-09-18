@@ -25,6 +25,7 @@ in {
       # Development Assistants
       self.nixosModules.gooseit
       self.nixosModules.claude-code
+      self.nixosModules.gpt-codex
     ];
   };
 }
