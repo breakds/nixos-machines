@@ -1,6 +1,6 @@
 profile = "gpt5"
 sandbox_mode = "workspace-write"
-approval_policy = "read-only"
+approval_policy = "untrusted"
 experimental_use_exec_command_tool = true
 
 [sandbox_workspace_write]
