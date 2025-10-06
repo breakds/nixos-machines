@@ -74,6 +74,7 @@
       # Nix specific
       nix-index
       nix-init
+      nix-update
       cachix
 
       # Agent
