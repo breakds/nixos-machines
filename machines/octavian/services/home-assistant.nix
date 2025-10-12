@@ -59,6 +59,7 @@ in {
       "piper"
       "ollama"
       "go2rtc"
+      "matter"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
