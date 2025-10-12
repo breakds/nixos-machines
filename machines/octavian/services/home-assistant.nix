@@ -39,6 +39,8 @@ in {
       };
 
       "automation ui" = "!include automations.yaml";
+
+      ffmpeg = {};
     };
 
     extraComponents = [
@@ -91,6 +93,8 @@ in {
       wyoming
       elevenlabs
       ollama
+      aiohomekit
+      ha-ffmpeg
 
       # Weather
       accuweather
