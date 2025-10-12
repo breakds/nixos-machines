@@ -95,6 +95,7 @@ in {
       ollama
       aiohomekit
       ha-ffmpeg
+      python-otbr-api
 
       # Weather
       accuweather
