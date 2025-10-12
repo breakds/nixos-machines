@@ -145,4 +145,10 @@ in {
       threshold = 0.9;
     };
   };
+
+  services.matter-server = let reg = (import ../../../data/service-registry.nix).matter-server;
+  in {
+    enable = true;
+    port = reg.port;
+  };
 }

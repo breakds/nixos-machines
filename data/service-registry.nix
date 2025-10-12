@@ -143,4 +143,8 @@ rec {
     faster-whisper.port = 10300;
     openwakeword.port = 10400;
   };
+
+  matter-server = {
+    port = 5580;
+  };
 }
