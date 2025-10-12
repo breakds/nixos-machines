@@ -58,6 +58,7 @@ in {
       "wyoming"
       "piper"
       "ollama"
+      "go2rtc"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
