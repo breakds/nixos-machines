@@ -43,5 +43,16 @@
         }]
       }
     ]
-  }
+  },
+  "extraKnownMarketplaces": {
+    "claude.bds": {
+      "source": {
+        "source": "github",
+        "repo": "breakds/claude.bds"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "bds-dev@claude.bds": true
+  }  
 }
