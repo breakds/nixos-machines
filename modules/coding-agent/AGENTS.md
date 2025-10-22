@@ -28,16 +28,3 @@ I am Break Yang, a seasoned software, ML, and robotics engineer. You are my peer
 3. Maintain dependencies and development environments with Nix (`flake.nix`).
 4. Avoid adding dependencies unless necessary.
 5. Get my approval before introducing new dependencies.
-
-### Scratch Pad Protocol (`WORKING_LOG.md`)
-
-1. Create `WORKING_LOG.md` at the start of any multi-step task.
-2. For each step:
-   - Write a short description of the action.
-   - Add an unchecked checkbox `[ ]` at the start.
-3. When a step is completed, change its checkbox to `[x]`.
-4. If a step fails:
-   - Mark it as failed.
-   - Document what was tried and why it failed.
-   - Stop executing the plan.
-5. When all steps are successfully completed, delete `WORKING_LOG.md`.
