@@ -526,11 +526,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1761254751,
-        "narHash": "sha256-tUkRDiXeKKj01SFbeobeR5zulqVf0LxsVYCPV/vn/f0=",
+        "lastModified": 1762281885,
+        "narHash": "sha256-9pu0WS43fjnAJUxnBgXHdSA5jUo9Z0+zjcEvEpP7SCw=",
         "ref": "refs/heads/main",
-        "rev": "ff04c817b38cf11ebd8381858b82195dc7e7a6bb",
-        "revCount": 38,
+        "rev": "916aabbc6a14b9d9d8234ce81c50e2a3903cf869",
+        "revCount": 40,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/www.psynk.ai"
       },
