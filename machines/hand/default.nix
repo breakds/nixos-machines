@@ -71,6 +71,7 @@
       freecad
       serena
       obs-studio
+      moonlight-qt
     ];
 
     xdg.mime = {
