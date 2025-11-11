@@ -1,7 +1,7 @@
 profile = "gpt5"
 sandbox_mode = "workspace-write"
 approval_policy = "untrusted"
-experimental_use_exec_command_tool = true
+streamable_shell = true
 
 [sandbox_workspace_write]
 network_access = false
@@ -16,5 +16,5 @@ inherit = "core"
 [tui]
 notifications = true
 
-[tools]
-web_search = true
+[features]
+web_search_request = true
