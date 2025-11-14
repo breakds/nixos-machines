@@ -40,6 +40,10 @@
       git
     ];
 
+    nix = {
+      settings.experimental-features = [ "nix-command" "flakes" ];
+    };
+
     fonts.packages = with pkgs; [
       # Use nerd-fonts for coding
       nerd-fonts.fira-code
