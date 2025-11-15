@@ -1,14 +1,14 @@
 profile = "gpt5"
-sandbox_mode = "workspace-write"
-approval_policy = "untrusted"
-streamable_shell = true
+approval_presets = "auto"
 
 [sandbox_workspace_write]
-network_access = false
+network_access = true
 
 [profiles.gpt5]
-model = "gpt-5-codex"
+model = "gpt-5.1-codex"
 model_reasoning_effort = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
 
 [shell_environment_policy]
 inherit = "core"
@@ -17,4 +17,6 @@ inherit = "core"
 notifications = true
 
 [features]
+apply_patch_freeform = true
 web_search_request = true
+streamable_shell = true
