@@ -52,6 +52,8 @@
       # Add Wenquanyi Microsoft Ya Hei, a nice-looking Chinese font.
       wqy_microhei
       font-awesome
+      noto-fonts
+      noto-fonts-cjk-sans      
     ];
   };
 }
