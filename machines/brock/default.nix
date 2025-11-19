@@ -18,7 +18,7 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_malenia.pub
       ];
       shell = pkgs.zsh;
     };

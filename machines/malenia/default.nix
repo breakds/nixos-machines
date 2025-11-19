@@ -17,13 +17,13 @@
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_malenia.pub
       ];
     };
 
     users.users."root" = {
       openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_malenia.pub
       ];
     };
 

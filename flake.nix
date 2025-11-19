@@ -70,10 +70,8 @@
         ./machines/malenia/part.nix
         ./machines/octavian/part.nix
         ./machines/learners/part.nix
-        ./machines/ghostberry/part.nix
         ./machines/hand/part.nix
         ./machines/brock/part.nix
-        ./machines/orchard/part.nix
         ./machines/pi/part.nix
         ./machines/forgery/part.nix
         ./machines/livecd/part.nix

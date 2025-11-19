@@ -16,7 +16,7 @@
   users.extraUsers = lib.mkIf (config.vital.mainUser == "breakds") {
     "breakds" = {
       openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_samaritan.pub
+        ../../data/keys/breakds_malenia.pub
       ];
       shell = lib.mkDefault pkgs.bash;
       useDefaultShell = false;

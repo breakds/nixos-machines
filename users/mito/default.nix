@@ -13,13 +13,14 @@
         ];
         openssh.authorizedKeys.keyFiles = [
           ../../data/keys/breakds_samaritan.pub
+          ../../data/keys/breakds_malenia.pub
         ];
       };
     };
-    
+
     home-manager.users.mito = {
       home.stateVersion = "23.05";
-      
+
       imports = [
         ./git.nix
         ./wezterm.nix
@@ -31,7 +32,7 @@
           "\e[B": history-search-forward
         '';
       };
-      
+
       programs.direnv = {
         enable = true;
         enableBashIntegration = true;

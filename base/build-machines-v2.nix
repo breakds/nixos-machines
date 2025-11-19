@@ -69,6 +69,7 @@ in {
           isSystemUser = true;
           openssh.authorizedKeys.keyFiles = [
             ../data/keys/breakds_samaritan.pub
+            ../data/keys/breakds_malenia.pub
             ../data/keys/nixbuilder_malenia.pub
           ];
           useDefaultShell = true;

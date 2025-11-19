@@ -76,6 +76,7 @@
       nix-init
       nix-update
       cachix
+      ragenix
 
       # Agent
       gemini-cli
