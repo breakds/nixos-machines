@@ -5,7 +5,7 @@ approval_presets = "auto"
 network_access = true
 
 [profiles.gpt5]
-model = "gpt-5.1-codex"
+model = "gpt-5.1-codex-max"
 model_reasoning_effort = "medium"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
