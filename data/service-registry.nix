@@ -147,4 +147,8 @@ rec {
   matter-server = {
     port = 5580;
   };
+
+  komga = {
+    port = 25600;
+  };
 }

@@ -29,6 +29,7 @@
     ./services/home-assistant.nix
     ./services/psynker.nix
     ./services/solar-assistant.nix
+    ./services/komga.nix
     ../../base/vpn.nix
   ];
 
