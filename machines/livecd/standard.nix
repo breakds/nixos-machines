@@ -14,7 +14,7 @@
       bat
       silver-searcher
       duf
-      du-dust
+      dust
       feh
       pass
 

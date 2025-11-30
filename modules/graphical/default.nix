@@ -28,7 +28,7 @@ in {
     ./cjk.nix
     ./remote-desktop.nix
   ];
-  
+
   options.vital.graphical = {
     enable = lib.mkEnableOption "Enable Graphical UI (xserver and friends)";
     xserver = lib.mkOption {
@@ -44,12 +44,27 @@ in {
   config = lib.mkIf cfg.enable {
     # Enable unfree as it can potentially use Nvidia drivers.
     nixpkgs.config.allowUnfree = true;
-    
+
     # Disable the gnome shell as it is not currently used, and will appear
     # in the dmenu so that hinder how chrome is being launched.
     services.gnome.gnome-browser-connector.enable = false;
 
     services.displayManager.sddm.enable = cfg.xserver.displayManager == "sddm";
+    services.displayManager.gdm = {
+      enable = cfg.xserver.displayManager == "gdm";
+      # When using gdm, do not automatically suspend since we want to
+      # keep the server running.
+      autoSuspend = false;
+    };
+
+    services.desktopManager.gnome = {
+      # Default desktop manager: gnome.
+      enable = true;
+      extraGSettingsOverrides = ''
+        [org.gnome.desktop.peripherals.touchpad]
+        click-method='default'
+      '';
+    };
 
     services.xserver = {
       enable = true;
@@ -61,22 +76,11 @@ in {
       # DPI
       dpi = cfg.xserver.dpi;
 
-      # Default desktop manager: gnome.
-      desktopManager.gnome.enable = true;
-      desktopManager.gnome.extraGSettingsOverrides = ''
-        [org.gnome.desktop.peripherals.touchpad]
-        click-method='default'
-      '';
-
-      displayManager.gdm.enable = cfg.xserver.displayManager == "gdm";
-      # When using gdm, do not automatically suspend since we want to
-      # keep the server running.
-      displayManager.gdm.autoSuspend = false;
       displayManager.lightdm.enable = cfg.xserver.displayManager == "lightdm";
     };
 
     # Exclude some of the gnome3 packages
-    programs.geary.enable = false;    
+    programs.geary.enable = false;
     environment.gnome.excludePackages = with pkgs; [
       epiphany
       gnome-software

@@ -2,7 +2,7 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -10,7 +10,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use vital-modules, with the same nixpkgs
@@ -42,6 +42,7 @@
     beancounting.inputs.flake-parts.follows = "flake-parts";
 
     www-psynk-ai.url = "git+ssh://git@github.com/psynk-ai/www.psynk.ai";
+    www-psynk-ai.inputs.nixpkgs.follows = "nixpkgs-unstable";
     www-psynk-ai.inputs.flake-parts.follows = "flake-parts";
   };
 

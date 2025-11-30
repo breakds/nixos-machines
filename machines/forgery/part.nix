@@ -16,7 +16,6 @@ in {
         nixpkgs.overlays = [ inputs.ml-pkgs.overlays.tools ];
       })
 
-      self.nixosModules.temporal
       inputs.beancounting.nixosModules.bcounting
     ];
   };

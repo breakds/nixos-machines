@@ -91,7 +91,6 @@
     ];
 
     vital.programs.texlive.enable = true;
-    vital.programs.modern-utils.enable = true;
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).

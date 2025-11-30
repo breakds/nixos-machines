@@ -141,7 +141,6 @@ in {
     openwakeword = {
       enable = true;
       uri = "tcp://0.0.0.0:${toString wyoming-registry.openwakeword.port}";
-      preloadModels = [ "ok_nabu" "hey_jarvis" "hey_mycroft" ];
       threshold = 0.9;
     };
   };

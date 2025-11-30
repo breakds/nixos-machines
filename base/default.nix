@@ -31,13 +31,17 @@
       feh
       jq
       google-chrome
-      tor-browser-bundle-bin
+      tor-browser
       scrot
       dmenu
       firefox
       arandr
       vim
       git
+      duf
+      lsd
+      bat
+      dust
     ];
 
     nix = {

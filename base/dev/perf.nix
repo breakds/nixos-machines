@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     sysstat
-    linuxPackages.perf
+    perf
     perf-tools  # By Brendan Gregg
     flamegraph
   ];

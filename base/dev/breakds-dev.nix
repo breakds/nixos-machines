@@ -12,7 +12,6 @@
       silver-searcher
       rsync
       wget
-      pinentry
       neovim
       cntr
       meld
@@ -24,7 +23,6 @@
       rustdesk-flutter
       ffmpeg
       vlc
-      mysql-client
       sqlitebrowser
       awscli
       azure-cli
@@ -58,6 +56,7 @@
       zstd
       meld
       lm_sensors
+      glances
 
       # Customized
       shuriken

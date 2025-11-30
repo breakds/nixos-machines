@@ -27,7 +27,6 @@ in {
       self.nixosModules.first-party-software
 
       self.nixosModules.ollama
-      self.nixosModules.temporal
       self.nixosModules.glance
       self.nixosModules.prometheus-exporters
 

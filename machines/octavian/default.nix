@@ -20,7 +20,6 @@
     ./services/docker-registry.nix
     ./services/paperless.nix
     # ./services/game-solutions.nix
-    ./services/temporal.nix
     ./services/bcounting.nix
     ./services/glance.nix
     ./services/rustdesk.nix
@@ -91,7 +90,6 @@
 
     vital.programs = {
       texlive.enable = false;
-      modern-utils.enable = true;
     };
 
     environment.systemPackages = with pkgs; [

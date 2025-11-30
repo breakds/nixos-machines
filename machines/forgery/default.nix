@@ -61,7 +61,6 @@
 
     vital.programs = {
       texlive.enable = false;
-      modern-utils.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -91,11 +90,6 @@
           "root"
         ];
       };
-    };
-
-    services.temporal = {
-      enable = false;
-      namespaces = [ "factorai-dev" "factorai" ];
     };
 
     services.bcounting-collectors = {
