@@ -19,7 +19,7 @@ in {
       ./.
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
-      inputs.beancounting.nixosModules.bcounting
+      # inputs.beancounting.nixosModules.bcounting
 
       self.nixosModules.base-overlays
       self.nixosModules.graphical

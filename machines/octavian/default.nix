@@ -20,7 +20,7 @@
     ./services/docker-registry.nix
     ./services/paperless.nix
     # ./services/game-solutions.nix
-    ./services/bcounting.nix
+    # ./services/bcounting.nix
     ./services/glance.nix
     ./services/rustdesk.nix
     ./services/karakeep.nix
