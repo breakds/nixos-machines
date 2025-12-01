@@ -30,10 +30,10 @@ in {
       self.nixosModules.glance
       self.nixosModules.prometheus-exporters
 
-      # inputs.www-psynk-ai.nixosModules.www-psynk-ai
-      # ({config, ... }: {
-      #   services.www-psynk-ai.environmentFile = "/home/breakds/.config/www-psynk-ai/env";
-      # })
+      inputs.www-psynk-ai.nixosModules.www-psynk-ai
+      ({config, ... }: {
+        services.www-psynk-ai.environmentFile = "/home/breakds/.config/www-psynk-ai/env";
+      })
     ];
   };
 }

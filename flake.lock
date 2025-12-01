@@ -262,11 +262,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764539998,
-        "narHash": "sha256-/CJ7y7NqldzixG68RYAH5Al/pdAVHjBTQAkdPKX1s+k=",
+        "lastModified": 1764559443,
+        "narHash": "sha256-yKTBm2uhaxBWYRyFwyG8cQQv2atNKYVwohjCeT4S2qg=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "bcb38a8ebd7824377dd66bdf26d56c901c88a2ba",
+        "rev": "631e0e52b7447c776e468995f227feea05569b48",
         "type": "github"
       },
       "original": {
@@ -512,11 +512,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763609329,
-        "narHash": "sha256-+VYWpT8MENqVWZ5bOFx0eu5Z2Omb8dmpeBe/ve/jzXs=",
+        "lastModified": 1764559771,
+        "narHash": "sha256-gonEnEx4zFm3lvtGx1kLkdDHpVuMtCsrGpjeD3ykZ8k=",
         "ref": "refs/heads/main",
-        "rev": "aa76cee8b2384fcb130e20300af0ab1fa2ed9f3d",
-        "revCount": 56,
+        "rev": "9c1ab8110c1695cf4f35da79e4fe7c76020be5b2",
+        "revCount": 59,
         "type": "git",
         "url": "ssh://git@github.com/psynk-ai/www.psynk.ai"
       },
