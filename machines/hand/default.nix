@@ -41,6 +41,13 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      # Disable UCM profiles to fix built-in microphone on Framework 13 AMD
+      # Ryzen AI 300. See: https://github.com/NixOS/nixos-hardware/issues/1603
+      wireplumber.extraConfig.no-ucm = {
+        "monitor.alsa.properties" = {
+          "alsa.use-ucm" = false;
+        };
+      };
     };
 
     # Machine-specific networking configuration.
