@@ -71,6 +71,7 @@
       serena
       obs-studio
       moonlight-qt
+      yt-dlp
     ];
 
     xdg.mime = {
