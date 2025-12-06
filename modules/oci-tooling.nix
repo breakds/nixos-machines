@@ -22,7 +22,6 @@ in {
 
     virtualisation.podman = {
       enable = cfg.backend == "podman";
-      enableNvidia = enableNvidia;
       dockerCompat = true;
     };
 
