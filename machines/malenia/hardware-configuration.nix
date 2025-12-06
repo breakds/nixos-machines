@@ -29,7 +29,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home/braekds/draft" =
+  fileSystems."/home/breakds/draft" =
     { device = "/dev/disk/by-label/DRAFT";
       fsType = "ext4";
       # Do not block booting if the disck is missing
