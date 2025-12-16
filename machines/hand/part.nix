@@ -20,6 +20,7 @@ in {
       self.nixosModules.localsend
       self.nixosModules.builder-cache-valley
       self.nixosModules.qmk
+      self.nixosModules.sunshine      
 
       # Development Assistants
       self.nixosModules.gooseit

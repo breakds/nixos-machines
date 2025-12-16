@@ -66,5 +66,6 @@ in {
     localsend = import ./localsend.nix;
     coding-agent = import ./coding-agent;
     qmk = import ./qmk.nix;
+    sunshine = import ./sunshine.nix;
   };
 }
