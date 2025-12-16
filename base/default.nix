@@ -27,7 +27,8 @@
     networking.usePredictableInterfaceNames = true;
 
     environment.systemPackages = with pkgs; [
-      gparted pass samba
+      gparted samba
+      (pass.withExtensions (exts: [ exts.pass-otp ]))
       feh
       jq
       google-chrome
