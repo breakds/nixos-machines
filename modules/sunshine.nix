@@ -33,7 +33,7 @@
       fi
 
       for out in $HEADLESS_OUTPUTS; do
-        ${swaymsg} output "$out" mode 3440x1440@60Hz
+        ${swaymsg} output "$out" mode 5120x1440@60Hz
       done
     '';
 
