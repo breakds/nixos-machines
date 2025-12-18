@@ -19,7 +19,6 @@ in {
       self.nixosModules.machine-learning
       self.nixosModules.flatpak
       self.nixosModules.wonder-devops
-      self.nixosModules.gooseit
       self.nixosModules.prometheus-exporters
       self.nixosModules.ollama
     ];

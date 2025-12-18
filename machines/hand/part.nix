@@ -23,7 +23,6 @@ in {
       self.nixosModules.sunshine      
 
       # Development Assistants
-      self.nixosModules.gooseit
       self.nixosModules.coding-agent
     ];
   };

@@ -86,8 +86,6 @@
       aider-chat
     ];
 
-    programs.gooseit.enable = true;
-
     services.prometheus.exporters.node.enable = true;
     services.ollama.host = "0.0.0.0";
 
