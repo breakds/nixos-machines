@@ -27,6 +27,7 @@
       awscli
       azure-cli
       azure-storage-azcopy
+      xh
       miniserve  # miniserve --index index.html --spa .
       # TODO(breakds): Re-enable this when the insecure poetry issue is resolved.
       # nixops_unstable
