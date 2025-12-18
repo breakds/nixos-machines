@@ -10,6 +10,7 @@ in {
       inputs.vital-modules.nixosModules.foundation
       inputs.nixos-home.nixosModules.breakds-home
 
+      self.nixosModules.base-overlays
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
       self.nixosModules.flatpak
