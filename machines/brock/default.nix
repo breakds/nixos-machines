@@ -111,7 +111,7 @@
 
       programs.texlive = {
         enable = true;
-        packageSet = pkgs.texlive.combined.scheme-full;
+        extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
       };
     };
 
