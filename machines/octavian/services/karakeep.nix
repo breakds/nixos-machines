@@ -15,7 +15,9 @@ in {
       package = pkgs.meilisearch;
       listenPort = meili.port;
       listenAddress = "127.0.0.1";
-      dumplessUpgrade = true;
+      settings = {
+        experimental_dumpless_upgrade = true;
+      };
     };
     
     services.karakeep = {
