@@ -12,6 +12,7 @@ in {
       modules = [
         ./lorian
         inputs.vital-modules.nixosModules.foundation
+        self.nixosModules.vital-base
         inputs.nixos-home.nixosModules.breakds-home
 
         self.nixosModules.base-overlays
@@ -30,6 +31,7 @@ in {
       modules = [
         ./radahn
         inputs.vital-modules.nixosModules.foundation
+        self.nixosModules.vital-base
         inputs.nixos-home.nixosModules.breakds-home
 
         self.nixosModules.base-overlays

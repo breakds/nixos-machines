@@ -9,6 +9,8 @@ in {
   ];
 
   flake.nixosModules = {
+    vital-base = import ./vital-base;
+    
     base-overlays = { config, lib, pkgs, ... }: {
       nixpkgs.overlays = [
         (final: prev: rec {

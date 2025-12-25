@@ -1,12 +1,12 @@
-# This is the base for all machines that is managed and serviced by
-# Break and Cassandra.
+# The module `vital-base` is designed to serve as the foundation for all my servers.
 
 { config, lib, pkgs, ... }:
 
 {
   imports = [
-    ../modules/oci-tooling.nix
-    ../modules/priting.nix
+    # ./main-user.nix
+    ../oci-tooling.nix
+    ../priting.nix
   ];
   
   config = {

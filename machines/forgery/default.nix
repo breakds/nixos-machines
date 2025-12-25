@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../base
     ../../base/dev/breakds-dev.nix
     ../../users
     ../../base/build-machines-v2.nix

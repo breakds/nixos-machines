@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../base
     ../../users
     ../../users/xin.nix
     ../../users/toph.nix
