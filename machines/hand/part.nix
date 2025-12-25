@@ -21,7 +21,8 @@ in {
       self.nixosModules.localsend
       self.nixosModules.builder-cache-valley
       self.nixosModules.qmk
-      self.nixosModules.sunshine      
+      self.nixosModules.sunshine
+      self.nixosModules.arduino
 
       # Development Assistants
       self.nixosModules.coding-agent
