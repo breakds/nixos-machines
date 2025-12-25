@@ -15,7 +15,7 @@ rec {
 
   "radahn" = {
     hostName = "10.77.1.35";
-    location = "lab";
+    location = "homelab";
     maxJobs = 32;
     speedFactor = 12;
   };
