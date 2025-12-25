@@ -22,9 +22,6 @@
       nvidia.enable = true;
     };
 
-    vital.programs.texlive.enable = true;
-    vital.programs.vscode.enable = true;
-
     # Hopefully this is effectively ulimit -n 65535
     security.pam.loginLimits = [{
       domain = "*";

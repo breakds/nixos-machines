@@ -88,10 +88,6 @@
       networkmanager.enable = true;
     };
 
-    vital.programs = {
-      texlive.enable = false;
-    };
-
     environment.systemPackages = with pkgs; [
       lm_sensors
       smartmontools

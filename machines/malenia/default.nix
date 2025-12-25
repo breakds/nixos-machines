@@ -52,10 +52,12 @@
       nvidia.enable = true;
     };
 
-    vital.programs.texlive.enable = true;
-
     home-manager.users."breakds" = {
       home.bds.windowManager = "i3";
+      programs.texlive = {
+        enable = true;
+        packageSet = pkgs.texlive.combined.scheme-full;
+      };
     };
 
     environment.systemPackages = with pkgs; [

@@ -89,8 +89,6 @@
       xorg.xeyes
     ];
 
-    vital.programs.texlive.enable = true;
-
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).
     environment.sessionVariables = {
@@ -109,6 +107,11 @@
       # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = {
         "Xft.dpi" = 100;
+      };
+
+      programs.texlive = {
+        enable = true;
+        packageSet = pkgs.texlive.combined.scheme-full;
       };
     };
 

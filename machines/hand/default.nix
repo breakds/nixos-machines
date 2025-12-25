@@ -55,7 +55,6 @@
     networking.useDHCP = lib.mkDefault true;
 
     vital.programs.arduino.enable = true;
-    vital.programs.texlive.enable = true;
 
     # +----------+
     # | Desktop  |
@@ -125,6 +124,12 @@
         "eDP-1" = {
           scale = "1.0";
         };
+      };
+
+      # Texlive
+      programs.texlive = {
+        enable = true;
+        extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
       };
     };
 
