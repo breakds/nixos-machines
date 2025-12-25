@@ -5,11 +5,21 @@
 {
   imports = [
     ./main-user.nix
+    ./vm.nix
+    ./network-base.nix
     ../oci-tooling.nix
     ../priting.nix
   ];
-  
+
   config = {
+    boot = {
+      loader.systemd-boot.enable = lib.mkDefault true;
+      loader.efi.canTouchEfiVariables = lib.mkDefault true;
+      # Filesystem Support
+      supportedFilesystems = [ "ntfs" ];
+    };
+
+
     time.timeZone = lib.mkDefault "America/Los_Angeles";
 
     # Enable to use non-free packages such as nvidia drivers
@@ -45,10 +55,6 @@
       dust
     ];
 
-    nix = {
-      settings.experimental-features = [ "nix-command" "flakes" ];
-    };
-
     fonts.packages = with pkgs; [
       # Use nerd-fonts for coding
       nerd-fonts.fira-code
@@ -58,7 +64,31 @@
       wqy_microhei
       font-awesome
       noto-fonts
-      noto-fonts-cjk-sans      
+      noto-fonts-cjk-sans
     ];
+
+    programs.bash.completion.enable = true;
+
+    services.udev.packages = [ pkgs.libu2f-host ];
+    # Disable UDisks by default (significantly reduces system closure size)
+    services.udisks2.enable = lib.mkDefault false;
+    services.blueman.enable = true;
+
+    nix = {
+      package = pkgs.nix;
+      settings.experimental-features = [ "nix-command" "flakes" ];
+
+      # Automatically optimize storage spaces /nix/store
+      settings = {
+        auto-optimise-store = true;
+      };
+
+      # Automatic garbage collection
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 120d";
+      };
+    };
   };
 }

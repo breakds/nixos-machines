@@ -7,7 +7,6 @@ in {
     system = "x86_64-linux";
     modules = [
       ./.
-      inputs.vital-modules.nixosModules.foundation
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
 

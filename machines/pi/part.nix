@@ -9,7 +9,7 @@ in {
       system = "aarch64-linux";
       modules = [
         ./armlet
-        inputs.vital-modules.nixosModules.users
+        ../../modules/vital-base/main-user.nix
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
         self.nixosModules.graphical
       ];
@@ -19,7 +19,7 @@ in {
       system = "aarch64-linux";
       modules = [
         ./amber
-        inputs.vital-modules.nixosModules.users
+        ../../modules/vital-base/main-user.nix        
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
         self.nixosModules.graphical
         self.nixosModules.prometheus-exporters

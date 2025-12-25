@@ -11,7 +11,6 @@ in {
       specialArgs = { inherit (inputs) nixpkgs-unstable; };
       modules = [
         ./lorian
-        inputs.vital-modules.nixosModules.foundation
         self.nixosModules.vital-base
         inputs.nixos-home.nixosModules.breakds-home
 
@@ -30,7 +29,6 @@ in {
       specialArgs = { inherit (inputs) nixpkgs-unstable; };
       modules = [
         ./radahn
-        inputs.vital-modules.nixosModules.foundation
         self.nixosModules.vital-base
         inputs.nixos-home.nixosModules.breakds-home
 

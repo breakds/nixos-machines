@@ -335,7 +335,6 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
-        "vital-modules": "vital-modules",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org",
         "www-psynk-ai": "www-psynk-ai"
@@ -437,26 +436,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "vital-modules": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1766643940,
-        "narHash": "sha256-HyjGxdvr8IOWLAVSDhmSYbnupjg7q8AKmmP8RvbP0+A=",
-        "owner": "nixvital",
-        "repo": "vital-modules",
-        "rev": "50361bd07d632d17b4470ed236e546205c42cfbd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixvital",
-        "repo": "vital-modules",
         "type": "github"
       }
     },

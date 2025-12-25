@@ -8,7 +8,6 @@ in {
     specialArgs = { inherit (inputs) nixpkgs-unstable; };
     modules = [
       ./.
-      inputs.vital-modules.nixosModules.foundation
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
 
