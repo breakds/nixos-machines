@@ -26,7 +26,7 @@ in {
               inputs.ml-pkgs.overlays.gen-ai
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code codex ollama home-assistant-custom-components psynker wyoming-faster-whisper serena;
+          inherit (unstable) n8n glance gemini-cli claude-code codex ollama ollama-cuda home-assistant-custom-components psynker wyoming-faster-whisper serena;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
       ];
