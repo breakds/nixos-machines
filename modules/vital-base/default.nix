@@ -4,7 +4,7 @@
 
 {
   imports = [
-    # ./main-user.nix
+    ./main-user.nix
     ../oci-tooling.nix
     ../priting.nix
   ];

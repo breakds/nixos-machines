@@ -30,6 +30,7 @@ in {
       self.nixosModules.ollama
       self.nixosModules.glance
       self.nixosModules.prometheus-exporters
+      self.nixosModules.filerun
 
       inputs.www-psynk-ai.nixosModules.www-psynk-ai
       ({config, ... }: {

@@ -68,5 +68,6 @@ in {
     coding-agent = import ./coding-agent;
     qmk = import ./qmk.nix;
     sunshine = import ./sunshine.nix;
+    filerun = import ./filerun.nix;  # TODO(breakds): Upgrade filerun
   };
 }
