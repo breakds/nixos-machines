@@ -21,6 +21,9 @@ in {
       self.nixosModules.wonder-devops
       self.nixosModules.prometheus-exporters
       self.nixosModules.ollama
+
+      # Development Assistants
+      self.nixosModules.coding-agent
     ];
   };
 }
