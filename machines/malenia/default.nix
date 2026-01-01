@@ -53,6 +53,8 @@
 
     # Re-enable Wayland for GDM (overrides nvidia.nix default)
     services.displayManager.gdm.wayland = lib.mkForce true;
+    # Enable modesetting for proper Wayland resolution
+    hardware.nvidia.modesetting.enable = lib.mkForce true;
 
     home-manager.users."breakds" = {
       programs.texlive = {
