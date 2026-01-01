@@ -35,6 +35,7 @@
       fd
       pandoc
       marksman  # Markdown Language Server
+      waypipe
 
       pv  # pipe viewer
       asciinema
