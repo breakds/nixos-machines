@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
@@ -52,8 +51,10 @@
       nvidia.enable = true;
     };
 
+    # Re-enable Wayland for GDM (overrides nvidia.nix default)
+    services.displayManager.gdm.wayland = true;
+
     home-manager.users."breakds" = {
-      home.bds.windowManager = "i3";
       programs.texlive = {
         enable = true;
         extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
