@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -52,7 +52,7 @@
     };
 
     # Re-enable Wayland for GDM (overrides nvidia.nix default)
-    services.displayManager.gdm.wayland = true;
+    services.displayManager.gdm.wayland = lib.mkForce true;
 
     home-manager.users."breakds" = {
       programs.texlive = {
