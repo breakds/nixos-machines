@@ -83,7 +83,9 @@
       gemini-cli
     ] ++ (let
       hasHM = config ? home-manager && config.home-manager.users ? "breakds";
-      isWayland = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
+      isSway = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
+      isGdmWayland = config.services.displayManager.gdm.enable && config.services.displayManager.gdm.wayland;
+      isWayland = isSway || isGdmWayland;
     in [(if isWayland then pkgs.emacs-pgtk else pkgs.emacs)]);
 
     programs.nix-ld.enable = true;
