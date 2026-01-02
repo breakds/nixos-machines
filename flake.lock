@@ -262,11 +262,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767313944,
-        "narHash": "sha256-QZY1pspVikNfZzwVBF+wVJDLNuFmF43knmEcmTzsWYs=",
+        "lastModified": 1767339371,
+        "narHash": "sha256-kjbqRwVPpcuzr5lg3+45SHMad8d7sp9BLdMDC8Fo3qw=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "3760b6cc85453b8dadc9b20b3c4c9121b81bc099",
+        "rev": "cbbfc2aea3f78228e420ae7cfa054254f72607ac",
         "type": "github"
       },
       "original": {
