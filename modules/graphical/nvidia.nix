@@ -46,8 +46,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
-    # Disable Wayland if nvidia is on.
-    services.displayManager.gdm.wayland = false;
 
     hardware = {
       nvidia.open = true;  # For using nvidia drivers >= 560
