@@ -51,10 +51,12 @@ in {
 
     hardware = {
       nvidia.open = true;  # For using nvidia drivers >= 560
+      # Kernel modesetting (KMS) is required for Wayland, PRIME sync, and
+      # provides flicker-free boot, proper suspend/resume, and seamless VT switching.
+      nvidia.modesetting.enable = true;
       # Nvidia PRIME The card Nvidia 940MX is non-MXM card. Needs special treatment.
       # muxless/non-MXM Optimus cards have no display outputs and show as 3D
       # Controller in lspci output, seen in most modern consumer laptops
-      nvidia.modesetting.enable = cfg.prime.enable;
       nvidia.prime.sync.enable = cfg.prime.enable && !cfg.prime.offload;
       nvidia.prime.offload = lib.mkIf (cfg.prime.enable && cfg.prime.offload) {
         enable = true;
