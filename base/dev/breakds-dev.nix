@@ -61,6 +61,9 @@
       lm_sensors
       glances
 
+      # Font
+      emacs-all-the-icons-fonts
+
       # Customized
       shuriken
 
