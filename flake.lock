@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "advisory-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767016174,
+        "narHash": "sha256-/uqlY+aGlb+VsHliRRJVCQkn5cSXRmTzwWwwszOA0Ec=",
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "63bd4ad0ee27041c6ab13c897aee707bf838ebe9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
     "beancounting": {
       "inputs": {
         "flake-parts": [
@@ -22,6 +38,21 @@
       "original": {
         "type": "git",
         "url": "ssh://git@github.com/breakds/beancounting"
+      }
+    },
+    "crane": {
+      "locked": {
+        "lastModified": 1767319442,
+        "narHash": "sha256-TXsJUc+nZflFGWLopUxHwdlxYY+ucxbF5IAPLEX5tc4=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "607c91ce75d63ea52731933c5396649b9d08284c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
       }
     },
     "flake-parts": {
@@ -79,6 +110,27 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "rev": "506278e768c2a08bec68eb62932193e341f55c90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_4": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "muxwarden",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765835352,
+        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
         "type": "github"
       },
       "original": {
@@ -236,6 +288,29 @@
         "type": "github"
       }
     },
+    "muxwarden": {
+      "inputs": {
+        "advisory-db": "advisory-db",
+        "crane": "crane",
+        "flake-parts": "flake-parts_4",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767399104,
+        "narHash": "sha256-cEDvFacTX0ontrr+PqZurxQuNMTmNlZ+oSX2WBdXKJ4=",
+        "owner": "breakds",
+        "repo": "muxwarden",
+        "rev": "8891ed13d8d9ca7a0893dd33ff61e45ad235d2d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "muxwarden",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1764440730,
@@ -331,6 +406,7 @@
         "home-manager": "home-manager",
         "interm": "interm",
         "ml-pkgs": "ml-pkgs_3",
+        "muxwarden": "muxwarden",
         "nixos-hardware": "nixos-hardware",
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",

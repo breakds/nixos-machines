@@ -13,6 +13,7 @@ in {
     
     base-overlays = { config, lib, pkgs, ... }: {
       nixpkgs.overlays = [
+        inputs.muxwarden.overlays.default
         (final: prev: rec {
           unstable = import inputs.nixpkgs-unstable {
             inherit (final) system;

@@ -36,6 +36,7 @@
       pandoc
       marksman  # Markdown Language Server
       waypipe
+      muxwarden
 
       pv  # pipe viewer
       asciinema
