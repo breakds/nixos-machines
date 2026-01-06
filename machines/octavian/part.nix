@@ -35,6 +35,8 @@ in {
       ({config, ... }: {
         services.www-psynk-ai.environmentFile = "/home/breakds/.config/www-psynk-ai/env";
       })
+
+      inputs.stt-server.nixosModules.default
     ];
   };
 }
