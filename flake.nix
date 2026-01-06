@@ -43,6 +43,10 @@
 
     muxwarden.url = "github:breakds/muxwarden";
     muxwarden.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    stt-server.url = "github:breakds/stt-server";
+    stt-server.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    stt-server.inputs.ml-pkgs.follows = "ml-pkgs";
   };
 
   outputs =

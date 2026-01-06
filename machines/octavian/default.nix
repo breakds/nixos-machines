@@ -29,6 +29,7 @@
     ./services/psynker.nix
     ./services/solar-assistant.nix
     ./services/komga.nix
+    ./services/stt-server.nix
     ../../base/vpn.nix
   ];
 

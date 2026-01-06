@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "advisory-db_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767558865,
+        "narHash": "sha256-thysk7Xxg01ssmEnhukGjZoPhOe4fxusEt4zjgQB0fE=",
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "c7f8c39b7bae0c89f8a98926842bac073400307b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
     "beancounting": {
       "inputs": {
         "flake-parts": [
@@ -47,6 +63,21 @@
         "owner": "ipetkov",
         "repo": "crane",
         "rev": "607c91ce75d63ea52731933c5396649b9d08284c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
+        "lastModified": 1767461147,
+        "narHash": "sha256-TH/xTeq/RI+DOzo+c+4F431eVuBpYVwQwBxzURe7kcI=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "7d59256814085fd9666a2ae3e774dc5ee216b630",
         "type": "github"
       },
       "original": {
@@ -122,6 +153,27 @@
       "inputs": {
         "nixpkgs-lib": [
           "muxwarden",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765835352,
+        "narHash": "sha256-XswHlK/Qtjasvhd1nOa1e8MgZ8GS//jBoTqWtrS1Giw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_5": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "stt-server",
           "nixpkgs"
         ]
       },
@@ -411,9 +463,36 @@
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
+        "stt-server": "stt-server",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org",
         "www-psynk-ai": "www-psynk-ai"
+      }
+    },
+    "stt-server": {
+      "inputs": {
+        "advisory-db": "advisory-db_2",
+        "crane": "crane_2",
+        "flake-parts": "flake-parts_5",
+        "ml-pkgs": [
+          "ml-pkgs"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767718419,
+        "narHash": "sha256-+XKCZJKXgJW8yyYajPf+f97xIIBOvgjq3JkNHnocjeE=",
+        "owner": "breakds",
+        "repo": "stt-server",
+        "rev": "b9e96128c819b7a948a37ed1ef6847cacd6e6326",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "stt-server",
+        "type": "github"
       }
     },
     "systems": {

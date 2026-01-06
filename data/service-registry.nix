@@ -151,4 +151,8 @@ rec {
   komga = {
     port = 25600;
   };
+
+  stt-server = {
+    port = 15751;
+  };
 }
