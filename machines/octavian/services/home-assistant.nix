@@ -126,8 +126,9 @@ in {
       uri = "tcp://0.0.0.0:${toString wyoming-registry.piper.port}";
     };
 
+    # Faster whisper is disabled, as we will use stt-server.
     faster-whisper.servers.default = {
-      enable = true;
+      enable = false;
       model = "medium.en";
       device = "cuda";
       language = "en";
