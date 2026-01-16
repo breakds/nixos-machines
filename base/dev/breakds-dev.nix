@@ -60,6 +60,7 @@
       meld
       lm_sensors
       glances
+      tio  # Serieal console TTY
 
       # Font
       emacs-all-the-icons-fonts
