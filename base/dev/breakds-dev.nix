@@ -84,8 +84,8 @@
       cachix
       ragenix
 
-      # Agent
-      gemini-cli
+      # Audio
+      audacity
     ] ++ (let
       hasHM = config ? home-manager && config.home-manager.users ? "breakds";
       isSway = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
