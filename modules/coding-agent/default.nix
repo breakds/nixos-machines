@@ -3,7 +3,7 @@
 {
   config = {
     environment.systemPackages = with pkgs; [
-      claude-code codex
+      claude-code-bin codex
     ];
 
     home-manager.users.breakds = {
