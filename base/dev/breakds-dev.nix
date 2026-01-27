@@ -12,6 +12,7 @@
       silver-searcher
       rsync
       wget
+      zip
       neovim
       cntr
       meld
