@@ -7,6 +7,7 @@
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
+    ./services/clamav.nix
   ];
 
   config = {
