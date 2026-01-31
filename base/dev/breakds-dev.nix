@@ -82,6 +82,7 @@
       nix-index
       nix-init
       nix-update
+      nixos-container
       cachix
       ragenix
 
