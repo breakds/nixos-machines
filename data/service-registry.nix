@@ -155,4 +155,9 @@ rec {
   stt-server = {
     port = 15751;
   };
+
+  toylet-notes = {
+    domain = "toylet.breakds.org";
+    port = 7030;
+  };
 }

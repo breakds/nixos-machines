@@ -30,6 +30,7 @@
     ./services/solar-assistant.nix
     ./services/komga.nix
     ./services/stt-server.nix
+    ./services/toylet-notes.nix
     ../../base/vpn.nix
   ];
 

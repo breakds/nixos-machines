@@ -47,6 +47,10 @@
     stt-server.url = "github:breakds/stt-server";
     stt-server.inputs.nixpkgs.follows = "nixpkgs-unstable";
     stt-server.inputs.ml-pkgs.follows = "ml-pkgs";
+
+    toylet-notes.url = "github:breakds/toylet-notes";
+    toylet-notes.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    toylet-notes.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
