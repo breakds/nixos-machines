@@ -3,7 +3,7 @@
 let registry = (import ../../../data/service-registry.nix).toylet-notes;
 
 in {
-  services.toylet-note = {
+  services.toylet-notes = {
     enable = true;
     port = registry.port;
     domainName = registry.domain;

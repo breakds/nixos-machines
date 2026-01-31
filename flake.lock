@@ -629,11 +629,11 @@
         "reading-desk": "reading-desk"
       },
       "locked": {
-        "lastModified": 1769900464,
-        "narHash": "sha256-iH9P1WmuKSSJhGhjaqZ1kK2txeQpkMiS1nFo2kE7ufA=",
+        "lastModified": 1769902815,
+        "narHash": "sha256-NKqaJGQrKuxlowOZikKJH8aPyyZSBk4RDqoa5tOao8s=",
         "owner": "breakds",
         "repo": "toylet-notes",
-        "rev": "9247ad85915d34f8e59712685721738ad412bf53",
+        "rev": "c67058c340de9402c48ac719d63a7dba0547af11",
         "type": "github"
       },
       "original": {
