@@ -4,10 +4,13 @@
   pkgs,
   ...
 }:
-{
+
+let enabled = false;
+
+in {
   services.clamav = {
     daemon = {
-      enable = true;
+      enable = enabled;
       settings = {
         # Log to syslog for audit trail
         LogSyslog = true;
@@ -18,14 +21,14 @@
 
     # Keep virus definitions updated, once daily
     updater = {
-      enable = true;
+      enable = enabled;
       interval = "daily";
       frequency = 1;
     };
 
     # Weekly scan
     scanner = {
-      enable = true;
+      enable = enabled;
       interval = "weekly";
       scanDirectories = [
         "/home/breakds/projects"
