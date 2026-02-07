@@ -53,6 +53,7 @@
       lsd
       bat
       dust
+      sbctl
     ];
 
     fonts.packages = with pkgs; [
