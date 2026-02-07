@@ -82,6 +82,7 @@
         ./machines/octavian/part.nix
         ./machines/learners/part.nix
         ./machines/hand/part.nix
+        ./machines/claw/part.nix
         ./machines/brock/part.nix
         ./machines/pi/part.nix
         ./machines/forgery/part.nix

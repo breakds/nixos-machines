@@ -24,12 +24,13 @@ in {
           "hand" = { id = "HDUZ6E3-ZMKCKOU-H6EYUET-XZ72BBU-547J5H2-BFEZFWM-DRX5YIR-23Z6TAH"; };
           "malenia" = { id = "RO54QTU-EJBHNA6-7IEMT2A-57UBFYH-N2USR7J-UN6A2ZL-G4W4AIV-DUFACAF"; };
           "brock" = { id = "2O6IE5U-2OGL2ZB-LO44JKX-LB6ZIFO-4JDRC34-HSIEAMX-VW4CN5G-IZGOKAZ"; };
+          "claw" = { id = "REPLACE-WITH-ACTUAL-SYNCTHING-DEVICE-ID-FROM-CLAW"; };
         };
 
         folders = {
           "workspace" = {
             path = "/home/breakds/syncthing/workspace";
-            devices = [ "hand" "malenia" "brock" ];
+            devices = [ "hand" "claw" "malenia" "brock" ];
             ignorePerms = true;  # Do not sync the permissions.
             # Normally the sync is triggered by inotify (watch) so that it does
             # not need rescan. Still make full rescan happen every hour just to
