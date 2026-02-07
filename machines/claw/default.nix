@@ -20,10 +20,14 @@
       shell = pkgs.zsh;
     };
 
-    # Bootloader (systemd-boot, will migrate to lanzaboote later with
-    # secure boot).
-    boot.loader.systemd-boot.enable = true;
+    # Bootloader
+    boot.loader.systemd-boot.enable = false;
     boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
 
     # Framework Firmware Update
     #

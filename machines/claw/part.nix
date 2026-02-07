@@ -10,6 +10,7 @@ in {
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
       inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+      inputs.lanzaboote.nixosModules.lanzaboote
 
       self.nixosModules.base-overlays
       self.nixosModules.laptop
