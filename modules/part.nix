@@ -28,7 +28,7 @@ in {
               inputs.stt-server.overlays.default
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server;
+          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri;
           shuriken = final.callPackage ../pkgs/shuriken {};
         })
       ];
