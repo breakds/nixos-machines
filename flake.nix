@@ -81,7 +81,8 @@
         ./machines/malenia/part.nix
         ./machines/octavian/part.nix
         ./machines/learners/part.nix
-        ./machines/hand/part.nix
+        # hand is archived for now
+        # ./machines/hand/part.nix 
         ./machines/claw/part.nix
         ./machines/brock/part.nix
         ./machines/pi/part.nix
@@ -99,7 +100,8 @@
         liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
         octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
         malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
-        hand = self.nixosConfigurations.hand.config.system.build.toplevel;
+        # hand is archived for now
+        # hand = self.nixosConfigurations.hand.config.system.build.toplevel;
       };
     };
 }
