@@ -15,12 +15,11 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  # LUKS encrypted root partition with TPM2 auto-unlock
+  # LUKS encrypted root partition with TPM2 auto-unlock.
+  # systemd in initrd automatically tries TPM2 tokens enrolled in the
+  # LUKS2 header via systemd-cryptenroll.
   boot.initrd.systemd.enable = true;
-  boot.initrd.luks.devices."luks-fa89f27a-14c6-42eb-97a0-9e57f465d583" = {
-    device = "/dev/disk/by-uuid/fa89f27a-14c6-42eb-97a0-9e57f465d583";
-    cryptTabExtraOpts = [ "tpm2-device=auto" ];
-  };
+  boot.initrd.luks.devices."luks-fa89f27a-14c6-42eb-97a0-9e57f465d583".device = "/dev/disk/by-uuid/fa89f27a-14c6-42eb-97a0-9e57f465d583";
 
   fileSystems."/" =
     { device = "/dev/mapper/luks-fa89f27a-14c6-42eb-97a0-9e57f465d583";
