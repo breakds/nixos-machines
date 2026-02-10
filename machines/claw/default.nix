@@ -71,10 +71,19 @@
 
     programs.niri.enable = true;
 
-    # Niri is not wlroots-based - it implements GNOME Mutter ScreenCast/RemoteDesktop
+    # Niri is not wlroots-based — it implements GNOME Mutter ScreenCast/RemoteDesktop
     # D-Bus interfaces. The gnome portal backend is required for screen sharing
     # (Google Meet, OBS PipeWire capture, etc.) to work under niri.
+    #
+    # xdg-desktop-portal looks for config in /etc/xdg/, not the data dir where
+    # niri installs its niri-portals.conf, so we must set this explicitly.
     xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    xdg.portal.config.niri = {
+      default = [ "gnome" "gtk" ];
+      "org.freedesktop.impl.portal.Access" = "gtk";
+      "org.freedesktop.impl.portal.Notification" = "gtk";
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+    };
 
     environment.systemPackages = with pkgs; [
       zoom-us
