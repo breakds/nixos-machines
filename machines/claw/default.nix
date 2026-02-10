@@ -71,6 +71,11 @@
 
     programs.niri.enable = true;
 
+    # Niri is not wlroots-based - it implements GNOME Mutter ScreenCast/RemoteDesktop
+    # D-Bus interfaces. The gnome portal backend is required for screen sharing
+    # (Google Meet, OBS PipeWire capture, etc.) to work under niri.
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+
     environment.systemPackages = with pkgs; [
       zoom-us
       thunderbird
