@@ -69,22 +69,6 @@
       enable = true;
     };
 
-    programs.niri.enable = true;
-
-    # Niri is not wlroots-based — it implements GNOME Mutter ScreenCast/RemoteDesktop
-    # D-Bus interfaces. The gnome portal backend is required for screen sharing
-    # (Google Meet, OBS PipeWire capture, etc.) to work under niri.
-    #
-    # xdg-desktop-portal looks for config in /etc/xdg/, not the data dir where
-    # niri installs its niri-portals.conf, so we must set this explicitly.
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-    xdg.portal.config.niri = {
-      default = [ "gnome" "gtk" ];
-      "org.freedesktop.impl.portal.Access" = "gtk";
-      "org.freedesktop.impl.portal.Notification" = "gtk";
-      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
-    };
-
     environment.systemPackages = with pkgs; [
       zoom-us
       thunderbird
@@ -132,19 +116,12 @@
 
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
-      home.bds.windowManager = "sway";
       home.bds.location = "valley";
       # If you are not using a desktop environment such as KDE, Xfce, or other
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = {
         "Xft.dpi" = 144;
-      };
-      # Set the default scale to 1.0.
-      wayland.windowManager.sway.config.output = {
-        "eDP-1" = {
-          scale = "1.0";
-        };
       };
 
       programs.texlive = {

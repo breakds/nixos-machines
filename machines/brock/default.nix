@@ -100,7 +100,6 @@
     };
 
     home-manager.users."breakds" = {
-      home.bds.windowManager = "sway";
       home.bds.location = "valley";
       # If you are not using a desktop environment such as KDE, Xfce, or other
       # that manipulates the X settings for you, you can set the desired DPI

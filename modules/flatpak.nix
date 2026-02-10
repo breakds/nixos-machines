@@ -4,18 +4,9 @@
   services.flatpak.enable = true;
 
   # For the sandboxed apps to work correctly, desktop integration portals need
-  # to be installed. If you run GNOME, this will be handled automatically for
-  # you; in other cases, you will need to add something like the following to
-  # your configuration.nix.
-  xdg.portal = {
-    enable = true;
-    # The XDG portal is used to e.g. prompt a file chooser when you need to open
-    # files etc.
-    config.common.default = "gtk";
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-    ];
-  };
+  # to be installed. Portal backends and routing are configured by compositor
+  # modules (e.g. modules/niri.nix).
+  xdg.portal.enable = true;
 
   # Add flathub on start up
   systemd.services.configure-flathub-repo = {

@@ -38,6 +38,7 @@ in {
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;
     flatpak = import ./flatpak.nix;
+    niri = import ./niri.nix;
     steam = import ./steam.nix;
     laptop = import ./laptop.nix;
 

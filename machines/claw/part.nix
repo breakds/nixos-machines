@@ -17,6 +17,7 @@ in {
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
       self.nixosModules.steam
+      self.nixosModules.niri
       self.nixosModules.flatpak
       self.nixosModules.localsend
       self.nixosModules.builder-cache-valley
