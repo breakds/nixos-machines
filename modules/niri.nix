@@ -3,6 +3,10 @@
 {
   programs.niri.enable = true;
 
+  programs.ydotool.enable = true;
+
+  environment.systemPackages = with pkgs; [ ydotool pass-fuzzel ];
+
   # Niri implements GNOME Mutter ScreenCast/RemoteDesktop D-Bus interfaces (not
   # wlroots protocols), so it needs the gnome portal backend for screen sharing
   # to work (Google Meet, OBS PipeWire capture, etc.).
