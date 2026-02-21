@@ -22,6 +22,6 @@
       "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
       "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
     };
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
   };
 }
