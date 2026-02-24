@@ -25,7 +25,7 @@
       ffmpeg
       vlc
       sqlitebrowser
-      awscli
+      awscli2
       azure-cli
       azure-storage-azcopy
       xh
