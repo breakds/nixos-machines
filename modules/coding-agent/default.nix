@@ -4,8 +4,7 @@
   config = {
     environment.systemPackages = with pkgs; [
       claude-code-bin
-      # TODO: Re-enable codex once nixpkgs PR #486983 (fetch-cargo-vendor-util fix) reaches nixpkgs-unstable
-      # codex
+      codex
     ];
 
     home-manager.users.breakds = {
