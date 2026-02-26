@@ -40,10 +40,6 @@
     beancounting.inputs.nixpkgs.follows = "nixpkgs";
     beancounting.inputs.flake-parts.follows = "flake-parts";
 
-    www-psynk-ai.url = "git+ssh://git@github.com/psynk-ai/www.psynk.ai";
-    www-psynk-ai.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    www-psynk-ai.inputs.flake-parts.follows = "flake-parts";
-
     muxwarden.url = "github:breakds/muxwarden";
     muxwarden.inputs.nixpkgs.follows = "nixpkgs-unstable";
 

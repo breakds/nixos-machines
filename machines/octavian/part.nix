@@ -31,13 +31,7 @@ in {
       self.nixosModules.prometheus-exporters
       self.nixosModules.filerun
 
-      inputs.www-psynk-ai.nixosModules.www-psynk-ai
       inputs.toylet-notes.nixosModules.default
-      
-      ({config, ... }: {
-        services.www-psynk-ai.environmentFile = "/home/breakds/.config/www-psynk-ai/env";
-      })
-
       inputs.stt-server.nixosModules.default
     ];
   };
