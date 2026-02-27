@@ -20,6 +20,7 @@ in {
         self.nixosModules.machine-learning
         self.nixosModules.ollama
         self.nixosModules.builder-cache-valley
+        self.nixosModules.coding-agent
       ];
     };
 
@@ -37,6 +38,7 @@ in {
         self.nixosModules.prometheus-exporters        
         self.nixosModules.machine-learning
         self.nixosModules.ollama
+        self.nixosModules.coding-agent
       ];
     };
   };
