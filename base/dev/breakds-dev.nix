@@ -7,6 +7,10 @@
   ];
 
   config = {
+    nixpkgs.config.permittedInsecurePackages = [
+      "beekeeper-studio-5.3.4"
+    ];
+
     environment.systemPackages = with pkgs; [
       ripgrep
       silver-searcher
@@ -73,7 +77,7 @@
       beancount
       fava
 
-      dbeaver-bin
+      beekeeper-studio
 
       # C++
       clang
