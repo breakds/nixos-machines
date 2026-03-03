@@ -52,6 +52,8 @@ in {
           systems = [ "x86_64-linux" "aarch64-linux" ];
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
           sshUser = if builtins.hasAttr "sshUser" x then x.sshUser else "nixbuilder";
+          sshKey = let keyFile = if builtins.hasAttr "sshKey" x then x.sshKey else "nixbuilder_malenia";
+                   in "/root/.ssh/${keyFile}";
         }) selectedBuilders;
         extraOptions = ''
           builders-use-substitutes = true
