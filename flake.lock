@@ -479,11 +479,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767399104,
-        "narHash": "sha256-cEDvFacTX0ontrr+PqZurxQuNMTmNlZ+oSX2WBdXKJ4=",
+        "lastModified": 1772521720,
+        "narHash": "sha256-8Eu8you/GACQrLyKQCOkH+dtHGNwmvqiklpZu3nLKzo=",
         "owner": "breakds",
         "repo": "muxwarden",
-        "rev": "8891ed13d8d9ca7a0893dd33ff61e45ad235d2d9",
+        "rev": "d73c1f75391c127ec0363b2924d163fd82436e5f",
         "type": "github"
       },
       "original": {
