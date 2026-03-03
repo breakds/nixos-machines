@@ -64,6 +64,15 @@
       enable = true;
     };
 
+    # HiDPI console font for the Framework 13's high-res display.
+    # earlySetup copies the font into initrd so systemd-vconsole-setup
+    # can find it before the Nix store is mounted.
+    console = {
+      earlySetup = true;
+      packages = [ pkgs.terminus_font ];
+      font = "ter-132n";
+    };
+
     environment.systemPackages = with pkgs; [
       zoom-us
       thunderbird

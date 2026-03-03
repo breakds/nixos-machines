@@ -87,9 +87,5 @@ in {
       gnome-characters
     ];
 
-    console = {
-      packages = [ pkgs.wqy_microhei pkgs.terminus_font  ];
-      font = "ter-132n";
-    };
   };
 }
