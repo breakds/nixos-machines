@@ -95,14 +95,16 @@
       };
     };
 
-    # With the following, fcitx can work with xwayland (i.e. non-native wayland
-    # windows).
+    # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
+    # GTK_IM_MODULE, QT_IM_MODULE, XMODIFIERS: fcitx works with xwayland
+    # (i.e. non-native wayland windows).
     environment.sessionVariables = {
       NIX_PROFILES =
         "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
+      NIXOS_OZONE_WL = "1";
     };
 
     # This follows olmokramer's solution from this post:
