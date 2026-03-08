@@ -20,7 +20,7 @@
         enable = true;
         settings.passwordAuthentication = false;
       };
-      
+
       users.users.breakds = {
         isNormalUser = true;
         home = "/home/breakds";
@@ -29,6 +29,10 @@
           ../../data/keys/breakds_malenia.pub
         ];
       };
+
+      environment.systemPackages = with pkgs; [
+        claude-code-bin
+      ];
     };
   };
 }
