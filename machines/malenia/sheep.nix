@@ -26,7 +26,7 @@
         isNormalUser = true;
         home = "/home/breakds";
         uid = 1000;
-        openssh.authorizedKeys.keys = [
+        openssh.authorizedKeys.keyFiles = [
           ../../data/keys/breakds_malenia.pub
         ];
       };
