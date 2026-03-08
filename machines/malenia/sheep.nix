@@ -31,6 +31,7 @@
     config = { ... }: {
       nixpkgs.pkgs = pkgs;
       system.stateVersion = "25.05";
+      networking.defaultGateway = "10.33.1.1";
       networking.nameservers = [ "10.77.1.1" ];
 
       services.openssh = {
