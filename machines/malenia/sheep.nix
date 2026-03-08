@@ -1,6 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
+  networking.nat = {
+    enable = true;
+    # NixOS creates veth pair named ve-<container-name> for privateNetwork containers
+    internalInterfaces = [ "ve-sheep" ];
+    externalInterface = "eno1";
+  };
+
   containers.sheep = {
     autoStart = true;
     privateNetwork = true;
@@ -16,6 +23,7 @@
     config = { ... }: {
       nixpkgs.pkgs = pkgs;
       system.stateVersion = "25.05";
+      networking.nameservers = [ "10.77.1.1" ];
 
       services.openssh = {
         enable = true;
