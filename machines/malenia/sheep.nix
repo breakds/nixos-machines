@@ -13,7 +13,8 @@
       isReadOnly = false;
     };
 
-    config = { pkgs, ... }: {
+    config = { ... }: {
+      nixpkgs.pkgs = pkgs;
       system.stateVersion = "25.05";
 
       services.openssh = {
