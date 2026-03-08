@@ -1,18 +1,26 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Shared bridge for all sheep containers. Each container connects to
+  # this bridge and can reach the host at 10.33.1.1.
+  networking.bridges.br-sheep.interfaces = [];
+
+  networking.interfaces.br-sheep.ipv4.addresses = [{
+    address = "10.33.1.1";
+    prefixLength = 24;
+  }];
+
   networking.nat = {
     enable = true;
-    # NixOS creates veth pair named ve-<container-name> for privateNetwork containers
-    internalInterfaces = [ "ve-sheep" ];
+    internalInterfaces = [ "br-sheep" ];
     externalInterface = "eno1";
   };
 
   containers.sheep = {
     autoStart = true;
     privateNetwork = true;
-    hostAddress = "10.33.1.1";
-    localAddress = "10.33.1.2";
+    hostBridge = "br-sheep";
+    localAddress = "10.33.1.2/24";
 
     bindMounts.data = {
       hostPath = "/home/breakds/sheep-workspace/first";
