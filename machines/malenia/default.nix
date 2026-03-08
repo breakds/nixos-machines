@@ -6,6 +6,7 @@
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
+    ./sheep.nix
     # ./clickhouse
     # ./n8n
   ];
