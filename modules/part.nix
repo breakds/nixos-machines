@@ -29,7 +29,7 @@ in {
               inputs.shepherd.overlays.default
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri;
+          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri shepherd;
           shuriken = final.callPackage ../pkgs/shuriken {};
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel {};
         })
