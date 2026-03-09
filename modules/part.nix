@@ -26,6 +26,7 @@ in {
             overlays = [
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
+              inputs.shepherd.overlays.default
             ];
           };
           inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri;

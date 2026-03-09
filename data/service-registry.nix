@@ -160,4 +160,8 @@ rec {
     domain = "toylet.breakds.org";
     port = 7030;
   };
+
+  shepherd = {
+    port = 10201;
+  };
 }

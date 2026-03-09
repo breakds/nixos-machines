@@ -50,6 +50,10 @@
     toylet-notes.url = "github:breakds/toylet-notes";
     toylet-notes.inputs.nixpkgs.follows = "nixpkgs-unstable";
     toylet-notes.inputs.flake-parts.follows = "flake-parts";
+
+    shepherd.url = "git+ssh://git@github.com/breakds/shepherd";
+    shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    shepherd.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
