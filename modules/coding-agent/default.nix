@@ -5,6 +5,7 @@
     environment.systemPackages = with pkgs; [
       claude-code-bin
       codex
+      shepherd
     ];
 
     home-manager.users.breakds = {
