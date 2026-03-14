@@ -29,7 +29,8 @@ in {
               inputs.shepherd.overlays.default
             ];
           };
-          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama ollama-cuda home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri shepherd;
+          inherit (unstable) n8n glance gemini-cli claude-code-bin codex ollama home-assistant-custom-components wyoming-faster-whisper serena stt-server noctalia-shell niri shepherd;
+          ollama-cuda = final.ollama.override { acceleration = "cuda"; };
           shuriken = final.callPackage ../pkgs/shuriken {};
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel {};
         })
