@@ -19,6 +19,7 @@
 
     # The LLM server
     services.ollama.host = "0.0.0.0";
+    services.ollama.environmentVariables.OLLAMA_KEEP_ALIVE = "1h";
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
