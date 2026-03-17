@@ -13,8 +13,7 @@
       "Bash(python -m:*)",
       "Bash(lsd:*)",
       "Read(~/.zshrc)",
-      "WebFetch(domain:github.com)",
-      "mcp__serena"
+      "WebFetch(domain:github.com)"
     ],
     "deny": [
       "Read(./.envrc.local)"

@@ -82,7 +82,6 @@
       parsec-bin  # For game streaming
       xorg.xeyes
       freecad
-      serena
       obs-studio
       moonlight-qt
       yt-dlp
