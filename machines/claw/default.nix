@@ -135,6 +135,14 @@
       };
     };
 
+    services.post-box = {
+      enable = true;
+      hostIp = "10.55.1.1";
+      localIp = "10.55.1.2";
+      user = "breakds";
+      keyFiles = [ ../../data/keys/breakds_malenia.pub ];
+    };
+
     # +--------------------+
     # | VPN                |
     # +--------------------+

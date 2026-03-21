@@ -9,4 +9,8 @@ in {
       ./fortress.nix
     ];
   };
+
+  flake.nixosModules = {
+    post-box = import ./post-box.nix;
+  };
 }

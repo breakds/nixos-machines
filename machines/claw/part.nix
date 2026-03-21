@@ -24,6 +24,7 @@ in {
       self.nixosModules.qmk
       self.nixosModules.sunshine
       self.nixosModules.arduino
+      self.nixosModules.post-box
 
       # Development Assistants
       self.nixosModules.coding-agent
