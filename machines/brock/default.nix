@@ -9,7 +9,6 @@
     ../../base/dev/interbotix.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
-    # ./unison.nix
   ];
 
   config = {
