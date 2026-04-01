@@ -14,6 +14,7 @@ in {
 
       self.nixosModules.base-overlays
       self.nixosModules.laptop
+      self.nixosModules.printing      
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
       self.nixosModules.steam

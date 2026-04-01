@@ -5,7 +5,12 @@ let cfg = config.vital;
 in {
   config = {
     # CUPS service
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [
+        canon-cups-ufr2
+      ];
+    };
 
     users.users."${cfg.mainUser}".extraGroups = [
       # udev sets the group of printer devices to "lp". By having this
