@@ -59,6 +59,7 @@ in {
       "piper"
       "ollama"
       "go2rtc"
+      "gree"
       "matter"
     ];
 
