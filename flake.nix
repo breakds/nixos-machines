@@ -36,10 +36,6 @@
     game-solutions.url = "git+ssh://git@github.com/breakds/game-solutions";
     game-solutions.inputs.nixpkgs.follows = "nixpkgs";
 
-    beancounting.url = "git+ssh://git@github.com/breakds/beancounting";
-    beancounting.inputs.nixpkgs.follows = "nixpkgs";
-    beancounting.inputs.flake-parts.follows = "flake-parts";
-
     muxwarden.url = "github:breakds/muxwarden";
     muxwarden.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
@@ -86,7 +82,6 @@
         ./machines/claw/part.nix
         ./machines/brock/part.nix
         ./machines/pi/part.nix
-        ./machines/forgery/part.nix
         ./machines/livecd/part.nix
         ./containers/part.nix
       ];

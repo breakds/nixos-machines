@@ -64,30 +64,6 @@
         "type": "github"
       }
     },
-    "beancounting": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "ml-pkgs": "ml-pkgs",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1745703555,
-        "narHash": "sha256-2ylm0GyBuOi1Jk7DSqdS87bc+BhtyCweWvephRs3Qus=",
-        "ref": "refs/heads/main",
-        "rev": "28723b68447c7fb5ad2f10fd0ae69dc980de93cb",
-        "revCount": 286,
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/beancounting"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/beancounting"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1769737823,
@@ -323,7 +299,7 @@
     },
     "game-solutions": {
       "inputs": {
-        "ml-pkgs": "ml-pkgs_2",
+        "ml-pkgs": "ml-pkgs",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -432,33 +408,6 @@
     },
     "ml-pkgs": {
       "inputs": {
-        "flake-parts": [
-          "beancounting",
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "beancounting",
-          "nixpkgs"
-        ],
-        "nixpkgs-unstable": "nixpkgs-unstable"
-      },
-      "locked": {
-        "lastModified": 1752590169,
-        "narHash": "sha256-IFn6DjQ3UefGsBB72KxImGQM8KU8cIA+KSssnFfdIXg=",
-        "owner": "nixvital",
-        "repo": "ml-pkgs",
-        "rev": "7b4057e69f8920a663d1ec6ffe2eaeb23442d4d0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixvital",
-        "ref": "archive/24.11",
-        "repo": "ml-pkgs",
-        "type": "github"
-      }
-    },
-    "ml-pkgs_2": {
-      "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
           "game-solutions",
@@ -479,7 +428,7 @@
         "type": "github"
       }
     },
-    "ml-pkgs_3": {
+    "ml-pkgs_2": {
       "inputs": {
         "flake-parts": "flake-parts_3",
         "nixpkgs": [
@@ -580,22 +529,6 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1743583204,
-        "narHash": "sha256-F7n4+KOIfWrwoQjXrL2wD9RhFYLs2/GGe/MQY1sSdlE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2c8d3f48d33929642c1c12cd243df4cc7d2ce434",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable_2": {
-      "locked": {
         "lastModified": 1772198003,
         "narHash": "sha256-I45esRSssFtJ8p/gLHUZ1OUaaTaVLluNkABkk6arQwE=",
         "owner": "NixOS",
@@ -659,18 +592,17 @@
     },
     "root": {
       "inputs": {
-        "beancounting": "beancounting",
         "flake-parts": "flake-parts",
         "game-solutions": "game-solutions",
         "home-manager": "home-manager",
         "interm": "interm",
         "lanzaboote": "lanzaboote",
-        "ml-pkgs": "ml-pkgs_3",
+        "ml-pkgs": "ml-pkgs_2",
         "muxwarden": "muxwarden",
         "nixos-hardware": "nixos-hardware",
         "nixos-home": "nixos-home",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable_2",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "shepherd": "shepherd",
         "stt-server": "stt-server",
         "toylet-notes": "toylet-notes",
