@@ -37,6 +37,7 @@
       # TODO(breakds): Re-enable this when the insecure poetry issue is resolved.
       # nixops_unstable
       tmux
+      zellij      
       fd
       pandoc
       marksman  # Markdown Language Server
