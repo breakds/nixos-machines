@@ -59,7 +59,6 @@ in {
       "piper"
       "ollama"
       "go2rtc"
-      "gree"
       "matter"
     ];
 
@@ -68,6 +67,7 @@ in {
       xiaomi_gateway3
     ] ++ [
       (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix {})
+      (haPkgs.callPackage ../../../pkgs/gree_ac/package.nix {})
     ];
 
     extraPackages = python-pkgs: with python-pkgs; [
