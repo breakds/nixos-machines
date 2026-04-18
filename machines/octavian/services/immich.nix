@@ -24,7 +24,17 @@ in {
     # Dedicated Redis for Immich (unix socket, isolated from anything else).
     redis.enable = true;
 
-    machine-learning.enable = true;
+    machine-learning = {
+      enable = true;
+      environment = {
+        # Default 10s timeouts aren't enough for large CLIP models (e.g.
+        # ViT-H-14-378) whose ONNX weights ship as many external-data
+        # shards on HuggingFace — a few slow HEAD/GET round-trips cause
+        # retries to exhaust and the model download to fail wholesale.
+        HF_HUB_ETAG_TIMEOUT = "120";
+        HF_HUB_DOWNLOAD_TIMEOUT = "120";
+      };
+    };
 
     # null grants the service access to all hardware devices. Needed for
     # ffmpeg (NVENC/NVDEC) during video transcoding and for the ML sidecar
