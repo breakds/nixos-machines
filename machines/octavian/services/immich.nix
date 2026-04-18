@@ -9,17 +9,12 @@ in {
   # (which would break packages like mxnet that mark cudaSupport as broken).
   nixpkgs.overlays = [
     (final: prev: {
-      # Pull cudaPackages from unstable — same set ollama and stt-server (also
-      # imported from unstable in modules/part.nix) inherit, so all three GPU
-      # services share cudart/cublas/cudnn closures and auto-track the
-      # unstable default through future bumps (12.9 → 13.x → ...) without
-      # hardcoding a version here. The Python binding reads its CUDA deps
-      # from onnxruntime.passthru.cudaPackages (nixpkgs:python-modules/
-      # onnxruntime/default.nix:64), so this one override propagates.
-      onnxruntime = prev.onnxruntime.override {
-        cudaSupport = true;
-        cudaPackages = final.unstable.cudaPackages;
-      };
+      # Stable's default cudaPackages (12.8) is what upstream onnxruntime
+      # is validated against and what Hydra has prebuilt — diverges from
+      # ollama/stt-server (on unstable's 12.9) but nvidia userspace runs
+      # both side-by-side without conflict, and the extra ~2GB of CUDA libs
+      # in the closure is cheaper than a 30min local rebuild.
+      onnxruntime = prev.onnxruntime.override { cudaSupport = true; };
       immich-machine-learning = prev.immich-machine-learning.overrideAttrs (_: {
         # Upstream test_main.py asserts that force the CUDA EP into init, which
         # fails inside the Nix build sandbox. Tracked at nixpkgs#352113.
