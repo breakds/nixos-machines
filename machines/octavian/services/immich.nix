@@ -9,17 +9,26 @@ in {
   # (which would break packages like mxnet that mark cudaSupport as broken).
   nixpkgs.overlays = [
     (final: prev: {
-      # Stable's default cudaPackages (12.8) is what upstream onnxruntime
-      # is validated against and what Hydra has prebuilt — diverges from
-      # ollama/stt-server (on unstable's 12.9) but nvidia userspace runs
-      # both side-by-side without conflict, and the extra ~2GB of CUDA libs
-      # in the closure is cheaper than a 30min local rebuild.
       onnxruntime = prev.onnxruntime.override { cudaSupport = true; };
       immich-machine-learning = prev.immich-machine-learning.overrideAttrs (_: {
-        # Upstream test_main.py asserts that force the CUDA EP into init, which
+        # Upstream test_main.py asserts force the CUDA EP into init, which
         # fails inside the Nix build sandbox. Tracked at nixpkgs#352113.
         doCheck = false;
       });
+      # Unrelated consumers of onnxruntime (rapidocr-onnxruntime via
+      # open-webui, etc.) now inherit the CUDA build and fail the same way
+      # at test time. pythonPackagesExtensions is the canonical way to inject
+      # per-package overrides that propagate through every python3.pkgs scope.
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pyFinal: pyPrev: {
+          rapidocr-onnxruntime = pyPrev.rapidocr-onnxruntime.overrideAttrs (_: {
+            # pytest-check-hook is bound to doInstallCheck, not doCheck, so
+            # only flipping doInstallCheck actually skips the failing tests.
+            doCheck = false;
+            doInstallCheck = false;
+          });
+        })
+      ];
     })
   ];
 
