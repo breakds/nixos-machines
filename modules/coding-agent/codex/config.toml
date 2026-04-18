@@ -1,12 +1,11 @@
 profile = "gpt5"
-approval_presets = "auto"
 
 [sandbox_workspace_write]
 network_access = true
 
 [profiles.gpt5]
 model = "gpt-5.4"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
