@@ -32,13 +32,19 @@ in {
       nix.settings = {
         substituters = builtins.map (x: x.url) selectedCaches ++ [
           "https://cache.nixos.org"
+          # Community CUDA cache — covers cudaSupport=true builds (onnxruntime,
+          # pytorch, etc.) that cache.nixos.org doesn't build. Safe to include
+          # on non-CUDA hosts: misses fall through to the next substituter.
+          "https://cache.nixos-cuda.org"
         ];
 
         # Here, we add all the keys instead of only the selected caches, so that
         # in case we want to manually add a substituter in the command line, we
         # can do that.
         trusted-public-keys = lib.attrsets.mapAttrsToList (
-          host: properties: properties.publicKey) cache-registry;
+          host: properties: properties.publicKey) cache-registry ++ [
+          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+        ];
 
         trusted-users = [ "root" "breakds" ];
       };
