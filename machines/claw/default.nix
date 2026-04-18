@@ -85,6 +85,7 @@
       obs-studio
       moonlight-qt
       yt-dlp
+      immich-cli
     ];
 
     xdg.mime = {

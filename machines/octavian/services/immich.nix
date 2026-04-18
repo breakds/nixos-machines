@@ -92,4 +92,8 @@ in {
       '';
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    immich-cli
+  ];
 }
