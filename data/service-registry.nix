@@ -43,6 +43,11 @@ rec {
     port = 28981;
   };
 
+  immich = {
+    domain = "pic.breakds.org";
+    port = 2283;
+  };
+
   sharing = {
     port = 7478;
   };

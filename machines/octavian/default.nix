@@ -14,6 +14,7 @@
     ./services/web-services.nix
     ./services/monitor
     ./services/hydra.nix
+    ./services/immich.nix
     ./services/media.nix
     # ./services/code-server.nix
     # ./services/terraria.nix
