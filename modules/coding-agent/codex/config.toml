@@ -3,8 +3,19 @@ profile = "gpt5"
 [sandbox_workspace_write]
 network_access = true
 
+[model_providers.lorian-ollama]
+name = "Lorian Ollama"
+base_url = "http://lorian.local:11434/v1"
+
 [profiles.gpt5]
 model = "gpt-5.4"
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[profiles.lorian-qwen]
+model_provider = "lorian-ollama"
+model = "qwen3.6:latest"
 model_reasoning_effort = "high"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
