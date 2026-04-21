@@ -94,8 +94,10 @@
       smartmontools
     ];
 
+    # Octavian is a headless home server — no desktop, boot to multi-user (tty).
+    # Keep NVIDIA enabled separately for CUDA (immich, ollama).
     vital.graphical = {
-      enable = true;
+      enable = false;
       nvidia = {
         enable = true;
         prime = {
@@ -105,7 +107,6 @@
           offload = true;
         };
       };
-      # remote-desktop.enable = false;
     };
 
     services.pulseaudio.enable = false;
