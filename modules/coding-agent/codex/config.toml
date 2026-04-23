@@ -8,7 +8,7 @@ name = "Lorian Ollama"
 base_url = "http://lorian.local:11434/v1"
 
 [profiles.gpt5]
-model = "gpt-5.4"
+model = "gpt-5.5"
 model_reasoning_effort = "high"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
