@@ -60,6 +60,7 @@ in {
       "ollama"
       "go2rtc"
       "matter"
+      "thread"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components; [
