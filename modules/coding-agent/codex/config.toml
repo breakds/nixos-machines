@@ -25,6 +25,8 @@ inherit = "core"
 
 [tui]
 notifications = true
+status_line = ["model-with-reasoning", "current-dir", "context-usage", "used-tokens"]
+terminal_title = ["project", "git-branch", "status", "thread", "task-progress"]
 
 [features]
 # apply_patch_freeform = true
