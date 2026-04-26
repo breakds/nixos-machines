@@ -152,9 +152,12 @@ in {
   in {
     enable = true;
     port = reg.port;
-    # Pin to the home VLAN NIC. Without this, matter-server auto-picks
-    # enp6s0 (which is DOWN), CHIP's UDP sockets fail with "Network is
-    # unreachable", and CASE sessions churn until the controller wedges.
+    # Pins python-matter-server's link-local interface. CHIP's C++ layer
+    # has its own primary-interface auto-detect that this flag does NOT
+    # influence — the actual fix for that is the igc kernel module
+    # blacklist in machines/octavian/default.nix, which removes the
+    # wrong NIC from CHIP's view entirely. This flag is defense-in-depth
+    # for the python layer.
     extraArgs = [ "--primary-interface=enp4s0f0" ];
   };
 }

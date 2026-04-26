@@ -89,6 +89,32 @@
       networkmanager.enable = true;
     };
 
+    # Blacklist the on-board Intel I225 1G NIC driver. Home VLAN runs on
+    # the 10G enp4s0f0 (ixgbe); the 1G port has no cable.
+    #
+    # This isn't a hardware preference — it's a workaround for an
+    # upstream-acknowledged bug in matter-server's CHIP backend. CHIP
+    # picks the "primary Ethernet interface" by walking getifaddrs() and
+    # taking the first interface whose name starts with `en`/`eth`. On
+    # this host that lands on enp6s0 (igc) instead of enp4s0f0. CHIP
+    # then sends all mDNS/CASE UDP via the dead NIC, sendto() fails with
+    # ENETUNREACH, Matter sessions to existing devices churn every ~80s
+    # with `Subscription Liveness timeout`, and after a few hours the
+    # controller silently wedges — process alive but doing no work,
+    # blocking new device commissioning until restart.
+    #
+    # Upstream has no override flag for CHIP's choice — see
+    # python-matter-server issues #493, #1010, #4028 and
+    # connectedhomeip #42516, all closed as wontfix/stale. The community
+    # workaround is to hide the wrong NIC from CHIP entirely. We
+    # blacklist the driver rather than rename via systemd.network.links
+    # so the device cleanly disappears from `ip addr` instead of leaving
+    # a renamed orphan interface that future-debugging would chase.
+    #
+    # To re-enable the 1G port (e.g. for emergency wired access), remove
+    # this line and reboot.
+    boot.blacklistedKernelModules = [ "igc" ];
+
     environment.systemPackages = with pkgs; [
       lm_sensors
       smartmontools
