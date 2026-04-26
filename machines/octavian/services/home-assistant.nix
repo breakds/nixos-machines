@@ -152,5 +152,9 @@ in {
   in {
     enable = true;
     port = reg.port;
+    # Pin to the home VLAN NIC. Without this, matter-server auto-picks
+    # enp6s0 (which is DOWN), CHIP's UDP sockets fail with "Network is
+    # unreachable", and CASE sessions churn until the controller wedges.
+    extraArgs = [ "--primary-interface=enp4s0f0" ];
   };
 }
