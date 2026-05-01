@@ -5,6 +5,7 @@
 {
   imports = [
     ./main-user.nix
+    ./harden.nix
     ./vm.nix
     ./network-base.nix
     ../oci-tooling.nix
