@@ -1,17 +1,31 @@
 { config, lib, pkgs, ... }:
 
 let
-  # Copy Fail is fixed in Linux 6.19.12+, 6.18.22+, and 7.0+.
-  # The stock 6.19 kernel is EOL in current nixpkgs, so use the latest
-  # maintained kernel package set instead of pinning an unavailable 6.19.14.
-  patchedKernelPackages = pkgs.linuxPackages_latest;
+  kernelVersion = config.boot.kernelPackages.kernel.version;
+  hasZfs = config.boot.supportedFilesystems ? zfs;
+
+  # Copy Fail is fixed in mainline 7.0+, plus stable backports including
+  # 6.19.12+, 6.18.22+, and the 6.12 LTS line currently in nixpkgs.
+  copyFailIsFixed =
+    lib.versionAtLeast kernelVersion "7.0"
+    || (lib.versionAtLeast kernelVersion "6.19.12"
+      && lib.versionOlder kernelVersion "6.20")
+    || (lib.versionAtLeast kernelVersion "6.18.22"
+      && lib.versionOlder kernelVersion "6.19")
+    || (lib.versionAtLeast kernelVersion "6.12.84"
+      && lib.versionOlder kernelVersion "6.13");
+
+  # ZFS 2.3.6 is marked broken against Linux 7.0.2 in current nixpkgs.
+  # Keep ZFS hosts on patched LTS while newer laptop hardware can still use
+  # the latest kernel selected by nixos-hardware.
+  patchedKernelPackages =
+    if hasZfs then pkgs.linuxPackages_6_12 else pkgs.linuxPackages_latest;
 
 in {
   boot.kernelPackages = lib.mkOverride 1100 patchedKernelPackages;
 
   assertions = [{
-    assertion =
-      lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.19.14";
+    assertion = copyFailIsFixed;
     message =
       "vital-base requires a kernel new enough for CVE-2026-31431 / Copy Fail.";
   }];
