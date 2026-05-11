@@ -9,6 +9,25 @@
 # Derived from graham33/nixos-dgx-spark's overlays/fixes.nix, trimmed to the
 # subset needed on x86_64 without the CUDA-13.2 switch.
 final: prev: {
+  # Bump NCCL to v2.28.9-1 (nixpkgs has 2.28.7-1). 2.28.x is where Blackwell
+  # (sm_120) support landed; .7 → .9 is bug fixes. Matters for tensor-parallel
+  # inference on lorian's 2× RTX 5090, where NCCL is on the per-layer hot path.
+  _cuda = prev._cuda.extend (_: prevAttrs: {
+    extensions = prevAttrs.extensions ++ [
+      (_: cudaPrev: {
+        nccl = cudaPrev.nccl.overrideAttrs (_: {
+          version = "2.28.9-1";
+          src = prev.fetchFromGitHub {
+            owner = "NVIDIA";
+            repo = "nccl";
+            rev = "v2.28.9-1";
+            hash = "sha256-1nNLcS/F0HsGbYf327TLX+ZVI13YcrrhpLqbGVuml2g=";
+          };
+        });
+      })
+    ];
+  });
+
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (python-final: python-prev: {
       # New Python deps vllm 0.19 needs that aren't in nixpkgs yet.

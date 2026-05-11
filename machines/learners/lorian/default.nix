@@ -17,9 +17,19 @@
       hostId = "8e549b2e";
     };
 
-    # The LLM server
-    services.ollama.host = "0.0.0.0";
-    services.ollama.environmentVariables.OLLAMA_KEEP_ALIVE = "1h";
+    # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
+    # tensor-parallel across both RTX 5090s. FP8 variant from Qwen fits
+    # comfortably on 2× 32GB, leaving generous KV-cache headroom for the
+    # model's native 262K context. Tool/reasoning parsers per the official
+    # vLLM recipe (recipes.vllm.ai/Qwen/Qwen3.6-27B).
+    services.vllm.instances.main = {
+      model = "Qwen/Qwen3.6-27B-FP8";
+      tensorParallelSize = 2;
+      gpuMemoryUtilization = 0.90;
+      maxModelLen = 262144;
+      toolCallParser = "qwen3_coder";
+      reasoningParser = "qwen3";
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
