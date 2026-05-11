@@ -5,6 +5,7 @@ let self = inputs.self;
 in {
   imports = [
     ./ollama/part.nix
+    ./vllm/part.nix
     ./extra-mounts/part.nix
   ];
 
