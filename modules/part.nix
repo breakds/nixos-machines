@@ -27,12 +27,14 @@ in {
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
               inputs.shepherd.overlays.default
+              (import ../pkgs/vllm-overlay.nix)
             ];
           };
           inherit (unstable)
             n8n glance gemini-cli claude-code-bin codex ollama
             home-assistant-custom-components wyoming-faster-whisper stt-server
-            niri shepherd;
+            niri shepherd
+            vllm;
           noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
             patches = (old.patches or [ ]) ++ [
               # Backported from Mic92's dotfiles:
