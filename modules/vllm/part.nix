@@ -226,7 +226,11 @@
               RestrictNamespaces = true;
               RestrictRealtime = true;
               RestrictSUIDSGID = true;
-              RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" ];
+              # AF_NETLINK is needed for torch.distributed's gloo backend to
+              # enumerate network interfaces; without it ProcessGroupGloo's
+              # device init fails with EAFNOSUPPORT and tensor-parallel
+              # worker startup dies before any model load.
+              RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" "AF_NETLINK" ];
               SystemCallArchitectures = "native";
               SystemCallFilter = [ "@system-service" "~@privileged" ];
               UMask = "0077";
@@ -253,22 +257,24 @@
 
           # Triton's FileCacheManager.put() writes JIT-compiled `.so`
           # files via Python's open(), which uses mode 0o666 — combined
-          # with the unit's UMask=0077 that yields 0o600 (no execute
-          # bit), so the subsequent dlopen fails with "failed to map
-          # segment from shared object". Triton has no chmod step (see
-          # python-triton/python/triton/runtime/cache.py).
+          # with this unit's UMask=0077 the file ends up 0o600 (no
+          # execute bit for owner), so the subsequent dlopen fails with
+          # mmap(PROT_EXEC) → EACCES. Triton has no chmod step (see
+          # python-triton/python/triton/runtime/cache.py upstream).
           #
-          # Fixing this in nixpkgs' triton derivation would force a
-          # rebuild of triton + torch + torchaudio + torchvision + vllm.
-          # Avoid the cascade with a `sitecustomize.py` that monkey-
-          # patches FileCacheManager.put at Python startup. Python's
-          # site module imports the first `sitecustomize` it finds on
-          # sys.path; putting this dir on PYTHONPATH in the unit ensures
-          # it loads before any triton import in either the main
-          # process or the registry-inspector subprocess.
+          # Patching triton in nixpkgs would cascade rebuilds through
+          # triton → torch → torchaudio → torchvision → vllm. Avoid that
+          # with a sitecustomize.py shipped via /etc and discoverable via
+          # PYTHONPATH=/etc/vllm in the unit env. Python's site module
+          # imports the first sitecustomize it finds on sys.path, so the
+          # monkey-patch lands in both the main vLLM process and the
+          # registry-inspector subprocess.
+          #
+          # Pair with `ExecPaths=/var/lib/vllm` in the unit — that's the
+          # other half of the fix (lifts the noexec the DynamicUser state
+          # bind mount applies by default).
           environment.etc."vllm/sitecustomize.py".text = ''
-            import os, sys
-            sys.stderr.write("[vllm-sitecustomize] loaded, pid=" + str(os.getpid()) + "\n")
+            import os
             try:
                 from triton.runtime.cache import FileCacheManager
                 _orig_put = FileCacheManager.put
@@ -276,14 +282,12 @@
                     path = _orig_put(self, data, filename, binary=binary)
                     try:
                         os.chmod(path, 0o755)
-                        sys.stderr.write("[vllm-sitecustomize] chmod 0755 " + path + "\n")
-                    except OSError as e:
-                        sys.stderr.write("[vllm-sitecustomize] chmod FAILED " + path + ": " + repr(e) + "\n")
+                    except OSError:
+                        pass
                     return path
                 FileCacheManager.put = _put_then_chmod
-                sys.stderr.write("[vllm-sitecustomize] triton patch installed\n")
-            except Exception as e:
-                sys.stderr.write("[vllm-sitecustomize] triton patch FAILED: " + repr(e) + "\n")
+            except ImportError:
+                pass
           '';
 
           networking.firewall.allowedTCPPorts = lib.unique (
