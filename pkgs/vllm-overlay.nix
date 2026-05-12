@@ -10,6 +10,14 @@
 #
 # CUDA-13-driven fixes derived from graham33/nixos-dgx-spark's overlays/
 # fixes.nix; aarch64-only and CPU/ROCm-only fixes from that file are skipped.
+#
+# `gpuTargets` is the per-host CUDA compute-capability list vLLM compiles
+# kernels for — typically the single arch of the GPUs on that machine
+# (e.g. ["12.0"] on a 5090 host, ["8.9"] on a 4090 host). Empty falls
+# back to nixpkgs' system-wide `cudaCapabilities`, which works but wastes
+# build time compiling kernels the host can't run.
+{ gpuTargets ? [ ] }:
+
 final: prev: {
   # Global CUDA toolkit switch. Affects every consumer that reads
   # `pkgs.cudaPackages` from the unstable import (torch, ollama, etc).
@@ -144,12 +152,12 @@ final: prev: {
           sourceRoot = "${src.name}/opentelemetry-instrumentation";
         });
 
-      # vllm itself: still target sm_120 only (Blackwell consumer).
+      # vllm itself, narrowed to the per-host `gpuTargets`.
       # MAX_JOBS caps build parallelism — nvcc/cicc uses ~6 GiB per job, so
       # 16 on lorian (16C/32T, 256 GiB) leaves comfortable headroom.
       vllm = (python-final.callPackage ./vllm {
         inherit (final) cudaPackages;
-        gpuTargets = [ "12.0" ];
+        inherit gpuTargets;
         # ROCm-only args — null out for CUDA-only build.
         amd-aiter = null;
         amd-quark = null;

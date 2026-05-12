@@ -16,6 +16,9 @@
       hostId = "8e549b2e";
     };
 
+    # 2× RTX 5090 (Blackwell consumer) → sm_120 only.
+    vital.vllm.gpuTargets = [ "12.0" ];
+
     # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
     # tensor-parallel across both RTX 5090s. NVFP4 weights (~13.5 GB total
     # vs ~27 GB at FP8) free up the KV pool to ~41 GB; with FP8 KV cache
