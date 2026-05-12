@@ -86,6 +86,7 @@
       unetbootin
       pavucontrol
       xorg.xeyes
+      mpv
     ];
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
