@@ -2,11 +2,15 @@
 # it requires.
 #
 # Applied to nixpkgs-unstable (the CUDA-aware ML tree this repo already uses
-# for ollama, stt-server, etc.). Switches cudaPackages to 13.2 — required for
-# stable NVFP4 weight quantization on sm_120 (RTX 50-series consumer
-# Blackwell). The 0.19 → 0.20.2 vLLM bump also covers the signed-scale
-# Marlin-kernel fix and the SM 12.0 kernel-selection improvements that 0.19
-# was missing.
+# for ollama, stt-server, etc.). Switches cudaPackages to 13.0 — the NVIDIA
+# driver currently in nixpkgs unstable is 580.142, whose embedded PTX
+# compiler only supports up to CUDA 13.0's PTX version. CUDA 13.2 emits
+# newer PTX (8.8) which trips cudaErrorUnsupportedPtxVersion at runtime
+# inside vllm-flash-attn's prebuilt ViT kernels. Stay on 13.0 until a
+# newer R580.x or R590 driver lands. NVFP4 support is in 13.0; 13.2 had
+# stability improvements we lose, but they're moot if nothing loads.
+# The 0.19 → 0.20.2 vLLM bump also covers the signed-scale Marlin-kernel
+# fix and the SM 12.0 kernel-selection improvements that 0.19 was missing.
 #
 # CUDA-13-driven fixes derived from graham33/nixos-dgx-spark's overlays/
 # fixes.nix; aarch64-only and CPU/ROCm-only fixes from that file are skipped.
@@ -21,9 +25,9 @@
 final: prev: {
   # Global CUDA toolkit switch. Affects every consumer that reads
   # `pkgs.cudaPackages` from the unstable import (torch, ollama, etc).
-  # 13.2 already ships nccl 2.28.7 with Blackwell sm_120 support, so the
+  # 13.0 already ships nccl 2.28.7 with Blackwell sm_120 support, so the
   # manual nccl bump that was needed under CUDA 12.9 is gone.
-  cudaPackages = prev.cudaPackages_13_2;
+  cudaPackages = prev.cudaPackages_13_0;
 
   # OpenCV's CUDA backend doesn't compile under CUDA 13; vLLM doesn't need
   # CUDA-accelerated OpenCV anyway (uses opencv-python-headless for image
