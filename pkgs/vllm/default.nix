@@ -3,7 +3,6 @@
 , python
 , buildPythonPackage
 , fetchFromGitHub
-, fetchpatch
 , symlinkJoin
 , autoAddDriverRunpath
 , # nativeBuildInputs
@@ -122,8 +121,8 @@ let
     name = "cutlass-source";
     owner = "NVIDIA";
     repo = "cutlass";
-    tag = "v4.2.1";
-    hash = "sha256-iP560D5Vwuj6wX1otJhwbvqe/X4mYVeKTpK533Wr5gY=";
+    tag = "v4.4.2";
+    hash = "sha256-0q9Ad0Z6E/rO2PdM4uQc8H0E0qs9uKc3reHepiHhjEc=";
   };
 
   # FlashMLA's Blackwell (SM100) kernels were developed against CUTLASS v3.9.0
@@ -151,8 +150,8 @@ let
       name = "FlashMLA-source";
       owner = "vllm-project";
       repo = "FlashMLA";
-      rev = "c2afa9cb93e674d5a9120a170a6da57b89267208";
-      hash = "sha256-pKlwxV6G9iHag/jbu3bAyvYvnu5TbrQwUMFV0AlGC3s=";
+      rev = "a6ec2ba7bd0a7dff98b3f4d3e6b52b159c48d78b";
+      hash = "sha256-Oj37H0swZdxaprpaHq0XfOCagc0ypYKpS8e6JzqcDQg=";
     };
 
     dontConfigure = true;
@@ -187,6 +186,21 @@ let
     hash = "sha256-aG4qd0vlwP+8gudfvHwhtXCFmBOJKQQTvcwahpEqC84=";
   };
 
+  # vLLM 0.20 added DeepGEMM as a sub-build, gated to sm_90a / sm_100 only.
+  # On sm_120 (RTX 50-series consumer Blackwell) the cmake creates an empty
+  # target — but FetchContent_Populate runs unconditionally before the gate,
+  # so we still need to provide a source directory. Submodules (third-party/
+  # {cutlass,fmt}) are only referenced inside the if(DEEPGEMM_ARCHS) block
+  # and are unused on our path.
+  # grep for GIT_TAG in cmake/external_projects/deepgemm.cmake
+  deepgemm = fetchFromGitHub {
+    name = "deepgemm-source";
+    owner = "deepseek-ai";
+    repo = "DeepGEMM";
+    rev = "891d57b4db1071624b5c8fa0d1e51cb317fa709f";
+    hash = "sha256-xbgkpMvh5NXuTk7nXkgPs9Pa91XQaTXRronHnSGPfHM=";
+  };
+
   vllm-flash-attn' = lib.defaultTo
     (stdenv.mkDerivation {
       pname = "vllm-flash-attn";
@@ -199,23 +213,14 @@ let
         name = "flash-attention-source";
         owner = "vllm-project";
         repo = "flash-attention";
-        rev = "188be16520ceefdc625fdf71365585d2ee348fe2";
-        hash = "sha256-Osec+/IF3+UDtbIhDMBXzUeWJ7hDJNb5FpaVaziPSgM=";
+        rev = "f5bc33cfc02c744d24a2e9d50e6db656de40611c";
+        hash = "sha256-Bdvg5ROX4EFccrRElYnbGtHS9FD9qLY9ZwYfqTUYOnA=";
       };
 
-      patches = [
-        # fix Hopper build failure
-        # https://github.com/Dao-AILab/flash-attention/pull/1719
-        # https://github.com/Dao-AILab/flash-attention/pull/1723
-        (fetchpatch {
-          url = "https://github.com/Dao-AILab/flash-attention/commit/dad67c88d4b6122c69d0bed1cebded0cded71cea.patch";
-          hash = "sha256-JSgXWItOp5KRpFbTQj/cZk+Tqez+4mEz5kmH5EUeQN4=";
-        })
-        (fetchpatch {
-          url = "https://github.com/Dao-AILab/flash-attention/commit/e26dd28e487117ee3e6bc4908682f41f31e6f83a.patch";
-          hash = "sha256-NkCEowXSi+tiWu74Qt+VPKKavx0H9JeteovSJKToK9A=";
-        })
-      ];
+      # Hopper-build-failure fetchpatches (Dao-AILab/flash-attention PRs
+      # #1719, #1723) carried in 0.19's package are dropped — sm_120-only
+      # build doesn't compile Hopper paths, and the upstream rev moved past
+      # those commits.
 
       dontConfigure = true;
 
@@ -338,24 +343,26 @@ in
 
 buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
   pname = "vllm";
-  version = "0.19.0";
+  version = "0.20.2";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "vllm-project";
     repo = "vllm";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-0gM52DDfLzkE4QXCGR3c3Jq4CQ1PrnDj4Ky0lsUJ2a8=";
+    hash = "sha256-NqcziIw7zVu8RmZx2HaZ9BEdLpRlNKVFxccDZZdTQfE=";
   };
 
   patches = [
+    # Nix integration: surface cmakeFlags from the derivation into setup.py's
+    # cmake_args, and propagate PYTHONPATH into model-registry subprocesses.
     ./0002-setup.py-nix-support-respect-cmakeFlags.patch
     ./0003-propagate-pythonpath.patch
-    ./0005-drop-intel-reqs.patch
-    ./0006-drop-rocm-extra-reqs.patch
-    # QuACK and Cutlass DSL seem to be added only for FA4
-    # which in our case handles its own deps
-    ./0007-drop-quack-reqs.patch
+    # Drop cuda.txt deps that aren't packaged in nixpkgs (tilelang,
+    # fastsafetensors, nvidia-cutlass-dsl, quack-kernels). Each is either
+    # lazily-imported with a graceful fallback or only used for code paths
+    # we don't run on sm_120 (FA4 / DeepSeek V4). See patch header.
+    ./0007-drop-cuda-reqs-without-nixpkgs.patch
   ];
 
   postPatch = ''
@@ -543,6 +550,7 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     (lib.cmakeFeature "FLASH_MLA_SRC_DIR" "${lib.getDev flashmla}")
     (lib.cmakeFeature "VLLM_FLASH_ATTN_SRC_DIR" "${lib.getDev vllm-flash-attn'}")
     (lib.cmakeFeature "QUTLASS_SRC_DIR" "${lib.getDev qutlass}")
+    (lib.cmakeFeature "DEEPGEMM_SRC_DIR" "${lib.getDev deepgemm}")
     (lib.cmakeFeature "TORCH_CUDA_ARCH_LIST" "${gpuTargetString}")
     (lib.cmakeFeature "CUTLASS_NVCC_ARCHS_ENABLED" "${cudaPackages.flags.cmakeCudaArchitecturesString}")
     (lib.cmakeFeature "CUDA_TOOLKIT_ROOT_DIR" "${symlinkJoin {

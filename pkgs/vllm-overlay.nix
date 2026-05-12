@@ -1,42 +1,80 @@
-# Overlay providing vllm 0.19.0 and the Python-package bumps it requires.
+# Overlay providing vllm 0.20.2 + the CUDA-13 / Python-package adjustments
+# it requires.
 #
 # Applied to nixpkgs-unstable (the CUDA-aware ML tree this repo already uses
-# for ollama, stt-server, etc.). Staying on the host's current cudaPackages
-# (12.9 on unstable as of writing) rather than switching to 13.x — sub-builds
-# (cutlass 4.2.1, qutlass, vllm-flash-attn 2.7.2) all document CUDA 12.8+ as
-# their floor, and we target sm_120 (RTX 50-series).
+# for ollama, stt-server, etc.). Switches cudaPackages to 13.2 — required for
+# stable NVFP4 weight quantization on sm_120 (RTX 50-series consumer
+# Blackwell). The 0.19 → 0.20.2 vLLM bump also covers the signed-scale
+# Marlin-kernel fix and the SM 12.0 kernel-selection improvements that 0.19
+# was missing.
 #
-# Derived from graham33/nixos-dgx-spark's overlays/fixes.nix, trimmed to the
-# subset needed on x86_64 without the CUDA-13.2 switch.
+# CUDA-13-driven fixes derived from graham33/nixos-dgx-spark's overlays/
+# fixes.nix; aarch64-only and CPU/ROCm-only fixes from that file are skipped.
 final: prev: {
-  # Bump NCCL to v2.28.9-1 (nixpkgs has 2.28.7-1). 2.28.x is where Blackwell
-  # (sm_120) support landed; .7 → .9 is bug fixes. Matters for tensor-parallel
-  # inference on lorian's 2× RTX 5090, where NCCL is on the per-layer hot path.
-  _cuda = prev._cuda.extend (_: prevAttrs: {
-    extensions = prevAttrs.extensions ++ [
-      (_: cudaPrev: {
-        nccl = cudaPrev.nccl.overrideAttrs (_: {
-          version = "2.28.9-1";
-          src = prev.fetchFromGitHub {
-            owner = "NVIDIA";
-            repo = "nccl";
-            rev = "v2.28.9-1";
-            hash = "sha256-1nNLcS/F0HsGbYf327TLX+ZVI13YcrrhpLqbGVuml2g=";
-          };
-        });
-      })
-    ];
-  });
+  # Global CUDA toolkit switch. Affects every consumer that reads
+  # `pkgs.cudaPackages` from the unstable import (torch, ollama, etc).
+  # 13.2 already ships nccl 2.28.7 with Blackwell sm_120 support, so the
+  # manual nccl bump that was needed under CUDA 12.9 is gone.
+  cudaPackages = prev.cudaPackages_13_2;
+
+  # OpenCV's CUDA backend doesn't compile under CUDA 13; vLLM doesn't need
+  # CUDA-accelerated OpenCV anyway (uses opencv-python-headless for image
+  # preprocessing).
+  opencv4 = prev.opencv4.override { enableCuda = false; };
+
+  # Header-only tensor-sharing lib pulled in transitively by torch/cupy
+  # under CUDA 13. Not in nixpkgs.
+  dlpack = prev.stdenv.mkDerivation rec {
+    pname = "dlpack";
+    version = "1.2";
+    src = prev.fetchFromGitHub {
+      owner = "dmlc";
+      repo = "dlpack";
+      rev = "v${version}";
+      hash = "sha256-9sKjRGnoaHLUXjDahyWrYYYdDQuqwJyL0hFo1YhGov4=";
+    };
+    nativeBuildInputs = [ prev.cmake ];
+    dontBuild = true;
+    installPhase = ''
+      mkdir -p $out/include
+      cp -r $src/include/dlpack $out/include/
+    '';
+    meta = with prev.lib; {
+      description = "Open in-memory tensor structure for sharing tensors among frameworks";
+      homepage = "https://github.com/dmlc/dlpack";
+      license = licenses.asl20;
+      platforms = platforms.all;
+    };
+  };
 
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (python-final: python-prev: {
-      # New Python deps vllm 0.19 needs that aren't in nixpkgs yet.
-      kaldi-native-fbank =
-        python-final.callPackage ./kaldi-native-fbank { };
+      # Not yet in nixpkgs.
       opentelemetry-semantic-conventions-ai =
         python-final.callPackage ./opentelemetry-semantic-conventions-ai { };
 
-      # vllm 0.19 imports ReasoningEffort, added after mistral-common 1.8.8.
+      # CUDA 13: upstream marks torch broken (needs validation cycle to lift).
+      torch = python-prev.torch.overridePythonAttrs (oldAttrs: {
+        meta = oldAttrs.meta // { broken = false; };
+      });
+
+      # CUDA 13 split the CUDA C runtime headers into a separate package
+      # (cuda_crt). bitsandbytes' build needs them on the include path.
+      bitsandbytes = python-prev.bitsandbytes.overridePythonAttrs
+        (oldAttrs: prev.lib.optionalAttrs (final.cudaPackages ? cuda_crt) {
+          buildInputs = (oldAttrs.buildInputs or [ ]) ++ [
+            final.cudaPackages.cuda_crt
+          ];
+        });
+
+      # cupy in nixpkgs hard-codes cuDNN 8.9.7 (gone in CUDA 13). Re-thread
+      # cudaPackages from the overlay so it picks up our 13.2 cudnn 9.x.
+      cupy = python-prev.cupy.override {
+        cudaPackages = final.cudaPackages;
+      };
+
+      # vllm 0.20 imports `mistral_common[image]` which only exists from
+      # 1.11.0 onward; nixpkgs has 1.8.8.
       mistral-common = python-prev.mistral-common.overridePythonAttrs (oldAttrs: rec {
         version = "1.11.0";
         src = prev.fetchFromGitHub {
@@ -51,32 +89,7 @@ final: prev: {
         ];
       });
 
-      # vllm 0.19 requires opentelemetry-api >= 1.40.
-      opentelemetry-api = python-prev.opentelemetry-api.overridePythonAttrs (oldAttrs: rec {
-        version = "1.40.0";
-        src = prev.fetchFromGitHub {
-          owner = "open-telemetry";
-          repo = "opentelemetry-python";
-          tag = "v${version}";
-          hash = "sha256-1KVy9s+zjlB4w7E45PMCWRxPus24bgBmmM3k2R9d+Jg=";
-        };
-        sourceRoot = "${src.name}/opentelemetry-api";
-      });
-
-      # Sibling bump so contrib stays in sync with api 1.40.
-      opentelemetry-instrumentation =
-        python-prev.opentelemetry-instrumentation.overridePythonAttrs (oldAttrs: rec {
-          version = "0.61b0";
-          src = prev.fetchFromGitHub {
-            owner = "open-telemetry";
-            repo = "opentelemetry-python-contrib";
-            tag = "v${version}";
-            hash = "sha256-DT13gcYPNYXBPnf622WsA16C+7sabJfOshDquHn06Ok=";
-          };
-          sourceRoot = "${src.name}/opentelemetry-instrumentation";
-        });
-
-      # vllm itself: target Blackwell consumer (RTX 5090 = sm_120) only.
+      # vllm itself: still target sm_120 only (Blackwell consumer).
       # MAX_JOBS caps build parallelism — nvcc/cicc uses ~6 GiB per job, so
       # 16 on lorian (16C/32T, 256 GiB) leaves comfortable headroom.
       vllm = (python-final.callPackage ./vllm {
