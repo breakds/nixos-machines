@@ -165,6 +165,11 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
+              # HuggingFace's xet (content-addressed transfer) client wedges
+              # mid-download for large models on this host — threads stay
+              # alive, but the CAS chunk requests stop progressing and no
+              # retry fires. Fall back to plain HTTP downloads.
+              HF_HUB_DISABLE_XET = "1";
               # Make /etc/vllm discoverable on sys.path so the sitecustomize.py
               # below (which chmods triton's compiled .so files) loads at
               # Python startup.
