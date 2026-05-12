@@ -84,7 +84,8 @@
   psutil
 , py-libnuma
 , # cuda-only
-  cupy
+  apache-tvm-ffi
+, cupy
 , flashinfer
 , nvidia-ml-py
 , # rocm-only
@@ -524,6 +525,7 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     py-libnuma
   ]
   ++ lib.optionals cudaSupport [
+    apache-tvm-ffi
     cupy
     flashinfer
     nvidia-ml-py
