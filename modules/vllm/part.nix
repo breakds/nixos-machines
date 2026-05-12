@@ -186,6 +186,13 @@
               StateDirectory = "vllm";
               StateDirectoryMode = "0750";
               WorkingDirectory = "%S/vllm";
+              # DynamicUser + StateDirectory bind-mounts /var/lib/vllm with
+              # nosuid,nodev,noexec by default — a sensible default for
+              # daemons that don't JIT-compile, but vLLM/triton compile
+              # cuda_utils.cpython-*.so into the cache dir and dlopen it,
+              # which mmap(PROT_EXEC) rejects under noexec regardless of
+              # file mode. Whitelist the state dir for execution.
+              ExecPaths = [ "/var/lib/vllm" ];
 
               # CUDA device access — same character-device allowlist that
               # nixpkgs's services.ollama uses. PrivateDevices=false is
