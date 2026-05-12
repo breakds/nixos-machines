@@ -20,28 +20,34 @@
     vital.vllm.gpuTargets = [ "12.0" ];
 
     # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
-    # tensor-parallel across both RTX 5090s.
+    # tensor-parallel across both RTX 5090s. NVFP4 weights (~13.5 GB total
+    # vs ~27 GB at FP8) free up the KV pool to ~41 GB; with FP8 KV cache
+    # and Qwen 3.6's hybrid attention (Gated DeltaNet + Gated Attention,
+    # 16/64 layers on the scaling path), that's ~6 concurrent 200K agents.
     #
-    # Qwen3-32B AWQ (INT4 weights) fits comfortably on 2× 32 GB: ~18 GB
-    # weights total, ~9 GB per GPU at TP=2, leaving ~20 GB per GPU for KV
-    # cache at gpu-memory-utilization 0.90. FP8 KV cache stretches that
-    # significantly further.
+    # `unsloth/Qwen3.6-27B-NVFP4` repacks the NVFP4 scales in a layout
+    # vLLM's compressed-tensors loader recognizes (auto-detected — no
+    # --quantization flag needed). The Qwen3.5/3.6 architecture
+    # (`Qwen3_5ForConditionalGeneration`) is implemented natively in
+    # vllm 0.20.2 (vllm/model_executor/models/qwen3_5.py), so
+    # --trust-remote-code is not load-bearing for the model class itself —
+    # it's kept because the upstream recipe specifies it and it harmlessly
+    # also covers any tokenizer/processor code paths.
     #
-    # NOTE: previously pointed at sakamakismile/Qwen3.6-27B-NVFP4, but
-    # that checkpoint declares architectures = ["Qwen3_5ForConditionalGeneration"]
-    # which is not registered in vLLM 0.20.2 (vllm-project/vllm#35391 —
-    # support landed post-0.20). Unsloth's NVFP4 build has the same
-    # config.json arch and ships no `auto_map`/custom modeling code, so
-    # --trust-remote-code can't bridge it. Move back to NVFP4 + Qwen 3.6
-    # once vLLM is bumped to a release with Qwen3.5/3.6 support.
+    # --max-num-seqs caps concurrent requests so the activation-VRAM
+    # spikes during prefill stay bounded; tune up if requests queue.
     services.vllm.instances.main = {
-      model = "Qwen/Qwen3-32B-AWQ";
+      model = "unsloth/Qwen3.6-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.90;
+      maxModelLen = 200000;
       toolCallParser = "qwen3_coder";
       reasoningParser = "qwen3";
       extraArgs = [
         "--kv-cache-dtype" "fp8_e4m3"
+        "--dtype" "bfloat16"
+        "--max-num-seqs" "8"
+        "--trust-remote-code"
       ];
     };
 
