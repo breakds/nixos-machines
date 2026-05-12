@@ -1,0 +1,44 @@
+Skip building FA3 (Hopper sm_90 kernels) on Blackwell-only targets.
+
+vllm-flash-attn 2.7.2.post1's `hopper/` source tree uses the old
+2-template-arg form of `cutlass::epilogue::collective::detail::
+sm90_get_smem_store_op_for_accumulator`. CUTLASS 4.0 added a third
+template argument, so the bundled CUTLASS 4.4.2 fails template
+deduction for every `*_sm90.cu` instantiation in FA3:
+
+    hopper/epilogue_fwd.hpp(100): error: no instance of function
+    template "cutlass::epilogue::collective::detail::
+    sm90_get_smem_store_op_for_accumulator" matches the argument list
+
+The vllm-flash-attn cmake gates SASS arch flags via
+`cuda_archs_loose_intersection(FA3_ARCHS "9.0a;" "${CUDA_ARCHS}")`
+but still compiles the `*_sm90.cu` source files (with `ArchTag_ =
+cutlass::arch::Sm90`) when sm_90 isn't in our arch list, which our
+sm_120-only build is. Template instantiation runs at host-compile
+time regardless of which SASS we'd actually emit, so the .cu files
+fail to even compile.
+
+For an sm_120 (Blackwell consumer) build there is nothing to gain
+from FA3 — it is a Hopper-only path. FA2 still covers sm_120, so
+the simplest fix is to not register the FA3 CMakeExtension at all.
+
+diff --git a/setup.py b/setup.py
+index 7c226a7..8e55f3f 100644
+--- a/setup.py
++++ b/setup.py
+@@ -998,11 +998,10 @@ if _is_hip():
+
+ if _is_cuda():
+     ext_modules.append(CMakeExtension(name="vllm.vllm_flash_attn._vllm_fa2_C"))
+-    if envs.VLLM_USE_PRECOMPILED or (
+-        CUDA_HOME and get_nvcc_cuda_version() >= Version("12.3")
+-    ):
+-        # FA3 requires CUDA 12.3 or later
+-        ext_modules.append(CMakeExtension(name="vllm.vllm_flash_attn._vllm_fa3_C"))
++    # FA3 hopper kernels skipped — this Nix build targets sm_120 (Blackwell
++    # consumer) only; FA3's hopper/ tree is incompatible with the bundled
++    # CUTLASS 4.4.2 anyway (sm90_get_smem_store_op_for_accumulator gained a
++    # third template arg in CUTLASS 4.0).
+     # FA4 CuteDSL - Python-only component for FA4's cute DSL support
+     # Optional since this doesn't produce a .so file, just copies Python files
+     ext_modules.append(

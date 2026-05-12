@@ -363,6 +363,10 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     # lazily-imported with a graceful fallback or only used for code paths
     # we don't run on sm_120 (FA4 / DeepSeek V4). See patch header.
     ./0007-drop-cuda-reqs-without-nixpkgs.patch
+    # Skip building FA3 (Hopper sm_90) entirely — vllm-flash-attn 2.7.2's
+    # hopper/ kernels don't compile against CUTLASS 4.4.2, and we don't
+    # need FA3 on sm_120. See patch header.
+    ./0008-skip-fa3-for-non-hopper.patch
   ];
 
   postPatch = ''
