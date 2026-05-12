@@ -155,9 +155,16 @@
             conflicts = map (n: "vllm-${n}.service") otherNames;
 
             environment = {
-              # Persist the HF cache under the systemd state dir so models
-              # survive across deploys without re-downloading.
+              # DynamicUser leaves HOME unset; libraries that default their
+              # cache to ~/.foo (triton, torch inductor, transformers, etc.)
+              # then fall back to "/" — which ProtectSystem=strict makes
+              # read-only. Anchor HOME inside the state dir so every cache
+              # lands somewhere writable, and pin the most common offenders
+              # explicitly.
+              HOME = "%S/vllm";
               HF_HOME = "%S/vllm/huggingface";
+              TRITON_CACHE_DIR = "%S/vllm/triton";
+              XDG_CACHE_HOME = "%S/vllm/cache";
               # Disable vLLM's anonymous usage telemetry.
               VLLM_NO_USAGE_STATS = "1";
               DO_NOT_TRACK = "1";
