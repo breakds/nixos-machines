@@ -5,7 +5,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./jupyter-lab.nix
     ../common.nix
     ../cassandra.nix
     ../../../users/xin.nix
@@ -18,17 +17,26 @@
     };
 
     # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
-    # tensor-parallel across both RTX 5090s. FP8 variant from Qwen fits
-    # comfortably on 2× 32GB, leaving generous KV-cache headroom for the
-    # model's native 262K context. Tool/reasoning parsers per the official
-    # vLLM recipe (recipes.vllm.ai/Qwen/Qwen3.6-27B).
+    # tensor-parallel across both RTX 5090s. NVFP4 weights (~13.5 GB total
+    # vs ~27 GB at FP8) free up the KV pool to ~41 GB; with FP8 KV cache
+    # and Qwen 3.6's hybrid attention (16/64 layers on the scaling path),
+    # that's ~6 concurrent 200K agents.
+    #
+    # `sakamakismile/Qwen3.6-27B-NVFP4` is the canonical community NVFP4
+    # release (compressed-tensors format, auto-detected — no
+    # --quantization flag needed). NVIDIA / RedHat don't publish a dense
+    # 27B NVFP4. Tool/reasoning parsers per the official vLLM recipe.
     services.vllm.instances.main = {
-      model = "Qwen/Qwen3.6-27B-FP8";
+      model = "sakamakismile/Qwen3.6-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.90;
       maxModelLen = 262144;
       toolCallParser = "qwen3_coder";
       reasoningParser = "qwen3";
+      extraArgs = [
+        "--kv-cache-dtype" "fp8_e4m3"
+        "--trust-remote-code"
+      ];
     };
 
     # This value determines the NixOS release from which the default
