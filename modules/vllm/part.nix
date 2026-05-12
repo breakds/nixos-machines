@@ -260,7 +260,8 @@
           # it loads before any triton import in either the main
           # process or the registry-inspector subprocess.
           environment.etc."vllm/sitecustomize.py".text = ''
-            import os
+            import os, sys
+            sys.stderr.write("[vllm-sitecustomize] loaded, pid=" + str(os.getpid()) + "\n")
             try:
                 from triton.runtime.cache import FileCacheManager
                 _orig_put = FileCacheManager.put
@@ -268,12 +269,14 @@
                     path = _orig_put(self, data, filename, binary=binary)
                     try:
                         os.chmod(path, 0o755)
-                    except OSError:
-                        pass
+                        sys.stderr.write("[vllm-sitecustomize] chmod 0755 " + path + "\n")
+                    except OSError as e:
+                        sys.stderr.write("[vllm-sitecustomize] chmod FAILED " + path + ": " + repr(e) + "\n")
                     return path
                 FileCacheManager.put = _put_then_chmod
-            except ImportError:
-                pass
+                sys.stderr.write("[vllm-sitecustomize] triton patch installed\n")
+            except Exception as e:
+                sys.stderr.write("[vllm-sitecustomize] triton patch FAILED: " + repr(e) + "\n")
           '';
 
           networking.firewall.allowedTCPPorts = lib.unique (
