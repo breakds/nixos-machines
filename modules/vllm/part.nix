@@ -165,6 +165,10 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
+              # Make /etc/vllm discoverable on sys.path so the sitecustomize.py
+              # below (which chmods triton's compiled .so files) loads at
+              # Python startup.
+              PYTHONPATH = "/etc/vllm";
               # Disable vLLM's anonymous usage telemetry.
               VLLM_NO_USAGE_STATS = "1";
               DO_NOT_TRACK = "1";
@@ -239,6 +243,38 @@
 
         config = lib.mkIf (enabledInstances != { }) {
           environment.systemPackages = [ pkgs.vllm ];
+
+          # Triton's FileCacheManager.put() writes JIT-compiled `.so`
+          # files via Python's open(), which uses mode 0o666 — combined
+          # with the unit's UMask=0077 that yields 0o600 (no execute
+          # bit), so the subsequent dlopen fails with "failed to map
+          # segment from shared object". Triton has no chmod step (see
+          # python-triton/python/triton/runtime/cache.py).
+          #
+          # Fixing this in nixpkgs' triton derivation would force a
+          # rebuild of triton + torch + torchaudio + torchvision + vllm.
+          # Avoid the cascade with a `sitecustomize.py` that monkey-
+          # patches FileCacheManager.put at Python startup. Python's
+          # site module imports the first `sitecustomize` it finds on
+          # sys.path; putting this dir on PYTHONPATH in the unit ensures
+          # it loads before any triton import in either the main
+          # process or the registry-inspector subprocess.
+          environment.etc."vllm/sitecustomize.py".text = ''
+            import os
+            try:
+                from triton.runtime.cache import FileCacheManager
+                _orig_put = FileCacheManager.put
+                def _put_then_chmod(self, data, filename, binary=True):
+                    path = _orig_put(self, data, filename, binary=binary)
+                    try:
+                        os.chmod(path, 0o755)
+                    except OSError:
+                        pass
+                    return path
+                FileCacheManager.put = _put_then_chmod
+            except ImportError:
+                pass
+          '';
 
           networking.firewall.allowedTCPPorts = lib.unique (
             lib.mapAttrsToList (_: inst: inst.port)
