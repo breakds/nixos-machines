@@ -1,13 +1,39 @@
+Inherit parent env (not just PYTHONPATH) in vLLM's inspector subprocess.
+
+`_run_in_subprocess` in vllm/model_executor/models/registry.py is what
+runs a small model-class introspection in a child Python process. The
+Nix build originally needed PYTHONPATH propagated so the subprocess
+could import vllm itself — the simplest path was `env={'PYTHONPATH':
+':'.join(sys.path)}`, which works but has a footgun: `subprocess.run`
+treats `env=` as a full replacement, so the child inherits NOTHING
+ELSE from the parent. No `HOME`, no `TRITON_CACHE_DIR`, no
+`XDG_CACHE_HOME`, no `HF_HOME`, no `CUDA_VISIBLE_DEVICES`.
+
+In a hardened systemd unit (DynamicUser=true, ProtectSystem=strict)
+the child then defaults `HOME=""`, Triton's runtime driver init does
+`os.makedirs(os.path.join("", ".triton", "cache"))` → tries to write
+`/.triton`, fails with EROFS, and the model class import fails. vLLM
+labels it "architectures failed to be inspected", which is
+indistinguishable from "model not supported" at first glance.
+
+Merge the parent environment instead of replacing it:
+
+    env={**os.environ, "PYTHONPATH": ":".join(sys.path)}
+
+That keeps the parent's cache-dir env vars in scope and only overrides
+the PYTHONPATH bit we actually needed to add.
+
 diff --git a/vllm/model_executor/models/registry.py b/vllm/model_executor/models/registry.py
-index a2de597c8..4c2410209 100644
+index 01f357a..3baad0a 100644
 --- a/vllm/model_executor/models/registry.py
 +++ b/vllm/model_executor/models/registry.py
-@@ -1121,7 +1121,7 @@ def _run_in_subprocess(fn: Callable[[], _T]) -> _T:
+@@ -1328,7 +1328,8 @@ def _run_in_subprocess(fn: Callable[[], _T]) -> _T:
          # cannot use `sys.executable __file__` here because the script
          # contains relative imports
          returned = subprocess.run(
 -            _SUBPROCESS_COMMAND, input=input_bytes, capture_output=True
-+            _SUBPROCESS_COMMAND, input=input_bytes, capture_output=True, env={'PYTHONPATH': ':'.join(sys.path)},
++            _SUBPROCESS_COMMAND, input=input_bytes, capture_output=True,
++            env={**os.environ, "PYTHONPATH": ":".join(sys.path)},
          )
 
          # check if the subprocess is successful
