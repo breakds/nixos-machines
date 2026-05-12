@@ -89,6 +89,61 @@ final: prev: {
         ];
       });
 
+      # Bump the opentelemetry stack: nixpkgs unstable still ships
+      # api/sdk 1.34.0 and semconv/instrumentation 0.55b0, but
+      # opentelemetry-semantic-conventions-ai 0.4.15 (above) demands
+      # sdk >= 1.38 and semconv >= 0.59b0. All four packages live on
+      # the same upstream release train; pin the lot to v1.40.0 / 0.61b0
+      # (api+sdk+semconv share opentelemetry-python; instrumentation
+      # lives in opentelemetry-python-contrib).
+      opentelemetry-api = python-prev.opentelemetry-api.overridePythonAttrs (oldAttrs: rec {
+        version = "1.40.0";
+        src = prev.fetchFromGitHub {
+          owner = "open-telemetry";
+          repo = "opentelemetry-python";
+          tag = "v${version}";
+          hash = "sha256-1KVy9s+zjlB4w7E45PMCWRxPus24bgBmmM3k2R9d+Jg=";
+        };
+        sourceRoot = "${src.name}/opentelemetry-api";
+      });
+
+      opentelemetry-sdk = python-prev.opentelemetry-sdk.overridePythonAttrs (oldAttrs: rec {
+        version = "1.40.0";
+        src = prev.fetchFromGitHub {
+          owner = "open-telemetry";
+          repo = "opentelemetry-python";
+          tag = "v${version}";
+          hash = "sha256-1KVy9s+zjlB4w7E45PMCWRxPus24bgBmmM3k2R9d+Jg=";
+        };
+        sourceRoot = "${src.name}/opentelemetry-sdk";
+      });
+
+      opentelemetry-semantic-conventions =
+        python-prev.opentelemetry-semantic-conventions.overridePythonAttrs (oldAttrs: rec {
+          version = "0.61b0";
+          src = prev.fetchFromGitHub {
+            owner = "open-telemetry";
+            repo = "opentelemetry-python";
+            # The semconv subdir tags as 0.NNbN, not v1.x.y — but the
+            # opentelemetry-python repo tags both together at v1.x.y.
+            tag = "v1.40.0";
+            hash = "sha256-1KVy9s+zjlB4w7E45PMCWRxPus24bgBmmM3k2R9d+Jg=";
+          };
+          sourceRoot = "${src.name}/opentelemetry-semantic-conventions";
+        });
+
+      opentelemetry-instrumentation =
+        python-prev.opentelemetry-instrumentation.overridePythonAttrs (oldAttrs: rec {
+          version = "0.61b0";
+          src = prev.fetchFromGitHub {
+            owner = "open-telemetry";
+            repo = "opentelemetry-python-contrib";
+            tag = "v${version}";
+            hash = "sha256-DT13gcYPNYXBPnf622WsA16C+7sabJfOshDquHn06Ok=";
+          };
+          sourceRoot = "${src.name}/opentelemetry-instrumentation";
+        });
+
       # vllm itself: still target sm_120 only (Blackwell consumer).
       # MAX_JOBS caps build parallelism — nvcc/cicc uses ~6 GiB per job, so
       # 16 on lorian (16C/32T, 256 GiB) leaves comfortable headroom.
