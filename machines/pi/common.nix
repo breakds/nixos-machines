@@ -8,9 +8,9 @@
   # Enable to use non-free packages such as nvidia drivers
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    (import ../../base/overlays)
-  ];
+  # Note: base overlays are now wired in via `self.nixosModules.base-overlays`
+  # at the part.nix level (see machines/pi/part.nix), matching the post-July-2025
+  # refactor done for the non-Pi machines.
 
   # TODO(breakds): Override the default shell to zsh for breakds
   users.extraUsers = lib.mkIf (config.vital.mainUser == "breakds") {
