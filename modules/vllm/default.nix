@@ -8,18 +8,6 @@ let
   cfg = config.services.vllm;
   enabledInstances = lib.filterAttrs (_: inst: inst.enable) cfg.instances;
 
-  cudaToolkit = pkgs.symlinkJoin {
-    name = "vllm-cuda-toolkit";
-    paths = with pkgs.unstable.cudaPackages; [
-      cudatoolkit
-      # cudnn's `out` output is empty (just license/nix-support);
-      # its libraries and headers live in split outputs.
-      cudnn.lib
-      cudnn.include
-    ];
-    postBuild = "ln -s lib $out/lib64";
-  };
-
   instanceModule = { name, config, ... }: {
     options = {
       enable = lib.mkEnableOption "this vLLM instance" // { default = true; };
@@ -148,7 +136,7 @@ in {
   };
 
   config = lib.mkIf (enabledInstances != {}) {
-    environment.systemPackages = [ pkgs.vllm ];
+    environment.systemPackages = [ pkgs.vllm-with-batteries ];
 
     # Triton's FileCacheManager.put() writes JIT-compiled `.so`
     # files via Python's open(), which uses mode 0o666 — combined
@@ -203,39 +191,6 @@ in {
         otherNames = lib.filter (n: n!= name) (lib.attrNames enabledInstances);
       in map (n: "vllm-${n}.service") otherNames;
 
-      # vLLM/flashinfer JIT-compile CUDA kernels at runtime for
-      # archs that don't ship as AOT cubin (sm_120 NVFP4 GEMM and
-      # FP8-KV attention prefill are the live cases). That
-      # compilation path needs a real C++ toolchain on the unit's
-      # PATH, not just nvcc:
-      #
-      #   - pkgs.which        : `which nvcc` lookups inside torch
-      #   - cudaToolkit       : merged CUDA tree (nvcc + cudart +
-      #                         cublas + cudnn + ...) — flashinfer
-      #                         needs `$CUDA_HOME/include/cuda_runtime.h`
-      #                         and `$CUDA_HOME/lib64/libcudart.so`,
-      #                         not just nvcc
-      #   - backendStdenv.cc  : the CUDA-paired gcc wrapper
-      #                         (provides cc/gcc/g++/c++/ld/ar);
-      #                         matches the toolchain vllm was
-      #                         built against
-      #   - pkgs.ninja        : flashinfer builds via ninja
-      #   - pkgs.bash         : ninja wraps every command in
-      #                         `sh -c "..."` and looks up bare
-      #                         `sh` via PATH (NOT /bin/sh).
-      #                         Without bash on PATH ninja fails
-      #                         with the generic
-      #                         `posix_spawn: No such file or
-      #                         directory` — strace identifies
-      #                         "sh" as the missing exec target.
-      path = [
-        pkgs.which
-        cudaToolkit
-        pkgs.unstable.cudaPackages.backendStdenv.cc
-        pkgs.ninja
-        pkgs.bash
-      ];  # TODO(breakds): I think we should package this into vllm instead
-
       environment = {
         # DynamicUser leaves HOME unset; libraries that default their
         # cache to ~/.foo (triton, torch inductor, transformers, etc.)
@@ -247,11 +202,6 @@ in {
         HF_HOME = "%S/vllm/huggingface";
         TRITON_CACHE_DIR = "%S/vllm/triton";
         XDG_CACHE_HOME = "%S/vllm/cache";
-        # CUDA_HOME points at the merged toolkit so that both
-        # torch's `$CUDA_HOME/bin/nvcc` lookup and flashinfer's
-        # `-isystem $CUDA_HOME/include` + `-L$CUDA_HOME/lib64`
-        # JIT compile flags both resolve.
-        CUDA_HOME = "${cudaToolkit}";
         # HuggingFace's xet (content-addressed transfer) client wedges
         # mid-download for large models on this host — threads stay
         # alive, but the CAS chunk requests stop progressing and no
@@ -281,7 +231,7 @@ in {
         "--reasoning-parser" inst.reasoningParser
       ] ++ (lib.optional inst.enforceEager "--enforce-eager") ++ inst.extraArgs; in {
         Type = "exec";
-        ExecStart = "${pkgs.vllm}/bin/vllm serve ${lib.escapeShellArgs args}";
+        ExecStart = "${pkgs.vllm-with-batteries}/bin/vllm serve ${lib.escapeShellArgs args}";
         Restart = "on-failure";
         RestartSec = 10;
         # Model loading + first-time compile can take several minutes.

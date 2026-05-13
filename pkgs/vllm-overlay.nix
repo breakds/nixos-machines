@@ -18,7 +18,18 @@
 # build time compiling kernels the host can't run.
 { gpuTargets ? [ ] }:
 
-final: prev: {
+final: prev:
+let
+  runtimeCudaToolkit = final.symlinkJoin {
+    name = "vllm-cuda-toolkit-${final.cudaPackages.cudaMajorMinorVersion}";
+    paths = with final.cudaPackages; [
+      cudatoolkit
+      cudnn.lib
+      cudnn.include
+    ];
+    postBuild = "ln -s lib $out/lib64";
+  };
+in {
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (python-final: python-prev: {
       # Not yet in nixpkgs.
@@ -115,4 +126,43 @@ final: prev: {
       });
     })
   ];
+
+  # vLLM with the runtime CUDA/JIT "batteries" needed by flashinfer/triton
+  # startup compilation. This is deliberately a lightweight wrapper around
+  # `vllm`, not an override of the vLLM derivation, so changing the runtime
+  # toolchain wrapper does not rebuild the CUDA extension-heavy base package.
+  #
+  # flashinfer's generated build.ninja assumes a traditional unified CUDA
+  # layout with `$CUDA_HOME/include` and `$CUDA_HOME/lib64`, but nixpkgs splits
+  # CUDA into many derivations and stores libraries under lib/. The merged
+  # toolkit comes from final.cudaPackages, the same CUDA package set passed to
+  # pkgs/vllm/default.nix above.
+  vllm-with-batteries = final.symlinkJoin {
+    name = "${final.vllm.name}-with-batteries";
+    paths = [ final.vllm ];
+    nativeBuildInputs = [ final.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/vllm \
+        --set CUDA_HOME ${runtimeCudaToolkit} \
+        --prefix PATH : ${final.lib.makeBinPath [
+          # `which nvcc` lookups inside torch.
+          final.which
+          # nvcc plus headers/libs in the layout expected by flashinfer.
+          runtimeCudaToolkit
+          # CUDA-paired gcc wrapper for runtime JIT compilation.
+          final.cudaPackages.backendStdenv.cc
+          # flashinfer builds via ninja.
+          final.ninja
+          # ninja does posix_spawnp("sh"), not /bin/sh.
+          final.bash
+        ]}
+    '';
+    passthru = (final.vllm.passthru or { }) // {
+      inherit runtimeCudaToolkit;
+      unwrapped = final.vllm;
+    };
+    meta = (final.vllm.meta or { }) // {
+      mainProgram = "vllm";
+    };
+  };
 }

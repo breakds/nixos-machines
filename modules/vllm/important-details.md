@@ -1,9 +1,10 @@
 # vLLM Important Details
 
-This module is unusual for a "Python webserver" service: it uses a merged CUDA
-toolkit symlinkJoin, an `/etc`-shipped `sitecustomize.py` with a triton
-monkey-patch, `path = [ bash gcc-wrapper ninja cuda_nvcc ]`, a stripped-down
-systemd sandbox, and `ExecPaths=/var/lib/vllm`.
+This module is unusual for a "Python webserver" service:
+`pkgs.vllm-with-batteries` wraps `pkgs.vllm` with a merged CUDA toolkit and
+runtime compiler toolchain, while the NixOS module ships an `/etc`
+`sitecustomize.py` triton monkey-patch, a stripped-down systemd sandbox, and
+`ExecPaths=/var/lib/vllm`.
 
 Each of those is here because vLLM 0.20 + flashinfer + triton + torch.compile
 all run a C++/CUDA JIT compiler at process startup to materialize kernels that

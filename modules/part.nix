@@ -51,7 +51,7 @@ in {
             n8n glance gemini-cli claude-code-bin codex ollama
             home-assistant-custom-components wyoming-faster-whisper stt-server
             niri shepherd
-            vllm;
+            vllm vllm-with-batteries;
           noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
             patches = (old.patches or [ ]) ++ [
               # Backported from Mic92's dotfiles:
