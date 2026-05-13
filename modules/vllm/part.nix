@@ -184,15 +184,6 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
-              # NVFP4 GEMM backend selection. The auto-select order in
-              # vllm 0.20 prefers FlashInferCutlassNvFp4LinearKernel,
-              # which on sm_120 has no AOT cubin shipped and falls back
-              # to JIT compilation via ninja. That JIT is a brittle
-              # build-tooling-at-runtime requirement we'd rather avoid.
-              # CutlassNvFp4LinearKernel is the pure-CUTLASS variant
-              # that's AOT-compiled into our vllm package — same
-              # underlying kernel, no runtime build.
-              VLLM_NVFP4_GEMM_BACKEND = "cutlass";
               # CUDA_HOME is the canonical hint torch uses to find nvcc.
               # Pointing at cuda_nvcc's output is enough — torch only
               # looks for $CUDA_HOME/bin/nvcc here.
