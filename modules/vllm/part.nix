@@ -210,21 +210,31 @@
               # Model loading + first-time compile can take several minutes.
               TimeoutStartSec = "30min";
 
+              # vLLM's runtime is a JIT compiler that happens to also serve
+              # inference (torch.compile, triton kernel JIT, flashinfer
+              # cutlass-NVFP4 build). Aggressive systemd hardening fights
+              # this at every layer — we previously trapped /.triton write,
+              # bind-mount noexec, AF_NETLINK, missing toolchain, etc.,
+              # each one a separate fix. graham33/nixos-dgx-spark runs
+              # this service as root with no sandbox at all for the same
+              # reason. We keep the bits that don't conflict and drop the
+              # rest.
               DynamicUser = true;
               StateDirectory = "vllm";
               StateDirectoryMode = "0750";
               WorkingDirectory = "%S/vllm";
-              # DynamicUser + StateDirectory bind-mounts /var/lib/vllm with
-              # nosuid,nodev,noexec by default — a sensible default for
-              # daemons that don't JIT-compile, but vLLM/triton compile
-              # cuda_utils.cpython-*.so into the cache dir and dlopen it,
-              # which mmap(PROT_EXEC) rejects under noexec regardless of
-              # file mode. Whitelist the state dir for execution.
+              NoNewPrivileges = true;
+              UMask = "0077";
+              # DynamicUser+StateDirectory bind-mounts /var/lib/vllm with
+              # nosuid,nodev,noexec; that conflicts with triton/flashinfer
+              # dlopen'ing their own JIT-compiled .so files. Whitelist
+              # the state dir for execution.
               ExecPaths = [ "/var/lib/vllm" ];
 
-              # CUDA device access — same character-device allowlist that
-              # nixpkgs's services.ollama uses. PrivateDevices=false is
-              # required for /dev/nvidia* to appear in the unit's namespace.
+              # CUDA device access — character-device allowlist matching
+              # nixpkgs's services.ollama. PrivateDevices=false is
+              # required for /dev/nvidia* to appear in the unit's
+              # namespace at all.
               DeviceAllow = [
                 "char-nvidiactl"
                 "char-nvidia-caps"
@@ -234,34 +244,6 @@
               DevicePolicy = "closed";
               PrivateDevices = false;
               SupplementaryGroups = [ "render" "video" ];
-
-              # General hardening (mirrors nixpkgs ollama).
-              CapabilityBoundingSet = [ "" ];
-              LockPersonality = true;
-              NoNewPrivileges = true;
-              PrivateTmp = true;
-              PrivateUsers = true;
-              ProtectClock = true;
-              ProtectControlGroups = true;
-              ProtectHome = true;
-              ProtectHostname = true;
-              ProtectKernelLogs = true;
-              ProtectKernelModules = true;
-              ProtectKernelTunables = true;
-              ProtectProc = "invisible";
-              ProtectSystem = "strict";
-              RemoveIPC = true;
-              RestrictNamespaces = true;
-              RestrictRealtime = true;
-              RestrictSUIDSGID = true;
-              # AF_NETLINK is needed for torch.distributed's gloo backend to
-              # enumerate network interfaces; without it ProcessGroupGloo's
-              # device init fails with EAFNOSUPPORT and tensor-parallel
-              # worker startup dies before any model load.
-              RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" "AF_NETLINK" ];
-              SystemCallArchitectures = "native";
-              SystemCallFilter = [ "@system-service" "~@privileged" ];
-              UMask = "0077";
             }
             // lib.optionalAttrs (inst.environmentFile != null) {
               EnvironmentFile = inst.environmentFile;
