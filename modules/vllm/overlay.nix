@@ -1,21 +1,19 @@
-# Overlay providing vllm 0.20.2 + the CUDA-13 / Python-package adjustments
-# it requires.
+# Overlay providing vllm 0.20.2, its Python dependency pins, and the
+# `vllm-with-batteries` wrapper that bundles the runtime CUDA toolchain
+# JIT-compiled kernels need (flashinfer, triton).
 #
-# Applied to nixpkgs-unstable (the CUDA-aware ML tree this repo already uses
-# for ollama, stt-server, etc.). Switches cudaPackages to 13.2 — required for
-# stable NVFP4 weight quantization on sm_120 (RTX 50-series consumer
-# Blackwell). The 0.19 → 0.20.2 vLLM bump also covers the signed-scale
-# Marlin-kernel fix and the SM 12.0 kernel-selection improvements that 0.19
-# was missing.
-#
-# CUDA-13-driven fixes derived from graham33/nixos-dgx-spark's overlays/
-# fixes.nix; aarch64-only and CPU/ROCm-only fixes from that file are skipped.
+# Applied via modules/vllm/default.nix only on machines that run vllm —
+# the opentelemetry / mistral-common pins shouldn't land tree-wide just
+# because a host happens to have a GPU. The CUDA 13.2 bump and its
+# tree-wide consumers (torch, cupy, bitsandbytes, opencv) live in
+# pkgs/cuda-13-overlay.nix and apply to every host using the unstable
+# pkgs scope.
 #
 # `gpuTargets` is the per-host CUDA compute-capability list vLLM compiles
 # kernels for — typically the single arch of the GPUs on that machine
 # (e.g. ["12.0"] on a 5090 host, ["8.9"] on a 4090 host). Empty falls
-# back to nixpkgs' system-wide `cudaCapabilities`, which works but wastes
-# build time compiling kernels the host can't run.
+# back to nixpkgs' system-wide `cudaCapabilities`, which still builds
+# but wastes time compiling kernels the host can't run.
 { gpuTargets ? [ ] }:
 
 final: prev:

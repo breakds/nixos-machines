@@ -50,9 +50,9 @@ let
         default = 1;
         description = ''
           Number of GPUs to shard the model across (tensor parallel).
-                With TP > 1, vLLM uses NCCL all-reduce on the per-layer hot
-                path; colocated GPUs on the same PCIe root complex give the
-                best throughput (no NVLink on consumer Blackwell).
+          With TP > 1, vLLM uses NCCL all-reduce on the per-layer hot
+          path; colocated GPUs on the same PCIe root complex give the
+          best throughput (no NVLink on consumer Blackwell).
         '';
       };
 
@@ -61,8 +61,8 @@ let
         default = 0.90;
         description = ''
           Fraction of each GPU's memory to reserve for weights + KV
-                cache. Higher = more concurrent requests / longer context,
-                but less headroom for activation spikes.
+          cache. Higher = more concurrent requests / longer context,
+          but less headroom for activation spikes.
         '';
       };
 
@@ -71,8 +71,8 @@ let
         default = null;
         description = ''
           Maximum context length (tokens). Null uses the model's
-                native max — vLLM will clip automatically if memory budget
-                (gpuMemoryUtilization) can't fit it.
+          native max — vLLM will clip automatically if memory budget
+          (gpuMemoryUtilization) can't fit it.
         '';
       };
 
@@ -82,8 +82,8 @@ let
         example = "hermes";
         description = ''
           Tool/function-calling parser. When set, also enables
-                --enable-auto-tool-choice. Common values: "hermes",
-                "qwen3_coder", "llama3_json".
+          --enable-auto-tool-choice. Common values: "hermes",
+          "qwen3_coder", "llama3_json".
         '';
       };
 
@@ -93,7 +93,7 @@ let
         example = "qwen3";
         description = ''
           Reasoning/thinking parser for chain-of-thought models.
-                Common values: "qwen3", "deepseek_r1".
+          Common values: "qwen3", "deepseek_r1".
         '';
       };
 
@@ -102,9 +102,9 @@ let
         default = false;
         description = ''
           Disable CUDA graph compilation. Defaults to false on
-                discrete GPUs; set true only if you hit illegal-instruction
-                crashes with a specific quantization (a workaround that
-                originally surfaced on DGX Spark / SM121).
+          discrete GPUs; set true only if you hit illegal-instruction
+          crashes with a specific quantization (a workaround that
+          originally surfaced on DGX Spark / SM121).
         '';
       };
 
@@ -113,8 +113,8 @@ let
         default = null;
         description = ''
           Systemd EnvironmentFile path — typically used to inject
-                HF_TOKEN for gated models. Keep outside /nix/store
-                (e.g. an agenix secret or a 0600 root-owned file).
+          HF_TOKEN for gated models. Keep outside /nix/store
+          (e.g. an agenix secret or a 0600 root-owned file).
         '';
       };
 
@@ -146,8 +146,8 @@ in {
         default = { };
         description = ''
           Named vLLM inference server instances. Each becomes a systemd
-                service `vllm-<name>.service`. Instances declare mutual
-                `conflicts` so only one runs at a time on a shared GPU pool.
+          service `vllm-<name>.service`. Instances declare mutual
+          `conflicts` so only one runs at a time on a shared GPU pool.
         '';
       };
     };
