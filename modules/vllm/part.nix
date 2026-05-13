@@ -154,12 +154,19 @@
             # Instances share the GPU pool — only one at a time.
             conflicts = map (n: "vllm-${n}.service") otherNames;
 
-            # Deep inside vllm's attention-metadata builder (and various
-            # triton/CUDA JIT paths) there are subprocess.run(['which', ...])
-            # calls to locate auxiliary binaries. systemd's default service
-            # PATH doesn't include `which`, which lives in its own nixpkgs
-            # derivation rather than coreutils.
-            path = [ pkgs.which ];
+            # vllm's profile_cudagraph_memory path needs nvcc at runtime
+            # (and shells out via `which nvcc`, hence `pkgs.which` too).
+            # Without these, torch falls back to /usr/local/cuda which
+            # doesn't exist on NixOS and the worker dies with
+            # "Could not find nvcc and default cuda_home=... doesn't exist".
+            #
+            # cuda_nvcc comes from unstable's cudaPackages — the same
+            # toolkit (13.2) vllm itself was built against, so version
+            # alignment is automatic.
+            path = [
+              pkgs.which
+              pkgs.unstable.cudaPackages.cuda_nvcc
+            ];
 
             environment = {
               # DynamicUser leaves HOME unset; libraries that default their
@@ -172,6 +179,10 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
+              # CUDA_HOME is the canonical hint torch uses to find nvcc.
+              # Pointing at cuda_nvcc's output is enough — torch only
+              # looks for $CUDA_HOME/bin/nvcc here.
+              CUDA_HOME = "${pkgs.unstable.cudaPackages.cuda_nvcc}";
               # HuggingFace's xet (content-addressed transfer) client wedges
               # mid-download for large models on this host — threads stay
               # alive, but the CAS chunk requests stop progressing and no
