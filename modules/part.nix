@@ -41,6 +41,7 @@ in {
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
               inputs.shepherd.overlays.default
+              (import ../pkgs/cuda-13-overlay.nix)
               (import ../pkgs/vllm-overlay.nix {
                 inherit (config.vital.vllm) gpuTargets;
               })
