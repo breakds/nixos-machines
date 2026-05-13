@@ -6,6 +6,39 @@
       let
         cfg = config.services.vllm;
 
+        # nixpkgs splits the CUDA toolkit into ~30 derivations
+        # (cuda_nvcc, cuda_cudart, libcublas, ...) where a traditional
+        # install would be a single /usr/local/cuda tree with bin/,
+        # include/, lib/, etc. Flashinfer's runtime JIT assumes the
+        # traditional layout: it does `-isystem $CUDA_HOME/include`
+        # and `-L$CUDA_HOME/lib64 -lcudart`. cuda_nvcc alone only has
+        # nvcc + its own headers — no cuda_runtime.h, no cudart.
+        #
+        # Merge the libraries vllm's own build references
+        # (pkgs/vllm/default.nix `mergedCudaLibraries`) into a single
+        # tree so $CUDA_HOME/{include,lib64,bin} all resolve.
+        cudaToolkit = pkgs.symlinkJoin {
+          name = "vllm-runtime-cuda-toolkit";
+          paths = with pkgs.unstable.cudaPackages; [
+            cuda_nvcc
+            cuda_cudart
+            cuda_cccl
+            cuda_nvrtc
+            cuda_nvtx
+            libcublas
+            libcusolver
+            libcusparse
+            libcurand
+            cudnn
+          ];
+          # nixpkgs installs CUDA shared libs into lib/, but flashinfer's
+          # generated build.ninja hardcodes `-L$CUDA_HOME/lib64`. Add the
+          # traditional lib64 → lib symlink so `-lcudart` resolves.
+          postBuild = ''
+            ln -s lib $out/lib64
+          '';
+        };
+
         instanceModule = { name, config, ... }: {
           options = {
             enable = lib.mkEnableOption "this vLLM instance" // { default = true; };
@@ -160,24 +193,28 @@
             # compilation path needs a real C++ toolchain on the unit's
             # PATH, not just nvcc:
             #
-            #   - pkgs.which            : `which nvcc` lookups inside torch
-            #   - cudaPackages.cuda_nvcc: nvcc itself, also covers CUDA_HOME
-            #   - backendStdenv.cc      : the CUDA-paired gcc wrapper
-            #                             (provides cc/gcc/g++/c++/ld/ar);
-            #                             matches the toolchain vllm was
-            #                             built against
-            #   - pkgs.ninja            : flashinfer builds via ninja
-            #   - pkgs.bash             : ninja wraps every command in
-            #                             `sh -c "..."` and looks up bare
-            #                             `sh` via PATH (NOT /bin/sh).
-            #                             Without bash on PATH ninja fails
-            #                             with the generic
-            #                             `posix_spawn: No such file or
-            #                             directory` — strace identifies
-            #                             "sh" as the missing exec target.
+            #   - pkgs.which        : `which nvcc` lookups inside torch
+            #   - cudaToolkit       : merged CUDA tree (nvcc + cudart +
+            #                         cublas + cudnn + ...) — flashinfer
+            #                         needs `$CUDA_HOME/include/cuda_runtime.h`
+            #                         and `$CUDA_HOME/lib64/libcudart.so`,
+            #                         not just nvcc
+            #   - backendStdenv.cc  : the CUDA-paired gcc wrapper
+            #                         (provides cc/gcc/g++/c++/ld/ar);
+            #                         matches the toolchain vllm was
+            #                         built against
+            #   - pkgs.ninja        : flashinfer builds via ninja
+            #   - pkgs.bash         : ninja wraps every command in
+            #                         `sh -c "..."` and looks up bare
+            #                         `sh` via PATH (NOT /bin/sh).
+            #                         Without bash on PATH ninja fails
+            #                         with the generic
+            #                         `posix_spawn: No such file or
+            #                         directory` — strace identifies
+            #                         "sh" as the missing exec target.
             path = [
               pkgs.which
-              pkgs.unstable.cudaPackages.cuda_nvcc
+              cudaToolkit
               pkgs.unstable.cudaPackages.backendStdenv.cc
               pkgs.ninja
               pkgs.bash
@@ -194,10 +231,11 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
-              # CUDA_HOME is the canonical hint torch uses to find nvcc.
-              # Pointing at cuda_nvcc's output is enough — torch only
-              # looks for $CUDA_HOME/bin/nvcc here.
-              CUDA_HOME = "${pkgs.unstable.cudaPackages.cuda_nvcc}";
+              # CUDA_HOME points at the merged toolkit so that both
+              # torch's `$CUDA_HOME/bin/nvcc` lookup and flashinfer's
+              # `-isystem $CUDA_HOME/include` + `-L$CUDA_HOME/lib64`
+              # JIT compile flags both resolve.
+              CUDA_HOME = "${cudaToolkit}";
               # HuggingFace's xet (content-addressed transfer) client wedges
               # mid-download for large models on this host — threads stay
               # alive, but the CAS chunk requests stop progressing and no
