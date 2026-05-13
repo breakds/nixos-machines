@@ -1,5 +1,64 @@
 { inputs, ... }:
 
+# vLLM NixOS module — services.vllm.instances.<name>.
+#
+# The shape of this file is unusual for a "Python webserver" service: a
+# merged CUDA toolkit symlinkJoin, an /etc-shipped sitecustomize.py with
+# a triton monkey-patch, `path = [bash, gcc-wrapper, ninja, cuda_nvcc]`,
+# a stripped-down systemd sandbox, and a `ExecPaths=/var/lib/vllm`. Each
+# of those is here because vLLM 0.20 + flashinfer + triton + torch.compile
+# all run a C++/CUDA JIT compiler *at process startup* to materialize
+# kernels that aren't AOT-compiled for the host arch (sm_120 in our
+# case). On a NixOS host they collectively assume a traditional
+# /usr/local/cuda + /bin/sh shape that nixpkgs doesn't ship by default.
+#
+# Layers that surfaced during the lorian bring-up, all individually
+# documented at their respective lines below:
+#
+#   1. Inspector subprocess env wipe — vllm's `_run_in_subprocess` in
+#      registry.py replaces env entirely with `{PYTHONPATH: …}`, dropping
+#      HOME / CUDA_HOME / TRITON_CACHE_DIR / XDG_CACHE_HOME on the way
+#      into the child. Fixed by the 0003 patch in pkgs/vllm/, which
+#      merges os.environ instead of replacing it.
+#
+#   2. Triton write-fail on `/.triton` — DynamicUser leaves HOME empty,
+#      triton's cache code constructs `~/.triton/cache` and tries to
+#      mkdir `/.triton`. Anchored HOME / TRITON_CACHE_DIR / XDG_CACHE_HOME
+#      under %S/vllm so the cache lands in the writable state dir.
+#
+#   3. dlopen of triton's compiled .so fails with mmap PROT_EXEC EACCES —
+#      UMask=0077 made Python's `open()` create the file mode 0o600 (no
+#      exec). triton itself has no chmod step. Patched at runtime via a
+#      tiny sitecustomize.py monkey-patch on FileCacheManager.put.
+#
+#   4. DynamicUser+StateDirectory bind-mounts %S/vllm with `noexec` by
+#      default — even with the file mode fixed, the mount-level noexec
+#      still rejects PROT_EXEC. Exempted via ExecPaths=/var/lib/vllm.
+#
+#   5. gloo's interface enumeration opens AF_NETLINK — the default
+#      RestrictAddressFamilies list didn't include it. (Moot after we
+#      stripped the broad systemd hardening, but worth noting because
+#      it's not obvious from the error string.)
+#
+#   6. flashinfer JIT (sm_120 NVFP4 GEMM, FP8-KV attention) requires a
+#      full C/C++ toolchain on PATH — `which`, `nvcc`, `gcc-wrapper`,
+#      `ninja`, and crucially **bash** (ninja does posix_spawnp("sh"),
+#      not /bin/sh; without `sh` on PATH it fails with the maddening
+#      generic message `posix_spawn: No such file or directory`).
+#
+#   7. flashinfer's generated build.ninja uses `-isystem $CUDA_HOME/include`
+#      and `-L$CUDA_HOME/lib64`, assuming the traditional unified-tree
+#      layout. cuda_nvcc alone doesn't have cuda_runtime.h or libcudart.
+#      Solved by pointing CUDA_HOME at a symlinkJoin of cudatoolkit +
+#      cudnn.{lib,include} with a `lib64 -> lib` symlink on top.
+#
+#   8. dgx-spark's vllm module avoided all of (1)–(7) by running with
+#      enforceEager=true + int4 quantization, which routes around the
+#      JIT paths entirely. We can't — NVFP4 + CUDA graphs are the point.
+#
+# If a future contributor is tempted to "simplify" this module by
+# matching the nixpkgs-ollama hardening pattern: please don't, or be
+# ready to re-derive all the above one error message at a time.
 {
   flake.nixosModules = {
     vllm = { config, lib, pkgs, ... }:
