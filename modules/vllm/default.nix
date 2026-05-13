@@ -5,6 +5,7 @@
 # CUDA/JIT, systemd sandboxing, and cache-directory choices below.
 
 let
+  registry = (import ../../data/service-registry.nix).vllm;
   cfg = config.services.vllm;
   enabledInstances = lib.filterAttrs (_: inst: inst.enable) cfg.instances;
   vllmOverlay = import ./overlay.nix {
@@ -29,7 +30,7 @@ let
 
       port = lib.mkOption {
         type = lib.types.port;
-        default = 8000;
+        default = registry.port;
         description = "Port for the OpenAI-compatible API server.";
       };
 

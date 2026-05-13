@@ -169,4 +169,8 @@ rec {
   shepherd = {
     port = 10201;
   };
+
+  vllm = {
+    port = 11080;
+  };
 }
