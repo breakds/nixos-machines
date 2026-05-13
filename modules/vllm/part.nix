@@ -154,6 +154,13 @@
             # Instances share the GPU pool — only one at a time.
             conflicts = map (n: "vllm-${n}.service") otherNames;
 
+            # Deep inside vllm's attention-metadata builder (and various
+            # triton/CUDA JIT paths) there are subprocess.run(['which', ...])
+            # calls to locate auxiliary binaries. systemd's default service
+            # PATH doesn't include `which`, which lives in its own nixpkgs
+            # derivation rather than coreutils.
+            path = [ pkgs.which ];
+
             environment = {
               # DynamicUser leaves HOME unset; libraries that default their
               # cache to ~/.foo (triton, torch inductor, transformers, etc.)
