@@ -5,12 +5,12 @@ let self = inputs.self;
 in {
   imports = [
     ./ollama/part.nix
-    ./vllm/part.nix
     ./extra-mounts/part.nix
   ];
 
   flake.nixosModules = {
     vital-base = import ./vital-base;
+    vllm = import ./vllm;
     
     base-overlays = { config, lib, pkgs, ... }: {
       options.vital.vllm.gpuTargets = lib.mkOption {

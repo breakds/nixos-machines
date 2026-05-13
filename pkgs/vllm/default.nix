@@ -461,7 +461,6 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
 
   dependencies = [
     aioprometheus
-    amd-quark
     anthropic
     bitsandbytes
     blake3
@@ -532,6 +531,7 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
   ]
   ++ lib.optionals rocmSupport [
     amd-aiter
+    amd-quark
     rocmPackages.rocminfo
     amdsmi
     datasets
