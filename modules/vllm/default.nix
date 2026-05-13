@@ -7,6 +7,9 @@
 let
   cfg = config.services.vllm;
   enabledInstances = lib.filterAttrs (_: inst: inst.enable) cfg.instances;
+  vllmOverlay = import ./overlay.nix {
+    inherit (cfg) gpuTargets;
+  };
 
   instanceModule = { name, config, ... }: {
     options = {
@@ -123,19 +126,43 @@ let
     };
   };
 in {
-  options.services.vllm = {
-    instances = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.submodule instanceModule);
-      default = { };
-      description = ''
-        Named vLLM inference server instances. Each becomes a systemd
-              service `vllm-<name>.service`. Instances declare mutual
-              `conflicts` so only one runs at a time on a shared GPU pool.
-      '';
+  options = {
+    services.vllm = {
+      gpuTargets = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        example = [ "12.0" ];
+        description = ''
+          CUDA compute capabilities to compile vLLM kernels for this host.
+          Set to the GPU's compute capability — e.g. [ "8.6" ] for a 3090,
+          [ "8.9" ] for a 4090, [ "12.0" ] for a 5090. Leaving this empty
+          falls back to the system-wide `cudaCapabilities` list, which still
+          builds but wastes time compiling kernels the host can't run.
+        '';
+      };
+
+      instances = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.submodule instanceModule);
+        default = { };
+        description = ''
+          Named vLLM inference server instances. Each becomes a systemd
+                service `vllm-<name>.service`. Instances declare mutual
+                `conflicts` so only one runs at a time on a shared GPU pool.
+        '';
+      };
     };
   };
 
   config = lib.mkIf (enabledInstances != {}) {
+    nixpkgs.overlays = lib.mkAfter [
+      (final: prev:
+        let
+          unstableForVllm = prev.unstable.appendOverlays [ vllmOverlay ];
+        in {
+          inherit (unstableForVllm) vllm vllm-with-batteries;
+        })
+    ];
+
     environment.systemPackages = [ pkgs.vllm-with-batteries ];
 
     # Triton's FileCacheManager.put() writes JIT-compiled `.so`

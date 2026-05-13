@@ -34,7 +34,7 @@ in {
     (python-final: python-prev: {
       # Not yet in nixpkgs.
       opentelemetry-semantic-conventions-ai =
-        python-final.callPackage ./opentelemetry-semantic-conventions-ai { };
+        python-final.callPackage ../../pkgs/opentelemetry-semantic-conventions-ai { };
 
       # vllm 0.20 imports `mistral_common[image]` which only exists from
       # 1.11.0 onward; nixpkgs has 1.8.8.
@@ -110,7 +110,7 @@ in {
       # vllm itself, narrowed to the per-host `gpuTargets`.
       # MAX_JOBS caps build parallelism — nvcc/cicc uses ~6 GiB per job, so
       # 16 on lorian (16C/32T, 256 GiB) leaves comfortable headroom.
-      vllm = (python-final.callPackage ./vllm {
+      vllm = (python-final.callPackage ../../pkgs/vllm {
         inherit (final) cudaPackages;
         inherit gpuTargets;
         # ROCm-only args — null out for CUDA-only build.
@@ -137,7 +137,7 @@ in {
   # CUDA into many derivations and stores libraries under lib/. The merged
   # toolkit comes from final.cudaPackages, the same CUDA package set passed to
   # pkgs/vllm/default.nix above.
-  vllm-with-batteries = final.symlinkJoin {
+  vllm-with-batteries = final.symlinkJoin rec {
     name = "${final.vllm.name}-with-batteries";
     paths = [ final.vllm ];
     nativeBuildInputs = [ final.makeWrapper ];
@@ -158,6 +158,7 @@ in {
         ]}
     '';
     passthru = (final.vllm.passthru or { }) // {
+      inherit name;
       inherit runtimeCudaToolkit;
       unwrapped = final.vllm;
     };

@@ -12,20 +12,7 @@ in {
     vital-base = import ./vital-base;
     vllm = import ./vllm;
     
-    base-overlays = { config, lib, pkgs, ... }: {
-      options.vital.vllm.gpuTargets = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-        example = [ "12.0" ];
-        description = ''
-          CUDA compute capabilities to compile vLLM kernels for on this host.
-          Set to the GPU's compute capability — e.g. [ "8.6" ] for a 3090,
-          [ "8.9" ] for a 4090, [ "12.0" ] for a 5090. Leaving this empty
-          falls back to the system-wide `cudaCapabilities` list, which still
-          builds but wastes time compiling kernels the host can't run.
-        '';
-      };
-
+    base-overlays = { ... }: {
       config.nixpkgs.overlays = [
         inputs.muxwarden.overlays.default
         (final: prev: rec {
@@ -42,16 +29,12 @@ in {
               inputs.stt-server.overlays.default
               inputs.shepherd.overlays.default
               (import ../pkgs/cuda-13-overlay.nix)
-              (import ../pkgs/vllm-overlay.nix {
-                inherit (config.vital.vllm) gpuTargets;
-              })
             ];
           };
           inherit (unstable)
             n8n glance gemini-cli claude-code-bin codex ollama
             home-assistant-custom-components wyoming-faster-whisper stt-server
-            niri shepherd
-            vllm vllm-with-batteries;
+            niri shepherd;
           noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
             patches = (old.patches or [ ]) ++ [
               # Backported from Mic92's dotfiles:

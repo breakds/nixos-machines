@@ -17,7 +17,7 @@
     };
 
     # 2× RTX 5090 (Blackwell consumer) → sm_120 only.
-    vital.vllm.gpuTargets = [ "12.0" ];
+    services.vllm.gpuTargets = [ "12.0" ];
 
     # CUDA 13.2 (vllm toolkit) emits PTX 8.8 — newer than the embedded
     # PTX-to-SASS compiler in stable nixpkgs's R580.142 driver, which
