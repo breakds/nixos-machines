@@ -184,6 +184,28 @@
               HF_HOME = "%S/vllm/huggingface";
               TRITON_CACHE_DIR = "%S/vllm/triton";
               XDG_CACHE_HOME = "%S/vllm/cache";
+              # Phase 1 — pure-CUTLASS NVFP4 GEMM, no JIT.
+              #
+              # vLLM 0.20's auto-select for NVFP4 GEMM picks
+              # FlashInferCutlassNvFp4LinearKernel first when
+              # FlashInfer's is_supported() check passes (which it does
+              # now that we're on driver R595). That kernel ships no
+              # AOT cubin for sm_120 (Blackwell consumer) and JITs via
+              # ninja at startup. The JIT trips
+              # `ninja: fatal: posix_spawn: No such file or directory`
+              # even with a full toolchain on PATH — reproduces
+              # standalone as root, so not a TP-worker race. Similar
+              # in spirit to flashinfer-ai/flashinfer#2338 (fixed in
+              # 0.6.1; we're on 0.6.4) but a distinct code path.
+              #
+              # CutlassNvFp4LinearKernel is the same underlying CUTLASS
+              # kernel without the FlashInfer wrapper, AOT-compiled
+              # into our vllm build. Slower than the FlashInfer path
+              # for prefill (~20-40%) and decode (~5-15%), but it
+              # boots. Revisit by packaging flashinfer-cubin or
+              # bumping flashinfer past 0.6.4 once the rest of the
+              # deployment is validated.
+              VLLM_NVFP4_GEMM_BACKEND = "cutlass";
               # CUDA_HOME is the canonical hint torch uses to find nvcc.
               # Pointing at cuda_nvcc's output is enough — torch only
               # looks for $CUDA_HOME/bin/nvcc here.
