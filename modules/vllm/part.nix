@@ -154,18 +154,23 @@
             # Instances share the GPU pool — only one at a time.
             conflicts = map (n: "vllm-${n}.service") otherNames;
 
-            # vllm's profile_cudagraph_memory path needs nvcc at runtime
-            # (and shells out via `which nvcc`, hence `pkgs.which` too).
-            # Without these, torch falls back to /usr/local/cuda which
-            # doesn't exist on NixOS and the worker dies with
-            # "Could not find nvcc and default cuda_home=... doesn't exist".
+            # vLLM/flashinfer JIT-compile CUDA kernels at runtime for
+            # archs that don't ship as AOT cubin (sm_120 NVFP4 GEMM is
+            # the live case). That compilation path needs a real C++
+            # toolchain on the unit's PATH, not just nvcc:
             #
-            # cuda_nvcc comes from unstable's cudaPackages — the same
-            # toolkit (13.2) vllm itself was built against, so version
-            # alignment is automatic.
+            #   - pkgs.which            : `which nvcc` lookups inside torch
+            #   - cudaPackages.cuda_nvcc: nvcc itself, also covers CUDA_HOME
+            #   - backendStdenv.cc      : the CUDA-paired gcc wrapper
+            #                             (provides cc/gcc/g++/c++/ld/ar);
+            #                             matches the toolchain vllm was
+            #                             built against
+            #   - pkgs.ninja            : flashinfer builds via ninja
             path = [
               pkgs.which
               pkgs.unstable.cudaPackages.cuda_nvcc
+              pkgs.unstable.cudaPackages.backendStdenv.cc
+              pkgs.ninja
             ];
 
             environment = {
