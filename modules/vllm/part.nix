@@ -7,36 +7,27 @@
         cfg = config.services.vllm;
 
         # nixpkgs splits the CUDA toolkit into ~30 derivations
-        # (cuda_nvcc, cuda_cudart, libcublas, ...) where a traditional
-        # install would be a single /usr/local/cuda tree with bin/,
-        # include/, lib/, etc. Flashinfer's runtime JIT assumes the
-        # traditional layout: it does `-isystem $CUDA_HOME/include`
-        # and `-L$CUDA_HOME/lib64 -lcudart`. cuda_nvcc alone only has
-        # nvcc + its own headers — no cuda_runtime.h, no cudart.
+        # (cuda_nvcc, cuda_cudart, libcublas, ...). `cudaPackages.cudatoolkit`
+        # is nixpkgs' canonical unified tree — same one torch's
+        # default.nix references. We use *unstable's* cudaPackages here
+        # because that's what vllm itself was built against (see
+        # pkgs/vllm-overlay.nix: `cudaPackages = prev.cudaPackages_13_2`
+        # applied to the unstable import).
         #
-        # Merge the libraries vllm's own build references
-        # (pkgs/vllm/default.nix `mergedCudaLibraries`) into a single
-        # tree so $CUDA_HOME/{include,lib64,bin} all resolve.
+        # cudnn isn't bundled into cudatoolkit (separate proprietary
+        # license tarball), so layer it on. Then add the lib64→lib
+        # symlink: nixpkgs CUDA libs live under lib/, but flashinfer's
+        # generated build.ninja hardcodes `-L$CUDA_HOME/lib64`.
         cudaToolkit = pkgs.symlinkJoin {
-          name = "vllm-runtime-cuda-toolkit";
+          name = "vllm-cuda-toolkit";
           paths = with pkgs.unstable.cudaPackages; [
-            cuda_nvcc
-            cuda_cudart
-            cuda_cccl
-            cuda_nvrtc
-            cuda_nvtx
-            libcublas
-            libcusolver
-            libcusparse
-            libcurand
-            cudnn
+            cudatoolkit
+            # cudnn's `out` output is empty (just license/nix-support);
+            # its libraries and headers live in split outputs.
+            cudnn.lib
+            cudnn.include
           ];
-          # nixpkgs installs CUDA shared libs into lib/, but flashinfer's
-          # generated build.ninja hardcodes `-L$CUDA_HOME/lib64`. Add the
-          # traditional lib64 → lib symlink so `-lcudart` resolves.
-          postBuild = ''
-            ln -s lib $out/lib64
-          '';
+          postBuild = "ln -s lib $out/lib64";
         };
 
         instanceModule = { name, config, ... }: {
