@@ -48,14 +48,6 @@
         "--dtype" "bfloat16"
         "--max-num-seqs" "8"
         "--trust-remote-code"
-        # TEMP: ViT path on Qwen3.6 VL is hitting "the provided PTX was
-        # compiled with an unsupported toolchain" on driver 580.142 +
-        # CUDA 13.2 (failure inside qwen3_vl.py:806 during profile_run's
-        # vision encoder warmup). The text-only path is fine — weights
-        # load and the LM is happy. Skip the vision encoder until we
-        # narrow down which kernel ships the offending PTX. Remove to
-        # re-enable multimodal.
-        "--language-model-only"
       ];
     };
 
