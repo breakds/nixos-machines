@@ -11,7 +11,7 @@ in {
   flake.nixosModules = {
     vital-base = import ./vital-base;
     vllm = import ./vllm;
-    
+
     base-overlays = { ... }: {
       config.nixpkgs.overlays = [
         inputs.muxwarden.overlays.default
@@ -52,6 +52,7 @@ in {
     };
 
     graphical = import ./graphical;
+    mpvKiosk = import ./mpv-kiosk.nix;
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;
     flatpak = import ./flatpak.nix;

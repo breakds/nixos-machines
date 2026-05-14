@@ -4,35 +4,7 @@
 
 { config, lib, pkgs, ... }:
 
-let
-  mediaDir = "/home/kiosk/Videos";
-
-  kioskRunner = pkgs.writeShellScript "olden-kiosk-runner" ''
-    set -u
-
-    while true; do
-      if ${pkgs.findutils}/bin/find "${mediaDir}" -maxdepth 1 -type f \
-          \( -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.mov' -o -iname '*.webm' -o -iname '*.m4v' \) \
-          | ${pkgs.gnugrep}/bin/grep -q .; then
-        echo "olden-kiosk: starting mpv"
-        ${pkgs.mpv}/bin/mpv \
-          --fullscreen \
-          --loop-playlist=inf \
-          --no-osc \
-          --no-input-default-bindings \
-          --cursor-autohide=always \
-          --hwdec=auto-safe \
-          "${mediaDir}"
-        echo "olden-kiosk: mpv exited; restarting in 5s"
-      else
-        echo "olden-kiosk: waiting for videos in ${mediaDir}"
-      fi
-
-      sleep 5
-    done
-  '';
-
-in {
+{
   imports = [ ./hardware-configuration.nix ];
 
   config = {
@@ -43,20 +15,11 @@ in {
       shell = pkgs.zsh;
     };
 
-    users.users.kiosk = {
-      isNormalUser = true;
-      home = "/home/kiosk";
-      createHome = true;
-      extraGroups = [ "video" "audio" "render" "input" ];
-    };
-
     programs.zsh.enable = true;
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.kernelParams = [ "consoleblank=0" ];
-
     networking.hostName = "olden"; # Define your hostname.
     networking.hostId = "7E689A4B";
     networking.useDHCP = lib.mkDefault true;
@@ -94,21 +57,12 @@ in {
       pulse.enable = true;
     };
 
-    systemd.tmpfiles.rules = [ "d ${mediaDir} 0755 kiosk kiosk -" ];
-
-    services.cage = {
+    services.mpvKiosk = {
       enable = true;
-      user = "kiosk";
-      program = "${kioskRunner}";
+      mediaDir = "/home/kiosk/Videos";
     };
 
-    systemd.services."cage-tty1".serviceConfig = {
-      Restart = "always";
-      RestartSec = 5;
-      StartLimitIntervalSec = 0;
-    };
-
-    environment.systemPackages = with pkgs; [ mpv vim git ];
+    environment.systemPackages = with pkgs; [ vim git ];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

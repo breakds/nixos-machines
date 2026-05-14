@@ -11,6 +11,7 @@ in {
       inputs.nixos-home.nixosModules.breakds-home
 
       self.nixosModules.base-overlays
+      self.nixosModules.mpvKiosk
     ];
   };
 }

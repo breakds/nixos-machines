@@ -12,6 +12,7 @@ in {
 
       self.nixosModules.base-overlays
       self.nixosModules.graphical
+      self.nixosModules.mpvKiosk
       self.nixosModules.iphone-connect
       self.nixosModules.niri
       self.nixosModules.flatpak
