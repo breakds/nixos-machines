@@ -6,6 +6,7 @@
       claude-code-bin
       codex
       shepherd
+      pi-coding-agent
     ];
 
     home-manager.users.breakds = {
