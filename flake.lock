@@ -126,6 +126,21 @@
     },
     "crane_5": {
       "locked": {
+        "lastModified": 1778106249,
+        "narHash": "sha256-cM/AuKy5tMhwOOQIbha8ZRRMHVfNf7cv2aljIw+qoCg=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "6d015ea29630b7ad2402841386da2cb617a470a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_6": {
+      "locked": {
         "lastModified": 1768873933,
         "narHash": "sha256-CfyzdaeLNGkyAHp3kT5vjvXhA1pVVK7nyDziYxCPsNk=",
         "owner": "ipetkov",
@@ -569,7 +584,7 @@
     "reading-desk": {
       "inputs": {
         "advisory-db": "advisory-db_4",
-        "crane": "crane_5",
+        "crane": "crane_6",
         "flake-parts": "flake-parts_6",
         "nixpkgs": [
           "toylet-notes",
@@ -605,6 +620,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "shepherd": "shepherd",
         "stt-server": "stt-server",
+        "tiny-share": "tiny-share",
         "toylet-notes": "toylet-notes",
         "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
@@ -724,6 +740,30 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tiny-share": {
+      "inputs": {
+        "crane": "crane_5",
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778872024,
+        "narHash": "sha256-ziqkzjfWVPIcLYCQgfQ3aEXRNR4SHOZaBd3qP9/b24A=",
+        "owner": "breakds",
+        "repo": "tiny-share",
+        "rev": "951373ae726d87aff260f7786ed069074478bf47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "tiny-share",
         "type": "github"
       }
     },

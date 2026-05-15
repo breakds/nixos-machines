@@ -32,6 +32,7 @@ in {
 
       inputs.toylet-notes.nixosModules.default
       inputs.stt-server.nixosModules.default
+      inputs.tiny-share.nixosModules.tiny-share
     ];
   };
 }
