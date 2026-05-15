@@ -68,6 +68,20 @@ in {
       nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
     };
 
+    # Client side of tiny-share: makes `share` available on PATH and drops
+    # the per-user config so `share put …` knows where to ssh. Server side
+    # lives in machines/octavian/services/tiny-share.nix.
+    tiny-share-client = { config, lib, pkgs, ... }: {
+      nixpkgs.overlays = [ inputs.tiny-share.overlays.default ];
+
+      environment.systemPackages = [ pkgs.tiny-share ];
+
+      home-manager.users.${config.vital.mainUser}.xdg.configFile."tiny-share/config.toml".text = ''
+        remote = "tinyshare@share.breakds.org"
+        base_url = "https://share.breakds.org"
+      '';
+    };
+
     builder-cache-valley = { config, lib, pkgs, ... }: {
       imports = [ ../base/build-machines-v2.nix ];
       config = {

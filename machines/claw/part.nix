@@ -21,6 +21,7 @@ in {
       self.nixosModules.niri
       self.nixosModules.flatpak
       self.nixosModules.localsend
+      self.nixosModules.tiny-share-client
       self.nixosModules.builder-cache-valley
       self.nixosModules.qmk
       self.nixosModules.sunshine
