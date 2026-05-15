@@ -20,6 +20,7 @@ in {
         self.nixosModules.machine-learning
         self.nixosModules.vllm
         self.nixosModules.builder-cache-valley
+        self.nixosModules.tiny-share-client
         self.nixosModules.coding-agent
       ];
     };
@@ -35,9 +36,10 @@ in {
 
         self.nixosModules.base-overlays
         self.nixosModules.graphical
-        self.nixosModules.prometheus-exporters        
+        self.nixosModules.prometheus-exporters
         self.nixosModules.machine-learning
         self.nixosModules.ollama
+        self.nixosModules.tiny-share-client
         self.nixosModules.coding-agent
       ];
     };

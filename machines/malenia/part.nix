@@ -21,6 +21,7 @@ in {
       self.nixosModules.wonder-devops
       self.nixosModules.prometheus-exporters
       self.nixosModules.ollama
+      self.nixosModules.tiny-share-client
 
       # Development Assistants
       self.nixosModules.coding-agent
