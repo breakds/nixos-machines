@@ -754,11 +754,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778872024,
-        "narHash": "sha256-ziqkzjfWVPIcLYCQgfQ3aEXRNR4SHOZaBd3qP9/b24A=",
+        "lastModified": 1778879484,
+        "narHash": "sha256-scxqy7dZnZVyVGWqGAzt8gz3Axdo8hsjekWnySUDdaM=",
         "owner": "breakds",
         "repo": "tiny-share",
-        "rev": "951373ae726d87aff260f7786ed069074478bf47",
+        "rev": "4fe0ddfb9c4daa30feebd50ef2bad6683acaaf1e",
         "type": "github"
       },
       "original": {
