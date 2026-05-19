@@ -21,6 +21,18 @@ in {
       description = "Container IP address (e.g. 10.55.1.2).";
     };
 
+    bridgeName = lib.mkOption {
+      type = lib.types.str;
+      default = "br-post-box";
+      description = "Host bridge interface for the post-box container network.";
+    };
+
+    prefixLength = lib.mkOption {
+      type = lib.types.int;
+      default = 24;
+      description = "IPv4 prefix length for the post-box bridge network.";
+    };
+
     user = lib.mkOption {
       type = lib.types.str;
       description = "The user to create inside the container.";
@@ -34,11 +46,20 @@ in {
   };
   
   config = lib.mkIf cfg.enable {
+    networking.networkmanager.unmanaged = [ "interface-name:${cfg.bridgeName}" ];
+
+    networking.bridges.${cfg.bridgeName}.interfaces = [];
+
+    networking.interfaces.${cfg.bridgeName}.ipv4.addresses = [{
+      address = cfg.hostIp;
+      prefixLength = cfg.prefixLength;
+    }];
+
     containers.post-box = {
       autoStart = true;
       privateNetwork = true;
-      hostAddress = cfg.hostIp;
-      localAddress = cfg.localIp;
+      hostBridge = cfg.bridgeName;
+      localAddress = "${cfg.localIp}/${toString cfg.prefixLength}";
 
       config = { ... }: {
         nixpkgs.pkgs = pkgs;
@@ -95,6 +116,17 @@ in {
           '';
         };
       };
+    };
+
+    systemd.services."container@post-box" = {
+      after = [
+        "${cfg.bridgeName}-netdev.service"
+        "network-addresses-${cfg.bridgeName}.service"
+      ];
+      requires = [
+        "${cfg.bridgeName}-netdev.service"
+        "network-addresses-${cfg.bridgeName}.service"
+      ];
     };
   };
 }
