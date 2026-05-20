@@ -173,4 +173,9 @@ rec {
   vllm = {
     port = 11080;
   };
+
+  forgejo = {
+    domain = "git.breakds.org";
+    port = 5970;
+  };
 }

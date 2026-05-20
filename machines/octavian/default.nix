@@ -31,6 +31,7 @@
     ./services/stt-server.nix
     ./services/toylet-notes.nix
     ./services/tiny-share.nix
+    ./services/forgejo.nix
     ../../base/vpn.nix
   ];
 
