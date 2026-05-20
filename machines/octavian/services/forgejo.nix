@@ -55,6 +55,12 @@ in {
       service = {
         DISABLE_REGISTRATION = true;
       };
+
+      # TLS terminates at nginx, so Forgejo sees plain HTTP and won't set the
+      # Secure flag on session cookies on its own. Force it on.
+      session = {
+        COOKIE_SECURE = true;
+      };
     };
   };
 
