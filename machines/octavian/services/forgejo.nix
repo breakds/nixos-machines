@@ -6,6 +6,10 @@ in {
   services.forgejo = {
     enable = true;
 
+    lfs = {
+      enable = true;
+    };
+
     database = {
       type = "postgres";
       host = "unix:/run/postgresql";
