@@ -21,12 +21,10 @@ in {
         DOMAIN = registry.domain;
         ROOT_URL = "https://${registry.domain}";
         # Use host's sshd for git operations.
-        # START_SSH_SERVER = true is a workaround for the module state machine:
-        # it prevents the module from overriding openssh settings (AcceptEnv),
-        # while DISABLE_SSH = true tells Forgejo not to start its own SSH server.
-        # Net result: git SSH goes through port 22 via host sshd, and the module
-        # still manages authorized_keys for the forgejo user.
-        START_SSH_SERVER = true;
+        # DISABLE_SSH = true tells Forgejo not to start its own SSH server.
+        # The NixOS module sets AcceptEnv GIT_PROTOCOL on the host sshd for
+        # CVE-2023-27655 mitigation. Git SSH goes through port 22 via host sshd,
+        # and Forgejo manages authorized_keys for the forgejo user.
         DISABLE_SSH = true;
         SSH_PORT = 22;
       };
