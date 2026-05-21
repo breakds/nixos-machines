@@ -8,11 +8,9 @@ in {
    *
    * System user: forgejo (default, used for process execution and file ownership)
    * PostgreSQL:  forgejo/forgejo db+user (created via NixOS declarative config)
-   * SSH clone:   git@... (SSH_USER = "git" for familiar clone URLs)
+   * SSH clone:   forgejo@... (clone URLs match the actual system user)
    *
-   * The SSH_USER display name is "git" while the actual system user is "forgejo".
-   * sshd authenticates via the managed authorized_keys file, not the URL username.
-   * Users clone with: git clone git@git.breakds.org:owner/repo.git
+   * Users clone with: git clone forgejo@git.breakds.org:owner/repo.git
    */
 
   services.forgejo = {
@@ -41,13 +39,13 @@ in {
         DOMAIN = registry.domain;
         ROOT_URL = "https://${registry.domain}";
 
-        # Git over SSH: clone URL is git@git.breakds.org:owner/repo.git
+        # Git over SSH: clone URL is forgejo@git.breakds.org:owner/repo.git
         # Forgejo does NOT start its own SSH server — it uses the host's sshd.
         # Users add their SSH public key in Forgejo's web UI, and Forgejo writes
         # it to the authorized_keys file for the "forgejo" system user.
         # The host's sshd authenticates the connection, and Forgejo handles the git
         # operation via the command= prefix in authorized_keys.
-        SSH_USER = "git";  # displayed in clone URLs (e.g. git@git.breakds.org)
+        SSH_USER = "forgejo";  # displayed in clone URLs
         SSH_PORT = 22;
       };
 
