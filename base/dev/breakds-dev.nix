@@ -34,8 +34,6 @@
       azure-storage-azcopy
       xh
       miniserve  # miniserve --index index.html --spa .
-      # TODO(breakds): Re-enable this when the insecure poetry issue is resolved.
-      # nixops_unstable
       tmux
       zellij      
       fd
@@ -43,6 +41,7 @@
       marksman  # Markdown Language Server
       waypipe
       muxwarden
+      forgejo-cli
 
       pv  # pipe viewer
       asciinema
