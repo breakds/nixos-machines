@@ -29,5 +29,6 @@ status_line = ["model-with-reasoning", "current-dir", "context-usage", "used-tok
 terminal_title = ["project", "git-branch", "status", "thread", "task-progress"]
 
 [features]
-# apply_patch_freeform = true
 streamable_shell = true
+apps = false
+enable_mcp_apps = false

@@ -96,11 +96,17 @@ in {
       };
     };
 
+    coding-agent = { config, lib, pkgs, ... }: {
+      imports = [
+        ./coding-agent
+        inputs.skillful.nixosModules.default
+      ];
+    };
+
     syncthing = import ./syncthing.nix;
     glance = import ./glance;
     prometheus-exporters = import ./prometheus/exporters.nix;
     localsend = import ./localsend.nix;
-    coding-agent = import ./coding-agent;
     qmk = import ./qmk.nix;
     sunshine = import ./sunshine.nix;
     filerun = import ./filerun.nix;  # TODO(breakds): Upgrade filerun

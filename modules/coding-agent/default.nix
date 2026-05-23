@@ -9,6 +9,12 @@
       pi-coding-agent
     ];
 
+    programs.skillful = {
+      user = "breakds";
+      enabledAgents = [ "pi" "codex" "claude" ];
+      skills = [ "nix-scaffolding" "shepherd-submit" ];
+    };
+
     home-manager.users.breakds = {
       home.file = {
         # User specific claude code configurations

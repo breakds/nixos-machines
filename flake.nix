@@ -54,6 +54,10 @@
     tiny-share.url = "github:breakds/tiny-share";
     tiny-share.inputs.nixpkgs.follows = "nixpkgs-unstable";
     tiny-share.inputs.flake-parts.follows = "flake-parts";
+
+    skillful.url = "github:breakds/skillful";
+    skillful.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    skillful.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
@@ -82,7 +86,7 @@
         ./machines/octavian/part.nix
         ./machines/learners/part.nix
         # hand is archived for now
-        # ./machines/hand/part.nix 
+        # ./machines/hand/part.nix
         ./machines/claw/part.nix
         ./machines/brock/part.nix
         ./machines/olden/part.nix

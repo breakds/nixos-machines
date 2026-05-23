@@ -619,6 +619,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "shepherd": "shepherd",
+        "skillful": "skillful",
         "stt-server": "stt-server",
         "tiny-share": "tiny-share",
         "toylet-notes": "toylet-notes",
@@ -670,6 +671,29 @@
       "original": {
         "type": "git",
         "url": "ssh://git@github.com/breakds/shepherd"
+      }
+    },
+    "skillful": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779549662,
+        "narHash": "sha256-11wNCx3esK68zCnAH8tM7JP40t3AM8YW+MgWG+7yRE0=",
+        "owner": "breakds",
+        "repo": "skillful",
+        "rev": "8254b481c039afb4cc6c3ac3ba1a670562b2d8ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "breakds",
+        "repo": "skillful",
+        "type": "github"
       }
     },
     "stt-server": {
