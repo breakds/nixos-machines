@@ -4,6 +4,65 @@ let
   registry = (import ../../../data/service-registry.nix).home-assistant;
   haPkgs = config.services.home-assistant.package.python.pkgs;
 
+  mkAcThermostat = {
+    name,
+    entity,
+    coolAbove,
+    coolTo,
+    stopBelow,
+    debounce ? { minutes = 1; },
+  }: [
+    {
+      alias = "Cool ${name}";
+      mode = "single";
+      triggers = [{
+        trigger = "numeric_state";
+        entity_id = entity;
+        attribute = "current_temperature";
+        above = coolAbove;
+        for = debounce;
+      }];
+      conditions = [{
+        condition = "state";
+        entity_id = entity;
+        state = "off";
+      }];
+      actions = [
+        {
+          action = "climate.set_hvac_mode";
+          target.entity_id = entity;
+          data.hvac_mode = "cool";
+        }
+        {
+          action = "climate.set_temperature";
+          target.entity_id = entity;
+          data.temperature = coolTo;
+        }
+      ];
+    }
+    {
+      alias = "Stop Cooling ${name}";
+      mode = "single";
+      triggers = [{
+        trigger = "numeric_state";
+        entity_id = entity;
+        attribute = "current_temperature";
+        below = stopBelow;
+        for = debounce;
+      }];
+      conditions = [{
+        condition = "state";
+        entity_id = entity;
+        state = "cool";
+      }];
+      actions = [{
+        action = "climate.set_hvac_mode";
+        target.entity_id = entity;
+        data.hvac_mode = "off";
+      }];
+    }
+  ];
+
 in {
   # NOTE: When starting a fresh instance, you will need to click "CREATE MY
   # SMART HOME" and set up your username and password.
@@ -39,6 +98,14 @@ in {
       };
 
       "automation ui" = "!include automations.yaml";
+
+      "automation declared" = mkAcThermostat {
+        name = "Garage";
+        entity = "climate.gree_ac_garage";
+        coolAbove = 30;
+        coolTo = 25;
+        stopBelow = 21;
+      };
 
       ffmpeg = {};
     };
