@@ -12,7 +12,11 @@
     programs.skillful = {
       user = "breakds";
       enabledAgents = [ "pi" "codex" "claude" ];
-      skills = [ "nix-scaffolding" "shepherd-submit" ];
+      skills = [
+        "nix-scaffolding"
+        "shepherd-submit"
+        "grill-with-docs"
+      ];
     };
 
     home-manager.users.breakds = {
