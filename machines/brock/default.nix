@@ -38,11 +38,9 @@
     # | Desktop  |
     # +----------+
 
-    # Temporarily disabled while brock is repurposed as an mpv kiosk.
-    # Re-enable this block when converting brock back to a desktop machine.
-    # vital.graphical = {
-    #   enable = true;
-    # };
+    vital.graphical = {
+      enable = true;
+    };
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
@@ -80,11 +78,6 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-    };
-
-    services.mpvKiosk = {
-      enable = true;
-      mediaDir = "/home/kiosk/Videos";
     };
 
     programs.firefox.enable = true;
