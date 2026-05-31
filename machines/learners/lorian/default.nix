@@ -52,6 +52,10 @@
     #
     # --max-num-seqs caps concurrent requests so the activation-VRAM
     # spikes during prefill stay bounded; tune up if requests queue.
+    #
+    # The upstream checkpoint now includes its own MTP module. Use it as a
+    # speculative draft model for faster decode without loading a separate
+    # draft checkpoint.
     services.vllm.instances.main = {
       model = "unsloth/Qwen3.6-27B-NVFP4";
       tensorParallelSize = 2;
@@ -64,6 +68,7 @@
         "--dtype" "bfloat16"
         "--max-num-seqs" "8"
         "--trust-remote-code"
+        "--speculative-config" ''{"method":"mtp","num_speculative_tokens":3}''
       ];
     };
 
