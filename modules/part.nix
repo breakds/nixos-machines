@@ -57,14 +57,6 @@ in {
     steam = import ./steam.nix;
     laptop = import ./laptop.nix;
 
-    wonder-devops = { config, lib, pkgs, ... }: {
-      nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
-    };
-
-    overlay-wonder-devops = { config, lib, pkgs, ... }: {
-      nixpkgs.overlays = [ inputs.wonder-devops.overlays.default ];
-    };
-
     # Client side of tiny-share: makes `share` available on PATH and drops
     # the per-user config so `share put …` knows where to ssh. Server side
     # lives in machines/octavian/services/tiny-share.nix.

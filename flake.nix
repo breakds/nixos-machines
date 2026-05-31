@@ -24,13 +24,6 @@
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
 
-    wonder-devops.url =
-      "git+ssh://git@github.com/quant-wonderland/devops-tools";
-    wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
-
-    interm.url = "git+ssh://git@github.com/breakds/interm";
-    interm.inputs.nixpkgs.follows = "nixpkgs";
-
     ml-pkgs.url = "github:nixvital/ml-pkgs";
     ml-pkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
 

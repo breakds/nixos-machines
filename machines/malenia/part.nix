@@ -18,7 +18,6 @@ in {
       self.nixosModules.steam
       self.nixosModules.machine-learning
       self.nixosModules.flatpak
-      self.nixosModules.wonder-devops
       self.nixosModules.prometheus-exporters
       self.nixosModules.ollama
       self.nixosModules.tiny-share-client

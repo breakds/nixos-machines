@@ -297,21 +297,6 @@
         "type": "github"
       }
     },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1659877975,
-        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "game-solutions": {
       "inputs": {
         "ml-pkgs": "ml-pkgs",
@@ -375,27 +360,6 @@
         "ref": "release-26.05",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "interm": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils_2"
-      },
-      "locked": {
-        "lastModified": 1700441345,
-        "narHash": "sha256-HT0Qpmy5NzwoUbHo4hQrAJ4wSFoHTaLT90OQRebQH88=",
-        "ref": "refs/heads/main",
-        "rev": "c579f373f7677702dc3255617c09b7ddad8ed98b",
-        "revCount": 17,
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/interm"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/breakds/interm"
       }
     },
     "lanzaboote": {
@@ -611,7 +575,6 @@
         "flake-parts": "flake-parts",
         "game-solutions": "game-solutions",
         "home-manager": "home-manager",
-        "interm": "interm",
         "lanzaboote": "lanzaboote",
         "ml-pkgs": "ml-pkgs_2",
         "muxwarden": "muxwarden",
@@ -624,7 +587,6 @@
         "stt-server": "stt-server",
         "tiny-share": "tiny-share",
         "toylet-notes": "toylet-notes",
-        "wonder-devops": "wonder-devops",
         "www-breakds-org": "www-breakds-org"
       }
     },
@@ -753,21 +715,6 @@
         "type": "github"
       }
     },
-    "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "tiny-share": {
       "inputs": {
         "crane": "crane_5",
@@ -839,24 +786,6 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_3": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
         "lastModified": 1710146030,
         "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
@@ -870,33 +799,12 @@
         "type": "github"
       }
     },
-    "wonder-devops": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1672223683,
-        "narHash": "sha256-2m8z3Vb+KXibep3olNCy+yr3+SHDe+QhD4IVeYE61O0=",
-        "ref": "refs/heads/master",
-        "rev": "fc324a724b00bac5ceed98134296433519d4fa77",
-        "revCount": 506,
-        "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/devops-tools"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/devops-tools"
-      }
-    },
     "www-breakds-org": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_3"
+        "utils": "utils_2"
       },
       "locked": {
         "lastModified": 1724584698,
