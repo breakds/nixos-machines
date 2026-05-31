@@ -14,7 +14,7 @@ in {
         inputs.muxwarden.overlays.default
         (final: prev: rec {
           unstable = import inputs.nixpkgs-unstable {
-            inherit (final) system;
+            inherit (final.stdenv.hostPlatform) system;
             config = {
               allowUnfree = true;
               cudaSupport = true;

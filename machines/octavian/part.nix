@@ -6,7 +6,8 @@ in {
   flake.nixosModules.first-party-software = {
     nixpkgs.overlays = [
       (final: prev: {
-        www-breakds-org = inputs.www-breakds-org.defaultPackage."${final.system}";
+        www-breakds-org =
+          inputs.www-breakds-org.defaultPackage."${final.stdenv.hostPlatform.system}";
       })
       inputs.game-solutions.overlays.kiseki
     ];
