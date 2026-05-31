@@ -112,7 +112,6 @@ in {
       "ecovacs"
       "whisper"
       "elevenlabs"
-      "wyoming"
       "piper"
       "ollama"
       "go2rtc"
@@ -150,7 +149,6 @@ in {
         pyatv
         zigpy
         tinytuya
-        wyoming
         elevenlabs
         ollama
         aiohomekit
@@ -175,32 +173,6 @@ in {
       proxyWebsockets = true;
     };
   };
-
-  services.wyoming =
-    let wyoming-registry = (import ../../../data/service-registry.nix).wyoming;
-    in {
-      piper.servers.default = {
-        enable = true;
-        voice = "en-us-ryan-high";
-        uri = "tcp://0.0.0.0:${toString wyoming-registry.piper.port}";
-      };
-
-      # Faster whisper is disabled, as we will use stt-server.
-      faster-whisper.servers.default = {
-        enable = false;
-        model = "medium.en";
-        device = "cuda";
-        language = "en";
-        beamSize = 5;
-        uri = "tcp://0.0.0.0:${toString wyoming-registry.faster-whisper.port}";
-      };
-
-      openwakeword = {
-        enable = true;
-        uri = "tcp://0.0.0.0:${toString wyoming-registry.openwakeword.port}";
-        threshold = 0.9;
-      };
-    };
 
   services.matter-server =
     let reg = (import ../../../data/service-registry.nix).matter-server;
