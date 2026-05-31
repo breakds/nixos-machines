@@ -15,9 +15,7 @@
     vital.mainUser = "breakds";
 
     users.users."breakds" = {
-      openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_malenia.pub
-      ];
+      openssh.authorizedKeys.keyFiles = [ ../../data/keys/breakds_malenia.pub ];
       shell = pkgs.zsh;
     };
 
@@ -60,9 +58,7 @@
     # | Desktop  |
     # +----------+
 
-    vital.graphical = {
-      enable = true;
-    };
+    vital.graphical = { enable = true; };
 
     # HiDPI console font for the Framework 13's high-res display.
     # earlySetup copies the font into initrd so systemd-vconsole-setup
@@ -79,8 +75,8 @@
       trezor-suite
       unetbootin
       pavucontrol
-      parsec-bin  # For game streaming
-      xorg.xeyes
+      parsec-bin # For game streaming
+      xeyes
       freecad
       obs-studio
       moonlight-qt
@@ -90,17 +86,15 @@
 
     xdg.mime = {
       enable = true;
-      addedAssociations = {
-        "application/pdf" = "sioyek.desktop";
-      };
+      addedAssociations = { "application/pdf" = "sioyek.desktop"; };
     };
 
     # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
     # GTK_IM_MODULE, QT_IM_MODULE, XMODIFIERS: fcitx works with xwayland
     # (i.e. non-native wayland windows).
     environment.sessionVariables = {
-      NIX_PROFILES =
-        "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+      NIX_PROFILES = "${lib.concatStringsSep " "
+        (lib.reverseList config.environment.profiles)}";
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
@@ -126,9 +120,7 @@
       # If you are not using a desktop environment such as KDE, Xfce, or other
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
-      xresources.properties = {
-        "Xft.dpi" = 144;
-      };
+      xresources.properties = { "Xft.dpi" = 144; };
 
       programs.texlive = {
         enable = true;
@@ -148,9 +140,7 @@
     # | VPN                |
     # +--------------------+
 
-    vital.vpn = {
-      tailscale = true;
-    };
+    vital.vpn = { tailscale = true; };
 
     # +--------------------+
     # | Distributed Build  |

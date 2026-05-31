@@ -1,10 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ../common.nix
-    ../../../base/build-machines.nix
-  ];
+  imports = [ ../common.nix ../../../base/build-machines.nix ];
 
   # +------------------------------+
   # | Hardware Related             |
@@ -12,8 +9,14 @@
 
   # Enable GPU acceleration
   hardware.raspberry-pi."4".fkms-3d.enable = true;
-  
-  services.pulseaudio.enable = true;
+
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
   fileSystems = {
     "/" = {
@@ -34,14 +37,21 @@
   # +------------------------------+
 
   vital.mainUser = "breakds";
-  
+
   # +------------------------------+
   # | Service and Package          |
   # +------------------------------+
-  
+
   environment.systemPackages = with pkgs; [
-    vim emacs git firefox
-    meld dmidecode shuriken asciinema websocat
+    vim
+    emacs
+    git
+    firefox
+    meld
+    dmidecode
+    shuriken
+    asciinema
+    websocat
     lsd
   ];
 
@@ -60,6 +70,6 @@
     enable = true;
     location = "homelab";
   };
-  
-  system.stateVersion = "22.11"; 
+
+  system.stateVersion = "22.11";
 }

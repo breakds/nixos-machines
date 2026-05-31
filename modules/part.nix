@@ -3,10 +3,7 @@
 let self = inputs.self;
 
 in {
-  imports = [
-    ./ollama/part.nix
-    ./extra-mounts/part.nix
-  ];
+  imports = [ ./ollama/part.nix ./extra-mounts/part.nix ];
 
   flake.nixosModules = {
     vital-base = import ./vital-base;
@@ -44,9 +41,9 @@ in {
           });
           noctalia-shell =
             unstable.noctalia-shell.override { inherit noctalia-qs; };
-          ollama-cuda = final.ollama.override { acceleration = "cuda"; };
-          shuriken = final.callPackage ../pkgs/shuriken {};
-          pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel {};
+          ollama-cuda = unstable.ollama-cuda or prev.ollama-cuda;
+          shuriken = final.callPackage ../pkgs/shuriken { };
+          pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel { };
         })
       ];
     };
@@ -76,10 +73,11 @@ in {
 
       environment.systemPackages = [ pkgs.tiny-share ];
 
-      home-manager.users.${config.vital.mainUser}.xdg.configFile."tiny-share/config.toml".text = ''
-        remote = "tinyshare@share.breakds.org"
-        base_url = "https://share.breakds.org"
-      '';
+      home-manager.users.${config.vital.mainUser}.xdg.configFile."tiny-share/config.toml".text =
+        ''
+          remote = "tinyshare@share.breakds.org"
+          base_url = "https://share.breakds.org"
+        '';
     };
 
     builder-cache-valley = { config, lib, pkgs, ... }: {
@@ -91,16 +89,14 @@ in {
           #
           # --extra-substituters "http://10.77.1.35:17777"
           caches = [ "octavian" ];
-          builders = lib.optionals (config.networking.hostName != "malenia") [ "octavian" ] ;
+          builders = lib.optionals (config.networking.hostName != "malenia")
+            [ "octavian" ];
         };
       };
     };
 
     coding-agent = { config, lib, pkgs, ... }: {
-      imports = [
-        ./coding-agent
-        inputs.skillful.nixosModules.default
-      ];
+      imports = [ ./coding-agent inputs.skillful.nixosModules.default ];
     };
 
     syncthing = import ./syncthing.nix;
@@ -109,7 +105,7 @@ in {
     localsend = import ./localsend.nix;
     qmk = import ./qmk.nix;
     sunshine = import ./sunshine.nix;
-    filerun = import ./filerun.nix;  # TODO(breakds): Upgrade filerun
+    filerun = import ./filerun.nix; # TODO(breakds): Upgrade filerun
     arduino = import ./arduino.nix;
     printing = import ./priting.nix;
   };

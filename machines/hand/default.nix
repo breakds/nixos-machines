@@ -14,9 +14,7 @@
     vital.mainUser = "breakds";
 
     users.users."breakds" = {
-      openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_malenia.pub
-      ];
+      openssh.authorizedKeys.keyFiles = [ ../../data/keys/breakds_malenia.pub ];
       shell = pkgs.zsh;
     };
 
@@ -49,9 +47,7 @@
       # Disable UCM profiles to fix built-in microphone on Framework 13 AMD
       # Ryzen AI 300. See: https://github.com/NixOS/nixos-hardware/issues/1603
       wireplumber.extraConfig.no-ucm = {
-        "monitor.alsa.properties" = {
-          "alsa.use-ucm" = false;
-        };
+        "monitor.alsa.properties" = { "alsa.use-ucm" = false; };
       };
     };
 
@@ -66,9 +62,7 @@
     # | Desktop  |
     # +----------+
 
-    vital.graphical = {
-      enable = true;
-    };
+    vital.graphical = { enable = true; };
 
     environment.systemPackages = with pkgs; [
       zoom-us
@@ -76,8 +70,8 @@
       trezor-suite
       unetbootin
       pavucontrol
-      parsec-bin  # For game streaming
-      xorg.xeyes
+      parsec-bin # For game streaming
+      xeyes
       freecad
       obs-studio
       moonlight-qt
@@ -86,16 +80,14 @@
 
     xdg.mime = {
       enable = true;
-      addedAssociations = {
-        "application/pdf" = "sioyek.desktop";
-      };
+      addedAssociations = { "application/pdf" = "sioyek.desktop"; };
     };
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).
     environment.sessionVariables = {
-      NIX_PROFILES =
-        "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+      NIX_PROFILES = "${lib.concatStringsSep " "
+        (lib.reverseList config.environment.profiles)}";
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
@@ -120,9 +112,7 @@
       # If you are not using a desktop environment such as KDE, Xfce, or other
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
-      xresources.properties = {
-        "Xft.dpi" = 144;
-      };
+      xresources.properties = { "Xft.dpi" = 144; };
 
       programs.texlive = {
         enable = true;
@@ -134,9 +124,7 @@
     # | VPN                |
     # +--------------------+
 
-    vital.vpn = {
-      tailscale = true;
-    };
+    vital.vpn = { tailscale = true; };
 
     # +--------------------+
     # | Distributed Build  |

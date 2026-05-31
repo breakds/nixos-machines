@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  registry = (import ../../../data/service-registry.nix).immich;
+let registry = (import ../../../data/service-registry.nix).immich;
 
 in {
   # Rebuild onnxruntime with CUDA so Immich's ML sidecar can use the Tesla T4.
@@ -45,8 +44,6 @@ in {
     database = {
       enable = true;
       createDB = true;
-      enableVectorChord = true;
-      enableVectors = false;
     };
 
     # Dedicated Redis for Immich (unix socket, isolated from anything else).
@@ -102,7 +99,5 @@ in {
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    immich-cli
-  ];
+  environment.systemPackages = with pkgs; [ immich-cli ];
 }

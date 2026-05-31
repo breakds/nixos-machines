@@ -15,9 +15,7 @@
     vital.mainUser = "breakds";
 
     users.users."breakds" = {
-      openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/breakds_malenia.pub
-      ];
+      openssh.authorizedKeys.keyFiles = [ ../../data/keys/breakds_malenia.pub ];
       shell = pkgs.zsh;
     };
 
@@ -38,9 +36,7 @@
     # | Desktop  |
     # +----------+
 
-    vital.graphical = {
-      enable = true;
-    };
+    vital.graphical = { enable = true; };
 
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
@@ -65,9 +61,7 @@
     # Also note, hardware.opengl will rename to `hardware.graphics` in 24.11
     hardware.graphics = {
       enable = true;
-      extraPackages = with pkgs; [
-        vpl-gpu-rt
-      ];
+      extraPackages = with pkgs; [ vpl-gpu-rt ];
     };
 
     # Enable sound with pipewire.
@@ -85,15 +79,15 @@
       zoom-us
       unetbootin
       pavucontrol
-      xorg.xeyes
+      xeyes
       mpv
     ];
 
     # With the following, fcitx can work with xwayland (i.e. non-native wayland
     # windows).
     environment.sessionVariables = {
-      NIX_PROFILES =
-        "${lib.concatStringsSep " " (lib.reverseList config.environment.profiles)}";
+      NIX_PROFILES = "${lib.concatStringsSep " "
+        (lib.reverseList config.environment.profiles)}";
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
@@ -104,9 +98,7 @@
       # If you are not using a desktop environment such as KDE, Xfce, or other
       # that manipulates the X settings for you, you can set the desired DPI
       # setting manually via the Xft.dpi variable in Xresources:
-      xresources.properties = {
-        "Xft.dpi" = 100;
-      };
+      xresources.properties = { "Xft.dpi" = 100; };
 
       programs.texlive = {
         enable = true;

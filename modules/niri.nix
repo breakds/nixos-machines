@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.niri.enable = true;
@@ -17,11 +17,12 @@
   xdg.portal = {
     enable = true;
     config.niri = {
-      default = [ "gtk" ];
+      default = lib.mkForce [ "gtk" ];
       "org.freedesktop.impl.portal.ScreenCast" = "gnome";
       "org.freedesktop.impl.portal.RemoteDesktop" = "gnome";
       "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
     };
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
+    extraPortals =
+      [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
   };
 }

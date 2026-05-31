@@ -1,103 +1,101 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ./lisp.nix
-    ./perf.nix
-  ];
+  imports = [ ./lisp.nix ./perf.nix ];
 
   config = {
-    nixpkgs.config.permittedInsecurePackages = [
-      "beekeeper-studio-5.3.4"
-    ];
+    nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.3.4" ];
 
-    environment.systemPackages = with pkgs; [
-      ripgrep
-      silver-searcher
-      rsync
-      wget
-      zip
-      neovim
-      cntr
-      meld
-      tig
-      nixpkgs-review
-      graphviz
-      graphicsmagick
-      pdftk
-      rustdesk-flutter
-      ffmpeg
-      vlc
-      sqlitebrowser
-      awscli2
-      azure-cli
-      azure-storage-azcopy
-      xh
-      miniserve  # miniserve --index index.html --spa .
-      tmux
-      zellij      
-      fd
-      pandoc
-      marksman  # Markdown Language Server
-      waypipe
-      muxwarden
-      forgejo-cli
+    environment.systemPackages = with pkgs;
+      [
+        ripgrep
+        silver-searcher
+        rsync
+        wget
+        zip
+        neovim
+        cntr
+        meld
+        tig
+        nixpkgs-review
+        graphviz
+        graphicsmagick
+        pdftk
+        rustdesk-flutter
+        ffmpeg
+        vlc
+        sqlitebrowser
+        awscli2
+        azure-cli
+        azure-storage-azcopy
+        xh
+        miniserve # miniserve --index index.html --spa .
+        tmux
+        zellij
+        fd
+        pandoc
+        marksman # Markdown Language Server
+        waypipe
+        muxwarden
+        forgejo-cli
 
-      pv  # pipe viewer
-      asciinema
-      wireshark
-      duckdb
-      websocat
-      bluetuith
+        pv # pipe viewer
+        asciinema
+        wireshark
+        duckdb
+        websocat
+        bluetuith
 
-      # System Tools
-      dmidecode
-      powertop
-      lsof
-      btop
-      pciutils
-      usbutils
-      inetutils
-      file
-      p7zip
-      unzip
-      zstd
-      meld
-      lm_sensors
-      glances
-      tio  # Serieal console TTY
+        # System Tools
+        dmidecode
+        powertop
+        lsof
+        btop
+        pciutils
+        usbutils
+        inetutils
+        file
+        p7zip
+        unzip
+        zstd
+        meld
+        lm_sensors
+        glances
+        tio # Serieal console TTY
 
-      # Font
-      emacs-all-the-icons-fonts
+        # Font
+        emacs-all-the-icons-fonts
 
-      # Customized
-      shuriken
+        # Customized
+        shuriken
 
-      # For accouting
-      beancount
-      fava
+        # For accouting
+        beancount
+        fava
 
-      beekeeper-studio
+        beekeeper-studio
 
-      # C++
-      clang
+        # C++
+        clang
 
-      # Nix specific
-      nix-index
-      nix-init
-      nix-update
-      nixos-container
-      cachix
-      ragenix
+        # Nix specific
+        nix-index
+        nix-init
+        nix-update
+        nixos-container
+        cachix
+        ragenix
 
-      # Audio
-      audacity
-    ] ++ (let
-      hasHM = config ? home-manager && config.home-manager.users ? "breakds";
-      isSway = hasHM && config.home-manager.users."breakds".home.bds.windowManager == "sway";
-      isGdmWayland = config.services.displayManager.gdm.enable && config.services.displayManager.gdm.wayland;
-      isWayland = isSway || isGdmWayland;
-    in [(if isWayland then pkgs.emacs-pgtk else pkgs.emacs)]);
+        # Audio
+        audacity
+      ] ++ (let
+        hasHM = config ? home-manager && config.home-manager.users ? "breakds";
+        isSway = hasHM
+          && config.home-manager.users."breakds".home.bds.windowManager
+          == "sway";
+        isGdmWayland = config.services.displayManager.gdm.enable;
+        isWayland = isSway || isGdmWayland;
+      in [ (if isWayland then pkgs.emacs-pgtk else pkgs.emacs) ]);
 
     programs.nix-ld.enable = true;
     programs.sysdig.enable = true;

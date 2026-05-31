@@ -61,17 +61,17 @@ in {
   # doesn't build those, and the modules-shrunk step fails at modprobe.
   # We mkForce the list down to a Pi-4 minimal set.
   boot.initrd.availableKernelModules = lib.mkForce [
-    "pcie-brcmstb"      # Pi 4's PCIe (the USB3 controller sits on it)
+    "pcie-brcmstb" # Pi 4's PCIe (the USB3 controller sits on it)
     "reset-raspberrypi" # VL805 firmware loader
-    "mmc_block"         # SD card block layer
-    "sdhci-iproc"       # Pi 4 SDHCI controller
-    "xhci_hcd"          # USB3
-    "xhci_pci"          # USB3
+    "mmc_block" # SD card block layer
+    "sdhci-iproc" # Pi 4 SDHCI controller
+    "xhci_hcd" # USB3
+    "xhci_pci" # USB3
     "usb_storage"
     "uas"
     "usbhid"
     "hid_generic"
-    "vc4"               # KMS console (also early modesetting for cage)
+    "vc4" # KMS console (also early modesetting for cage)
   ];
 
   # FKMS overlay applies to downstream-kernel DTBs (which still expose &fb
@@ -110,7 +110,7 @@ in {
     hostId = "be41ff05";
     networkmanager.enable = true;
     # NetworkManager owns the WiFi radio, so leave wpa_supplicant off.
-    wireless.enable = false;
+    wireless.enable = lib.mkForce false;
   };
 
   # +------------------------------+
@@ -142,9 +142,7 @@ in {
   # Created at boot; populate over scp:
   #   scp *.mp4 breakds@kiosk:/var/lib/kiosk-media/
   # Group-writable by `wheel` so breakds can drop new media without sudo.
-  systemd.tmpfiles.rules = [
-    "d ${mediaDir} 2775 kiosk wheel -"
-  ];
+  systemd.tmpfiles.rules = [ "d ${mediaDir} 2775 kiosk wheel -" ];
 
   # +------------------------------+
   # | Kiosk session                |
@@ -168,9 +166,7 @@ in {
   # | Packages                     |
   # +------------------------------+
 
-  environment.systemPackages = with pkgs; [
-    vim git tmux mpv
-  ];
+  environment.systemPackages = with pkgs; [ vim git tmux mpv ];
 
   system.stateVersion = "25.11";
 }

@@ -16,14 +16,16 @@ in {
         http_port = info.port;
       };
 
-      provision.datasources.settings.datasources = [
-        {
-          name = "Prometheus";
-          type = "prometheus";
-          access = "proxy";
-          url = "http://localhost:${toString config.services.prometheus.port}";
-        }
-      ];
+      # Preserve the pre-26.05 implicit default. Rotate this with a real
+      # secret-file provider once existing encrypted Grafana data is migrated.
+      settings.security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
+
+      provision.datasources.settings.datasources = [{
+        name = "Prometheus";
+        type = "prometheus";
+        access = "proxy";
+        url = "http://localhost:${toString config.services.prometheus.port}";
+      }];
 
       # Note: not using provision for reproducible dashboards and alerts at this
       # moment, but their jsons are committed anyway for future improvements.
@@ -36,7 +38,9 @@ in {
           forceSSL = true;
 
           locations."/" = {
-            proxyPass = "http://localhost:${toString config.services.grafana.settings.server.http_port}";
+            proxyPass = "http://localhost:${
+                toString config.services.grafana.settings.server.http_port
+              }";
             proxyWebsockets = true;
           };
         };

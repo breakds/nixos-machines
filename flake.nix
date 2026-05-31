@@ -2,7 +2,7 @@
   description = "Collection of my NixOS machines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -10,21 +10,22 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     lanzaboote.url = "github:nix-community/lanzaboote";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use nixos-home, with the same nixpkgs
-    nixos-home.url = "github:breakds/nixos-home";
+    nixos-home.url = "github:breakds/nixos-home/dev/26.05";
     nixos-home.inputs.nixpkgs.follows = "nixpkgs";
     nixos-home.inputs.home-manager.follows = "home-manager";
 
     www-breakds-org.url = "github:breakds/www.breakds.org";
     www-breakds-org.inputs.nixpkgs.follows = "nixpkgs";
 
-    wonder-devops.url = "git+ssh://git@github.com/quant-wonderland/devops-tools";
+    wonder-devops.url =
+      "git+ssh://git@github.com/quant-wonderland/devops-tools";
     wonder-devops.inputs.nixpkgs.follows = "nixpkgs";
 
     interm.url = "git+ssh://git@github.com/breakds/interm";
@@ -60,24 +61,19 @@
     skillful.inputs.flake-parts.follows = "flake-parts";
   };
 
-  outputs =
-    { self, flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = { self, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       # Uncomment the following line to enable debug, e.g. in nix repl.
       # See https://flake.parts/debug
 
       # debug = true;
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
+      systems = [ "x86_64-linux" "aarch64-linux" ];
 
       perSystem = { config, pkgs, ... }: {
         # This enables running `nix fmt` over all the nix files.
         formatter = pkgs.nixfmt-classic;
-        packages = {
-          shuriken = pkgs.callPackage ./pkgs/shuriken {};
-        };
+        packages = { shuriken = pkgs.callPackage ./pkgs/shuriken { }; };
       };
 
       imports = [
@@ -102,7 +98,8 @@
 
       flake.hydraJobs = {
         liveCD = self.nixosConfigurations.liveCD.config.system.build.isoImage;
-        octavian = self.nixosConfigurations.octavian.config.system.build.toplevel;
+        octavian =
+          self.nixosConfigurations.octavian.config.system.build.toplevel;
         malenia = self.nixosConfigurations.malenia.config.system.build.toplevel;
         # hand is archived for now
         # hand = self.nixosConfigurations.hand.config.system.build.toplevel;

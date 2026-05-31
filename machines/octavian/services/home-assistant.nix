@@ -4,64 +4,58 @@ let
   registry = (import ../../../data/service-registry.nix).home-assistant;
   haPkgs = config.services.home-assistant.package.python.pkgs;
 
-  mkAcThermostat = {
-    name,
-    entity,
-    coolAbove,
-    coolTo,
-    stopBelow,
-    debounce ? { minutes = 1; },
-  }: [
-    {
-      alias = "Cool ${name}";
-      mode = "single";
-      triggers = [{
-        trigger = "numeric_state";
-        entity_id = entity;
-        attribute = "current_temperature";
-        above = coolAbove;
-        for = debounce;
-      }];
-      conditions = [{
-        condition = "state";
-        entity_id = entity;
-        state = "off";
-      }];
-      actions = [
-        {
+  mkAcThermostat = { name, entity, coolAbove, coolTo, stopBelow
+    , debounce ? { minutes = 1; }, }: [
+      {
+        alias = "Cool ${name}";
+        mode = "single";
+        triggers = [{
+          trigger = "numeric_state";
+          entity_id = entity;
+          attribute = "current_temperature";
+          above = coolAbove;
+          for = debounce;
+        }];
+        conditions = [{
+          condition = "state";
+          entity_id = entity;
+          state = "off";
+        }];
+        actions = [
+          {
+            action = "climate.set_hvac_mode";
+            target.entity_id = entity;
+            data.hvac_mode = "cool";
+          }
+          {
+            action = "climate.set_temperature";
+            target.entity_id = entity;
+            data.temperature = coolTo;
+          }
+        ];
+      }
+      {
+        alias = "Stop Cooling ${name}";
+        mode = "single";
+        triggers = [{
+          trigger = "numeric_state";
+          entity_id = entity;
+          attribute = "current_temperature";
+          below = stopBelow;
+          for = debounce;
+        }];
+        conditions = [{
+          condition = "state";
+          entity_id = entity;
+          state = "cool";
+        }];
+        actions = [{
           action = "climate.set_hvac_mode";
           target.entity_id = entity;
-          data.hvac_mode = "cool";
-        }
-        {
-          action = "climate.set_temperature";
-          target.entity_id = entity;
-          data.temperature = coolTo;
-        }
-      ];
-    }
-    {
-      alias = "Stop Cooling ${name}";
-      mode = "single";
-      triggers = [{
-        trigger = "numeric_state";
-        entity_id = entity;
-        attribute = "current_temperature";
-        below = stopBelow;
-        for = debounce;
-      }];
-      conditions = [{
-        condition = "state";
-        entity_id = entity;
-        state = "cool";
-      }];
-      actions = [{
-        action = "climate.set_hvac_mode";
-        target.entity_id = entity;
-        data.hvac_mode = "off";
-      }];
-    }
-  ];
+          data.hvac_mode = "off";
+        }];
+      }
+    ];
 
 in {
   # NOTE: When starting a fresh instance, you will need to click "CREATE MY
@@ -71,17 +65,13 @@ in {
     openFirewall = true;
 
     config = {
-      default_config = {};
+      default_config = { };
 
       http = {
         server_host = "0.0.0.0";
         server_port = registry.port;
         use_x_forwarded_for = true;
-        trusted_proxies = [
-          "0.0.0.0"
-          "127.0.0.1"
-          "::1"
-        ];
+        trusted_proxies = [ "0.0.0.0" "127.0.0.1" "::1" ];
       };
 
       # Basic configuration
@@ -107,7 +97,7 @@ in {
         stopBelow = 21;
       };
 
-      ffmpeg = {};
+      ffmpeg = { };
     };
 
     extraComponents = [
@@ -130,52 +120,51 @@ in {
       "thread"
     ];
 
-    customComponents = with pkgs.home-assistant-custom-components; [
-      localtuya
-      xiaomi_gateway3
-    ] ++ [
-      (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix {})
-      (haPkgs.callPackage ../../../pkgs/gree_ac/package.nix {})
-    ];
+    customComponents = with pkgs.home-assistant-custom-components;
+      [ localtuya xiaomi_gateway3 ] ++ [
+        (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix { })
+        (haPkgs.callPackage ../../../pkgs/gree_ac/package.nix { })
+      ];
 
-    extraPackages = python-pkgs: with python-pkgs; [
-      psycopg2       # PostgreSQL support
-      gtts           # Google's TTS
-      aiousbwatcher  # USB
-      radios
-      pymetno
-      pychromecast
-      xiaomi-ble
-      pyxiaomigateway
-      python-miio
-      miauth
-      androidtvremote2
-      spotifyaio
-      rachiopy
-      yeelight
-      ibeacon-ble
-      pyipp
-      grpcio          # For Nest
-      grpcio-tools    # For Nest
-      grpcio-status   # For Nest
-      pyatv
-      zigpy
-      tinytuya
-      wyoming
-      elevenlabs
-      ollama
-      aiohomekit
-      ha-ffmpeg
-      python-otbr-api
+    extraPackages = python-pkgs:
+      with python-pkgs; [
+        psycopg2 # PostgreSQL support
+        gtts # Google's TTS
+        aiousbwatcher # USB
+        radios
+        pymetno
+        pychromecast
+        xiaomi-ble
+        pyxiaomigateway
+        python-miio
+        miauth
+        androidtvremote2
+        spotifyaio
+        rachiopy
+        yeelight
+        ibeacon-ble
+        pyipp
+        grpcio # For Nest
+        grpcio-tools # For Nest
+        grpcio-status # For Nest
+        pyatv
+        zigpy
+        tinytuya
+        wyoming
+        elevenlabs
+        ollama
+        aiohomekit
+        ha-ffmpeg
+        python-otbr-api
 
-      # Weather
-      accuweather
-      pyopenweathermap
+        # Weather
+        accuweather
+        pyopenweathermap
 
-      # Calendar
-      gcal-sync
-      oauth2client
-    ];
+        # Calendar
+        gcal-sync
+        oauth2client
+      ];
   };
 
   services.nginx.virtualHosts."${registry.domain}" = {
@@ -187,44 +176,43 @@ in {
     };
   };
 
-  services.wyoming = let wyoming-registry = (import ../../../data/service-registry.nix).wyoming;
-  in {
-    piper.servers.default = {
+  services.wyoming =
+    let wyoming-registry = (import ../../../data/service-registry.nix).wyoming;
+    in {
+      piper.servers.default = {
+        enable = true;
+        voice = "en-us-ryan-high";
+        uri = "tcp://0.0.0.0:${toString wyoming-registry.piper.port}";
+      };
+
+      # Faster whisper is disabled, as we will use stt-server.
+      faster-whisper.servers.default = {
+        enable = false;
+        model = "medium.en";
+        device = "cuda";
+        language = "en";
+        beamSize = 5;
+        uri = "tcp://0.0.0.0:${toString wyoming-registry.faster-whisper.port}";
+      };
+
+      openwakeword = {
+        enable = true;
+        uri = "tcp://0.0.0.0:${toString wyoming-registry.openwakeword.port}";
+        threshold = 0.9;
+      };
+    };
+
+  services.matter-server =
+    let reg = (import ../../../data/service-registry.nix).matter-server;
+    in {
       enable = true;
-      voice = "en-us-ryan-high";
-      uri = "tcp://0.0.0.0:${toString wyoming-registry.piper.port}";
+      port = reg.port;
+      # Pins python-matter-server's link-local interface. CHIP's C++ layer
+      # has its own primary-interface auto-detect that this flag does NOT
+      # influence — the actual fix for that is the igc kernel module
+      # blacklist in machines/octavian/default.nix, which removes the
+      # wrong NIC from CHIP's view entirely. This flag is defense-in-depth
+      # for the python layer.
+      extraArgs.primary-interface = "enp4s0f0";
     };
-
-    # Faster whisper is disabled, as we will use stt-server.
-    faster-whisper.servers.default = {
-      enable = false;
-      model = "medium.en";
-      device = "cuda";
-      language = "en";
-      beamSize = 5;
-      uri = "tcp://0.0.0.0:${toString wyoming-registry.faster-whisper.port}";
-      initialPrompt = ''
-        The user is talking to its AI assistant in his or her home.
-      '';
-    };
-
-    openwakeword = {
-      enable = true;
-      uri = "tcp://0.0.0.0:${toString wyoming-registry.openwakeword.port}";
-      threshold = 0.9;
-    };
-  };
-
-  services.matter-server = let reg = (import ../../../data/service-registry.nix).matter-server;
-  in {
-    enable = true;
-    port = reg.port;
-    # Pins python-matter-server's link-local interface. CHIP's C++ layer
-    # has its own primary-interface auto-detect that this flag does NOT
-    # influence — the actual fix for that is the igc kernel module
-    # blacklist in machines/octavian/default.nix, which removes the
-    # wrong NIC from CHIP's view entirely. This flag is defense-in-depth
-    # for the python layer.
-    extraArgs = [ "--primary-interface=enp4s0f0" ];
-  };
 }
