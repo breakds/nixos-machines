@@ -68,11 +68,6 @@ rec {
     port = 28603;
   };
 
-  code-server = {
-    domain = "code.breakds.org";
-    port = 4445;
-  };
-
   localsend = {
     port = 53317;
   };

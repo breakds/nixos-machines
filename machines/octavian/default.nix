@@ -16,7 +16,6 @@
     ./services/hydra.nix
     ./services/immich.nix
     ./services/media.nix
-    # ./services/code-server.nix
     # ./services/terraria.nix
     ./services/docker-registry.nix
     ./services/paperless.nix
