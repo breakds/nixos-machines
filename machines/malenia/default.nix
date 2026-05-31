@@ -8,7 +8,6 @@
     ../../modules/localsend.nix
     ./services/shepherd-fleet.nix
     # ./clickhouse
-    # ./n8n
   ];
 
   config = {

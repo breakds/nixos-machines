@@ -29,7 +29,7 @@ in {
             ];
           };
           inherit (unstable)
-            n8n glance gemini-cli claude-code-bin codex pi-coding-agent ollama
+            glance gemini-cli claude-code-bin codex pi-coding-agent ollama
             home-assistant-custom-components wyoming-faster-whisper stt-server
             niri shepherd;
           noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
