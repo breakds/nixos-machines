@@ -29,9 +29,8 @@ in {
             ];
           };
           inherit (unstable)
-            glance gemini-cli claude-code-bin codex pi-coding-agent ollama
-            home-assistant-custom-components wyoming-faster-whisper stt-server
-            niri shepherd;
+            claude-code-bin codex pi-coding-agent ollama
+            home-assistant-custom-components stt-server niri shepherd;
           noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
             patches = (old.patches or [ ]) ++ [
               # Backported from Mic92's dotfiles:
