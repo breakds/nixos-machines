@@ -73,13 +73,6 @@ rec {
     port = 4445;
   };
 
-  clickhouse-wonder = {
-    ports = {
-      tcp = 27005;
-      http = 27003;
-    };
-  };
-
   localsend = {
     port = 53317;
   };

@@ -7,7 +7,6 @@
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
     ./services/shepherd-fleet.nix
-    # ./clickhouse
   ];
 
   config = {
@@ -87,16 +86,6 @@
 
     services.prometheus.exporters.node.enable = true;
     services.ollama.host = "0.0.0.0";
-
-    # services.clickhouse-wonder = {
-    #   enable = true;
-    #   # TODO(breakds): Migrate this to dataset directory.
-    #   workDir = "/home/breakds/dataset/clickhouse";
-    #   backup = {
-    #     name = "backups1";
-    #     path = "/var/lib/wonder/warehouse/clickhouse/ClickHouseBackup";
-    #   };
-    # };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
