@@ -14,10 +14,10 @@ in {
         # fails inside the Nix build sandbox. Tracked at nixpkgs#352113.
         doCheck = false;
       });
-      # Unrelated consumers of onnxruntime (rapidocr-onnxruntime via
-      # open-webui, etc.) now inherit the CUDA build and fail the same way
-      # at test time. pythonPackagesExtensions is the canonical way to inject
-      # per-package overrides that propagate through every python3.pkgs scope.
+      # Unrelated consumers of onnxruntime now inherit the CUDA build and fail
+      # the same way at test time. pythonPackagesExtensions is the canonical
+      # way to inject per-package overrides that propagate through every
+      # python3.pkgs scope.
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
         (pyFinal: pyPrev: {
           rapidocr-onnxruntime = pyPrev.rapidocr-onnxruntime.overrideAttrs (_: {

@@ -197,15 +197,6 @@
     };
 
     services.ollama.host = "0.0.0.0";
-    # lorian (10.77.1.128) now serves an OpenAI-compatible API via vLLM on
-    # :8000 instead of ollama on :11434. Keep open-webui's OLLAMA_BASE_URLS
-    # at its module default (octavian's local ollama, used by karakeep) and
-    # add lorian as an OpenAI-compatible backend.
-    services.open-webui.environment = {
-      OPENAI_API_BASE_URLS = "http://10.77.1.128:8000/v1";
-      OPENAI_API_KEYS = "EMPTY";
-    };
-
     nix = {
       settings = {
         max-jobs = lib.mkDefault 12;

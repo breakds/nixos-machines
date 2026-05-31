@@ -40,8 +40,6 @@ let clock = {
           icon = "/assets/filerun.png"; }
         { title = "Blog"; url = "https://www.breakds.org/";
           icon = "/assets/tech_blog.png"; }
-        { title = "Ollama"; url = "https://llm.breakds.org/";
-          icon = "si:ollama"; }
         { title = "Docker"; url = "https://docker.breakds.org/";
           icon = "si:docker"; }
         { title = "Hydra"; url = "https://hydra.breakds.org/";
