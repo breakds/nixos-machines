@@ -807,11 +807,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1724584698,
-        "narHash": "sha256-29/hAVsMpwEzkilr9CCUZb2NXBAghEo92QTAuzbi3G8=",
+        "lastModified": 1780203972,
+        "narHash": "sha256-OArHPV48OwBO1FLTQJ4LYisIX28iCtXwo9eqo4OMSb0=",
         "owner": "breakds",
         "repo": "www.breakds.org",
-        "rev": "2ca12e346f1da12051c9144047b571f51588ea1d",
+        "rev": "9613a3b1d72504376a7e147b6f4f3f025a58ca53",
         "type": "github"
       },
       "original": {
