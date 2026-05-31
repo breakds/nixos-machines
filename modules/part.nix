@@ -31,15 +31,6 @@ in {
           inherit (unstable)
             claude-code-bin codex pi-coding-agent ollama
             home-assistant-custom-components stt-server niri shepherd;
-          noctalia-qs = unstable.noctalia-qs.overrideAttrs (old: {
-            patches = (old.patches or [ ]) ++ [
-              # Backported from Mic92's dotfiles:
-              # https://github.com/Mic92/dotfiles/commit/d0b48e70172bbb2dc87cb279c36570a472bd3921
-              ./patches/noctalia-qs-niri-avoid-duplicate-workspace-rows.patch
-            ];
-          });
-          noctalia-shell =
-            unstable.noctalia-shell.override { inherit noctalia-qs; };
           ollama-cuda = unstable.ollama-cuda or prev.ollama-cuda;
           shuriken = final.callPackage ../pkgs/shuriken { };
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel { };
