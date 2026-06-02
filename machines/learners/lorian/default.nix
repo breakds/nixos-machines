@@ -8,6 +8,7 @@
     ../common.nix
     ../cassandra.nix
     ../../../users/xin.nix
+    ../../../users/brent.nix
   ];
 
   config = {
