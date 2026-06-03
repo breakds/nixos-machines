@@ -45,6 +45,10 @@
     shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
     shepherd.inputs.flake-parts.follows = "flake-parts";
 
+    glovebox.url = "git+ssh://git@github.com/breakds/glovebox";
+    glovebox.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    glovebox.inputs.flake-parts.follows = "flake-parts";
+
     tiny-share.url = "github:breakds/tiny-share";
     tiny-share.inputs.nixpkgs.follows = "nixpkgs-unstable";
     tiny-share.inputs.flake-parts.follows = "flake-parts";

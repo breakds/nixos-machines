@@ -25,6 +25,7 @@ in {
       # Development Assistants
       self.nixosModules.coding-agent
       inputs.shepherd.nixosModules.malenia-fleet
+      inputs.glovebox.nixosModules.deploy-malenia
     ];
   };
 }

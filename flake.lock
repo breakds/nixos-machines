@@ -3,6 +3,22 @@
     "advisory-db": {
       "flake": false,
       "locked": {
+        "lastModified": 1780393993,
+        "narHash": "sha256-oWiGcf+UjyhdJwoxJJFVd/zOenn6rE2Lz9eX/OoUI6M=",
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "501c03f38eadd16a79d6712df424fd7d38369088",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
+    "advisory-db_2": {
+      "flake": false,
+      "locked": {
         "lastModified": 1767016174,
         "narHash": "sha256-/uqlY+aGlb+VsHliRRJVCQkn5cSXRmTzwWwwszOA0Ec=",
         "owner": "rustsec",
@@ -16,7 +32,7 @@
         "type": "github"
       }
     },
-    "advisory-db_2": {
+    "advisory-db_3": {
       "flake": false,
       "locked": {
         "lastModified": 1772776993,
@@ -32,7 +48,7 @@
         "type": "github"
       }
     },
-    "advisory-db_3": {
+    "advisory-db_4": {
       "flake": false,
       "locked": {
         "lastModified": 1767558865,
@@ -48,7 +64,7 @@
         "type": "github"
       }
     },
-    "advisory-db_4": {
+    "advisory-db_5": {
       "flake": false,
       "locked": {
         "lastModified": 1769147429,
@@ -66,6 +82,21 @@
     },
     "crane": {
       "locked": {
+        "lastModified": 1780099841,
+        "narHash": "sha256-EVZd2RsbpreRUDSi9rBwPY+ZxoyMaiEBbZxxhljbaS4=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "0532eb17955225173906d671fb36306bdeb1e2dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
         "lastModified": 1779130139,
         "narHash": "sha256-BLrtr42azquO7MdGFU5a7KiMl3YpFlTeIXqy1fT5GlQ=",
         "owner": "ipetkov",
@@ -79,7 +110,7 @@
         "type": "github"
       }
     },
-    "crane_2": {
+    "crane_3": {
       "locked": {
         "lastModified": 1767319442,
         "narHash": "sha256-TXsJUc+nZflFGWLopUxHwdlxYY+ucxbF5IAPLEX5tc4=",
@@ -94,7 +125,7 @@
         "type": "github"
       }
     },
-    "crane_3": {
+    "crane_4": {
       "locked": {
         "lastModified": 1772560058,
         "narHash": "sha256-NuVKdMBJldwUXgghYpzIWJdfeB7ccsu1CC7B+NfSoZ8=",
@@ -109,7 +140,7 @@
         "type": "github"
       }
     },
-    "crane_4": {
+    "crane_5": {
       "locked": {
         "lastModified": 1767461147,
         "narHash": "sha256-TH/xTeq/RI+DOzo+c+4F431eVuBpYVwQwBxzURe7kcI=",
@@ -124,7 +155,7 @@
         "type": "github"
       }
     },
-    "crane_5": {
+    "crane_6": {
       "locked": {
         "lastModified": 1778106249,
         "narHash": "sha256-cM/AuKy5tMhwOOQIbha8ZRRMHVfNf7cv2aljIw+qoCg=",
@@ -139,7 +170,7 @@
         "type": "github"
       }
     },
-    "crane_6": {
+    "crane_7": {
       "locked": {
         "lastModified": 1768873933,
         "narHash": "sha256-CfyzdaeLNGkyAHp3kT5vjvXhA1pVVK7nyDziYxCPsNk=",
@@ -341,6 +372,31 @@
         "type": "github"
       }
     },
+    "glovebox": {
+      "inputs": {
+        "advisory-db": "advisory-db",
+        "crane": "crane",
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780507675,
+        "narHash": "sha256-5ZH5U6d/7aAz4Swpzh0DTLt1rj9oayTDTVQSg18kuZM=",
+        "ref": "refs/heads/main",
+        "rev": "1f5a87b95f46de8d70cccd2b637045890ff6fa61",
+        "revCount": 10,
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/glovebox"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/glovebox"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -364,7 +420,7 @@
     },
     "lanzaboote": {
       "inputs": {
-        "crane": "crane",
+        "crane": "crane_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -430,8 +486,8 @@
     },
     "muxwarden": {
       "inputs": {
-        "advisory-db": "advisory-db",
-        "crane": "crane_2",
+        "advisory-db": "advisory-db_2",
+        "crane": "crane_3",
         "flake-parts": "flake-parts_4",
         "nixpkgs": [
           "nixpkgs-unstable"
@@ -563,8 +619,8 @@
     },
     "reading-desk": {
       "inputs": {
-        "advisory-db": "advisory-db_4",
-        "crane": "crane_6",
+        "advisory-db": "advisory-db_5",
+        "crane": "crane_7",
         "flake-parts": "flake-parts_6",
         "nixpkgs": [
           "toylet-notes",
@@ -589,6 +645,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "game-solutions": "game-solutions",
+        "glovebox": "glovebox",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "ml-pkgs": "ml-pkgs_2",
@@ -628,8 +685,8 @@
     },
     "shepherd": {
       "inputs": {
-        "advisory-db": "advisory-db_2",
-        "crane": "crane_3",
+        "advisory-db": "advisory-db_3",
+        "crane": "crane_4",
         "flake-parts": [
           "flake-parts"
         ],
@@ -676,8 +733,8 @@
     },
     "stt-server": {
       "inputs": {
-        "advisory-db": "advisory-db_3",
-        "crane": "crane_4",
+        "advisory-db": "advisory-db_4",
+        "crane": "crane_5",
         "flake-parts": "flake-parts_5",
         "ml-pkgs": [
           "ml-pkgs"
@@ -732,7 +789,7 @@
     },
     "tiny-share": {
       "inputs": {
-        "crane": "crane_5",
+        "crane": "crane_6",
         "flake-parts": [
           "flake-parts"
         ],
