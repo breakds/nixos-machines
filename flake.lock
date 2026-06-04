@@ -384,11 +384,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780507675,
-        "narHash": "sha256-5ZH5U6d/7aAz4Swpzh0DTLt1rj9oayTDTVQSg18kuZM=",
+        "lastModified": 1780596608,
+        "narHash": "sha256-+pY6ycxQxtN0NBeuZsl47wUqiqAosIFsapqqc3dfIbo=",
         "ref": "refs/heads/main",
-        "rev": "1f5a87b95f46de8d70cccd2b637045890ff6fa61",
-        "revCount": 10,
+        "rev": "985efdd2fdb62fff3ab2996769f3631d68961577",
+        "revCount": 16,
         "type": "git",
         "url": "ssh://git@github.com/breakds/glovebox"
       },
