@@ -19,7 +19,6 @@ in {
       self.nixosModules.machine-learning
       self.nixosModules.flatpak
       self.nixosModules.prometheus-exporters
-      self.nixosModules.ollama
       self.nixosModules.tiny-share-client
 
       # Development Assistants

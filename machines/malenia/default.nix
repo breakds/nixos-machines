@@ -79,7 +79,6 @@
     ];
 
     services.prometheus.exporters.node.enable = true;
-    services.ollama.host = "0.0.0.0";
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
