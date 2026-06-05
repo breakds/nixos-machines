@@ -41,10 +41,6 @@
     toylet-notes.inputs.nixpkgs.follows = "nixpkgs-unstable";
     toylet-notes.inputs.flake-parts.follows = "flake-parts";
 
-    shepherd.url = "git+ssh://git@github.com/breakds/shepherd";
-    shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    shepherd.inputs.flake-parts.follows = "flake-parts";
-
     glovebox.url = "git+ssh://git@github.com/breakds/glovebox";
     glovebox.inputs.nixpkgs.follows = "nixpkgs-unstable";
     glovebox.inputs.flake-parts.follows = "flake-parts";
@@ -56,6 +52,11 @@
     skillful.url = "github:breakds/skillful";
     skillful.inputs.nixpkgs.follows = "nixpkgs-unstable";
     skillful.inputs.flake-parts.follows = "flake-parts";
+
+    shepherd.url = "git+ssh://git@github.com/breakds/shepherd";
+    shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    shepherd.inputs.flake-parts.follows = "flake-parts";
+    shepherd.inputs.tiny-share.follows = "tiny-share";    
   };
 
   outputs = { self, flake-parts, ... }@inputs:

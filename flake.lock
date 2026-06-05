@@ -692,14 +692,17 @@
         ],
         "nixpkgs": [
           "nixpkgs-unstable"
+        ],
+        "tiny-share": [
+          "tiny-share"
         ]
       },
       "locked": {
-        "lastModified": 1780370773,
-        "narHash": "sha256-faS8P3a4xE4nJU6PTfrSZF/bVGEQ3YFCXPzqIjJ0frs=",
+        "lastModified": 1780671762,
+        "narHash": "sha256-4GcJR3sJbpJ58Juc05UWKD84n4KO2TaNIRCZQwyD400=",
         "ref": "refs/heads/main",
-        "rev": "c2577c2aafee5944c6e2718f096ba35ee2cb73eb",
-        "revCount": 51,
+        "rev": "9e762b560f2fa40502abbc91d7f2fff34a39935a",
+        "revCount": 57,
         "type": "git",
         "url": "ssh://git@github.com/breakds/shepherd"
       },
@@ -798,11 +801,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778879484,
-        "narHash": "sha256-scxqy7dZnZVyVGWqGAzt8gz3Axdo8hsjekWnySUDdaM=",
+        "lastModified": 1780670667,
+        "narHash": "sha256-3btvj5uZH2PID53Yrneb59E7bluNZ3hFURoQ1ux0jpI=",
         "owner": "breakds",
         "repo": "tiny-share",
-        "rev": "4fe0ddfb9c4daa30feebd50ef2bad6683acaaf1e",
+        "rev": "3a60eea09964179e51a28a0515bd1f3f0a7fd687",
         "type": "github"
       },
       "original": {
