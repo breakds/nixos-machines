@@ -62,26 +62,20 @@
       darktable
       go-ethereum
       filezilla
-      woeusb
       axel
       audacious
       audacity
       zoom-us
       thunderbird
-      mullvad-vpn
       unetbootin
       trezor-suite
       inkscape
-      element-desktop
       parsec-bin  # For game streaming
       # python3Packages.archer
-      blender
-      bambu-studio
       openconnect
       anki
       flacon     # audiofile encoder
       pavucontrol
-      aider-chat
     ];
 
     services.prometheus.exporters.node.enable = true;
