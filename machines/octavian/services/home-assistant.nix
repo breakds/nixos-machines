@@ -2,7 +2,7 @@
 
 let
   registry = (import ../../../data/service-registry.nix).home-assistant;
-  haPkgs = config.services.home-assistant.package.python.pkgs;
+  haPkgs = config.services.home-assistant.package.python3Packages;
 
   mkAcThermostat = { name, entity, coolAbove, coolTo, stopBelow
     , debounce ? { minutes = 1; }, }: [
