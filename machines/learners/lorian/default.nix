@@ -53,7 +53,7 @@
         "--dtype" "bfloat16"
         "--max-num-seqs" "8"
         "--trust-remote-code"
-        "--speculative-config" ''{"method":"mtp","num_speculative_tokens":3}''
+        "--speculative-config" ''{"method":"mtp","num_speculative_tokens":2}''
       ];
     };
 
