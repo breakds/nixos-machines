@@ -127,13 +127,16 @@ in {
           python-final.packaging
         ];
 
-        pythonRemoveDeps = (oldAttrs.pythonRemoveDeps or [ ]) ++ [
+        pythonRemoveDeps = builtins.filter
+          (dep: dep != "nvidia-cutlass-dsl")
+          ((oldAttrs.pythonRemoveDeps or [ ]) ++ [
           # New in FlashInfer 0.6.12 metadata; not packaged in nixpkgs and not
           # needed for the vLLM CUDA attention path we use.
           "cuda-tile"
-        ];
+          ]);
 
         dependencies = (oldAttrs.dependencies or [ ]) ++ [
+          python-final.nvidia-cutlass-dsl
           python-final.packaging
           python-final.requests
         ];
