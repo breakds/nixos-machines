@@ -108,20 +108,34 @@ in {
       # vLLM 0.23.0 calls newer FlashInfer APIs, including fp8 KV-cache scale
       # plumbing (`kv_cache_sf`) in prefill. nixpkgs currently ships 0.6.4,
       # which starts but fails under benchmark load with that argument.
-      flashinfer = python-prev.flashinfer.overridePythonAttrs (oldAttrs: rec {
+      flashinfer = (python-prev.flashinfer.override {
+        buildPythonPackage = python-final.buildPythonPackage.override {
+          inherit (python-final.torch) stdenv;
+        };
+      }).overridePythonAttrs (oldAttrs: rec {
         version = "0.6.12";
+        __structuredAttrs = true;
         src = prev.fetchFromGitHub {
           owner = "flashinfer-ai";
           repo = "flashinfer";
           tag = "v${version}";
           fetchSubmodules = true;
-          hash = "sha256-n7Vl8MkKCMhvlhEWlo1rEPqL+IsA1+FsWiX/EL/VPg0=";
+          hash = "sha256-UhLDUM5sNJdOYiEV2wGMdbijsi+SrIi7wgU7eDAJlW8=";
         };
+
+        build-system = (oldAttrs.build-system or [ ]) ++ [
+          python-final.packaging
+        ];
 
         pythonRemoveDeps = (oldAttrs.pythonRemoveDeps or [ ]) ++ [
           # New in FlashInfer 0.6.12 metadata; not packaged in nixpkgs and not
           # needed for the vLLM CUDA attention path we use.
           "cuda-tile"
+        ];
+
+        dependencies = (oldAttrs.dependencies or [ ]) ++ [
+          python-final.packaging
+          python-final.requests
         ];
       });
 
