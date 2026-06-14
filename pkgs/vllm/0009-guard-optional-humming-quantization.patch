@@ -1,0 +1,32 @@
+Treat humming-kernels as an optional quantization backend.
+
+vLLM imports all quantization config classes while probing the model's
+quantization settings. On CUDA, importing HummingConfig immediately imports
+the external humming package, so a build without humming-kernels crashes even
+when the selected model does not use humming quantization.
+
+diff --git a/vllm/model_executor/layers/quantization/__init__.py b/vllm/model_executor/layers/quantization/__init__.py
+--- a/vllm/model_executor/layers/quantization/__init__.py
++++ b/vllm/model_executor/layers/quantization/__init__.py
+@@ -125,7 +125,19 @@ def get_quantization_config(quantization: str) -> type[QuantizationConfig]:
+     from .fbgemm_fp8 import FBGEMMFp8Config
+     from .fp8 import Fp8Config
+     from .fp_quant import FPQuantConfig
+     from .gguf import GGUFConfig
+-    from .humming import HummingConfig
++    try:
++        from .humming import HummingConfig
++    except ModuleNotFoundError:
++        class HummingConfig:
++            @classmethod
++            def override_quantization_method(cls, *args, **kwargs):
++                return None
++
++            @classmethod
++            def from_config(cls, *args, **kwargs):
++                raise ModuleNotFoundError(
++                    "humming-kernels is required for humming quantization"
++                )
+     from .inc import INCConfig
+     from .modelopt import (
+         ModelOptFp8Config,

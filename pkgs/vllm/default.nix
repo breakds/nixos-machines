@@ -372,6 +372,9 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     # hopper/ kernels have been fragile against CUTLASS 4.x, and we don't
     # need FA3 on sm_120. See patch header.
     ./0008-skip-fa3-for-non-hopper.patch
+    # Avoid importing humming-kernels while probing unrelated quantization
+    # methods; the dependency is optional and not packaged here.
+    ./0009-guard-optional-humming-quantization.patch
   ];
 
   postPatch = ''
