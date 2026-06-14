@@ -105,6 +105,26 @@ in {
           sourceRoot = "${src.name}/opentelemetry-instrumentation";
         });
 
+      # vLLM 0.23.0 calls newer FlashInfer APIs, including fp8 KV-cache scale
+      # plumbing (`kv_cache_sf`) in prefill. nixpkgs currently ships 0.6.4,
+      # which starts but fails under benchmark load with that argument.
+      flashinfer = python-prev.flashinfer.overridePythonAttrs (oldAttrs: rec {
+        version = "0.6.12";
+        src = prev.fetchFromGitHub {
+          owner = "flashinfer-ai";
+          repo = "flashinfer";
+          tag = "v${version}";
+          fetchSubmodules = true;
+          hash = "sha256-n7Vl8MkKCMhvlhEWlo1rEPqL+IsA1+FsWiX/EL/VPg0=";
+        };
+
+        pythonRemoveDeps = (oldAttrs.pythonRemoveDeps or [ ]) ++ [
+          # New in FlashInfer 0.6.12 metadata; not packaged in nixpkgs and not
+          # needed for the vLLM CUDA attention path we use.
+          "cuda-tile"
+        ];
+      });
+
       # vllm itself, narrowed to the per-host `gpuTargets`.
       # MAX_JOBS caps build parallelism — nvcc/cicc uses ~6 GiB per job, so
       # 16 on lorian (16C/32T, 256 GiB) leaves comfortable headroom.
