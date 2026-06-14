@@ -29,9 +29,10 @@ in {
         PORT = "${toString registry.ports.ui}";
         DISABLE_SIGNUPS = "true";
         DISABLE_NEW_RELEASE_CHECK = "true";
-        OLLAMA_BASE_URL = "http://localhost:${toString config.services.ollama.port}";
-        INFERENCE_TEXT_MODEL = "gemma3:12b";
-        INFERENCE_IMAGE_MODEL = "gemma3:12b";
+        OPENAI_API_KEY = "ollama";
+        OPENAI_BASE_URL = "http://localhost:${toString config.services.ollama.port}/v1";
+        INFERENCE_TEXT_MODEL = "gemma4:e4b";
+        INFERENCE_IMAGE_MODEL = "gemma4:e4b";
         INFERENCE_CONTEXT_LENGTH = "50000";
       };
     };
