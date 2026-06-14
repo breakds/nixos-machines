@@ -1,4 +1,4 @@
-# Overlay providing vllm 0.20.2, its Python dependency pins, and the
+# Overlay providing vllm 0.23.0, its Python dependency pins, and the
 # `vllm-with-batteries` wrapper that bundles the runtime CUDA toolchain
 # JIT-compiled kernels need (flashinfer, triton).
 #
@@ -34,8 +34,8 @@ in {
       opentelemetry-semantic-conventions-ai =
         python-final.callPackage ../../pkgs/opentelemetry-semantic-conventions-ai { };
 
-      # vllm 0.20 imports `mistral_common[image]` which only exists from
-      # 1.11.0 onward; nixpkgs has 1.8.8.
+      # vllm imports `mistral_common[image]`, which only exists from
+      # 1.11.0 onward; keep this scoped to vLLM until nixpkgs catches up.
       mistral-common = python-prev.mistral-common.overridePythonAttrs (oldAttrs: rec {
         version = "1.11.0";
         src = prev.fetchFromGitHub {

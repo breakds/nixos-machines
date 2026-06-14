@@ -1,31 +1,40 @@
 Drop cuda.txt deps that are not packaged in nixpkgs and that vLLM either
-imports lazily (with a graceful fallback) or doesn't need on our path:
+imports lazily with a fallback or does not need on Lorian's Qwen3.6 NVFP4 path:
 
-  - tilelang: only used by DeepSeek V4's mhc.py (Multi-Head Coalesced).
-    We don't run DeepSeek V4 — its top-level import is lazy.
+  - tilelang: only used by DeepSeek V4 / MHC paths that probe availability
+    through vllm.utils.import_utils.has_tilelang().
   - fastsafetensors: weight_utils.py wraps the import in try/except and
     substitutes a PlaceholderModule on ImportError.
-  - nvidia-cutlass-dsl + quack-kernels: FlashAttention 4 cute-DSL path
-    only. We use FlashAttention 3 via the vendored vllm_flash_attn build.
+  - nvidia-cutlass-dsl + quack-kernels: Python packages for CuteDSL kernels
+    that are not packaged in nixpkgs. The sm_120 build uses vLLM's
+    vendored/source CUTLASS and QuTLASS paths.
+  - tokenspeed-mla: faster MLA with spec decode; not on Qwen3.6 GDN/full-attn.
+  - humming-kernels: optional mixed-precision quantization backend.
 
 flashinfer-cubin and nvidia-cudnn-frontend stay in cuda.txt — both are
-already covered by `pythonRemoveDeps` in the package definition.
+covered by `pythonRemoveDeps` in the package definition. flashinfer-python
+stays too; `pythonRelaxDeps = true` lets us continue using nixpkgs'
+flashinfer package even when its version lags upstream's strict pin.
 
 diff --git a/requirements/cuda.txt b/requirements/cuda.txt
 --- a/requirements/cuda.txt
 +++ b/requirements/cuda.txt
-@@ -12,14 +12,6 @@ torchvision==0.26.0 # Required for phi3v processor. See https://github.com/pytor
- flashinfer-python==0.6.8.post1
- flashinfer-cubin==0.6.8.post1
+@@ -12,18 +12,5 @@ torchvision==0.26.0 # Required for phi3v processor. See https://github.com/pytor
+ flashinfer-python==0.6.12
+ flashinfer-cubin==0.6.12
  apache-tvm-ffi==0.1.9
 -tilelang==0.1.9
- # Cap nvidia-cudnn-frontend (transitive dep of flashinfer) due to
- # breaking changes in 1.19.0
- nvidia-cudnn-frontend>=1.13.0,<1.19.0
--
+ nvidia-cudnn-frontend>=1.19.1
+ 
 -# Required for faster safetensors model loading
--fastsafetensors >= 0.2.2
+-fastsafetensors >= 0.3.2
 -
 -# QuACK and Cutlass DSL for FA4 (cute-DSL implementation)
--nvidia-cutlass-dsl>=4.4.2
+-nvidia-cutlass-dsl[cu13]==4.5.2
 -quack-kernels>=0.3.3
+-
+-# Tokenspeed_MLA for faster mla with spec decode
+-tokenspeed-mla==0.1.2
+-
+-# Humming kernels for quantization gemm
+-humming-kernels[cu13]==0.1.4
