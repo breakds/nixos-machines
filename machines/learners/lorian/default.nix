@@ -20,22 +20,6 @@
     # 2× RTX 5090 (Blackwell consumer) → sm_120 only.
     services.vllm.gpuTargets = [ "12.0" ];
 
-    # CUDA 13.2 (vllm toolkit) emits PTX 8.8 — newer than the embedded
-    # PTX-to-SASS compiler in stable nixpkgs's R580.142 driver, which
-    # tops out at the 13.0 / PTX 8.7 envelope. Surfaces as
-    # cudaErrorUnsupportedPtxVersion inside vllm-flash-attn's prebuilt
-    # ViT kernels during profile_run.
-    #
-    # NVIDIA's CUDA 13.2 GA bundles R595.x as the recommended driver
-    # (NVIDIA CUDA Toolkit Release Notes, Table 3). nixpkgs unstable
-    # already has R595.71.05 in its `linuxPackages.nvidiaPackages.production`
-    # set; pull it via `linuxKernel.packagesFor` so unstable's nvidia
-    # source builds against our host kernel (still on stable 25.05 →
-    # Linux 7.0.3) instead of unstable's default 6.18.
-    hardware.nvidia.package =
-      (pkgs.unstable.linuxKernel.packagesFor config.boot.kernelPackages.kernel)
-      .nvidiaPackages.production;
-
     # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
     # tensor-parallel across both RTX 5090s. NVFP4 weights (~13.5 GB total
     # vs ~27 GB at FP8) free up the KV pool to ~41 GB; with FP8 KV cache

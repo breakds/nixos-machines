@@ -13,7 +13,9 @@
 , jinja2
 , ninja
 , packaging
+, rustPlatform
 , setuptools
+, setuptools-rust
 , setuptools-scm
 , # buildInputs
   onednn
@@ -173,8 +175,8 @@ let
   triton-kernels = fetchFromGitHub {
     owner = "triton-lang";
     repo = "triton";
-    tag = "v3.6.0";
-    hash = "sha256-JFSpQn+WsNnh7CAPlcpOcUp0nyKXNbJEANdXqmkt4Tc=";
+    tag = "v3.5.1";
+    hash = "sha256-dyNRtS1qtU8C/iAf0Udt/1VgtKGSvng1+r2BtvT9RB4=";
   };
 
   # grep for GIT_TAG in the following file
@@ -214,8 +216,8 @@ let
         name = "flash-attention-source";
         owner = "vllm-project";
         repo = "flash-attention";
-        rev = "f5bc33cfc02c744d24a2e9d50e6db656de40611c";
-        hash = "sha256-Bdvg5ROX4EFccrRElYnbGtHS9FD9qLY9ZwYfqTUYOnA=";
+        rev = "dd62dac706b1cf7895bd99b18c6cb7e7e117ee25";
+        hash = "sha256-y6gIgP6a4U0UGzSxP0vjgIzqXoRSdyJei8FYEC6ITNk=";
       };
 
       # Hopper-build-failure fetchpatches (Dao-AILab/flash-attention PRs
@@ -243,7 +245,7 @@ let
 
   cpuSupport = !cudaSupport && !rocmSupport;
 
-  # https://github.com/pytorch/pytorch/blob/v2.9.1/torch/utils/cpp_extension.py#L2407-L2410
+  # https://github.com/pytorch/pytorch/blob/v2.11.0/torch/utils/cpp_extension.py#L2407-L2410
   supportedTorchCudaCapabilities =
     let
       real = [
@@ -344,28 +346,30 @@ in
 
 buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
   pname = "vllm";
-  version = "0.20.2";
+  version = "0.23.0";
   pyproject = true;
+  cargoRoot = "rust";
 
   src = fetchFromGitHub {
     owner = "vllm-project";
     repo = "vllm";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-NqcziIw7zVu8RmZx2HaZ9BEdLpRlNKVFxccDZZdTQfE=";
+    hash = "sha256-ORZbQoZWrplHnNfHf3EDPbIs3o+8bioOYlqQrj3QFFk=";
+  };
+
+  cargoDeps = rustPlatform.fetchCargoVendor {
+    inherit (finalAttrs) pname version src cargoRoot;
+    hash = "sha256-mE87Pu0W4rrhjxuSdg2yzITdie7PEd0DVmfiagkH7bg=";
   };
 
   patches = [
-    # Nix integration: surface cmakeFlags from the derivation into setup.py's
-    # cmake_args, and propagate PYTHONPATH into model-registry subprocesses.
-    ./0002-setup.py-nix-support-respect-cmakeFlags.patch
+    # Nix integration: propagate PYTHONPATH into model-registry subprocesses.
     ./0003-propagate-pythonpath.patch
-    # Drop cuda.txt deps that aren't packaged in nixpkgs (tilelang,
-    # fastsafetensors, nvidia-cutlass-dsl, quack-kernels). Each is either
-    # lazily-imported with a graceful fallback or only used for code paths
-    # we don't run on sm_120 (FA4 / DeepSeek V4). See patch header.
+    # Drop cuda.txt deps that aren't packaged in nixpkgs and are optional or
+    # outside Lorian's Qwen3.6 path. See patch header.
     ./0007-drop-cuda-reqs-without-nixpkgs.patch
-    # Skip building FA3 (Hopper sm_90) entirely — vllm-flash-attn 2.7.2's
-    # hopper/ kernels don't compile against CUTLASS 4.4.2, and we don't
+    # Skip building FA3 (Hopper sm_90) entirely — vllm-flash-attn's
+    # hopper/ kernels have been fragile against CUTLASS 4.x, and we don't
     # need FA3 on sm_120. See patch header.
     ./0008-skip-fa3-for-non-hopper.patch
   ];
@@ -415,7 +419,9 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     jinja2
     ninja
     packaging
+    rustPlatform.cargoSetupHook
     setuptools
+    setuptools-rust
     setuptools-scm
     torch
   ];
@@ -574,6 +580,7 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
         VLLM_TARGET_DEVICE = "cuda";
         CUDA_HOME = "${lib.getDev cudaPackages.cuda_nvcc}";
         TRITON_KERNELS_SRC_DIR = "${lib.getDev triton-kernels}/python/triton_kernels/triton_kernels";
+        CMAKE_ARGS = lib.concatStringsSep " " finalAttrs.cmakeFlags;
       }
     // lib.optionalAttrs rocmSupport {
       VLLM_TARGET_DEVICE = "rocm";
