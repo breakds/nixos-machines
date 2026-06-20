@@ -17,6 +17,39 @@
       hostId = "8e549b2e";
     };
 
+    # Mitigate recurring RTX 5090 Xid 79 "fallen off the bus" events.
+    # The failing device has consistently been the card at PCI 0000:61:00.0.
+    #
+    # Keep the PCIe link out of ASPM low-power states. This costs a little idle
+    # platform power, but removes one class of link retraining / wakeup failures.
+    boot.kernelParams = [ "pcie_aspm=off" ];
+
+    # Disable NVIDIA runtime dynamic power management. On Blackwell this keeps
+    # the GSP/driver away from deeper runtime power transitions that have been
+    # implicated in some Xid 79 reports. Expect higher idle GPU power.
+    boot.extraModprobeConfig = ''
+      options nvidia NVreg_DynamicPowerManagement=0x00
+    '';
+
+    hardware.nvidia.nvidiaPersistenced = true;
+
+    # Power limits are not persistent across reboot / driver reload, so apply
+    # them declaratively after the NVIDIA devices are initialized.
+    systemd.services.lorian-nvidia-power-limit = {
+      description = "Apply RTX 5090 persistence mode and 450 W power limit";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "nvidia-persistenced.service" "systemd-udev-settle.service" ];
+      wants = [ "nvidia-persistenced.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        ${config.hardware.nvidia.package.bin}/bin/nvidia-smi -pm 1
+        ${config.hardware.nvidia.package.bin}/bin/nvidia-smi -pl 450
+      '';
+    };
+
     # 2× RTX 5090 (Blackwell consumer) → sm_120 only.
     services.vllm.gpuTargets = [ "12.0" ];
 
