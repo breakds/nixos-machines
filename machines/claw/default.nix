@@ -136,6 +136,10 @@
       keyFiles = [ ../../data/keys/breakds_malenia.pub ];
     };
 
+    programs.skillful.skills = [
+      "pr-walkthrough"
+    ];
+
     # +--------------------+
     # | VPN                |
     # +--------------------+
