@@ -138,6 +138,7 @@
 
     programs.skillful.skills = [
       "pr-walkthrough"
+      "cdp-test-companion"
     ];
 
     # +--------------------+
