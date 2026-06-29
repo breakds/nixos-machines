@@ -50,6 +50,95 @@
       '';
     };
 
+    # Xid 79 diagnostics. The mitigations above have not stopped the card at
+    # 0000:61:00.0 from periodically falling off the bus, and by the time the
+    # Xid fires the GPU is electrically gone — so the journal only ever shows
+    # the aftermath. These two services capture the missing evidence: what the
+    # GPUs were doing in the seconds *before* the next failure, plus a full
+    # system snapshot at the moment it happens.
+
+    # Continuously sample both GPUs (temp / VRAM temp / power / clocks / PCIe
+    # link) to the journal. Tolerates one GPU vanishing mid-run and keeps
+    # logging the survivor. Inspect with: journalctl -u gpu-telemetry-sampler
+    systemd.services.gpu-telemetry-sampler = {
+      description = "Sample RTX 5090 telemetry for Xid 79 diagnosis";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "lorian-nvidia-power-limit.service" ];
+      path = [ config.hardware.nvidia.package.bin pkgs.coreutils ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        RestartSec = 5;
+        Nice = 10;
+      };
+      script = ''
+        echo "CSV fields: epoch,iso8601,gpu,temp_C,vram_temp_C,power_W,plimit_W,sm_MHz,mem_MHz,util_pct,pstate,pcie_gen,pcie_width"
+        while true; do
+          ts=$(date +%s); iso=$(date -Is)
+          rows=$(timeout 10 nvidia-smi \
+            --query-gpu=index,temperature.gpu,temperature.memory,power.draw,enforced.power.limit,clocks.sm,clocks.mem,utilization.gpu,pstate,pcie.link.gen.current,pcie.link.width.current \
+            --format=csv,noheader,nounits 2>/dev/null || true)
+          if [ -n "$rows" ]; then
+            while IFS= read -r r; do printf '%s,%s,%s\n' "$ts" "$iso" "$r"; done <<< "$rows"
+          else
+            printf '%s,%s,ALL_GPUS_UNREACHABLE\n' "$ts" "$iso"
+          fi
+          sleep 2
+        done
+      '';
+    };
+
+    # Watch the kernel journal and, on any NVRM Xid, dump a full system
+    # snapshot (telemetry lead-up + sensors + nvidia-smi -q + PCIe link/error
+    # registers) to /var/log/gpu-xid-events/xid-<epoch>.txt for offline review.
+    systemd.services.gpu-xid-watch = {
+      description = "Capture a full snapshot on NVIDIA Xid events";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "systemd-journald.service" ];
+      path = [
+        config.systemd.package config.hardware.nvidia.package.bin
+        pkgs.lm_sensors pkgs.pciutils pkgs.coreutils pkgs.gnugrep
+      ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        RestartSec = 5;
+        LogsDirectory = "gpu-xid-events";
+      };
+      script = ''
+        last=0
+        journalctl -kf -n0 -o cat | while IFS= read -r line; do
+          case "$line" in
+            *NVRM*Xid*) : ;;
+            *) continue ;;
+          esac
+          now=$(date +%s)
+          [ $(( now - last )) -lt 15 ] && continue
+          last=$now
+          f="/var/log/gpu-xid-events/xid-$now.txt"
+          {
+            echo "==== Xid event captured $(date -Is) ===="
+            echo "Trigger: $line"
+            echo; echo "---- telemetry lead-up (last 80 samples) ----"
+            timeout 10 journalctl -u gpu-telemetry-sampler -n 80 -o cat 2>&1
+            echo; echo "---- sensors -A ----"
+            timeout 15 sensors -A 2>&1
+            echo; echo "---- nvidia-smi -q ----"
+            timeout 20 nvidia-smi -q 2>&1
+            echo; echo "---- PCIe link / error registers ----"
+            for bdf in 41:00.0 61:00.0; do
+              echo "## $bdf"
+              timeout 15 lspci -vvv -s "$bdf" 2>&1 \
+                | grep -iE 'LnkSta|LnkCap|DevSta|UESta|CESta|Status:'
+            done
+            echo; echo "---- kernel tail ----"
+            timeout 10 journalctl -k -n 50 -o short-precise 2>&1
+          } > "$f" 2>&1
+          echo "Captured Xid snapshot -> $f"
+        done
+      '';
+    };
+
     # 2× RTX 5090 (Blackwell consumer) → sm_120 only.
     services.vllm.gpuTargets = [ "12.0" ];
 
