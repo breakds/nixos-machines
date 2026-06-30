@@ -698,11 +698,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781413335,
-        "narHash": "sha256-y0AfZa4YTH2KXEAhUAdRtOTob49ZqE8ntizhTdt6SfA=",
+        "lastModified": 1782797807,
+        "narHash": "sha256-ddrZauzGCrZijQSY8Qigpw+yKN7UPTVYspD88lwETK8=",
         "ref": "refs/heads/main",
-        "rev": "84c21b7800d6e8aff8cdbcdc015dfeb1c2e78b22",
-        "revCount": 59,
+        "rev": "2a3c71c97dda9193de3e204f20049e6f45c9e172",
+        "revCount": 60,
         "type": "git",
         "url": "ssh://git@github.com/breakds/shepherd"
       },
