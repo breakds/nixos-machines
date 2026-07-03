@@ -32,6 +32,8 @@
 
     time.timeZone = "America/Los_Angeles";
 
+    vital.programs.arduino.enable = true;
+
     # +----------+
     # | Desktop  |
     # +----------+
@@ -77,20 +79,31 @@
     programs.firefox.enable = true;
     environment.systemPackages = with pkgs; [
       zoom-us
+      thunderbird
+      trezor-suite
       unetbootin
       pavucontrol
+      parsec-bin # For game streaming
       xeyes
       mpv
+      freecad
+      obs-studio
+      moonlight-qt
+      yt-dlp
+      immich-cli
+      clamav
     ];
 
-    # With the following, fcitx can work with xwayland (i.e. non-native wayland
-    # windows).
+    # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
+    # GTK_IM_MODULE, QT_IM_MODULE, XMODIFIERS: fcitx works with xwayland
+    # (i.e. non-native wayland windows).
     environment.sessionVariables = {
       NIX_PROFILES = "${lib.concatStringsSep " "
         (lib.reverseList config.environment.profiles)}";
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
+      NIXOS_OZONE_WL = "1";
     };
 
     home-manager.users."breakds" = {
@@ -106,9 +119,17 @@
       };
     };
 
+    # Trezor cryptocurrency hardware wallet
+    services.trezord.enable = true;
+
     services.fwupd.enable = true;
 
     services.prometheus.exporters.node.enable = true;
+
+    programs.skillful.skills = [
+      "pr-walkthrough"
+      "cdp-test-companion"
+    ];
 
     # +--------------------+
     # | VPN                |
@@ -116,7 +137,7 @@
 
     vital.vpn = {
       clash = false;
-      tailscale = false;
+      tailscale = true;
     };
 
     # +--------------------+
