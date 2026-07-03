@@ -147,6 +147,7 @@
     vital.distributed-build = {
       caches = [ "octavian" ];
       builders = [ "octavian" "malenia" ];
+      sshKeyDir = "/home/breakds/.ssh";
     };
 
     # This value determines the NixOS release from which the default

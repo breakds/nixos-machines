@@ -4,13 +4,15 @@ rec {
     location = "homelab";
     maxJobs = 24;
     speedFactor = 12;
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUdDNW1FU2xMVDFHSHR1RWtRaWhLeGs1SmdnQ2o4NnhNQ21qVlIya2hISGsgcm9vdEBtYWxlbmlhCg==";
   };
 
   "octavian" = {
     hostName = "10.77.1.131";
-    location = "homelab";    
+    location = "homelab";
     maxJobs = 8;
     speedFactor = 10;
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU1uRlJrcUV0bGRna2VWdEVhYkVuMEFEbzNiOGlTeldKVjBNcWpUNkdCQWEgcm9vdEBuaXhvcwo=";
   };
 
   "radahn" = {

@@ -25,6 +25,15 @@ in {
         Specifies the list of remote builders.
       '';
     };
+
+    sshKeyDir = mkOption {
+      type = types.str;
+      default = "/root/.ssh";
+      description = ''
+        Directory containing private SSH keys used by the Nix daemon to connect
+        to remote builders.
+      '';
+    };
   };
 
   config = lib.mkMerge [
@@ -59,7 +68,8 @@ in {
           supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
           sshUser = if builtins.hasAttr "sshUser" x then x.sshUser else "nixbuilder";
           sshKey = let keyFile = if builtins.hasAttr "sshKey" x then x.sshKey else "nixbuilder_malenia";
-                   in "/root/.ssh/${keyFile}";
+                   in "${cfg.sshKeyDir}/${keyFile}";
+          publicHostKey = if builtins.hasAttr "publicHostKey" x then x.publicHostKey else null;
         }) selectedBuilders;
         extraOptions = ''
           builders-use-substitutes = true
