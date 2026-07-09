@@ -44,6 +44,7 @@
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [
         ../../data/keys/breakds_malenia.pub
+        ../../data/keys/trip_20260711.pub
       ];
     };
 
