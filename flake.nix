@@ -56,7 +56,7 @@
     shepherd.url = "git+ssh://git@github.com/breakds/shepherd";
     shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
     shepherd.inputs.flake-parts.follows = "flake-parts";
-    shepherd.inputs.tiny-share.follows = "tiny-share";    
+    shepherd.inputs.tiny-share.follows = "tiny-share";
   };
 
   outputs = { self, flake-parts, ... }@inputs:
@@ -82,6 +82,7 @@
         # hand is archived for now
         # ./machines/hand/part.nix
         ./machines/claw/part.nix
+        ./machines/ghostberry/part.nix
         ./machines/brock/part.nix
         ./machines/olden/part.nix
         ./machines/pi/part.nix
