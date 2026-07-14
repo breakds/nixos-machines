@@ -14,15 +14,14 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  # Plain, unencrypted root partition. Replace these placeholder UUIDs with
-  # the values generated on ghostberry before installing or switching.
+  # Plain, unencrypted root partition.
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/REPLACE_GHOSTBERRY_ROOT_UUID";
+    device = "/dev/disk/by-uuid/d6f2e6d7-33d9-433e-b8fd-3f23fa544ac0";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/REPLACE_GHOSTBERRY_BOOT_UUID";
+    device = "/dev/disk/by-uuid/1B0E-8080";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
