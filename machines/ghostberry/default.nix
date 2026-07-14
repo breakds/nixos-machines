@@ -46,8 +46,6 @@
     networking.hostId = "4acc106e";
     networking.useDHCP = lib.mkDefault true;
 
-    vital.programs.arduino.enable = true;
-
     # +----------+
     # | Desktop  |
     # +----------+
@@ -63,18 +61,10 @@
     };
 
     environment.systemPackages = with pkgs; [
-      zoom-us
-      thunderbird
-      trezor-suite
-      unetbootin
       pavucontrol
-      parsec-bin # For game streaming
       xeyes
-      freecad
-      obs-studio
       moonlight-qt
       yt-dlp
-      immich-cli
     ];
 
     xdg.mime = {
@@ -101,12 +91,6 @@
         KEYBOARD_KEY_3A=leftctrl    # CAPSLOCK -> CTRL
     '';
 
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
-
-    # Enable fingerprint support when the laptop exposes a supported reader.
-    services.fprintd.enable = true;
-
     home-manager.users."breakds" = {
       home.bds.laptopXsession = true;
       home.bds.location = "valley";
@@ -120,6 +104,12 @@
         extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
       };
     };
+
+    programs.gnupg.agent = {
+      enableSSHSupport = lib.mkForce false;
+      enable = lib.mkForce false;
+    };
+    programs.ssh.startAgent = lib.mkForce false;
 
     services.post-box = {
       enable = true;
