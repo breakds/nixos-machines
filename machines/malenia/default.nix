@@ -43,6 +43,9 @@
       hostName = "malenia";
       # Generated via `head -c 8 /etc/machine-id`
       hostId = "9cfcdd52";
+
+      # Temporary: expose the development server to the local network.
+      firewall.allowedTCPPorts = [ 5173 ];
     };
 
     vital.graphical = {
