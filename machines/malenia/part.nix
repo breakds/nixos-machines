@@ -20,6 +20,7 @@ in {
       self.nixosModules.flatpak
       self.nixosModules.prometheus-exporters
       self.nixosModules.tiny-share-client
+      self.nixosModules.post-box
 
       # Development Assistants
       self.nixosModules.coding-agent

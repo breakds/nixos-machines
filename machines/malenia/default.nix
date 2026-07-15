@@ -84,6 +84,14 @@
 
     services.prometheus.exporters.node.enable = true;
 
+    services.post-box = {
+      enable = true;
+      hostIp = "10.55.1.1";
+      localIp = "10.55.1.2";
+      user = "breakds";
+      keyFiles = [ ../../data/keys/breakds_malenia.pub ];
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
