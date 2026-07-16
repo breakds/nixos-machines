@@ -84,6 +84,10 @@
 
     services.prometheus.exporters.node.enable = true;
 
+    programs.skillful.skills = [
+      "cdp-test-companion"
+    ];
+
     services.post-box = {
       enable = true;
       hostIp = "10.55.1.1";
