@@ -123,6 +123,13 @@ rec {
     port = 7123;
   };
 
+  go2rtc = {
+    ports = {
+      api = 1984;
+      rtsp = 8554;
+    };
+  };
+
   wyoming = {
     piper.port = 10200;
     faster-whisper.port = 10300;

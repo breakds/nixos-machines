@@ -20,6 +20,7 @@ in {
       ./.
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
+      inputs.agenix.nixosModules.default
 
       self.nixosModules.base-overlays
       self.nixosModules.graphical
