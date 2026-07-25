@@ -5,6 +5,7 @@
 {
   imports = [
     ./main-user.nix
+    ./insecure-packages.nix
     ./harden.nix
     ./vm.nix
     ./network-base.nix

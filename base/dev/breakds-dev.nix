@@ -4,7 +4,8 @@
   imports = [ ./lisp.nix ./perf.nix ];
 
   config = {
-    nixpkgs.config.permittedInsecurePackages = [ "beekeeper-studio-5.3.4" ];
+    # For beekeeper-studio in environment.systemPackages below.
+    vital.insecurePackages = [ "beekeeper-studio-5.3.4" ];
 
     environment.systemPackages = with pkgs;
       [
