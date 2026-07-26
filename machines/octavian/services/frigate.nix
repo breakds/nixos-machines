@@ -12,7 +12,8 @@ let
     catcam_living_room = {
       address = "10.77.104.39";
       username = "frigate";
-      passwordEnv = "REOLINK_CATCAM_LIVING_ROOM_PASSWORD";
+      passwordEnv = "FRIGATE_REOLINK_CATCAM_LIVING_ROOM_PASSWORD";
+      onvifPort = 8000;
       streams = {
         main = "channel0_main.bcs";
         sub = "channel0_ext.bcs";
@@ -25,12 +26,13 @@ let
     };
   };
 
-  mkEnvironmentToken = name: "$" + "{${name}}";
+  mkGo2rtcEnvironmentToken = name: "$" + "{${name}}";
+  mkFrigateEnvironmentToken = name: "{${name}}";
 
   mkReolinkHttpFlvUrl = camera: stream:
     "http://${camera.address}/flv?port=1935&app=bcs&stream=${stream}"
     + "&user=${camera.username}"
-    + "&password=${mkEnvironmentToken camera.passwordEnv}";
+    + "&password=${mkGo2rtcEnvironmentToken camera.passwordEnv}";
 
   go2rtcStreams = lib.concatMapAttrs (name: camera: {
     "${name}_main" = "ffmpeg:${mkReolinkHttpFlvUrl camera camera.streams.main}"
@@ -78,9 +80,26 @@ let
       "Main Stream" = "${name}_main";
       "Sub Stream" = "${name}_sub";
     };
+
+    onvif = {
+      host = camera.address;
+      port = camera.onvifPort;
+      user = camera.username;
+      password = mkFrigateEnvironmentToken camera.passwordEnv;
+
+      # Manual PTZ is in scope; Reolink autotracking is not.
+      autotracking.enabled = false;
+    };
   };
 
   frigateCameras = lib.mapAttrs mkFrigateCamera cameras;
+
+  # Build-time config validation has no access to runtime agenix secrets.
+  # Supply non-secret placeholders so Frigate can validate the ONVIF schema.
+  frigateConfigCheckEnvironment = lib.concatStringsSep "\n"
+    (lib.mapAttrsToList (_: camera:
+      "export ${camera.passwordEnv}=config-check-placeholder"
+    ) cameras);
 in {
   # The encrypted secret is intentionally absent from the initial deployment.
   # After the shared camera-password file is created and committed, this
@@ -102,6 +121,7 @@ in {
   services.frigate = {
     enable = true;
     hostname = frigateRegistry.domain;
+    preCheckConfig = frigateConfigCheckEnvironment;
     settings = {
       auth = {
         enabled = true;
@@ -127,12 +147,18 @@ in {
     '';
   };
 
-  # go2rtc natively resolves each password token from its environment. Until
-  # the age file exists, literal placeholders remain in the loopback-only
-  # configuration and no password is provisioned.
-  systemd.services.go2rtc = lib.mkIf cameraPasswordsConfigured {
-    restartTriggers = [ cameraPasswordsFile ];
-    serviceConfig.EnvironmentFile =
-      config.age.secrets.frigate-camera-passwords.path;
+  # go2rtc uses the credential for HTTP-FLV and Frigate uses it for ONVIF.
+  # Both resolve it only from the runtime agenix environment file.
+  systemd.services = lib.mkIf cameraPasswordsConfigured {
+    go2rtc = {
+      restartTriggers = [ cameraPasswordsFile ];
+      serviceConfig.EnvironmentFile =
+        config.age.secrets.frigate-camera-passwords.path;
+    };
+    frigate = {
+      restartTriggers = [ cameraPasswordsFile ];
+      serviceConfig.EnvironmentFile =
+        config.age.secrets.frigate-camera-passwords.path;
+    };
   };
 }
