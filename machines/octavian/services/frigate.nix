@@ -21,8 +21,9 @@ let
       detect = {
         width = 896;
         height = 512;
-        fps = 10;
+        fps = 5;
       };
+      recordingRetentionDays = 14;
     };
   };
 
@@ -53,28 +54,61 @@ let
     streams = go2rtcStreams;
   };
 
+  mkGo2rtcRtspUrl = stream:
+    "rtsp://127.0.0.1:${toString go2rtcRegistry.ports.rtsp}/${stream}";
+
   # Frigate's native NixOS service talks to the separately managed go2rtc
   # process, but its UI still needs a matching stream inventory to enable MSE,
   # audio capability discovery, and manual stream selection. Point this
   # password-free inventory back to go2rtc's loopback RTSP restreams; only the
   # go2rtc service needs the camera credentials.
-  frigateGo2rtcStreams = lib.mapAttrs (name: _:
-    "rtsp://127.0.0.1:${toString go2rtcRegistry.ports.rtsp}/${name}"
-  ) go2rtcStreams;
+  frigateGo2rtcStreams =
+    lib.mapAttrs (name: _: mkGo2rtcRtspUrl name) go2rtcStreams;
 
   mkFrigateCamera = name: camera: {
-    ffmpeg.inputs = [{
-      path =
-        "rtsp://127.0.0.1:${toString go2rtcRegistry.ports.rtsp}/${name}_sub";
-      input_args = "preset-rtsp-restream";
-      roles = [ "detect" ];
-    }];
+    ffmpeg.inputs = [
+      {
+        path = mkGo2rtcRtspUrl "${name}_sub";
+        input_args = "preset-rtsp-restream";
+        roles = [ "detect" ];
+      }
+      {
+        path = mkGo2rtcRtspUrl "${name}_main";
+        input_args = "preset-rtsp-restream";
+        roles = [ "record" ];
+      }
+    ];
 
-    # Frigate still decodes the detect input for motion, snapshots, and its
-    # low-bandwidth live-view fallback. Object inference remains disabled.
-    detect = camera.detect // { enabled = false; };
+    # The camera provides a 10 FPS substream; sampling it at 5 FPS is enough
+    # for an initial cat detector while reducing decode and inference work.
+    detect = camera.detect // { enabled = true; };
 
-    record.enabled = false;
+    objects.track = [ "cat" ];
+
+    # Keep the review policy closed to cats. "Detection" is Frigate's
+    # lower-priority review category and does not imply an external alert.
+    review = {
+      alerts.labels = [ ];
+      detections.labels = [ "cat" ];
+    };
+
+    # Main is continuously remuxed into Frigate's rolling cache, but only
+    # complete cat review intervals are retained on ZFS. No continuous or
+    # generic motion timeline is kept.
+    record = {
+      enabled = true;
+      continuous.days = 0;
+      motion.days = 0;
+      alerts.retain.days = 0;
+      detections = {
+        pre_capture = 5;
+        post_capture = 5;
+        retain = {
+          days = camera.recordingRetentionDays;
+          mode = "all";
+        };
+      };
+    };
 
     live.streams = {
       "Main Stream" = "${name}_main";
@@ -96,10 +130,9 @@ let
 
   # Build-time config validation has no access to runtime agenix secrets.
   # Supply non-secret placeholders so Frigate can validate the ONVIF schema.
-  frigateConfigCheckEnvironment = lib.concatStringsSep "\n"
-    (lib.mapAttrsToList (_: camera:
-      "export ${camera.passwordEnv}=config-check-placeholder"
-    ) cameras);
+  frigateConfigCheckEnvironment = lib.concatStringsSep "\n" (lib.mapAttrsToList
+    (_: camera: "export ${camera.passwordEnv}=config-check-placeholder")
+    cameras);
 in {
   # The encrypted secret is intentionally absent from the initial deployment.
   # After the shared camera-password file is created and committed, this
@@ -130,6 +163,10 @@ in {
       };
       mqtt.enabled = false;
       birdseye.enabled = false;
+      detectors.cpu = {
+        type = "cpu";
+        num_threads = 3;
+      };
       go2rtc.streams = frigateGo2rtcStreams;
       cameras = frigateCameras;
     };
@@ -156,7 +193,14 @@ in {
         config.age.secrets.frigate-camera-passwords.path;
     };
     frigate = {
+      after = [ "zfs-mount.service" ];
+      requires = [ "zfs-mount.service" ];
       restartTriggers = [ cameraPasswordsFile ];
+      unitConfig.ConditionPathIsMountPoint = [
+        "/var/lib/frigate"
+        "/var/lib/frigate/recordings"
+        "/var/lib/frigate/exports"
+      ];
       serviceConfig.EnvironmentFile =
         config.age.secrets.frigate-camera-passwords.path;
     };
