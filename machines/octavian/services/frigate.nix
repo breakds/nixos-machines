@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   serviceRegistry = import ../../../data/service-registry.nix;
@@ -6,6 +6,16 @@ let
   frigateRegistry = serviceRegistry.frigate;
   cameraPasswordsFile = ../../../secrets/frigate-camera-passwords.age;
   cameraPasswordsConfigured = builtins.pathExists cameraPasswordsFile;
+
+  # Frigate's documented YOLOX example uses this upstream 416x416 model.
+  # ONNX Runtime keeps it loaded on the T4 and uses CUDA graphs automatically.
+  yoloxTinyModel = pkgs.fetchurl {
+    url =
+      "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_tiny.onnx";
+    hash = "sha256-QnzDZtNOJ/96A+KJm142cUJcJi6iKR+Iu5QrwcxwsPc=";
+  };
+  coco80LabelMap =
+    "${pkgs.frigate.src}/docker/main/rootfs/labelmap/coco-80.txt";
 
   # Add future cameras here; stream and credential wiring is generated below.
   cameras = {
@@ -163,9 +173,19 @@ in {
       };
       mqtt.enabled = false;
       birdseye.enabled = false;
-      detectors.cpu = {
-        type = "cpu";
-        num_threads = 3;
+      detectors.t4 = {
+        type = "onnx";
+        device = "0";
+      };
+      model = {
+        path = toString yoloxTinyModel;
+        model_type = "yolox";
+        width = 416;
+        height = 416;
+        input_tensor = "nchw";
+        input_pixel_format = "rgb";
+        input_dtype = "float_denorm";
+        labelmap_path = coco80LabelMap;
       };
       go2rtc.streams = frigateGo2rtcStreams;
       cameras = frigateCameras;
