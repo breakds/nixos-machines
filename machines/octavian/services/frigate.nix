@@ -39,6 +39,27 @@ let
       + "#video=copy";
   }) cameras;
 
+  go2rtcSettings = {
+    api.listen = "127.0.0.1:${toString go2rtcRegistry.ports.api}";
+    rtsp.listen = "127.0.0.1:${toString go2rtcRegistry.ports.rtsp}";
+
+    # MSE over the Frigate nginx proxy is the initial live-view transport.
+    # Keep WebRTC disabled until there is a concrete need for port 8555 or
+    # two-way audio.
+    webrtc.listen = "";
+
+    streams = go2rtcStreams;
+  };
+
+  # Frigate's native NixOS service talks to the separately managed go2rtc
+  # process, but its UI still needs a matching stream inventory to enable MSE,
+  # audio capability discovery, and manual stream selection. Point this
+  # password-free inventory back to go2rtc's loopback RTSP restreams; only the
+  # go2rtc service needs the camera credentials.
+  frigateGo2rtcStreams = lib.mapAttrs (name: _:
+    "rtsp://127.0.0.1:${toString go2rtcRegistry.ports.rtsp}/${name}"
+  ) go2rtcStreams;
+
   mkFrigateCamera = name: camera: {
     ffmpeg.inputs = [{
       path =
@@ -75,17 +96,7 @@ in {
 
   services.go2rtc = {
     enable = true;
-    settings = {
-      api.listen = "127.0.0.1:${toString go2rtcRegistry.ports.api}";
-      rtsp.listen = "127.0.0.1:${toString go2rtcRegistry.ports.rtsp}";
-
-      # MSE over the Frigate nginx proxy is the initial live-view transport.
-      # Keep WebRTC disabled until there is a concrete need for port 8555 or
-      # two-way audio.
-      webrtc.listen = "";
-
-      streams = go2rtcStreams;
-    };
+    settings = go2rtcSettings;
   };
 
   services.frigate = {
@@ -99,6 +110,7 @@ in {
       };
       mqtt.enabled = false;
       birdseye.enabled = false;
+      go2rtc.streams = frigateGo2rtcStreams;
       cameras = frigateCameras;
     };
   };
