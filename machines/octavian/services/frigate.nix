@@ -7,7 +7,7 @@ let
 
   # Add future cameras here; stream and credential wiring is generated below.
   cameras = {
-    e1_zoom = {
+    catcam_living_room = {
       address = "10.77.104.39";
       username = "frigate";
       passwordEnv = "REOLINK_CATCAM_LIVING_ROOM_PASSWORD";

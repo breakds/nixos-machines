@@ -65,6 +65,10 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    # Octavian boots from ext4; VAULT_ROOT is an extra data pool. Do not bypass
+    # ZFS import safeguards for a root pool that does not exist.
+    boot.zfs.forceImportRoot = false;
+
     # Allow sudo without password
     security.sudo.extraRules = [
       {
