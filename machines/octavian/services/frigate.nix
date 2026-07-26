@@ -1,7 +1,9 @@
 { config, lib, ... }:
 
 let
-  go2rtcRegistry = (import ../../../data/service-registry.nix).go2rtc;
+  serviceRegistry = import ../../../data/service-registry.nix;
+  go2rtcRegistry = serviceRegistry.go2rtc;
+  frigateRegistry = serviceRegistry.frigate;
   cameraPasswordsFile = ../../../secrets/frigate-camera-passwords.age;
   cameraPasswordsConfigured = builtins.pathExists cameraPasswordsFile;
 
@@ -14,6 +16,11 @@ let
       streams = {
         main = "channel0_main.bcs";
         sub = "channel0_ext.bcs";
+      };
+      detect = {
+        width = 896;
+        height = 512;
+        fps = 10;
       };
     };
   };
@@ -31,6 +38,28 @@ let
     "${name}_sub" = "ffmpeg:${mkReolinkHttpFlvUrl camera camera.streams.sub}"
       + "#video=copy";
   }) cameras;
+
+  mkFrigateCamera = name: camera: {
+    ffmpeg.inputs = [{
+      path =
+        "rtsp://127.0.0.1:${toString go2rtcRegistry.ports.rtsp}/${name}_sub";
+      input_args = "preset-rtsp-restream";
+      roles = [ "detect" ];
+    }];
+
+    # Frigate still decodes the detect input for motion, snapshots, and its
+    # low-bandwidth live-view fallback. Object inference remains disabled.
+    detect = camera.detect // { enabled = false; };
+
+    record.enabled = false;
+
+    live.streams = {
+      "Main Stream" = "${name}_main";
+      "Sub Stream" = "${name}_sub";
+    };
+  };
+
+  frigateCameras = lib.mapAttrs mkFrigateCamera cameras;
 in {
   # The encrypted secret is intentionally absent from the initial deployment.
   # After the shared camera-password file is created and committed, this
@@ -57,6 +86,33 @@ in {
 
       streams = go2rtcStreams;
     };
+  };
+
+  services.frigate = {
+    enable = true;
+    hostname = frigateRegistry.domain;
+    settings = {
+      auth = {
+        enabled = true;
+        cookie_secure = true;
+        failed_login_rate_limit = "1/second;5/minute;20/hour";
+      };
+      mqtt.enabled = false;
+      birdseye.enabled = false;
+      cameras = frigateCameras;
+    };
+  };
+
+  # nginx is the only public entry point. The Frigate module keeps its API,
+  # websocket, video-output, and go2rtc upstreams on loopback.
+  services.nginx.virtualHosts.${frigateRegistry.domain} = {
+    enableACME = true;
+    forceSSL = true;
+
+    # The UI root is enough to establish HSTS for subsequent browser requests.
+    locations."/".extraConfig = lib.mkAfter ''
+      add_header Strict-Transport-Security "max-age=31536000" always;
+    '';
   };
 
   # go2rtc natively resolves each password token from its environment. Until

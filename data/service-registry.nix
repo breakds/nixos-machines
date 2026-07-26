@@ -130,6 +130,18 @@ rec {
     };
   };
 
+  frigate = {
+    domain = "frigate.breakds.org";
+    ports = {
+      # Fixed internal ports reserved by the upstream NixOS module.
+      internal = 5000;
+      api = 5001;
+      mqttWebsocket = 5002;
+      jsmpeg = 8082;
+      rtmp = 1935;
+    };
+  };
+
   wyoming = {
     piper.port = 10200;
     faster-whisper.port = 10300;
