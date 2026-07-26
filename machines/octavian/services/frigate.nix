@@ -67,9 +67,7 @@ let
   mkReolinkRtspUrl = camera: stream:
     "rtsp://${camera.username}:"
     + "${mkGo2rtcEnvironmentToken camera.passwordEnv}"
-    + "@${camera.address}:554/${stream}"
-    # Two-way audio is out of scope; do not reserve the camera backchannel.
-    + "#backchannel=0";
+    + "@${camera.address}:554/${stream}";
 
   getStreamProfile = name: camera:
     camera.streamProfiles.${camera.streamTransport} or (throw
@@ -80,7 +78,11 @@ let
       "ffmpeg:${mkReolinkHttpFlvUrl camera stream}" + "#video=copy"
       + lib.optionalString (streamName == "main") "#audio=copy"
     else if camera.streamTransport == "rtsp" then
-      mkReolinkRtspUrl camera stream
+    # This Reolink's native RTSP stream starts with discontinuous timestamps.
+    # Remux it through FFmpeg so go2rtc's consumers receive a monotonic stream;
+    # copy mode does not decode or re-encode either track.
+      "ffmpeg:${mkReolinkRtspUrl camera stream}" + "#video=copy"
+      + lib.optionalString (streamName == "main") "#audio=copy"
     else
       throw "Unsupported Reolink stream transport: ${camera.streamTransport}";
 
