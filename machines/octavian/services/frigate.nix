@@ -33,6 +33,9 @@ let
         height = 512;
         fps = 5;
       };
+      # Mask only the camera-rendered timestamp. Its changing seconds were
+      # continuously creating motion regions across the top of the image.
+      motionMasks = [ "0.27,0.00,0.70,0.00,0.70,0.08,0.27,0.08" ];
       recordingRetentionDays = 14;
     };
   };
@@ -94,6 +97,8 @@ let
     detect = camera.detect // { enabled = true; };
 
     objects.track = [ "cat" ];
+
+    motion.mask = camera.motionMasks;
 
     # Keep the review policy closed to cats. "Detection" is Frigate's
     # lower-priority review category and does not imply an external alert.
@@ -183,7 +188,7 @@ in {
         width = 416;
         height = 416;
         input_tensor = "nchw";
-        input_pixel_format = "rgb";
+        input_pixel_format = "bgr";
         input_dtype = "float_denorm";
         labelmap_path = coco80LabelMap;
       };
