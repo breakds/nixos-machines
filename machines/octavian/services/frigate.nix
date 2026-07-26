@@ -262,7 +262,10 @@ in {
     };
     frigate = {
       after = [ "zfs-mount.service" ];
-      requires = [ "zfs-mount.service" ];
+      requires = [ "go2rtc.service" "zfs-mount.service" ];
+      # A go2rtc restart invalidates Frigate's long-lived FFmpeg inputs. Restart
+      # Frigate with it instead of leaving the camera capture loop wedged.
+      partOf = [ "go2rtc.service" ];
       restartTriggers = [ cameraPasswordsFile ];
       unitConfig.ConditionPathIsMountPoint = [
         "/var/lib/frigate"
