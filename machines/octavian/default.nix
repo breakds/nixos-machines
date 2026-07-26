@@ -166,7 +166,7 @@
 
     services.nginx = {
       enable = true;
-      package = pkgs.nginxMainline;
+      package = pkgs.nginxStable;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
       recommendedProxySettings = true;

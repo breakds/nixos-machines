@@ -24,15 +24,31 @@ let
       username = "frigate";
       passwordEnv = "FRIGATE_REOLINK_CATCAM_LIVING_ROOM_PASSWORD";
       onvifPort = 8000;
-      streams = {
-        main = "channel0_main.bcs";
-        sub = "channel0_ext.bcs";
+
+      # Change only this value to compare the camera's HTTP-FLV and RTSP
+      # implementations. Each profile records the matching endpoints and the
+      # actual resolution of its detection stream.
+      streamTransport = "rtsp";
+      streamProfiles = {
+        http-flv = {
+          main = "channel0_main.bcs";
+          sub = "channel0_ext.bcs";
+          detectResolution = {
+            width = 896;
+            height = 512;
+          };
+        };
+        rtsp = {
+          main = "Preview_01_main";
+          sub = "Preview_01_sub";
+          detectResolution = {
+            width = 640;
+            height = 360;
+          };
+        };
       };
-      detect = {
-        width = 896;
-        height = 512;
-        fps = 5;
-      };
+      detectFps = 5;
+
       # Mask only the camera-rendered timestamp. Its changing seconds were
       # continuously creating motion regions across the top of the image.
       motionMasks = [ "0.27,0.00,0.70,0.00,0.70,0.08,0.27,0.08" ];
@@ -48,12 +64,32 @@ let
     + "&user=${camera.username}"
     + "&password=${mkGo2rtcEnvironmentToken camera.passwordEnv}";
 
-  go2rtcStreams = lib.concatMapAttrs (name: camera: {
-    "${name}_main" = "ffmpeg:${mkReolinkHttpFlvUrl camera camera.streams.main}"
-      + "#video=copy#audio=copy";
-    "${name}_sub" = "ffmpeg:${mkReolinkHttpFlvUrl camera camera.streams.sub}"
-      + "#video=copy";
-  }) cameras;
+  mkReolinkRtspUrl = camera: stream:
+    "rtsp://${camera.username}:"
+    + "${mkGo2rtcEnvironmentToken camera.passwordEnv}"
+    + "@${camera.address}:554/${stream}"
+    # Two-way audio is out of scope; do not reserve the camera backchannel.
+    + "#backchannel=0";
+
+  getStreamProfile = name: camera:
+    camera.streamProfiles.${camera.streamTransport} or (throw
+      "Camera ${name} has no ${camera.streamTransport} stream profile");
+
+  mkGo2rtcSource = camera: streamName: stream:
+    if camera.streamTransport == "http-flv" then
+      "ffmpeg:${mkReolinkHttpFlvUrl camera stream}" + "#video=copy"
+      + lib.optionalString (streamName == "main") "#audio=copy"
+    else if camera.streamTransport == "rtsp" then
+      mkReolinkRtspUrl camera stream
+    else
+      throw "Unsupported Reolink stream transport: ${camera.streamTransport}";
+
+  go2rtcStreams = lib.concatMapAttrs (name: camera:
+    let profile = getStreamProfile name camera;
+    in {
+      "${name}_main" = mkGo2rtcSource camera "main" profile.main;
+      "${name}_sub" = mkGo2rtcSource camera "sub" profile.sub;
+    }) cameras;
 
   go2rtcSettings = {
     api.listen = "127.0.0.1:${toString go2rtcRegistry.ports.api}";
@@ -78,68 +114,73 @@ let
   frigateGo2rtcStreams =
     lib.mapAttrs (name: _: mkGo2rtcRtspUrl name) go2rtcStreams;
 
-  mkFrigateCamera = name: camera: {
-    ffmpeg.inputs = [
-      {
-        path = mkGo2rtcRtspUrl "${name}_sub";
-        input_args = "preset-rtsp-restream";
-        roles = [ "detect" ];
-      }
-      {
-        path = mkGo2rtcRtspUrl "${name}_main";
-        input_args = "preset-rtsp-restream";
-        roles = [ "record" ];
-      }
-    ];
+  mkFrigateCamera = name: camera:
+    let profile = getStreamProfile name camera;
+    in {
+      ffmpeg.inputs = [
+        {
+          path = mkGo2rtcRtspUrl "${name}_sub";
+          input_args = "preset-rtsp-restream";
+          roles = [ "detect" ];
+        }
+        {
+          path = mkGo2rtcRtspUrl "${name}_main";
+          input_args = "preset-rtsp-restream";
+          roles = [ "record" ];
+        }
+      ];
 
-    # The camera provides a 10 FPS substream; sampling it at 5 FPS is enough
-    # for an initial cat detector while reducing decode and inference work.
-    detect = camera.detect // { enabled = true; };
+      # Sample the camera's 10 FPS substream at 5 FPS to reduce decode and
+      # inference work. Resolution follows the selected transport profile.
+      detect = profile.detectResolution // {
+        enabled = true;
+        fps = camera.detectFps;
+      };
 
-    objects.track = [ "cat" ];
+      objects.track = [ "cat" ];
 
-    motion.mask = camera.motionMasks;
+      motion.mask = camera.motionMasks;
 
-    # Keep the review policy closed to cats. "Detection" is Frigate's
-    # lower-priority review category and does not imply an external alert.
-    review = {
-      alerts.labels = [ ];
-      detections.labels = [ "cat" ];
-    };
+      # Keep the review policy closed to cats. "Detection" is Frigate's
+      # lower-priority review category and does not imply an external alert.
+      review = {
+        alerts.labels = [ ];
+        detections.labels = [ "cat" ];
+      };
 
-    # Main is continuously remuxed into Frigate's rolling cache, but only
-    # complete cat review intervals are retained on ZFS. No continuous or
-    # generic motion timeline is kept.
-    record = {
-      enabled = true;
-      continuous.days = 0;
-      motion.days = 0;
-      alerts.retain.days = 0;
-      detections = {
-        pre_capture = 5;
-        post_capture = 5;
-        retain = {
-          days = camera.recordingRetentionDays;
-          mode = "all";
+      # Main is continuously remuxed into Frigate's rolling cache, but only
+      # complete cat review intervals are retained on ZFS. No continuous or
+      # generic motion timeline is kept.
+      record = {
+        enabled = true;
+        continuous.days = 0;
+        motion.days = 0;
+        alerts.retain.days = 0;
+        detections = {
+          pre_capture = 5;
+          post_capture = 5;
+          retain = {
+            days = camera.recordingRetentionDays;
+            mode = "all";
+          };
         };
       };
-    };
 
-    live.streams = {
-      "Main Stream" = "${name}_main";
-      "Sub Stream" = "${name}_sub";
-    };
+      live.streams = {
+        "Main Stream" = "${name}_main";
+        "Sub Stream" = "${name}_sub";
+      };
 
-    onvif = {
-      host = camera.address;
-      port = camera.onvifPort;
-      user = camera.username;
-      password = mkFrigateEnvironmentToken camera.passwordEnv;
+      onvif = {
+        host = camera.address;
+        port = camera.onvifPort;
+        user = camera.username;
+        password = mkFrigateEnvironmentToken camera.passwordEnv;
 
-      # Manual PTZ is in scope; Reolink autotracking is not.
-      autotracking.enabled = false;
+        # Manual PTZ is in scope; Reolink autotracking is not.
+        autotracking.enabled = false;
+      };
     };
-  };
 
   frigateCameras = lib.mapAttrs mkFrigateCamera cameras;
 
@@ -209,8 +250,8 @@ in {
     '';
   };
 
-  # go2rtc uses the credential for HTTP-FLV and Frigate uses it for ONVIF.
-  # Both resolve it only from the runtime agenix environment file.
+  # go2rtc uses the credential for camera streaming and Frigate uses it for
+  # ONVIF. Both resolve it only from the runtime agenix environment file.
   systemd.services = lib.mkIf cameraPasswordsConfigured {
     go2rtc = {
       restartTriggers = [ cameraPasswordsFile ];
