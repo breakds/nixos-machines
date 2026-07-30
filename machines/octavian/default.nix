@@ -226,9 +226,9 @@
       # network. The .ovpn profile is copied into the container by hand and is
       # deliberately not kept in this repository -- see base/vpn-tunnel.nix.
       tunnels = [{
-        name = "work";
-        port = 2222;
-        authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ];
+        name = "work1";
+        port = 23122;
+        authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ../../data/keys/breakds_malenia.pub ];
       }];
     };
 
