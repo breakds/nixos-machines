@@ -48,6 +48,9 @@ let
   guestProfileDir = "/var/lib/vpn-tunnel";
   guestProfile = "${guestProfileDir}/profile.ovpn";
 
+  snatSpec = index:
+    "-d ${guestIp index} -p tcp --dport 22 -j SNAT --to-source ${hostIp index}";
+
   tunnelType = lib.types.submodule {
     options = {
       name = lib.mkOption {
@@ -247,6 +250,30 @@ in {
     # NetworkManager will otherwise take these interfaces over and break the
     # containers' networking.
     networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
+
+    # systemd-nspawn forwards a port with DNAT alone, leaving the client's
+    # address as the source. A container's default route is inside its tunnel,
+    # so its reply to that address goes into the VPN and is never seen again --
+    # forwarded connections hang for every client, including this host
+    # reaching its own address, because the DNAT in OUTPUT happens after the
+    # source address has already been chosen.
+    #
+    # SNAT so a forwarded connection appears to come from this host, whose
+    # address the container reaches over the connected link. The cost is that
+    # a container's sshd sees one source address for every client.
+    #
+    # These append to POSTROUTING rather than to a chain of NixOS's, which the
+    # firewall neither flushes nor owns -- hence the check-before-add, since
+    # the firewall re-runs this on every reload.
+    networking.firewall.extraCommands = lib.mkAfter
+      (lib.concatStringsSep "\n" (lib.imap0 (index: tunnel:
+        "iptables -t nat -C POSTROUTING ${snatSpec index} 2>/dev/null"
+        + " || iptables -t nat -A POSTROUTING ${snatSpec index}") cfg));
+
+    networking.firewall.extraStopCommands = lib.concatStringsSep "\n"
+      (lib.imap0 (index: tunnel:
+        "iptables -t nat -D POSTROUTING ${snatSpec index} 2>/dev/null"
+        + " || true") cfg);
 
     # Open on every interface, not just the tailnet: at home, on the same LAN
     # and with Tailscale down, the jump has to keep working. These ports are
