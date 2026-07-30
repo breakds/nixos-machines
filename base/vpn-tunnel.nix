@@ -137,11 +137,21 @@ let
           useHostResolvConf = false;
 
           firewall.extraCommands = ''
+            # A reply to an inbound connection is also traffic addressed to
+            # the host, so it has to be let out before the rule below. The
+            # container's sshd answers across this same link, and rejecting
+            # that leaves every client hanging on an unanswered SYN -- the
+            # REJECT fires inside the container, so the ICMP goes to the
+            # local socket and the client simply never hears anything.
+            iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED \
+              -j ACCEPT
+
             # The host is this container's gateway, but nothing in here has
-            # any business addressing the host itself -- least of all its
-            # sshd, which would turn the jump account into a way back out
-            # onto the home network. Traffic *through* the gateway is
-            # unaffected: those packets carry their real destination.
+            # any business *starting* a conversation with the host -- least
+            # of all with its sshd, which would turn the jump account into a
+            # way back out onto the home network. Traffic *through* the
+            # gateway is unaffected: those packets carry their real
+            # destination.
             iptables -A OUTPUT -d ${hostIp index} \
               -j REJECT --reject-with icmp-admin-prohibited
           '';
