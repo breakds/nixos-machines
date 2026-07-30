@@ -34,6 +34,7 @@
     ./services/tiny-share.nix
     ./services/forgejo.nix
     ../../base/vpn.nix
+    ../../base/vpn-tunnel.nix
   ];
 
   config = {
@@ -214,6 +215,24 @@
 
     vital.vpn = {
       tailscale = true;
+
+      # Octavian holds Cassandra's employer's VPN so that her laptop can reach
+      # a handful of company hosts over SSH from anywhere. The VPN only accepts
+      # connections from this house's WAN address, which is why the tunnel
+      # lives here rather than on the laptop.
+      #
+      # It is sealed in a container, so octavian's own routing table is
+      # untouched and no other account on this machine can see the company
+      # network. See docs/plans/2026-07-29-octavian-corp-vpn-ssh-jump.md.
+      # The profile is placed here by hand rather than committed: this
+      # repository is public, and the credential belongs to an employer.
+      # See the notes on `ovpnFile` in base/vpn-tunnel.nix.
+      tunnels = [{
+        name = "machine-sp";
+        ovpnPath = "/var/lib/vpn-tunnels/machine-sp.ovpn";
+        port = 2222;
+        authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ];
+      }];
     };
 
     # This value determines the NixOS release from which the default
