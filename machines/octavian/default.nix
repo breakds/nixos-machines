@@ -34,6 +34,7 @@
     ./services/tiny-share.nix
     ./services/forgejo.nix
     ../../base/vpn.nix
+    ../../base/vpn-tunnel.nix
   ];
 
   config = {
@@ -214,6 +215,22 @@
 
     vital.vpn = {
       tailscale = true;
+
+      # Octavian holds Cassandra's work VPN so that her laptop can reach a few
+      # hosts behind it over SSH from anywhere. That VPN only accepts
+      # connections from this house's WAN address, which is why the tunnel
+      # lives here rather than on the laptop.
+      #
+      # It is sealed in a container, so octavian's own routing table is
+      # untouched and no other account on this machine can see the remote
+      # network. The profile is placed by hand at the path below and is
+      # deliberately not kept in this repository -- see base/vpn-tunnel.nix.
+      tunnels = [{
+        name = "work";
+        ovpnFile = "/var/lib/vpn-tunnels/work.ovpn";
+        port = 2222;
+        authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ];
+      }];
     };
 
     # This value determines the NixOS release from which the default
