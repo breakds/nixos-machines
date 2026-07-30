@@ -18,6 +18,16 @@
 # themselves:
 #
 #     ssh -J tunnel@<this-host>:<port> someone@<host-inside-the-vpn>
+#
+# The .ovpn profile is not declared anywhere: it is copied into the container
+# once, by hand, and lives only in the container's own state. A profile carries
+# its own private key inline, and encrypted at rest is not the same as fit to
+# publish, so it stays out of the repository entirely. From the host:
+#
+#     install -Dm400 profile.ovpn \
+#       /var/lib/nixos-containers/<name>/var/lib/vpn-tunnel/profile.ovpn
+#
+# The cost is that this is the one part a rebuild does not restore.
 
 let
   cfg = config.vital.vpn.tunnels;
@@ -32,7 +42,11 @@ let
   hostIp = index: "10.231.${toString index}.1";
   guestIp = index: "10.231.${toString index}.2";
 
-  guestProfile = "/etc/vpn-tunnel/profile.ovpn";
+  # Ordinary container state, deliberately not under /etc: NixOS assembles
+  # /etc, and with `system.etc.overlay` an unmanaged file there is not
+  # guaranteed to survive.
+  guestProfileDir = "/var/lib/vpn-tunnel";
+  guestProfile = "${guestProfileDir}/profile.ovpn";
 
   tunnelType = lib.types.submodule {
     options = {
@@ -46,23 +60,6 @@ let
           the container's virtual link is named after it and interface names
           are limited to 15. Both rules are enforced upstream, in
           nixos-containers.
-        '';
-      };
-
-      ovpnFile = lib.mkOption {
-        type = lib.types.str;
-        example = "/var/lib/vpn-tunnels/work.ovpn";
-        description = ''
-          Absolute path on this host to the .ovpn profile. Should be `0400`
-          and owned by root; it is mounted into the container read-only.
-
-          Placed here out of band rather than kept in the repository, even
-          encrypted. A profile carries its own private key inline, and
-          encrypted at rest is not the same as fit to publish -- committing
-          one puts a credential into a permanent history where it rests on the
-          cipher holding up indefinitely and on every recipient key staying
-          uncompromised. The cost is that this file has to be restored by hand
-          when the machine is rebuilt.
         '';
       };
 
@@ -114,25 +111,30 @@ let
         containerPort = 22;
       }];
 
-      bindMounts.profile = {
-        hostPath = tunnel.ovpnFile;
-        mountPoint = guestProfile;
-        isReadOnly = true;
-      };
-
       config = { ... }: {
         system.stateVersion = config.system.stateVersion;
         nixpkgs.pkgs = pkgs;
 
+        # Somewhere to put the profile, and a hint about what is missing when
+        # the tunnel will not start.
+        systemd.tmpfiles.rules = [ "d ${guestProfileDir} 0700 root root -" ];
+
         networking = {
           defaultGateway = hostIp index;
 
-          # Deliberately none. Everything worth reaching through a tunnel is
+          # No DNS at all. Everything worth reaching through a tunnel is
           # addressed numerically here, and a container that cannot resolve
           # names is one that cannot be talked into fetching things. A profile
           # whose `remote` is a hostname rather than an address would need
           # this relaxed.
+          #
+          # The empty list is not enough on its own: containers default to
+          # `useHostResolvConf = true` (virtualisation/container-config.nix),
+          # and nixos-containers copies the host's resolv.conf into the
+          # container on start. Without the line below the container quietly
+          # inherits this machine's resolvers.
           nameservers = [ ];
+          useHostResolvConf = false;
 
           firewall.extraCommands = ''
             # The host is this container's gateway, but nothing in here has
@@ -211,7 +213,6 @@ in {
     '';
     example = lib.literalExpression ''
       [ { name = "work";
-          ovpnFile = "/var/lib/vpn-tunnels/work.ovpn";
           port = 2222;
           authorizedKeyFiles = [ ../../data/keys/somebody.pub ]; } ]
     '';
@@ -223,15 +224,25 @@ in {
     # Lets a container reach its VPN server. It cannot reach anything else out
     # here: once the tunnel is up its default route lives inside the tunnel,
     # and the host itself is rejected by the container's own firewall.
+    #
+    # `ve-+` is an iptables wildcard, not an interface to declare -- nspawn
+    # names the host side of each container's link `ve-<name>`. Set
+    # `networking.nat.externalInterface` on the host to narrow which way out
+    # this masquerades.
     networking.nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
     };
 
-    # Jump ports are offered to the tailnet and nowhere else, so a device that
-    # is not on the tailnet cannot so much as knock on one.
-    networking.firewall.interfaces."tailscale0".allowedTCPPorts =
-      map (tunnel: tunnel.port) cfg;
+    # NetworkManager will otherwise take these interfaces over and break the
+    # containers' networking.
+    networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
+
+    # Open on every interface, not just the tailnet: at home, on the same LAN
+    # and with Tailscale down, the jump has to keep working. These ports are
+    # not reachable from the internet, and the key is the actual gate -- an
+    # untrusted device on the LAN can open a socket and get no further.
+    networking.firewall.allowedTCPPorts = map (tunnel: tunnel.port) cfg;
 
     assertions = [
       { assertion = lib.length (lib.unique (map (t: t.name) cfg))

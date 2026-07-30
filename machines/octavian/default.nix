@@ -223,15 +223,19 @@
       #
       # It is sealed in a container, so octavian's own routing table is
       # untouched and no other account on this machine can see the remote
-      # network. The profile is placed by hand at the path below and is
+      # network. The .ovpn profile is copied into the container by hand and is
       # deliberately not kept in this repository -- see base/vpn-tunnel.nix.
       tunnels = [{
         name = "work";
-        ovpnFile = "/var/lib/vpn-tunnels/work.ovpn";
         port = 2222;
         authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ];
       }];
     };
+
+    # The home VLAN uplink. Narrows the masquerade base/vpn-tunnel.nix sets up
+    # for its containers, which would otherwise apply on any interface a
+    # container's packet happened to leave by.
+    networking.nat.externalInterface = "enp4s0f0";
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
