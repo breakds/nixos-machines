@@ -282,13 +282,88 @@ This is not an oversight in our design. Everything up to this point has been abo
 
 The obvious shortcut: *the token works, so the user must be who they say they are.* iLedger calls some "tell me about the current user" API with the access token, gets back an answer, and logs that person in.
 
-This is broken, and it is worth seeing exactly why, because the reason is the same "who is this addressed to?" question from the two-channel discussion.
+This is broken. It is worth walking through slowly with names attached, because the reasoning is subtle and the consequence is severe.
 
-The access token is a **bearer** credential addressed to the **resource server**. It carries no statement about which client obtained it, and in the opaque case iLedger cannot read it at all. So "I am holding a working token" means only "somebody, at some point, obtained a valid token." It does not mean "the person in front of me obtained it."
+The cast:
 
-Now the attack. I write a small app - a shipping tracker, say - and register it with Amason like any other client. You use it, and you legitimately authorize it, so I now hold a valid access token for your Amason account. I take that token and inject it into iLedger's callback. iLedger asks Amason "who does this token belong to?", Amason truthfully answers "that user", and iLedger logs *me* into *your* iLedger account.
+| Who | Role | Intent |
+|---|---|---|
+| **Alice** | the user | innocent; has accounts on all three |
+| **Amason** | authorization server and resource server | honest, behaves correctly throughout |
+| **iLedger** | ledger app, with its own user accounts | honest, but has one flawed endpoint |
+| **Mallory** | attacker, who also runs a small genuine app called **ShipTrackr** | wants into Alice's iLedger account |
 
-Nothing was forged and nothing was stolen. I simply reused a token that was legitimately issued to me, in a place that never checked whether it was issued *for* it. A bearer token proves possession, never identity.
+Note what Mallory is after: **Alice's iLedger account**, not Alice's Amason data. iLedger is an aggregator - Alice has connected her Amason account, her bank, and her credit card to it. A narrow Amason token is the crowbar; the ledger is the prize.
+
+**Step 1: Mallory obtains a token, legitimately.**
+
+Mallory registers ShipTrackr with Amason like any other developer and receives `client_id: shiptrackr` plus a client secret. ShipTrackr genuinely works - it plots your Amason deliveries on a map. Alice signs up and connects her Amason account, and the full authorization code flow runs correctly: redirect, login, consent screen, code, back-channel exchange. Alice really does approve it.
+
+```
+Amason -> ShipTrackr's backend (which Mallory operates):
+
+    { "access_token": "AT-ISSUED-TO-SHIPTRACKR", "expires_in": 900 }
+```
+
+Mallory now holds a valid Amason access token for Alice's account, with Alice's consent, without having breached anything. That token carries two facts - but only Amason can see them: *whose account it opens* (Alice's), and *which client it was issued to* (`shiptrackr`).
+
+**Step 2: why iLedger has an attackable endpoint.**
+
+iLedger has a phone app. Alice taps "Connect Amason", and Amason's mobile SDK runs the flow inside the app and hands the phone an access token. But the token is now on the phone, while iLedger's *backend* is what needs to create the login session. So the app forwards it:
+
+```
+iLedger phone app -> iLedger backend:
+
+    POST https://iledger.example/api/auth/amason
+    { "access_token": "AT-ISSUED-TO-ILEDGER-MOBILE" }
+```
+
+and the backend verifies it the only way it knows how:
+
+```
+iLedger backend -> Amason:
+
+    GET https://amason.example/userinfo
+    Authorization: Bearer AT-ISSUED-TO-ILEDGER-MOBILE
+
+Amason -> iLedger backend:
+
+    { "sub": "amason-user-4471", "email": "alice@example.com" }
+```
+
+iLedger finds the local account linked to `amason-user-4471` and issues a session cookie. This is the legitimate path and it works fine. The shape - obtain a token in a native app, post it to your own backend to establish a session - is extremely common.
+
+The problem is that `POST /api/auth/amason` is a public HTTP endpoint. Anyone on the internet can call it.
+
+**Step 3: the attack.**
+
+Mallory, from her own laptop, with Alice nowhere near a computer:
+
+```
+Mallory (curl) -> iLedger backend:
+
+    POST https://iledger.example/api/auth/amason
+    { "access_token": "AT-ISSUED-TO-SHIPTRACKR" }     <- her token from step 1
+```
+
+iLedger does exactly what it always does. It calls userinfo, and Amason answers **truthfully** that this token opens Alice's account. iLedger looks up `amason-user-4471`, finds Alice's ledger, mints a session cookie, and hands it to Mallory - who now has Alice's entire iLedger account, bank and credit card data included.
+
+**Why iLedger could not tell the difference.**
+
+Put the two requests side by side:
+
+```
+LEGITIMATE:  POST /api/auth/amason  { "access_token": "AT-ISSUED-TO-ILEDGER-MOBILE" }
+ATTACK:      POST /api/auth/amason  { "access_token": "AT-ISSUED-TO-SHIPTRACKR"     }
+```
+
+Identical in shape. Both tokens are valid. Both open Alice's Amason account. Both make userinfo return Alice.
+
+The one distinguishing fact - which client the token was issued to - is known to Amason and never communicated to iLedger. The userinfo endpoint answers questions about the *user*, not about the token, and there is no standard way for a client to ask the other question.
+
+So iLedger asked *"whose account does this token open?"* and received a correct answer. The question it needed answered was *"was this token issued to me?"*
+
+That is what it means to say a bearer token proves possession, never identity. Holding a working token proves that somebody was authorized at some point. It says nothing about who is holding it now, or which application it was meant for.
 
 #### The fix: a token addressed to the client
 
@@ -297,9 +372,26 @@ The problem is a missing recipient, so the fix is a second token that has one.
 Alongside the access token, the authorization server issues an **ID token**. Two properties make it work:
 
 - It is **always a JWT**, signed by the authorization server. It has to be readable, because the client is the intended consumer. (This is also the clean answer to a question from the previous section: the access token *may* be opaque because only the resource server needs to understand it. The ID token may never be, because the client must.)
-- It carries an **audience** field, `aud`, set to the requesting client's client id. The client verifies that `aud` matches its own client id and rejects the token otherwise.
+- It carries an **audience** field, `aud`, set to the client id of whichever client requested it.
 
-That single check kills the attack. My shipping tracker's ID token has `aud: shipping-tracker`. When I inject it into iLedger, iLedger sees an audience that is not its own client id and throws it away. The token was minted for me, it says so, and it cannot be laundered into a different application.
+In our story, Amason mints:
+
+```
+to iLedger's phone app:    id_token { sub: "amason-user-4471", aud: "iledger-mobile" }
+to Mallory's ShipTrackr:   id_token { sub: "amason-user-4471", aud: "shiptrackr"     }
+```
+
+Same user, different audience. iLedger's backend now accepts an ID token instead of an access token, and adds one check:
+
+```
+if id_token.aud != "iledger-mobile":  reject
+```
+
+Mallory's token says `aud: shiptrackr`, so it is thrown away. The attack is over.
+
+The reason she cannot work around it is that **`aud` is stamped by the authorization server, not chosen by the client**. It is set from whichever client authenticated at the token endpoint. For Mallory to obtain a token with `aud: iledger-mobile`, she would have to complete the flow *as* iLedger, which requires iLedger's client secret - and it would require Alice to approve iLedger rather than ShipTrackr.
+
+Note that the fix is not "never accept tokens over HTTP". iLedger's endpoint was fine. The flaw was accepting a credential that carried no statement about who it was for. What OIDC adds is a credential that carries exactly that.
 
 This layer on top of OAuth 2.0 is **OpenID Connect**, usually written OIDC.
 
