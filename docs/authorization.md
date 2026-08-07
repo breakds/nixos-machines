@@ -198,6 +198,40 @@ Everything above has a standard name. The story terms map like this:
 
 The specific sequence we arrived at - redirect out, code back, redeem on the back channel - is called the **authorization code flow**, and it is the one that matters. Amason itself has a standard name too, but it turns out Amason is doing two quite different jobs here, so that is worth pulling apart separately.
 
+### Amason Is Actually Two Things
+
+The story has treated Amason as one system. That was fine while there was a single API and a single client, but neither stays true for long.
+
+Amason does not only serve transactions. It also has an address book, an order history, a wishlist, a returns API. And iLedger is not its only integration - there are tax tools, budgeting apps, shipping trackers, dozens of them.
+
+So ask an uncomfortable question about the previous section: *which part of Amason implements all that machinery?* Does the transactions API host its own consent screen, keep its own registry of clients, mint its own codes, run its own token endpoint, and handle its own refresh logic? And then the address book API implements the whole thing again, separately?
+
+Obviously not. Notice that none of that machinery is about transactions. It is entirely about *who is asking, what they are allowed to do, and whether the user agreed* - which is the same question no matter which API is being called. So we factor it out:
+
+- One component authenticates the user, shows the consent screen, keeps the registry of clients, and mints and refreshes tokens. This is the **authorization server**.
+- Every API becomes something much simpler. It receives a request carrying a token, checks that the token is valid and has the right scope, and serves the data. This is a **resource server**.
+
+The naming table from earlier can now be completed:
+
+| Our story | Standard term |
+|---|---|
+| the part of Amason that logs the user in, shows the consent screen, and mints keys | authorization server |
+| the part of Amason that actually serves transaction data | resource server |
+
+This is a bigger change than it looks, and four things fall out of it.
+
+**Resource servers hold no secrets.** A resource server never sees a password, never stores a credential, and has no credential database at all. Its entire job is to validate a token - by introspection if the token is opaque, or by checking a signature if it is a JWT. An API that was never given credentials cannot leak them, no matter how badly it is written.
+
+**Authentication becomes one component's problem.** When Amason wants to add passkeys, or require 2FA for high-value accounts, or support corporate SSO, it changes the authorization server and nothing else. Not one resource server needs to know, because no resource server was ever involved in authenticating anybody.
+
+**There is exactly one place to look.** One list of every grant the user has issued, across every API and every client. One place to revoke.
+
+**New APIs are cheap.** A new Amason API does not implement any of this. It validates tokens and serves data, and it inherits consent, scoping, revocation, and the whole client registry for free.
+
+And there is a fifth consequence, which is really the point of everything above: **the authorization server and the resource server no longer have to be the same organization.** Once the boundary between them is a well-specified protocol rather than an internal function call, an API written by someone who has never heard of your authorization server can still accept its tokens. That is the moment this stops being a clever Amason feature and becomes an ecosystem.
+
+It is also the moment the authorization server becomes a product you can just install. Keycloak and Authentik are exactly this box: they authenticate users, keep the client registry, show consent, and mint tokens - and they know nothing about whatever applications you point at them.
+
 ### Extra Details and Optional Features
 
 Everything up to here is the load-bearing structure. The rest is detail you will meet in real systems.
@@ -206,12 +240,12 @@ Everything up to here is the load-bearing structure. The rest is detail you will
 
 The design above never said. That is deliberate - it does not matter to the story, and the standard does not mandate a format. There are two families:
 
-- **Opaque tokens.** Random strings, meaningless on their own, exactly like the API key we started with. Amason's API looks each one up to find out what it means. Easy to revoke - delete the row and it dies instantly. Costs a lookup per request.
-- **Signed tokens (JWT).** The permissions are written *inside* the token as JSON, and Amason signs it. The API can verify the signature and read the contents without asking anyone. No lookup, no shared database. But the token is valid until it expires, and there is no clean way to kill it early.
+- **Opaque tokens.** Random strings, meaningless on their own, exactly like the API key we started with. The resource server looks each one up to find out what it means. Easy to revoke - delete the row and it dies instantly. Costs a lookup per request.
+- **Signed tokens (JWT).** The permissions are written *inside* the token as JSON, and the authorization server signs it. The resource server can verify the signature and read the contents without asking anyone. No lookup, no shared database. But the token is valid until it expires, and there is no clean way to kill it early.
 
 This is the same revocable-versus-stateless tradeoff throughout, and it is why signed tokens are always given short lifetimes: the expiry is standing in for the revocation you gave up. Note also that a JWT is *signed*, not encrypted - anyone holding one can read every field in it, so nothing secret goes inside.
 
-If Amason's API wants to accept opaque tokens but doesn't want to share a database, there is a standard endpoint for asking "is this token still good, and what does it mean?" It is called **token introspection**.
+If a resource server wants to accept opaque tokens without sharing a database with the authorization server, there is a standard endpoint for asking "is this token still good, and what does it mean?" It is called **token introspection**.
 
 #### Other ways to get a token
 
@@ -223,15 +257,127 @@ The authorization code flow assumes a human with a browser. Not every situation 
 
 Two grant types exist in the original specification and are now deprecated, and both should look familiar:
 
-- **Implicit grant** - Amason returns the access token directly in the redirect. That is exactly the design we wrote in the previous section, and exactly the one Problem 1 shot down. It was removed for precisely that reason.
+- **Implicit grant** - the authorization server returns the access token directly in the redirect. That is exactly the design we sketched in *Improving the API Key Granting User Experience*, and exactly the one Problem 1 shot down. It was removed for precisely that reason.
 - **Resource owner password credentials** - the client collects the user's username and password and posts them to the token endpoint. That is the password anti-pattern from the beginning of this document, standardized. Also removed.
 
 Both of the designs we rejected on our way here were once real, blessed parts of the specification. The history of OAuth is largely the history of learning why they were wrong.
 
 #### What this does *not* solve
 
-One thing is conspicuously absent. At the end of the whole flow, iLedger holds a token that lets it read transactions - but it still does not know **who the user is**. It never asked, and nothing in the exchange told it. The access token is addressed to Amason's API, not to iLedger; iLedger is not supposed to open it and in the opaque case cannot.
+One thing is conspicuously absent. At the end of the whole flow, iLedger holds a token that lets it read transactions - but it still does not know **who the user is**. It never asked, and nothing in the exchange told it. The access token is addressed to the resource server, not to iLedger; iLedger is not supposed to open it and in the opaque case cannot.
 
 That is not an oversight. This entire document has been about *authorization* - what an app is permitted to do. It has said nothing about *authentication* - who someone is. They are genuinely different questions, and the fact that "Log in with Google" is built on this machinery makes them very easy to confuse.
 
-Getting from here to "iLedger knows this is Break" needs one more layer on top, which is the subject of the next part.
+Getting from here to "iLedger knows exactly which person this is" needs one more layer on top, which is the subject of the next part.
+
+### Who Is the User?
+
+Let's push on that gap, because it is not a small one.
+
+iLedger now has everything it asked for. It can pull transactions every 15 minutes, forever, without ever having seen a password. But iLedger is a ledger application - it has its own accounts, its own settings, its own saved reports. It needs to know *which of its users* this data belongs to. And at the end of the entire flow, it does not know.
+
+This is not an oversight in our design. Everything up to this point has been about **authorization**: what an application is permitted to do. Nothing has been about **authentication**: who somebody is. They feel like the same topic and they are not.
+
+#### The tempting wrong answer
+
+The obvious shortcut: *the token works, so the user must be who they say they are.* iLedger calls some "tell me about the current user" API with the access token, gets back an answer, and logs that person in.
+
+This is broken, and it is worth seeing exactly why, because the reason is the same "who is this addressed to?" question from the two-channel discussion.
+
+The access token is a **bearer** credential addressed to the **resource server**. It carries no statement about which client obtained it, and in the opaque case iLedger cannot read it at all. So "I am holding a working token" means only "somebody, at some point, obtained a valid token." It does not mean "the person in front of me obtained it."
+
+Now the attack. I write a small app - a shipping tracker, say - and register it with Amason like any other client. You use it, and you legitimately authorize it, so I now hold a valid access token for your Amason account. I take that token and inject it into iLedger's callback. iLedger asks Amason "who does this token belong to?", Amason truthfully answers "that user", and iLedger logs *me* into *your* iLedger account.
+
+Nothing was forged and nothing was stolen. I simply reused a token that was legitimately issued to me, in a place that never checked whether it was issued *for* it. A bearer token proves possession, never identity.
+
+#### The fix: a token addressed to the client
+
+The problem is a missing recipient, so the fix is a second token that has one.
+
+Alongside the access token, the authorization server issues an **ID token**. Two properties make it work:
+
+- It is **always a JWT**, signed by the authorization server. It has to be readable, because the client is the intended consumer. (This is also the clean answer to a question from the previous section: the access token *may* be opaque because only the resource server needs to understand it. The ID token may never be, because the client must.)
+- It carries an **audience** field, `aud`, set to the requesting client's client id. The client verifies that `aud` matches its own client id and rejects the token otherwise.
+
+That single check kills the attack. My shipping tracker's ID token has `aud: shipping-tracker`. When I inject it into iLedger, iLedger sees an audience that is not its own client id and throws it away. The token was minted for me, it says so, and it cannot be laundered into a different application.
+
+This layer on top of OAuth 2.0 is **OpenID Connect**, usually written OIDC.
+
+#### What is inside an ID token
+
+A JWT is signed but not encrypted, so anyone holding one can read every field. The standard claims:
+
+| Claim | Meaning |
+|---|---|
+| `iss` | issuer - which authorization server minted this. Must match the one you configured. |
+| `sub` | subject - a stable, unique identifier for the user within that issuer |
+| `aud` | audience - the client id this token was minted for |
+| `exp` / `iat` | expiry and issue time |
+| `nonce` | echoes a random value the client sent in the authorization request |
+
+`nonce` is worth distinguishing from `state`, since they look similar and do different jobs. `state` protects the *redirect*, tying the callback to the browser session that started it. `nonce` protects the *ID token*, proving it was minted in response to this specific request rather than replayed from an older one.
+
+Request additional scopes and you get additional claims: `profile` brings `name`, `preferred_username`, `picture`; `email` brings `email` and `email_verified`. Most authorization servers can also be configured to include group or role membership, which is how you end up doing authorization decisions - "is this person in the `admins` group?" - on top of an identity layer.
+
+#### Use `sub`, not email
+
+This deserves its own heading because getting it wrong is common and the consequences are bad.
+
+When an application links an OIDC identity to a local account, it must key on `iss` plus `sub`. Not email. Two reasons:
+
+**Emails change.** A user updates their address at the authorization server, logs into the application, and the application - which stored `alice@old.example` - sees a stranger. Best case it creates a duplicate account; worst case the original is orphaned with no way back in.
+
+**Emails can be claimed.** If an authorization server does not verify email addresses, anyone can register an account claiming `admin@yourdomain.example`. An application that matches on email will happily hand over the existing account. This is a genuine account-takeover path, which is why `email_verified` exists and why it should be checked whenever email is used for anything that matters.
+
+`sub` is opaque, stable, and unique per issuer. It is ugly in a database and it is the correct key. Treat `email` and `name` as display attributes that may change at any time.
+
+#### How little was actually added
+
+Here is the pleasant surprise. After all that machinery, the difference between an OAuth 2.0 request and an OIDC request is:
+
+```
+scope=transactions            ->    scope=openid transactions
+```
+
+The literal scope value `openid` is what turns one into the other. The flow is unchanged - same redirect, same code, same back-channel exchange - and the token response simply gains one extra field:
+
+```
+{ "access_token": "...", "expires_in": 900,
+  "refresh_token": "...", "id_token": "eyJhbGci..." }   <- new
+```
+
+OIDC really is a thin layer. It adds an identity token, a few standard claims, and the rules for validating them. Everything underneath is the flow we already built.
+
+#### Discovery: why configuration is one URL
+
+One last piece, and it is the one you will actually appreciate in practice.
+
+An OIDC provider publishes a metadata document at a fixed, predictable path:
+
+```
+https://auth.example.com/.well-known/openid-configuration
+```
+
+That returns JSON listing everything a client needs: the authorization endpoint, the token endpoint, the userinfo endpoint, which scopes and signing algorithms are supported, and a `jwks_uri`.
+
+That last one points at the provider's **public keys**. A client fetches them, caches them, and uses them to verify ID token signatures. Because each key carries an identifier and the ID token names which key signed it, the provider can rotate keys without breaking anyone - clients just fetch the new set.
+
+This is why configuring an OIDC-aware application takes three values rather than ten: an issuer URL, a client id, and a client secret. The application derives every endpoint and every key from the discovery document. That is not a convenience feature bolted on afterwards; it is what makes it realistic to point twenty unrelated applications at one authorization server.
+
+There is also a **userinfo endpoint**, which returns claims when called with an access token. Having both can seem redundant, but they answer different questions: the ID token is a snapshot from the moment of login, available immediately with no network call, while userinfo is current and can be queried later. Use the ID token to establish who logged in; use userinfo when you need fresh attributes afterwards.
+
+## Where This Leaves Us
+
+Stepping back, the whole path was a sequence of small repairs:
+
+1. Copy data by hand. Unusable.
+2. Share the password. Every problem at once: no scope, no revocation, no attribution, and it breaks the moment real authentication is introduced.
+3. Mint an API key with a scope, revocable on its own. The security problems are genuinely solved - but a human is still carrying a secret around.
+4. Have the application request the key and have it delivered automatically. Better, but the key rides through the browser, nobody has verified the application, and nothing links the response to the request.
+5. Register the client, send a single-use code through the browser instead of the key, redeem it on a private back channel, bind everything with `state` and PKCE, and give the credential an expiry with a refresh path. This is **OAuth 2.0**.
+6. Notice that one component is doing all the user-facing work for every API, and split it out. This is the **authorization server** and the **resource server**.
+7. Notice that none of it says who the user is, and add a token addressed to the client to answer that. This is **OpenID Connect**.
+
+Every step fixed something concrete from the step before it. Nothing here was designed in one sitting, and the two designs the specification later deprecated - implicit and password grants - are exactly the two intermediate stages we ourselves rejected on the way through.
+
+Which also means the vocabulary is no longer arbitrary. An issuer URL, a client id and secret, a redirect URI, scopes, an `aud` claim, a JWKS endpoint - each one exists because something specific went wrong without it.
