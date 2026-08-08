@@ -68,9 +68,10 @@ in {
       tls_chain = "${certDir}/fullchain.pem";
       tls_key = "${certDir}/key.pem";
 
-      # nginx sits in front; take real client IPs from X-Forwarded-For.
+      # nginx sits in front; take real client IPs from X-Forwarded-For, but
+      # only when the connection comes from these trusted proxies.
       # (This replaced the pre-1.8 `trust_x_forward_for` boolean.)
-      http_client_address_info."x-forward-for" = true;
+      http_client_address_info."x-forward-for" = [ "127.0.0.1" ];
 
       # Daily online backup onto the same ZFS dataset. This is the recovery
       # source for everything managed imperatively (persons, credentials).
