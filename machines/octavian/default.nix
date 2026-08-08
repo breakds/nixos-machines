@@ -33,6 +33,7 @@
     ./services/toylet-notes.nix
     ./services/tiny-share.nix
     ./services/forgejo.nix
+    ./services/kanidm.nix
     ../../base/vpn.nix
     ../../base/vpn-tunnel.nix
   ];

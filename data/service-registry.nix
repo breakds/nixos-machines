@@ -14,6 +14,13 @@ rec {
     port = 5810;
   };
 
+  # Kanidm IdP (OIDC). The port is loopback-only; nginx proxies to it over
+  # https because kanidm terminates its own TLS.
+  kanidm = {
+    domain = "being.breakds.org";
+    port = 5830;
+  };
+
   prometheus = {
     port = 5820;
     exporters = {
