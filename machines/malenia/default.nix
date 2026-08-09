@@ -45,7 +45,7 @@
       hostId = "9cfcdd52";
 
       # Temporary: expose the development server to the local network.
-      firewall.allowedTCPPorts = [ 5173 ];
+      firewall.allowedTCPPorts = [ 5173 52959 ];
     };
 
     vital.graphical = {
