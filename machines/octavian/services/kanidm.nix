@@ -8,8 +8,10 @@ in {
    * Kanidm — the OIDC identity provider for the self-hosted services.
    *
    * Split of responsibilities (this repo is public):
-   *   - Declared here: server config, OAuth2 clients, capability groups
-   *     (names only, membership never touched by provisioning).
+   *   - Declared in Nix: server config (here); OAuth2 clients and their
+   *     capability groups, next to the service that consumes them (e.g.
+   *     monitor/grafana/oauth2.nix) — NixOS merges those declarations
+   *     into services.kanidm.provision.
    *   - Imperative via the `kanidm` CLI: persons, email addresses, group
    *     memberships, passkey enrollment. Source of truth for those is the
    *     database + its online backups on the VAULT_ROOT/kanidm dataset.
@@ -31,17 +33,6 @@ in {
    *     then `kanidm login --name idm_admin` with the printed password.
    *     The next kanidm.service restart invalidates it again.
    */
-
-  age.secrets = {
-    # OAuth2 client secret for Grafana. Two readers: kanidm provisioning
-    # (sets it on the client) and grafana ($__file provider in its config).
-    kanidm-oauth-grafana = {
-      file = ../../../secrets/kanidm-oauth-grafana.age;
-      mode = "0440";
-      owner = "kanidm";
-      group = "grafana";
-    };
-  };
 
   services.kanidm = {
     # Kanidm requires sequential upgrades (1.10 -> 1.11 -> ..., no skipping),
@@ -84,32 +75,10 @@ in {
     provision = {
       # With no idmAdminPasswordFile set, provisioning self-authenticates by
       # recovering idm_admin to a random throwaway password at each start.
+      #
+      # OAuth2 clients and capability groups are declared next to their
+      # consuming services (e.g. monitor/grafana/oauth2.nix), not here.
       enable = true;
-
-      # Capability groups, declared so OAuth2 scope maps below can reference
-      # them. overwriteMembers = false: membership is managed with the CLI
-      # (kanidm group add-members ...) and never clobbered by provisioning.
-      groups = {
-        grafana-users.overwriteMembers = false;
-        grafana-admins.overwriteMembers = false;
-      };
-
-      systems.oauth2.grafana = {
-        displayName = "Grafana";
-        originUrl = "https://${config.services.grafana.settings.server.domain}/login/generic_oauth";
-        originLanding = "https://${config.services.grafana.settings.server.domain}/";
-        basicSecretFile = config.age.secrets.kanidm-oauth-grafana.path;
-        # preferred_username claim becomes the short name ("breakds"), not
-        # the full SPN ("breakds@being.breakds.org").
-        preferShortUsername = true;
-        scopeMaps.grafana-users = [ "openid" "profile" "email" "groups" ];
-        # Members of grafana-admins land in Grafana with the Admin role; see
-        # role_attribute_path on the Grafana side.
-        claimMaps.grafana_role = {
-          joinType = "array";
-          valuesByGroup.grafana-admins = [ "Admin" ];
-        };
-      };
     };
   };
 
