@@ -23,6 +23,10 @@ in {
         domain = info.domain;
         http_addr = "127.0.0.1";
         http_port = info.port;
+        # The public URL behind nginx. Without it Grafana derives
+        # http://<domain>:<port>/ and sends that as the OAuth redirect_uri,
+        # which kanidm rejects (exact-match against the registered https URL).
+        root_url = "https://${info.domain}/";
       };
 
       # Rotated away from the historical hardcoded value (public in git
