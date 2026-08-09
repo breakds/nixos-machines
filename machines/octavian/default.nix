@@ -15,7 +15,7 @@
     ./services/web-services.nix
     ./services/monitor
     ./services/hydra.nix
-    ./services/immich.nix
+    ./services/immich
     ./services/media.nix
     # ./services/terraria.nix
     ./services/docker-registry.nix
