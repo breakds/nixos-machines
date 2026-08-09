@@ -1,8 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  registry = (import ../../../data/service-registry.nix).forgejo;
+  registry = (import ../../../../data/service-registry.nix).forgejo;
 in {
+  imports = [ ./oauth2.nix ];
+
   /*
    * Forgejo (self-hosted Git) service configuration:
    *
@@ -49,10 +51,8 @@ in {
         SSH_PORT = 22;
       };
 
-      # Disable open registration — admin creates accounts only
-      service = {
-        DISABLE_REGISTRATION = true;
-      };
+      # Registration policy lives in oauth2.nix: no self-registration form,
+      # accounts come only from the kanidm SSO flow (or admin creation).
 
       # TLS terminates at nginx, so Forgejo sees plain HTTP and won't set the
       # Secure flag on session cookies on its own. Force it on.

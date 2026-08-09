@@ -32,7 +32,7 @@
     ./services/stt-server.nix
     ./services/toylet-notes.nix
     ./services/tiny-share.nix
-    ./services/forgejo.nix
+    ./services/forgejo
     ./services/kanidm.nix
     ../../base/vpn.nix
     ../../base/vpn-tunnel.nix

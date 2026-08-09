@@ -4,5 +4,6 @@ let
 in {
   "frigate-camera-passwords.age".publicKeys = [ breakdsMalenia octavian ];
   "kanidm-oauth-grafana.age".publicKeys = [ breakdsMalenia octavian ];
+  "kanidm-oauth-forgejo.age".publicKeys = [ breakdsMalenia octavian ];
   "grafana-secret-key.age".publicKeys = [ breakdsMalenia octavian ];
 }
