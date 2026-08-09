@@ -2,13 +2,30 @@
 
 let
   registry = import ../../../../data/service-registry.nix;
-  idp = registry.kanidm;
   info = registry.immich;
 in {
   /*
-   * Immich <-> kanidm OIDC pairing. Both halves of the contract live in
-   * this file: the kanidm side (client registration, capability groups,
-   * claim map) and the immich side (the oauth section of its config file).
+   * Immich <-> kanidm OIDC pairing. The kanidm half (client registration,
+   * capability groups, claim map) is declared here; the immich half lives
+   * in immich's own database and is configured once through the admin UI,
+   * because declaring services.immich.settings would make the entire
+   * system-settings UI read-only (see the note in default.nix).
+   *
+   * Admin UI runbook — Administration > Settings > OAuth:
+   *   Issuer URL:    https://being.breakds.org/oauth2/openid/immich/.well-known/openid-configuration
+   *   Client ID:     immich
+   *   Client Secret: ssh octavian.local 'sudo cat /run/agenix/kanidm-oauth-immich'
+   *   Scope:         openid email profile
+   *   Signing Algorithm: ES256
+   *     (kanidm signs id tokens with ES256; the RS256 default fails with
+   *     "unexpected JWT alg received")
+   *   Button Text:   Login with kanidm
+   *   Auto Register: enabled
+   *   Mobile Redirect URI Override: enabled, set to
+   *     https://pic.breakds.org/api/oauth/mobile-redirect
+   *     (the app's native redirect is app.immich:///oauth-callback, a
+   *     custom scheme kanidm will not accept; the server rewrites it to
+   *     this https URL, which is what the originUrl list below registers)
    *
    * Access control: only members of immich-users can complete the OIDC
    * flow (the scope map grants them the openid scope). Membership is
@@ -25,13 +42,11 @@ in {
    * accounts keep whatever role they already have in immich's database.
    */
 
-  # OAuth2 client secret. Two readers: kanidm provisioning (as the kanidm
-  # user) and the immich config renderer (via systemd LoadCredential).
+  # OAuth2 client secret. Read by kanidm provisioning; pasted into the
+  # immich admin UI by hand (see runbook above).
   age.secrets.kanidm-oauth-immich = {
     file = ../../../../secrets/kanidm-oauth-immich.age;
-    mode = "0440";
     owner = "kanidm";
-    group = "immich";
   };
 
   services.kanidm.provision = {
@@ -46,8 +61,8 @@ in {
       # kanidm matches redirect URLs exactly. The web login page and the
       # account-link flow on the user settings page each send their own
       # URL; the third entry is the server-side hop that hands mobile
-      # logins back to the app (mobileOverrideEnabled below), which keeps
-      # this list https-only.
+      # logins back to the app (the mobile override in the runbook above),
+      # which keeps this list https-only.
       originUrl = [
         "https://${info.domain}/auth/login"
         "https://${info.domain}/user-settings"
@@ -63,24 +78,5 @@ in {
         valuesByGroup.immich-admins = [ "admin" ];
       };
     };
-  };
-
-  services.immich.settings.oauth = {
-    enabled = true;
-    issuerUrl =
-      "https://${idp.domain}/oauth2/openid/immich/.well-known/openid-configuration";
-    clientId = "immich";
-    clientSecret._secret = config.age.secrets.kanidm-oauth-immich.path;
-    scope = "openid email profile";
-    # kanidm signs id tokens with ES256; immich defaults to RS256 and would
-    # reject the token with "unexpected JWT alg received".
-    signingAlgorithm = "ES256";
-    buttonText = "Login with kanidm";
-    # The mobile app's native redirect is app.immich:///oauth-callback,
-    # a custom scheme kanidm will not accept. With the override enabled the
-    # server rewrites it to the https URL below (registered in kanidm),
-    # which then bounces the browser back into the app.
-    mobileOverrideEnabled = true;
-    mobileRedirectUri = "https://${info.domain}/api/oauth/mobile-redirect";
   };
 }

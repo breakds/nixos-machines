@@ -71,24 +71,6 @@ in {
     # ffmpeg NVENC/NVDEC. This option only affects transcoding, not ML; the
     # ML sidecar's device access is controlled by its own systemd unit below.
     accelerationDevices = null;
-
-    # Declaring `settings` switches immich to config-file mode: the admin UI
-    # system settings page becomes read-only, and anything not declared here
-    # falls back to immich defaults (NOT to what the UI used to say). The
-    # entries below reproduce everything that had been customized in the UI
-    # (the delta stored in the system_metadata DB row). The oauth section is
-    # declared in oauth2.nix.
-    settings = {
-      server.externalDomain = "https://${registry.domain}";
-      newVersionCheck.enabled = false;
-      storageTemplate.enabled = true;
-      ffmpeg = {
-        accel = "nvenc";
-        accelDecode = true;
-        temporalAQ = true;
-      };
-      machineLearning.clip.modelName = "ViT-H-14-378-quickgelu__dfn5b";
-    };
   };
 
   # The Immich module sets PrivateDevices=true on the ML unit, which hides
