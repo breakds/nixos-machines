@@ -34,6 +34,7 @@
     ./services/tiny-share.nix
     ./services/forgejo
     ./services/kanidm.nix
+    ./services/gate.nix
     ../../base/vpn.nix
     ../../base/vpn-tunnel.nix
   ];

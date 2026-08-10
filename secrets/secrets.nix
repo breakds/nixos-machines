@@ -6,5 +6,7 @@ in {
   "kanidm-oauth-grafana.age".publicKeys = [ breakdsMalenia octavian ];
   "kanidm-oauth-forgejo.age".publicKeys = [ breakdsMalenia octavian ];
   "kanidm-oauth-immich.age".publicKeys = [ breakdsMalenia octavian ];
+  "kanidm-oauth-gate.age".publicKeys = [ breakdsMalenia octavian ];
+  "gate-cookie-secret.age".publicKeys = [ breakdsMalenia octavian ];
   "grafana-secret-key.age".publicKeys = [ breakdsMalenia octavian ];
 }

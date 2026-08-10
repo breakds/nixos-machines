@@ -21,6 +21,17 @@ rec {
     port = 5830;
   };
 
+  # oauth2-proxy forward-auth gate: services with no authentication of their
+  # own are exposed behind nginx auth_request against this (see gate.nix).
+  gate = {
+    domain = "gate.breakds.org";
+    port = 5840;
+  };
+
+  solar-assistant = {
+    domain = "solar.breakds.org";
+  };
+
   prometheus = {
     port = 5820;
     exporters = {
