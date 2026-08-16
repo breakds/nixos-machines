@@ -137,7 +137,7 @@
     };
 
     programs.skillful.skills = [
-      "pr-walkthrough"
+      "pr-anatomy"
       "cdp-test-companion"
     ];
 

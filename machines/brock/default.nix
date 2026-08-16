@@ -127,7 +127,7 @@
     services.prometheus.exporters.node.enable = true;
 
     programs.skillful.skills = [
-      "pr-walkthrough"
+      "pr-anatomy"
       "cdp-test-companion"
     ];
 

@@ -119,7 +119,7 @@
       keyFiles = [ ../../data/keys/breakds_malenia.pub ];
     };
 
-    programs.skillful.skills = [ "pr-walkthrough" "cdp-test-companion" ];
+    programs.skillful.skills = [ "pr-anatomy" "cdp-test-companion" ];
 
     # +--------------------+
     # | VPN                |
