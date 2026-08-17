@@ -34,6 +34,7 @@ in {
           ollama-cuda = unstable.ollama-cuda or prev.ollama-cuda;
           shuriken = final.callPackage ../pkgs/shuriken { };
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel { };
+          hunk = final.callPackage ../pkgs/hunk { };
         })
       ];
     };

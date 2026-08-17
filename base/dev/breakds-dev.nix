@@ -69,6 +69,7 @@
 
         # Customized
         shuriken
+        hunk
 
         # For accouting
         beancount
