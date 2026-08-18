@@ -106,6 +106,20 @@ in {
     service = {
       DISABLE_REGISTRATION = false;
       ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
+
+      # Local username/password sign-in is off: the login page offers only
+      # the kanidm button and POSTing credentials to /user/login returns
+      # 403. Account linking below is unaffected — that flow accepts a local
+      # password regardless of this setting. Escape hatch when kanidm is
+      # down: flip this back and rebuild.
+      ENABLE_INTERNAL_SIGNIN = false;
+
+      # And no password over HTTP Basic either, so git-over-https and the
+      # API stop accepting one. Checked after the token paths in
+      # services/auth/method/basic.go, so personal access tokens, OAuth2
+      # tokens and Actions task tokens keep working — HTTPS remotes just
+      # have to use a token instead of a password.
+      ENABLE_BASIC_AUTHENTICATION = false;
     };
 
     oauth2_client = {
