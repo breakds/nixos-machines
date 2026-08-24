@@ -34,6 +34,10 @@ Work down the list and stop at the first that works:
 3. Rethink the problem one level up and refactor, so that a better concept replaces several weaker ones.
 4. Refine the current approach so the new concept is not needed at all.
 
+### 4. Volume of text and readability
+
+When writing something intended for human consumptin, (e.g. comment, commit meesage, answers to my prompts), try to use fewer words and understand a human is going to read it . Pick every word meticulously. Be down to the point and less is more.
+
 ### What simplicity does not mean
 
 A genuinely hard problem may need a sophisticated algorithm, and that is fine — as long as the complexity stays local and does not bleed outward. A KMP-style string matcher is fine when callers only call the function and never entangle with its internals.
