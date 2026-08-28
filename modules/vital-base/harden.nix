@@ -2,7 +2,7 @@
 
 let
   kernelVersion = config.boot.kernelPackages.kernel.version;
-  hasZfs = config.boot.supportedFilesystems ? zfs;
+  hasNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
 
   # Copy Fail is fixed in mainline 7.0+, plus stable backports including
   # 6.19.12+, 6.18.22+, and the 6.12 LTS line currently in nixpkgs.
@@ -15,11 +15,10 @@ let
     || (lib.versionAtLeast kernelVersion "6.12.84"
       && lib.versionOlder kernelVersion "6.13");
 
-  # ZFS 2.3.6 is marked broken against Linux 7.0.2 in current nixpkgs.
-  # Keep ZFS hosts on patched LTS while newer laptop hardware can still use
-  # the latest kernel selected by nixos-hardware.
+  # Linux 7.2 removed strncpy(), which nvidia-open 595.71.05 still calls.
+  # Drop the 7.1 pin once nixpkgs ships a driver that builds against 7.2.
   patchedKernelPackages =
-    if hasZfs then pkgs.linuxPackages_6_12 else pkgs.linuxPackages_latest;
+    if hasNvidia then pkgs.linuxPackages_7_1 else pkgs.linuxPackages_latest;
 
 in {
   boot.kernelPackages = lib.mkOverride 1100 patchedKernelPackages;
