@@ -39,7 +39,7 @@ in {
     # so the package is pinned explicitly and bumped one step at a time.
     # withSecretProvisioning carries the patches that let provisioning set
     # the idm_admin password and oauth2 basic secrets from files.
-    package = pkgs.kanidm_1_10.withSecretProvisioning;
+    package = pkgs.kanidm_1_11.withSecretProvisioning;
 
     # The CLI (`kanidm`) on octavian itself, for the imperative half of
     # administration: persons, memberships, credential reset tokens.
