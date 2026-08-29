@@ -3,7 +3,7 @@
 # JIT-compiled kernels need (flashinfer, triton).
 #
 # Applied via modules/vllm/default.nix only on machines that run vllm —
-# the opentelemetry / mistral-common pins shouldn't land tree-wide just
+# the opentelemetry / flashinfer pins shouldn't land tree-wide just
 # because a host happens to have a GPU. The CUDA 13.2 bump and its
 # tree-wide consumers (torch, cupy, bitsandbytes, opencv) live in
 # pkgs/cuda-13-overlay.nix and apply to every host using the unstable
@@ -33,22 +33,6 @@ in {
       # Not yet in nixpkgs.
       opentelemetry-semantic-conventions-ai =
         python-final.callPackage ../../pkgs/opentelemetry-semantic-conventions-ai { };
-
-      # vllm imports `mistral_common[image]`, which only exists from
-      # 1.11.0 onward; keep this scoped to vLLM until nixpkgs catches up.
-      mistral-common = python-prev.mistral-common.overridePythonAttrs (oldAttrs: rec {
-        version = "1.11.0";
-        src = prev.fetchFromGitHub {
-          owner = "mistralai";
-          repo = "mistral-common";
-          tag = "v${version}";
-          hash = "sha256-DejbLY2i6Hp1J+spxMut5RKugj7rDyrZmp6v+5wqyWY=";
-        };
-        # 1.11.0 adds tests that need llguidance (not yet packaged in nixpkgs).
-        disabledTestPaths = (oldAttrs.disabledTestPaths or [ ]) ++ [
-          "tests/guidance"
-        ];
-      });
 
       # Bump the opentelemetry stack: nixpkgs unstable still ships
       # api/sdk 1.34.0 and semconv/instrumentation 0.55b0, but
@@ -108,7 +92,7 @@ in {
       # vLLM 0.23.0 calls newer FlashInfer APIs, including fp8 KV-cache scale
       # plumbing (`kv_cache_sf`) in prefill. nixpkgs currently ships 0.6.4,
       # which starts but fails under benchmark load with that argument.
-      flashinfer = (python-prev.flashinfer.override {
+      flashinfer-python = (python-prev.flashinfer-python.override {
         buildPythonPackage = python-final.buildPythonPackage.override {
           inherit (python-final.torch) stdenv;
         };

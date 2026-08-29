@@ -88,7 +88,7 @@
 , # cuda-only
   apache-tvm-ffi
 , cupy
-, flashinfer
+, flashinfer-python
 , nvidia-ml-py
 , # rocm-only
   pybind11
@@ -316,7 +316,7 @@ let
 
   mergedCudaLibraries = with cudaPackages; [
     cuda_cudart # cuda_runtime.h, -lcudart
-    cuda_cccl
+    cccl
     libcurand # curand_kernel.h
     libcusparse # cusparse.h
     libcusolver # cusolverDn.h
@@ -535,7 +535,7 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
   ++ lib.optionals cudaSupport [
     apache-tvm-ffi
     cupy
-    flashinfer
+    flashinfer-python
     nvidia-ml-py
   ]
   ++ lib.optionals rocmSupport [
