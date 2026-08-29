@@ -1,4 +1,4 @@
-# Overlay providing vllm 0.23.0, its Python dependency pins, and the
+# Overlay providing vllm 0.28.0, its Python dependency pins, and the
 # `vllm-with-batteries` wrapper that bundles the runtime CUDA toolchain
 # JIT-compiled kernels need (flashinfer, triton).
 #
@@ -89,22 +89,22 @@ in {
           sourceRoot = "${src.name}/opentelemetry-instrumentation";
         });
 
-      # vLLM 0.23.0 calls newer FlashInfer APIs, including fp8 KV-cache scale
-      # plumbing (`kv_cache_sf`) in prefill. nixpkgs currently ships 0.6.4,
-      # which starts but fails under benchmark load with that argument.
+      # vLLM 0.28.0 pins flashinfer-python 0.6.16.post3 and calls APIs from it,
+      # including fp8 KV-cache scale plumbing (`kv_cache_sf`) in prefill. nixpkgs
+      # ships 0.6.4, which starts but fails under benchmark load with that argument.
       flashinfer-python = (python-prev.flashinfer-python.override {
         buildPythonPackage = python-final.buildPythonPackage.override {
           inherit (python-final.torch) stdenv;
         };
       }).overridePythonAttrs (oldAttrs: rec {
-        version = "0.6.12";
+        version = "0.6.16.post3";
         __structuredAttrs = true;
         src = prev.fetchFromGitHub {
           owner = "flashinfer-ai";
           repo = "flashinfer";
           tag = "v${version}";
           fetchSubmodules = true;
-          hash = "sha256-UhLDUM5sNJdOYiEV2wGMdbijsi+SrIi7wgU7eDAJlW8=";
+          hash = "sha256-mhmjIX1Whats3JUjrMr27mY7o3DR4D/Wg5XCJrFHqEY=";
         };
 
         build-system = (oldAttrs.build-system or [ ]) ++ [

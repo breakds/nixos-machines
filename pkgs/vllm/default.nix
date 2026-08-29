@@ -153,8 +153,8 @@ let
       name = "FlashMLA-source";
       owner = "vllm-project";
       repo = "FlashMLA";
-      rev = "a6ec2ba7bd0a7dff98b3f4d3e6b52b159c48d78b";
-      hash = "sha256-Oj37H0swZdxaprpaHq0XfOCagc0ypYKpS8e6JzqcDQg=";
+      rev = "a8f794d1251cbfd88a5011445dd5582289c727e4";
+      hash = "sha256-k/Mbc70U8wbP4BHnxZ/I607Dc2EnIkhWYd9iKUG740Y=";
     };
 
     dontConfigure = true;
@@ -185,8 +185,8 @@ let
     name = "qutlass-source";
     owner = "IST-DASLab";
     repo = "qutlass";
-    rev = "830d2c4537c7396e14a02a46fbddd18b5d107c65";
-    hash = "sha256-aG4qd0vlwP+8gudfvHwhtXCFmBOJKQQTvcwahpEqC84=";
+    rev = "e74319e3405ce6d71965732880f5dc1f52371f64";
+    hash = "sha256-Gzl3KuYXXLXMrVciEYrBPu1FH2cplGUPTFpWzFfUmMo=";
   };
 
   # vLLM 0.20 added DeepGEMM as a sub-build, gated to sm_90a / sm_100 only.
@@ -200,8 +200,48 @@ let
     name = "deepgemm-source";
     owner = "deepseek-ai";
     repo = "DeepGEMM";
-    rev = "891d57b4db1071624b5c8fa0d1e51cb317fa709f";
-    hash = "sha256-xbgkpMvh5NXuTk7nXkgPs9Pa91XQaTXRronHnSGPfHM=";
+    rev = "8b1392b978f5a03c828dd1711090d7fb50958b8a";
+    hash = "sha256-qMEm80V6thNDVcGvoOtOwtSGGKQRjffJcb3mwmcJAaE=";
+  };
+
+  # The three sub-builds below are new in vLLM 0.24-0.28. Each one's cmake
+  # runs FetchContent_Populate unconditionally for CUDA, so all three need a
+  # source directory even when the kernels themselves are gated off — leaving
+  # any of them unset makes the build try to git-clone inside the sandbox.
+  # grep for GIT_TAG in cmake/external_projects/{tml_fa4,flashkda,fmha_sm100}.cmake
+
+  # FA4 CuteDSL kernels. No submodules.
+  tml-fa4 = fetchFromGitHub {
+    name = "tml-fa4-source";
+    owner = "vllm-project";
+    repo = "tml-fa4";
+    rev = "b206834606ed5b5f21f8eed6b0683f528ea9cf7d";
+    hash = "sha256-LDA5bW4Bf5+w41K9aJ5flz372hy+Ukm//RT55L7nbbU=";
+  };
+
+  # Kimi Delta Attention. Unlike deepgemm this one does compile for us:
+  # flashkda.cmake lists "12.0f" as supported from CUDA 13.0, and its sources
+  # include ${flashkda_SOURCE_DIR}/cutlass/{include,examples,tools} — so the
+  # bundled cutlass submodule has to be present, not just the top-level repo.
+  flashkda = fetchFromGitHub {
+    name = "flashkda-source";
+    owner = "vllm-project";
+    repo = "FlashKDA";
+    rev = "053de1b716ef3255873e02d2d28f4adf09951978";
+    fetchSubmodules = true;
+    hash = "sha256-ew0xOyDP3Z+2c0azRf+nESZ4wgRXe/qQIyl7K+MmgKI=";
+  };
+
+  # Multi-head Sparse Attention, sm_100 only — nothing compiles on sm_120, but
+  # fmha_sm100.cmake still install()s Python and headers out of its cutlass
+  # submodule, so fetch that too.
+  fmha-sm100 = fetchFromGitHub {
+    name = "fmha-sm100-source";
+    owner = "vllm-project";
+    repo = "MSA";
+    rev = "087c161814d4d9c735b46c21212a09e5f8eb92fa";
+    fetchSubmodules = true;
+    hash = "sha256-y1NZBwmpiILIDb4ph1NJ+0jU1Tg4qP3y4w3tOCN4gEw=";
   };
 
   vllm-flash-attn' = lib.defaultTo
@@ -216,8 +256,8 @@ let
         name = "flash-attention-source";
         owner = "vllm-project";
         repo = "flash-attention";
-        rev = "dd62dac706b1cf7895bd99b18c6cb7e7e117ee25";
-        hash = "sha256-y6gIgP6a4U0UGzSxP0vjgIzqXoRSdyJei8FYEC6ITNk=";
+        rev = "f3e1a4f74c99145c0717709860bf765de1703779";
+        hash = "sha256-/szsVNSp1LvT2Ojbj67jy6tY31RTPR1qW2XzcB31B80=";
       };
 
       # Hopper-build-failure fetchpatches (Dao-AILab/flash-attention PRs
@@ -346,7 +386,7 @@ in
 
 buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
   pname = "vllm";
-  version = "0.23.0";
+  version = "0.28.0";
   pyproject = true;
   cargoRoot = "rust";
 
@@ -354,20 +394,17 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     owner = "vllm-project";
     repo = "vllm";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-ORZbQoZWrplHnNfHf3EDPbIs3o+8bioOYlqQrj3QFFk=";
+    hash = "sha256-Ia5SB9bQ+Vxkc5wBwY7HxQo6rqYFpWlVxeQyyP55dMg=";
   };
 
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit (finalAttrs) pname version src cargoRoot;
-    hash = "sha256-mE87Pu0W4rrhjxuSdg2yzITdie7PEd0DVmfiagkH7bg=";
+    hash = "sha256-CLvLAkejYfrnrPXJ78xh2mgCyRg7F56Um1LPnJtj7iw=";
   };
 
   patches = [
     # Nix integration: propagate PYTHONPATH into model-registry subprocesses.
     ./0003-propagate-pythonpath.patch
-    # Drop cuda.txt deps that aren't packaged in nixpkgs and are optional or
-    # outside Lorian's Qwen3.6 path. See patch header.
-    ./0007-drop-cuda-reqs-without-nixpkgs.patch
     # Skip building FA3 (Hopper sm_90) entirely — vllm-flash-attn's
     # hopper/ kernels have been fragile against CUTLASS 4.x, and we don't
     # need FA3 on sm_120. See patch header.
@@ -566,6 +603,9 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     (lib.cmakeFeature "VLLM_FLASH_ATTN_SRC_DIR" "${lib.getDev vllm-flash-attn'}")
     (lib.cmakeFeature "QUTLASS_SRC_DIR" "${lib.getDev qutlass}")
     (lib.cmakeFeature "DEEPGEMM_SRC_DIR" "${lib.getDev deepgemm}")
+    (lib.cmakeFeature "TML_FA4_SRC_DIR" "${lib.getDev tml-fa4}")
+    (lib.cmakeFeature "FLASH_KDA_SRC_DIR" "${lib.getDev flashkda}")
+    (lib.cmakeFeature "FMHA_SM100_SRC_DIR" "${lib.getDev fmha-sm100}")
     (lib.cmakeFeature "TORCH_CUDA_ARCH_LIST" "${gpuTargetString}")
     (lib.cmakeFeature "CUTLASS_NVCC_ARCHS_ENABLED" "${cudaPackages.flags.cmakeCudaArchitecturesString}")
     (lib.cmakeFeature "CUDA_TOOLKIT_ROOT_DIR" "${symlinkJoin {
@@ -607,12 +647,33 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
 
   pythonRelaxDeps = true;
 
-  # These optional deps don't have nixpkgs packages yet. flashinfer-cubin
-  # is a pre-built CUDA binary variant (we use flashinfer from source).
-  # nvidia-cudnn-frontend is a header-only C++ lib used at build time.
+  # Optional deps with no nixpkgs package. This list used to be split between
+  # here and a patch against requirements/cuda.txt, but that patch's context
+  # moved on every vLLM bump; stripping the metadata instead does the same job
+  # and survives version changes. vLLM either imports each of these lazily
+  # with a fallback, or never reaches them on the sm_120 NVFP4 path:
+  #
+  #   flashinfer-cubin      pre-built CUDA binaries (we build flashinfer from source)
+  #   nvidia-cudnn-frontend header-only C++ lib, build-time only
+  #   tilelang              DeepSeek V4 / MHC paths, probed via has_tilelang()
+  #   fastsafetensors       weight_utils.py wraps the import in try/except
+  #   nvidia-cutlass-dsl    CuteDSL kernels; we use the vendored CUTLASS/QuTLASS
+  #   quack-kernels         ditto (required by MSA for CUTLASS DSL 4.6)
+  #   tokenspeed-mla        faster MLA with spec decode; not on Qwen3's GDN path
+  #   humming-kernels       optional mixed-precision quantization backend
+  #   PyNvVideoCodec        hardware video decode; the image path doesn't need it
+  #   nvtx                  only for LLM_NVTX_SCOPES_FOR_PROFILING=1
   pythonRemoveDeps = [
     "flashinfer-cubin"
     "nvidia-cudnn-frontend"
+    "tilelang"
+    "fastsafetensors"
+    "nvidia-cutlass-dsl"
+    "quack-kernels"
+    "tokenspeed-mla"
+    "humming-kernels"
+    "PyNvVideoCodec"
+    "nvtx"
   ];
 
   pythonImportsCheck = [ "vllm" ];
