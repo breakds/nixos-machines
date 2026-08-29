@@ -143,31 +143,39 @@
     services.vllm.gpuTargets = [ "12.0" ];
 
     # The LLM server — vLLM serving an OpenAI-compatible API on :8000,
-    # tensor-parallel across both RTX 5090s. NVFP4 weights (~13.5 GB total
-    # vs ~27 GB at FP8) free up the KV pool to ~41 GB; with FP8 KV cache
-    # and Qwen 3.6's hybrid attention (Gated DeltaNet + Gated Attention,
-    # 16/64 layers on the scaling path), that's ~6 concurrent 200K agents.
+    # tensor-parallel across both RTX 5090s.
     #
-    # `unsloth/Qwen3.6-27B-NVFP4` repacks the NVFP4 scales in a layout
-    # vLLM's compressed-tensors loader recognizes (auto-detected — no
-    # --quantization flag needed). The Qwen3.5/3.6 architecture
-    # (`Qwen3_5ForConditionalGeneration`) is implemented natively in
-    # vllm 0.20.2 (vllm/model_executor/models/qwen3_5.py), so
-    # --trust-remote-code is not load-bearing for the model class itself —
-    # it's kept because the upstream recipe specifies it and it harmlessly
-    # also covers any tokenizer/processor code paths.
+    # Qwen3.8-27B keeps 3.6's `Qwen3_5ForConditionalGeneration` class, so the
+    # pinned vLLM serves it with no engine change. New in 3.8: a vision
+    # encoder (the model is multimodal now) and a 262144 native context, which
+    # is what maxModelLen below tracks — 3.6 was capped at 200000 here.
+    #
+    # `Inferact/Qwen3.8-27B-NVFP4` is a ModelOpt NVFP4 checkpoint; quant_algo
+    # NVFP4 selects ModelOptNvFp4LinearMethod and the cutlass W4A4 GEMM on
+    # sm_120. It leaves lm_head, the vision tower, the MTP module and the
+    # Gated DeltaNet projections unquantized — more VRAM than unsloth's build,
+    # but a far better MTP acceptance rate (0.897 vs 0.788 on vLLM's own TP2
+    # 5090 measurements), which is what decode speed actually rides on.
+    # unsloth's 3.8 NVFP4 quantizes lm_head to FP8 via compressed-tensors
+    # mixed-precision and needs vLLM main to load; not worth the churn.
+    #
+    # Unlike unsloth's, this checkpoint declares no kv_cache_scheme, so
+    # --kv-cache-dtype below is load-bearing rather than a redundant hint.
+    #
+    # --trust-remote-code is not load-bearing for the model class, which is
+    # native. Kept because the upstream recipe specifies it and it harmlessly
+    # covers the tokenizer/processor paths.
     #
     # --max-num-seqs caps concurrent requests so the activation-VRAM
     # spikes during prefill stay bounded; tune up if requests queue.
     #
-    # The upstream checkpoint now includes its own MTP module. Use it as a
-    # speculative draft model for faster decode without loading a separate
-    # draft checkpoint.
+    # The checkpoint ships its own MTP module. Use it as a speculative draft
+    # model for faster decode without loading a separate draft checkpoint.
     services.vllm.instances.main = {
-      model = "unsloth/Qwen3.6-27B-NVFP4";
+      model = "Inferact/Qwen3.8-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.90;
-      maxModelLen = 200000;
+      maxModelLen = 262144;
       toolCallParser = "qwen3_coder";
       reasoningParser = "qwen3";
       extraArgs = [
