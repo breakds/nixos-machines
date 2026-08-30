@@ -151,17 +151,21 @@
     # cap maxModelLen under that ceiling — a single request would otherwise be
     # allowed to claim most of the shared KV pool. 3.6 was capped at 200000.
     #
-    # `Inferact/Qwen3.8-27B-NVFP4` is a ModelOpt NVFP4 checkpoint; quant_algo
-    # NVFP4 selects ModelOptNvFp4LinearMethod and the cutlass W4A4 GEMM on
-    # sm_120. It leaves lm_head, the vision tower, the MTP module and the
-    # Gated DeltaNet projections unquantized — more VRAM than unsloth's build,
-    # but a far better MTP acceptance rate (0.897 vs 0.788 on vLLM's own TP2
-    # 5090 measurements), which is what decode speed actually rides on.
-    # unsloth's 3.8 NVFP4 quantizes lm_head to FP8 via compressed-tensors
-    # mixed-precision and needs vLLM main to load; not worth the churn.
+    # `unsloth/Qwen3.8-27B-NVFP4` is compressed-tensors in mixed-precision
+    # format: an FP8 W8A8 group covering lm_head, plus an nvfp4-pack group for
+    # the rest. Both format names are recognised by compressed-tensors 0.15.
     #
-    # Unlike unsloth's, this checkpoint declares no kv_cache_scheme, so
-    # --kv-cache-dtype below is load-bearing rather than a redundant hint.
+    # Picked over Inferact's ModelOpt NVFP4 build for two reasons. It declares
+    # a kv_cache_scheme with calibrated static_minmax scales, so --kv-cache-dtype
+    # below gets real k/v_scale values; Inferact declares none and vLLM falls
+    # back to a scaling factor of 1.0, which risks accuracy under fp8_e4m3. And
+    # it fits roughly twice the KV cache — about 920K tokens against 445K on
+    # vLLM's own TP2 5090 measurements.
+    #
+    # The cost is MTP acceptance, 0.788 against Inferact's 0.897. Qwen3.8 ships
+    # a single MTP layer, so num_speculative_tokens 3 reuses it three times and
+    # vLLM warns acceptance will fall short of either benchmark regardless.
+    # Worth measuring 1 and 2 against 3 here.
     #
     # --trust-remote-code is not load-bearing for the model class, which is
     # native. Kept because the upstream recipe specifies it and it harmlessly
@@ -173,7 +177,7 @@
     # The checkpoint ships its own MTP module. Use it as a speculative draft
     # model for faster decode without loading a separate draft checkpoint.
     services.vllm.instances.main = {
-      model = "Inferact/Qwen3.8-27B-NVFP4";
+      model = "unsloth/Qwen3.8-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.90;
       maxModelLen = 225000;
