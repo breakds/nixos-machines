@@ -1,0 +1,31 @@
+Do not import the Harmony parser eagerly.
+
+`vllm/parser/harmony.py` does a module-level
+`from xgrammar.openai_tool_call_schema import ...`, which only exists from
+xgrammar 0.1.34 onward. nixpkgs ships 0.1.33, and vLLM's own metadata pin
+(`xgrammar >= 0.2.1`) is relaxed away by pythonRelaxDeps, so the mismatch
+surfaces as a crash on startup rather than at dependency-check time:
+
+    ModuleNotFoundError: No module named 'xgrammar.openai_tool_call_schema'
+
+Harmony is the GPT-OSS tool-call format. `vllm/parser/__init__.py` is the
+only place that imports it eagerly; ParserManager re-imports the module
+lazily inside `get_parser()` and only when the model is Harmony-format, so
+a model that genuinely needs it still fails loudly and in the right place.
+
+--- a/vllm/parser/__init__.py
++++ b/vllm/parser/__init__.py
+@@ -5,7 +5,12 @@
+     DelegatingParser,
+     Parser,
+ )
+-from vllm.parser.harmony import HarmonyParser
++
++try:
++    from vllm.parser.harmony import HarmonyParser
++except ModuleNotFoundError:
++    HarmonyParser = None
++
+ from vllm.parser.parser_manager import ParserManager
+ 
+ __all__ = [
