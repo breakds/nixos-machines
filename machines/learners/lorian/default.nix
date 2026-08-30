@@ -162,10 +162,9 @@
     # it fits roughly twice the KV cache — about 920K tokens against 445K on
     # vLLM's own TP2 5090 measurements.
     #
-    # The cost is MTP acceptance, 0.788 against Inferact's 0.897. Qwen3.8 ships
-    # a single MTP layer, so num_speculative_tokens 3 reuses it three times and
-    # vLLM warns acceptance will fall short of either benchmark regardless.
-    # Worth measuring 1 and 2 against 3 here.
+    # The nominal cost is MTP acceptance, 0.788 against Inferact's 0.897 — see
+    # the measured figure below, which makes that gap look smaller than it
+    # reads on paper.
     #
     # --trust-remote-code is not load-bearing for the model class, which is
     # native. Kept because the upstream recipe specifies it and it harmlessly
@@ -174,12 +173,26 @@
     # --max-num-seqs caps concurrent requests so the activation-VRAM
     # spikes during prefill stay bounded; tune up if requests queue.
     #
+    # --max-num-batched-tokens sets the prefill chunk. vLLM derives
+    # max_num_scheduled_tokens from it and warns below 8192 once speculative
+    # decoding claims its draft slots; the default 2048 meant ~110 chunks to
+    # fill a 225000-token context.
+    #
+    # Note these two settings pull against each other. gpuMemoryUtilization
+    # raises the total budget, but a larger prefill chunk makes the memory
+    # profiler reserve more for activations, which comes out of the KV pool.
+    # 0.9178 is vLLM's own arithmetic for restoring the effective KV size it
+    # had before CUDA-graph memory profiling became the default in 0.21.
+    # Watch the reported "GPU KV cache size" after changing either.
+    #
     # The checkpoint ships its own MTP module. Use it as a speculative draft
     # model for faster decode without loading a separate draft checkpoint.
+    # Measured acceptance is 0.73 over 3 positions (0.83 / 0.70 / 0.67), so
+    # ~2.2 of every 3 drafted tokens land — worth keeping at 3.
     services.vllm.instances.main = {
       model = "unsloth/Qwen3.8-27B-NVFP4";
       tensorParallelSize = 2;
-      gpuMemoryUtilization = 0.90;
+      gpuMemoryUtilization = 0.9178;
       maxModelLen = 225000;
       toolCallParser = "qwen3_coder";
       reasoningParser = "qwen3";
@@ -187,6 +200,7 @@
         "--kv-cache-dtype" "fp8_e4m3"
         "--dtype" "bfloat16"
         "--max-num-seqs" "8"
+        "--max-num-batched-tokens" "8192"
         "--trust-remote-code"
         "--speculative-config" ''{"method":"mtp","num_speculative_tokens":3}''
       ];
