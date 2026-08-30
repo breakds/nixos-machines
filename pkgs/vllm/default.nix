@@ -414,10 +414,6 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
     # Avoid importing humming-kernels while probing unrelated quantization
     # methods; the dependency is optional and not packaged here.
     ./0009-guard-optional-humming-quantization.patch
-    # Keep vllm.parser.harmony importable against xgrammar 0.1.33, which has
-    # no openai_tool_call_schema. Four modules import harmony, so the guard
-    # belongs in harmony itself. See patch header.
-    ./0010-guard-harmony-parser-import.patch
   ];
 
   postPatch = ''

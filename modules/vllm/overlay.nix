@@ -89,6 +89,49 @@ in {
           sourceRoot = "${src.name}/opentelemetry-instrumentation";
         });
 
+      # vLLM 0.28.0 needs xgrammar >= 0.2.1; nixpkgs ships 0.1.33, on master
+      # too. The gap is not cosmetic — 0.1.33 lacks `normalize_tool_choice`,
+      # `get_model_structural_tag` and the whole `openai_tool_call_schema`
+      # module, all of which vLLM imports. pythonRelaxDeps drops vLLM's pin,
+      # so each one surfaces as a crash at startup instead.
+      #
+      # 0.2.x replaced nanobind with its own cpp/tvm_ffi bindings, so nixpkgs'
+      # nanobind patch is obsolete and apache-tvm-ffi joins the build. The
+      # transformers < 5 bound is upstream being careful about remote-code
+      # tokenizers (internlm2_5, aya-23, deepseek-coder-v1.5); 0.2.6 drops it
+      # entirely, and Qwen3.8 is not affected, so relax it rather than hold
+      # transformers back for vLLM's sake.
+      xgrammar = (python-prev.xgrammar.overridePythonAttrs (oldAttrs: rec {
+        version = "0.2.5";
+        src = prev.fetchFromGitHub {
+          owner = "mlc-ai";
+          repo = "xgrammar";
+          tag = "v${version}";
+          fetchSubmodules = true;
+          hash = "sha256-DvQizGr4YmMY+6Tl8PiCNmYkOk6d3mW/OwS25/ifxyI=";
+        };
+
+        patches = [ ];
+
+        build-system = [
+          prev.cmake
+          prev.ninja
+          python-final.scikit-build-core
+          python-final.apache-tvm-ffi
+        ];
+
+        dependencies = (oldAttrs.dependencies or [ ]) ++ [
+          python-final.apache-tvm-ffi
+          python-final.typing-extensions
+        ];
+
+        pythonRelaxDeps = [ "transformers" ];
+
+        # The 0.2.x suite pulls tokenizers from HuggingFace at runtime, which
+        # the sandbox has no network for.
+        doCheck = false;
+      }));
+
       # vLLM 0.28.0 pins flashinfer-python 0.6.16.post3 and calls APIs from it,
       # including fp8 KV-cache scale plumbing (`kv_cache_sf`) in prefill. nixpkgs
       # ships 0.6.4, which starts but fails under benchmark load with that argument.
