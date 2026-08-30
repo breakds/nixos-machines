@@ -189,19 +189,21 @@ let
     hash = "sha256-Gzl3KuYXXLXMrVciEYrBPu1FH2cplGUPTFpWzFfUmMo=";
   };
 
-  # vLLM 0.20 added DeepGEMM as a sub-build, gated to sm_90a / sm_100 only.
-  # On sm_120 (RTX 50-series consumer Blackwell) the cmake creates an empty
-  # target — but FetchContent_Populate runs unconditionally before the gate,
-  # so we still need to provide a source directory. Submodules (third-party/
-  # {cutlass,fmt}) are only referenced inside the if(DEEPGEMM_ARCHS) block
-  # and are unused on our path.
+  # DeepGEMM was gated to sm_90a / sm_100 when vLLM 0.20 added it, so on
+  # sm_120 the cmake used to fall through to an empty target and only needed a
+  # source directory to satisfy FetchContent_Populate. 0.28.0 added "12.0f" to
+  # DEEPGEMM_SUPPORT_ARCHS, so it now genuinely compiles for us — and its
+  # kernels include cute/ headers out of third-party/cutlass, which upstream
+  # pulls via GIT_SUBMODULES. Fetch the submodules or the build dies on a
+  # missing cute/arch/mma_sm100_desc.hpp.
   # grep for GIT_TAG in cmake/external_projects/deepgemm.cmake
   deepgemm = fetchFromGitHub {
     name = "deepgemm-source";
     owner = "deepseek-ai";
     repo = "DeepGEMM";
     rev = "8b1392b978f5a03c828dd1711090d7fb50958b8a";
-    hash = "sha256-qMEm80V6thNDVcGvoOtOwtSGGKQRjffJcb3mwmcJAaE=";
+    fetchSubmodules = true;
+    hash = "sha256-Dy3s3LJXkvgKAOMOwyissYjr47OjkwqlShVKUthL/II=";
   };
 
   # The three sub-builds below are new in vLLM 0.24-0.28. Each one's cmake
