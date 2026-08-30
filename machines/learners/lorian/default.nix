@@ -147,8 +147,9 @@
     #
     # Qwen3.8-27B keeps 3.6's `Qwen3_5ForConditionalGeneration` class, so the
     # pinned vLLM serves it with no engine change. New in 3.8: a vision
-    # encoder (the model is multimodal now) and a 262144 native context, which
-    # is what maxModelLen below tracks — 3.6 was capped at 200000 here.
+    # encoder (the model is multimodal now) and a 262144 native context. We
+    # cap maxModelLen under that ceiling — a single request would otherwise be
+    # allowed to claim most of the shared KV pool. 3.6 was capped at 200000.
     #
     # `Inferact/Qwen3.8-27B-NVFP4` is a ModelOpt NVFP4 checkpoint; quant_algo
     # NVFP4 selects ModelOptNvFp4LinearMethod and the cutlass W4A4 GEMM on
@@ -175,7 +176,7 @@
       model = "Inferact/Qwen3.8-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.90;
-      maxModelLen = 262144;
+      maxModelLen = 225000;
       toolCallParser = "qwen3_coder";
       reasoningParser = "qwen3";
       extraArgs = [
