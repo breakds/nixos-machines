@@ -426,9 +426,18 @@ buildPythonPackage.override { stdenv = torch.stdenv; } (finalAttrs: {
         "import vllm.third_party.pynvml as pynvml" \
         "import pynvml"
 
-    # pythonRelaxDeps does not cover build-system
+    # pythonRelaxDeps does not cover build-system, so relax those pins here.
+    #
+    # Drop the torch constraint outright rather than loosening == to >=.
+    # 0.28.0 asks for torch 2.13.0 and nixpkgs has 2.12.0 everywhere,
+    # including master, so >= is still unsatisfiable — vLLM went 2.11 -> 2.13
+    # and skipped the version we have. Pinning the exact string means the next
+    # bump trips --replace-fail instead of silently keeping a stale rule.
+    #
+    # This only clears the metadata gate. Whether vLLM's CUDA sources actually
+    # compile against 2.12's ATen/c10 headers is settled later, in the build.
     substituteInPlace pyproject.toml \
-      --replace-fail "torch ==" "torch >=" \
+      --replace-fail '"torch == 2.13.0"' '"torch"' \
       --replace-fail "setuptools>=77.0.3,<81.0.0" "setuptools"
 
     # Ignore the python version check because it hard-codes minor versions and
