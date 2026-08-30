@@ -114,20 +114,20 @@ in {
         pythonRemoveDeps = builtins.filter
           (dep: dep != "nvidia-cutlass-dsl")
           ((oldAttrs.pythonRemoveDeps or [ ]) ++ [
-          # nixpkgs has no `cuda-python`; upstream ships it as a meta-package
-          # over cuda-bindings and cuda-core, which nixpkgs packages
-          # separately. Supply those two below instead.
+          # cuda-python and nccl4py are runtime deps of FlashInfer's moe_ep
+          # expert-parallel transport, which a dense model never reaches
+          # (FlashInfer's own requirements.txt says as much). nixpkgs has no
+          # cuda-python at all, and its nccl4py is broken — the package
+          # patches nccl_ep_linux.pyx, which does not exist at the 0.4.1 tag.
           "cuda-python"
+          "nccl4py"
+          # Not needed for the vLLM CUDA attention path we use.
+          "cuda-tile"
           ]);
 
-        # nixpkgs' dependency list was written for 0.6.4; 0.6.16 adds several
-        # more to requirements.txt. All of these are packaged, so satisfy them
-        # rather than stripping them out of the metadata.
+        # nixpkgs' dependency list was written for 0.6.4; ninja is one of the
+        # few genuinely new entries in 0.6.16's requirements.txt.
         dependencies = (oldAttrs.dependencies or [ ]) ++ [
-          python-final.cuda-bindings
-          python-final.cuda-core
-          python-final.cuda-tile
-          python-final.nccl4py
           python-final.ninja
           python-final.nvidia-cutlass-dsl
           python-final.packaging
