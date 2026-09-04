@@ -31,7 +31,7 @@
 
         # User specific codex configuration
         ".codex/AGENTS.md".source = ./AGENTS.md;
-        ".codex/config.toml".source = ./codex/config.toml;
+        # ".codex/config.toml".source = ./codex/config.toml;
       };
     };
   };
