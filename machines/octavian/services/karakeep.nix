@@ -33,6 +33,9 @@ in {
 
     services.karakeep = {
       enable = true;
+      # better-sqlite3 11.x aborts on Node >= 24.19 (ObjectWrap cleanup-hook
+      # regression). Drop once karakeep ships better-sqlite3 >= 13.
+      package = pkgs.karakeep.override { nodejs = pkgs.nodejs_22; };
       meilisearch.enable = true;
       browser.enable = true;
       browser.port = registry.ports.browser;
