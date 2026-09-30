@@ -80,6 +80,7 @@
       anki
       flacon     # audiofile encoder
       pavucontrol
+      mediainfo
     ];
 
     services.prometheus.exporters.node.enable = true;

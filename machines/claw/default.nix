@@ -82,6 +82,7 @@
       moonlight-qt
       yt-dlp
       immich-cli
+      mediainfo
     ];
 
     xdg.mime = {
