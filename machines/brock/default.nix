@@ -56,12 +56,10 @@
     # Enable CUPS to print documents.
     services.printing.enable = true;
 
-    # Quick Sync Video (hardware accelerated media conversion for Intel)
-    # See https://wiki.nixos.org/wiki/Intel_Graphics
-    # Also note, hardware.opengl will rename to `hardware.graphics` in 24.11
+    # Intel hardware video acceleration through VA-API and Quick Sync.
     hardware.graphics = {
       enable = true;
-      extraPackages = with pkgs; [ vpl-gpu-rt ];
+      extraPackages = with pkgs; [ intel-media-driver vpl-gpu-rt ];
     };
 
     # Enable sound with pipewire.
@@ -79,6 +77,7 @@
     environment.systemPackages = with pkgs; [
       pavucontrol
       mpv
+      xwayland-satellite # Niri starts this on demand for X11 applications.
     ];
 
     # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
