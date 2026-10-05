@@ -5,8 +5,6 @@
     ./hardware-configuration.nix
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
-    ../../base/build-machines-v2.nix
-    ../../base/dev/interbotix.nix
     ../../modules/syncthing.nix
     ../../base/vpn.nix
   ];
@@ -31,8 +29,6 @@
     networking.networkmanager.enable = true;
 
     time.timeZone = "America/Los_Angeles";
-
-    vital.programs.arduino.enable = true;
 
     # +----------+
     # | Desktop  |
@@ -124,8 +120,6 @@
 
     services.fwupd.enable = true;
 
-    services.prometheus.exporters.node.enable = true;
-
     programs.skillful.skills = [
       "pr-anatomy"
       "cdp-test-companion"
@@ -147,7 +141,6 @@
     vital.distributed-build = {
       caches = [ "octavian" ];
       builders = [ "octavian" "malenia" ];
-      sshKeyDir = "/home/breakds/.ssh";
     };
 
     # This value determines the NixOS release from which the default

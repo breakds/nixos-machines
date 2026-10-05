@@ -18,10 +18,9 @@ in {
       self.nixosModules.flatpak
       self.nixosModules.localsend
       self.nixosModules.tiny-share-client
-      self.nixosModules.prometheus-exporters
+      self.nixosModules.builder-cache-valley
       self.nixosModules.syncthing
       self.nixosModules.qmk
-      self.nixosModules.arduino
 
       # Development Assistants
       self.nixosModules.coding-agent
