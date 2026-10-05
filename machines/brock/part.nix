@@ -12,17 +12,10 @@ in {
 
       self.nixosModules.base-overlays
       self.nixosModules.graphical
-      self.nixosModules.iphone-connect
-      self.nixosModules.steam
       self.nixosModules.niri
-      self.nixosModules.flatpak
       self.nixosModules.localsend
       self.nixosModules.tiny-share-client
       self.nixosModules.builder-cache-valley
-      self.nixosModules.syncthing
-      self.nixosModules.qmk
-
-      # Development Assistants
       self.nixosModules.coding-agent
     ];
   };

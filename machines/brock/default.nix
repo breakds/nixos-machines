@@ -11,6 +11,8 @@
 
   config = {
     vital.mainUser = "breakds";
+    vital.development.profile = "light";
+    vital.coding-agent.enabledAgents = [ "pi" ];
 
     users.users."breakds" = {
       openssh.authorizedKeys.keyFiles = [ ../../data/keys/breakds_malenia.pub ];
@@ -73,21 +75,10 @@
     };
 
     programs.firefox.enable = true;
+
     environment.systemPackages = with pkgs; [
-      zoom-us
-      thunderbird
-      trezor-suite
-      unetbootin
       pavucontrol
-      parsec-bin # For game streaming
-      xeyes
       mpv
-      freecad
-      obs-studio
-      moonlight-qt
-      yt-dlp
-      immich-cli
-      clamav
     ];
 
     # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
@@ -109,14 +100,15 @@
       # setting manually via the Xft.dpi variable in Xresources:
       xresources.properties = { "Xft.dpi" = 100; };
 
-      programs.texlive = {
-        enable = true;
-        extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
+      programs.vscode.enable = lib.mkForce false;
+
+      # Keep connection reuse and host aliases from nixos-home, but detect
+      # dead connections after roughly 90 seconds when changing networks.
+      programs.ssh.settings."*" = {
+        ServerAliveInterval = lib.mkForce 30;
+        ServerAliveCountMax = 3;
       };
     };
-
-    # Trezor cryptocurrency hardware wallet
-    services.trezord.enable = true;
 
     services.fwupd.enable = true;
 
@@ -141,6 +133,12 @@
     vital.distributed-build = {
       caches = [ "octavian" ];
       builders = [ "octavian" "malenia" ];
+    };
+
+    # Keep local builds responsive; remote builders handle parallel work.
+    nix.settings = {
+      max-jobs = 1;
+      cores = 2;
     };
 
     # This value determines the NixOS release from which the default

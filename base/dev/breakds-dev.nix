@@ -1,75 +1,91 @@
 { config, pkgs, lib, ... }:
 
-{
+let full = config.vital.development.profile == "full";
+
+in {
   imports = [ ./lisp.nix ./perf.nix ];
+
+  options.vital.development.profile = lib.mkOption {
+    type = lib.types.enum [ "full" "light" ];
+    default = "full";
+    description = ''
+      The light profile keeps editing, remote access, and basic CLI tools.
+      The full profile adds local development and production tools.
+      Both include Lisp and profiling tools.
+    '';
+  };
 
   config = {
     # For beekeeper-studio in environment.systemPackages below.
-    vital.insecurePackages = [ "beekeeper-studio-5.3.4" ];
+    vital.insecurePackages = lib.optionals full [ "beekeeper-studio-5.3.4" ];
 
     environment.systemPackages = with pkgs;
       [
         ripgrep
-        silver-searcher
         rsync
         wget
         zip
         neovim
+        tig
+        rustdesk-flutter
+        xh
+        tmux
+        zellij
+        fd
+        waypipe
+        muxwarden
+        bluetuith
+
+        # System Tools
+        lsof
+        btop
+        pciutils
+        usbutils
+        file
+        p7zip
+        unzip
+        zstd
+
+        # Font
+        emacs-all-the-icons-fonts
+
+        # Customized
+        hunk
+
+        # Nix specific
+        nix-index
+        nixos-container
+        ragenix
+      ] ++ lib.optionals full [
+        silver-searcher
         cntr
         meld
-        tig
         nixpkgs-review
         graphviz
         graphicsmagick
         pdftk
-        rustdesk-flutter
         ffmpeg
         vlc
         sqlitebrowser
         awscli2
         azure-cli
         azure-storage-azcopy
-        xh
         miniserve # miniserve --index index.html --spa .
-        tmux
-        zellij
-        fd
         pandoc
         marksman # Markdown Language Server
-        waypipe
-        muxwarden
         forgejo-cli
-
         pv # pipe viewer
         asciinema
         wireshark
         duckdb
         websocat
-        bluetuith
-
-        # System Tools
         dmidecode
         powertop
-        lsof
-        btop
-        pciutils
-        usbutils
         inetutils
-        file
-        p7zip
-        unzip
-        zstd
-        meld
         lm_sensors
         glances
-        tio # Serieal console TTY
-
-        # Font
-        emacs-all-the-icons-fonts
-
-        # Customized
+        tio # Serial console TTY
         shuriken
-        hunk
 
         # For accouting
         beancount
@@ -81,12 +97,9 @@
         clang
 
         # Nix specific
-        nix-index
         nix-init
         nix-update
-        nixos-container
         cachix
-        ragenix
 
         # Audio
         audacity
@@ -100,13 +113,13 @@
       in [ (if isWayland then pkgs.emacs-pgtk else pkgs.emacs) ]);
 
     programs.nix-ld.enable = true;
-    programs.sysdig.enable = true;
+    programs.sysdig.enable = full;
     programs.zsh.enable = true;
 
     nix = {
       # The following is added to /etc/nix.conf to prevent GC from
       # deleting too many dependencies.
-      extraOptions = ''
+      extraOptions = lib.mkIf full ''
         keep-outputs = true
         keep-derivations = true
       '';
