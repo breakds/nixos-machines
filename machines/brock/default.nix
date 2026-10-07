@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./bluetooth.nix
     ../../base/i3-session-breakds.nix
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
