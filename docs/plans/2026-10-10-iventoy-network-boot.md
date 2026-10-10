@@ -14,6 +14,10 @@ installer downloads on demand or automatic disk installation.
   - [x] Build the package.
   - [x] Verify management UI startup with real root privileges.
 - [ ] Add Octavian's systemd service.
+  - Configuration prepared in `machines/octavian/services/iventoy.nix`.
+    Deployment and service lifecycle checks remain pending.
+  - Full Octavian system derivation evaluates successfully; checked the
+    generated service settings and home-interface firewall port lists.
   - Store state and ISOs under `/var/lib/iventoy`.
   - Use external DHCP and restrict access to the home LAN.
   - Verify start, stop, and restart behavior.
@@ -46,7 +50,23 @@ installer downloads on demand or automatic disk installation.
 - Test state is at `/var/lib/iventoy-package-test` on Octavian. The transient
   unit is stopped; no test daemon remains running. No LAN boot traffic was
   enabled. This verifies the management daemon, not ISO boot compatibility.
-- No Octavian service, firewall, or router configuration has been changed.
+- Octavian's service and home-interface firewall configuration are prepared
+  in the repository but have not been deployed. Router configuration is unchanged.
+
+## Next deployment checkpoint
+
+The user requested assistance before deploying changes to any machine.
+Deploy Octavian's configuration first, then verify `systemctl status iventoy`.
+The service starts only the management UI, at `http://10.77.1.131:26000`.
+In the UI, select **ExternalNet** DHCP mode before starting PXE. This mode
+leaves DHCP entirely to Kea, even with both servers on the home VLAN.
+Keep the default serving ports. Add an ISO to `/var/lib/iventoy/iso` and
+select Octavian's home address for boot serving.
+
+The PXE service must be started manually in the UI after daemon restarts
+at this stage. Add automatic PXE startup only after saved settings and
+service lifecycle checks pass. Then prepare and deploy the router's boot
+information for UEFI clients; no router change is needed to check the UI.
 
 Sources: [release](https://github.com/ventoy/PXE/releases/tag/v1.0.44),
 [usage](https://www.iventoy.com/en/doc_start.html),

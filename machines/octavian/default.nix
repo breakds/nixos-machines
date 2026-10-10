@@ -32,6 +32,7 @@
     ./services/stt-server.nix
     ./services/toylet-notes.nix
     ./services/tiny-share.nix
+    ./services/iventoy.nix
     ./services/forgejo
     ./services/kanidm.nix
     ./services/gate.nix
