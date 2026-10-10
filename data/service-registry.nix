@@ -9,6 +9,20 @@ rec {
     port = 5050;
   };
 
+  iventoy = {
+    # Upstream defaults. Changing these reservations also requires updating
+    # iVentoy's saved settings; its launcher does not configure listening ports.
+    ports = {
+      ui = 26000;
+      http = 16000;
+      nbd = 10809;
+      iscsi = 3260;
+      nfs = 12049;
+      smb = 10445;
+      tftp = 69; # UDP; all other ports above use TCP.
+    };
+  };
+
   grafana = {
     domain = "grafana.breakds.org";
     port = 5810;

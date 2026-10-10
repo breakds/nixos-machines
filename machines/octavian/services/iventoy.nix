@@ -2,6 +2,7 @@
 
 let
   iventoy = pkgs.callPackage ../../../pkgs/iventoy { };
+  registry = (import ../../../data/service-registry.nix).iventoy;
 in {
   environment.systemPackages = [ iventoy ];
 
@@ -30,7 +31,7 @@ in {
   # Default iVentoy file-serving ports, accessible through the home uplink.
   # ExternalNet mode needs no DHCP or proxy DHCP listener on Octavian.
   networking.firewall.interfaces.enp4s0f0 = {
-    allowedTCPPorts = [ 26000 16000 10809 3260 12049 10445 ];
-    allowedUDPPorts = [ 69 ];
+    allowedTCPPorts = with registry.ports; [ ui http nbd iscsi nfs smb ];
+    allowedUDPPorts = [ registry.ports.tftp ];
   };
 }

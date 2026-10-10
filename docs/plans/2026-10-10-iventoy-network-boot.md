@@ -18,6 +18,8 @@ installer downloads on demand or automatic disk installation.
     Deployment and service lifecycle checks remain pending.
   - Full Octavian system derivation evaluates successfully; checked the
     generated service settings and home-interface firewall port lists.
+  - Reserved iVentoy's default ports in `data/service-registry.nix`; the
+    service imports those reservations for its firewall rules.
   - Store state and ISOs under `/var/lib/iventoy`.
   - Use external DHCP and restrict access to the home LAN.
   - Verify start, stop, and restart behavior.
