@@ -71,10 +71,14 @@
 
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
-      perSystem = { config, pkgs, ... }: {
+      perSystem = { config, pkgs, lib, ... }: {
         # This enables running `nix fmt` over all the nix files.
         formatter = pkgs.nixfmt-classic;
-        packages = { shuriken = pkgs.callPackage ./pkgs/shuriken { }; };
+        packages = {
+          shuriken = pkgs.callPackage ./pkgs/shuriken { };
+        } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isx86_64 {
+          iventoy = pkgs.callPackage ./pkgs/iventoy { };
+        };
       };
 
       imports = [
