@@ -14,8 +14,10 @@ installer downloads on demand or automatic disk installation.
   - [x] Build the package.
   - [x] Verify management UI startup with real root privileges.
 - [ ] Add Octavian's systemd service.
-  - Configuration prepared in `machines/octavian/services/iventoy.nix`.
-    Deployment and service lifecycle checks remain pending.
+  - [x] Configuration prepared in `machines/octavian/services/iventoy.nix`.
+  - [x] User deployed Octavian; management UI is reachable on the home LAN.
+    Confirmed systemd reports active/running on 2026-10-10; only the UI
+    is listening. ExternalNet setup and service restart checks remain pending.
   - Full Octavian system derivation evaluates successfully; checked the
     generated service settings and home-interface firewall port lists.
   - Reserved iVentoy's default ports in `data/service-registry.nix`; the
@@ -24,6 +26,12 @@ installer downloads on demand or automatic disk installation.
   - Use external DHCP and restrict access to the home LAN.
   - Verify start, stop, and restart behavior.
 - [ ] Extend Pyrechomper's Kea configuration in `../nixos-routers`.
+  - [x] Prepared `home-uefi-pxe` class for home90, PXEClient vendor class,
+    and architecture 7 or 9. Points to `10.77.1.131` and
+    `iventoy_loader_16000_uefi`; deployment is pending.
+  - [x] Router system derivation evaluates. Kea 3.0.3 configuration check
+    passes with interface bindings omitted only in the local test copy
+    (the router's VLAN interfaces do not exist on this development host).
   - Direct home-LAN x86-64 UEFI network boots to Octavian (`10.77.1.131`).
   - Validate configuration before deployment.
 - [ ] Test an official NixOS ISO on one physical machine.
@@ -52,18 +60,23 @@ installer downloads on demand or automatic disk installation.
 - Test state is at `/var/lib/iventoy-package-test` on Octavian. The transient
   unit is stopped; no test daemon remains running. No LAN boot traffic was
   enabled. This verifies the management daemon, not ISO boot compatibility.
-- Octavian's service and home-interface firewall configuration are prepared
-  in the repository but have not been deployed. Router configuration is unchanged.
+- Octavian's service and home-interface firewall configuration are deployed.
+  Router configuration is unchanged.
 
 ## Next deployment checkpoint
 
 The user requested assistance before deploying changes to any machine.
-Deploy Octavian's configuration first, then verify `systemctl status iventoy`.
+Octavian deployment and `systemctl status iventoy` checks passed.
 The service starts only the management UI, at `http://10.77.1.131:26000`.
 In the UI, select **ExternalNet** DHCP mode before starting PXE. This mode
 leaves DHCP entirely to Kea, even with both servers on the home VLAN.
 Keep the default serving ports. Add an ISO to `/var/lib/iventoy/iso` and
 select Octavian's home address for boot serving.
+
+User confirmed ExternalNet is saved. An official NixOS GNOME 26.05 x86-64
+ISO (3.1 GiB) is present in `/var/lib/iventoy/iso`. Next: start PXE from
+the UI using Octavian's home address, deploy the prepared router change,
+then test one wired UEFI machine's boot menu.
 
 The PXE service must be started manually in the UI after daemon restarts
 at this stage. Add automatic PXE startup only after saved settings and
