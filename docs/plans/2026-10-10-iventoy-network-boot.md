@@ -16,8 +16,8 @@ installer downloads on demand or automatic disk installation.
 - [ ] Add Octavian's systemd service.
   - [x] Configuration prepared in `machines/octavian/services/iventoy.nix`.
   - [x] User deployed Octavian; management UI is reachable on the home LAN.
-    Confirmed systemd reports active/running on 2026-10-10; only the UI
-    is listening. ExternalNet setup and service restart checks remain pending.
+    Confirmed systemd reports active/running on 2026-10-10. User saved
+    ExternalNet and started PXE; service restart checks remain pending.
   - Full Octavian system derivation evaluates successfully; checked the
     generated service settings and home-interface firewall port lists.
   - Reserved iVentoy's default ports in `data/service-registry.nix`; the
@@ -28,13 +28,28 @@ installer downloads on demand or automatic disk installation.
 - [ ] Extend Pyrechomper's Kea configuration in `../nixos-routers`.
   - [x] Prepared `home-uefi-pxe` class for home90, PXEClient vendor class,
     and architecture 7 or 9. Points to `10.77.1.131` and
-    `iventoy_loader_16000_uefi`; deployment is pending.
+    `iventoy_loader_16000_uefi`; user deployed it and reached the ISO menu.
   - [x] Router system derivation evaluates. Kea 3.0.3 configuration check
     passes with interface bindings omitted only in the local test copy
     (the router's VLAN interfaces do not exist on this development host).
   - Direct home-LAN x86-64 UEFI network boots to Octavian (`10.77.1.131`).
   - Validate configuration before deployment.
 - [ ] Test an official NixOS ISO on one physical machine.
+  - UM760 Pro reaches iVentoy and the ISO's GRUB menu, then shows garbled
+    green/white text and a black screen after selecting Install. User reports
+    both custom 25.11 and 26.05 ISOs work from USB but fail over iVentoy.
+    `nomodeset` did not help. Live-system boot is not yet verified.
+  - vtoyboot with UEFI Resolution Lock at 1024x768 resolves the garbled
+    display. Stage 1 then times out waiting for `/dev/root` and fails to
+    mount `/mnt-root/iso`. Photos IMG_4066/4067 show `root=LABEL=nixos-gnome-...`,
+    no `/dev/disk/by-label`, and only internal NVMe partitions. The ISO
+    block device is missing after kernel handoff; cause remains under investigation.
+  - Official minimal 26.05 ISO also fails, so customizations alone do not
+    explain the issue. On 2026-10-11 downloaded the original and iVentoy's
+    virtual ISO locally; both kernel initrds are byte-identical across those
+    images and use Zstandard compression. This does not rule out injection
+    at bootloader runtime. Need to inspect `/ventoy` and network interfaces
+    in the failing initrd before choosing a fix.
   - Verify firmware network boot, menu selection, and entry into the live system.
   - Repeat with an ISO built from `machines/livecd`.
   - Do not install onto disk during boot tests.
@@ -61,7 +76,7 @@ installer downloads on demand or automatic disk installation.
   unit is stopped; no test daemon remains running. No LAN boot traffic was
   enabled. This verifies the management daemon, not ISO boot compatibility.
 - Octavian's service and home-interface firewall configuration are deployed.
-  Router configuration is unchanged.
+  Router boot configuration is deployed.
 
 ## Next deployment checkpoint
 
