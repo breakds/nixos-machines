@@ -89,6 +89,7 @@
         # hand is archived for now
         # ./machines/hand/part.nix
         ./machines/claw/part.nix
+        ./machines/grapple/part.nix
         ./machines/ghostberry/part.nix
         ./machines/brock/part.nix
         ./machines/olden/part.nix

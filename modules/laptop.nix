@@ -13,7 +13,7 @@
     #      will be held off for 60 seconds to wait for the users to dock or plug
     #      external power.
     services.logind.settings.Login = {
-      HandleLidSwitch = "suspend-then-hibernate";
+      HandleLidSwitch = lib.mkDefault "suspend-then-hibernate";
       HandleLidSwitchDocked = "ignore";
       HandleLidSwitchExternalPower = "ignore";
       HoldoffTimeoutSec = 60;

@@ -7,6 +7,7 @@ in {
     specialArgs = { inherit (inputs) nixpkgs-unstable; };
     modules = [
       ./.
+      ../../base/breakds-laptop.nix
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
       inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
