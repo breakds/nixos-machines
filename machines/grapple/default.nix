@@ -8,8 +8,14 @@
   # Remove this override after setting up /root/.ssh/nixbuilder_malenia.
   vital.distributed-build.builders = lib.mkForce [ ];
 
-  # Keep systemd-boot until Secure Boot keys are enrolled in a later stage.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+
+  # systemd discovers TPM2 tokens enrolled in the existing LUKS2 header.
+  boot.initrd.systemd.enable = true;
 
   # There is no swap configured for hibernation.
   services.logind.settings.Login.HandleLidSwitch = "suspend";

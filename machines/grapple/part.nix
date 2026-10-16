@@ -11,6 +11,7 @@ in {
       self.nixosModules.vital-base
       inputs.nixos-home.nixosModules.breakds-home
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+      inputs.lanzaboote.nixosModules.lanzaboote
 
       self.nixosModules.base-overlays
       self.nixosModules.laptop
