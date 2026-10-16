@@ -27,6 +27,7 @@
 
     # Internationalisation
     i18n.defaultLocale = "en_US.UTF-8";
+    i18n.inputMethod.fcitx5.waylandFrontend = true;
 
     # Enable sound with pipewire.
     services.pulseaudio.enable = false;
@@ -70,12 +71,10 @@
     };
 
     # NIXOS_OZONE_WL: Electron/Chromium apps use Wayland instead of X11.
-    # GTK_IM_MODULE, QT_IM_MODULE, XMODIFIERS: fcitx works with xwayland
-    # (i.e. non-native wayland windows).
+    # Keep Fcitx support for Qt and X11 applications; GTK uses Wayland input.
     environment.sessionVariables = {
       NIX_PROFILES = "${lib.concatStringsSep " "
         (lib.reverseList config.environment.profiles)}";
-      GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
       NIXOS_OZONE_WL = "1";

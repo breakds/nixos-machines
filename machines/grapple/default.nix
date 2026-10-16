@@ -38,7 +38,6 @@
         gaps 12
     }
     environment {
-        GTK_IM_MODULE null
         QT_IM_MODULE null
     }
   '';
