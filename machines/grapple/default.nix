@@ -23,8 +23,11 @@
       KEYBOARD_KEY_3a=leftctrl
   '';
 
-  # The shared Niri config includes this file. Leave output mode and scale automatic.
+  # The shared Niri config includes this file. Keep the panel's preferred mode.
   home-manager.users.breakds.xdg.configFile."niri/local.kdl".text = ''
+    output "eDP-1" {
+        scale 1
+    }
     layout {
         gaps 12
     }
