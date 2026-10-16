@@ -5,10 +5,7 @@
 
   networking.hostName = "grapple";
 
-  # Bootstrap without SSH keys. Remove these overrides after setting up
-  # GitHub access and /root/.ssh/nixbuilder_malenia.
-  vital.coding-agent.enabledAgents = [ "pi" ];
-  vital.coding-agent.shepherd.enable = false;
+  # Remove this override after setting up /root/.ssh/nixbuilder_malenia.
   vital.distributed-build.builders = lib.mkForce [ ];
 
   # Keep systemd-boot until Secure Boot keys are enrolled in a later stage.
