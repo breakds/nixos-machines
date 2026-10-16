@@ -9,7 +9,7 @@ in {
     vital-base = import ./vital-base;
     vllm = import ./vllm;
 
-    base-overlays = { ... }: {
+    base-overlays = { config, lib, ... }: {
       config.nixpkgs.overlays = [
         inputs.muxwarden.overlays.default
         (final: prev: rec {
@@ -24,7 +24,9 @@ in {
             overlays = [
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
+            ] ++ lib.optionals (config.vital.coding-agent.shepherd.enable or true) [
               inputs.shepherd.overlays.default
+            ] ++ [
               (import ../pkgs/cuda-13-overlay.nix)
             ];
           };
