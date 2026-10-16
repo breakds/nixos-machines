@@ -13,6 +13,13 @@
 
   environment.systemPackages = [ pkgs.xwayland-satellite ];
 
+  # Caps Lock -> Control on the built-in AT keyboard, regardless of revision.
+  # Adapted from horizon.zero (596a610), which matched revision eAB54.
+  services.udev.extraHwdb = ''
+    evdev:input:b0011v0001p0001e*
+      KEYBOARD_KEY_3a=leftctrl
+  '';
+
   # The shared Niri config includes this file. Leave output mode and scale automatic.
   home-manager.users.breakds.xdg.configFile."niri/local.kdl".text = ''
     layout {
