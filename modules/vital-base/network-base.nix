@@ -6,6 +6,11 @@
       gnupg.agent = {
         enable = true;
         enableSSHSupport = lib.mkDefault true;
+        settings = {
+          # Cache GPG passphrases for one hour idle, at most eight hours total.
+          default-cache-ttl = lib.mkDefault 3600;
+          max-cache-ttl = lib.mkDefault 28800;
+        };
       };
       ssh.startAgent = lib.mkDefault false;
     };
