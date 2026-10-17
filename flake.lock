@@ -602,11 +602,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792257556,
-        "narHash": "sha256-hlQH6MHARVDF3bVsLT26El6xPzZ+cfuNIh/a+JmMW5A=",
+        "lastModified": 1792258041,
+        "narHash": "sha256-qWY+qjyfB5ZD+WVXvTaaqluB6Uw1vXCrEGcEKQl3S4I=",
         "owner": "breakds",
         "repo": "nixos-home",
-        "rev": "cdb1804a151b45297c3e12ba0ab73a3ad1979bae",
+        "rev": "f83a52cf2b507e6dcd077e490debf640b2d8c8c5",
         "type": "github"
       },
       "original": {
