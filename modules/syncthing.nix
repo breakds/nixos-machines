@@ -26,12 +26,13 @@ in {
           "malenia" = { id = "RO54QTU-EJBHNA6-7IEMT2A-57UBFYH-N2USR7J-UN6A2ZL-G4W4AIV-DUFACAF"; };
           "brock" = { id = "2O6IE5U-2OGL2ZB-LO44JKX-LB6ZIFO-4JDRC34-HSIEAMX-VW4CN5G-IZGOKAZ"; };
           "claw" = { id = "SPXDVPN-CDZOWPP-I2QKYOD-3PNV4BZ-YH2S7OL-RSEM7LC-CKJ6DCL-AUSATAS"; };
+          "grapple" = { id = "JEXYKVV-PL5TIBV-OHDNCRN-BXCYDRJ-DSQXPZD-T7NUE7Z-JRS44FU-QVXBKAV"; };
         };
 
         folders = {
           "workspace" = {
             path = "${config.services.syncthing.dataDir}/workspace";
-            devices = [ "hand" "claw" "malenia" "brock" ];
+            devices = [ "hand" "claw" "malenia" "brock" "grapple" ];
             ignorePerms = true;  # Do not sync the permissions.
             # Normally the sync is triggered by inotify (watch) so that it does
             # not need rescan. Still make full rescan happen every hour just to
