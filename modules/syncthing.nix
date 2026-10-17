@@ -7,6 +7,7 @@ in {
   config = {
     services.syncthing = {
       enable = true;
+      openDefaultPorts = true;
       dataDir = "/home/${config.vital.mainUser}/syncthing";
       user = config.vital.mainUser;
       group = "users";
@@ -29,7 +30,7 @@ in {
 
         folders = {
           "workspace" = {
-            path = "/home/breakds/syncthing/workspace";
+            path = "${config.services.syncthing.dataDir}/workspace";
             devices = [ "hand" "claw" "malenia" "brock" ];
             ignorePerms = true;  # Do not sync the permissions.
             # Normally the sync is triggered by inotify (watch) so that it does
