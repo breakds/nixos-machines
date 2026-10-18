@@ -20,7 +20,7 @@
     # ./services/terraria.nix
     ./services/docker-registry.nix
     ./services/paperless.nix
-    # ./services/game-solutions.nix
+    ./services/game-solutions.nix
     ./services/glance.nix
     ./services/rustdesk.nix
     ./services/karakeep.nix

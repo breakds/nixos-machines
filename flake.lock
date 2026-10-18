@@ -269,7 +269,6 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
-          "game-solutions",
           "ml-pkgs",
           "nixpkgs"
         ]
@@ -291,27 +290,6 @@
     "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
-          "ml-pkgs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1730504689,
-        "narHash": "sha256-hgmguH29K2fvs9szpq2r3pz2/8cJd2LPS+b4tfNFCwE=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "506278e768c2a08bec68eb62932193e341f55c90",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_4": {
-      "inputs": {
-        "nixpkgs-lib": [
           "muxwarden",
           "nixpkgs"
         ]
@@ -330,7 +308,7 @@
         "type": "github"
       }
     },
-    "flake-parts_5": {
+    "flake-parts_4": {
       "inputs": {
         "nixpkgs-lib": [
           "stt-server",
@@ -351,7 +329,7 @@
         "type": "github"
       }
     },
-    "flake-parts_6": {
+    "flake-parts_5": {
       "inputs": {
         "nixpkgs-lib": [
           "toylet-notes",
@@ -382,11 +360,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1726415546,
-        "narHash": "sha256-lKC6eOhtZxQfAChhz5dxPc8p0NKWpHhAdOhwi83/htE=",
+        "lastModified": 1792285700,
+        "narHash": "sha256-9AGS5JLY9B7vfzgczhhY6w20C58ayIuNtoJ8kDJuA60=",
         "ref": "refs/heads/main",
-        "rev": "6d470c525fc020b09e86615f0e504f591bad70af",
-        "revCount": 83,
+        "rev": "a4648a6fc9a0e31c34d36ea7c7cbc20b8990308c",
+        "revCount": 86,
         "type": "git",
         "url": "ssh://git@github.com/breakds/game-solutions"
       },
@@ -509,18 +487,21 @@
     },
     "ml-pkgs": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
         "nixpkgs": [
           "game-solutions",
           "nixpkgs"
+        ],
+        "utils": [
+          "game-solutions",
+          "utils"
         ]
       },
       "locked": {
-        "lastModified": 1754953512,
-        "narHash": "sha256-zxq4SQQg+6IHkf+W39Yb4dhd/DH7kRQUNN12L5toTBA=",
+        "lastModified": 1720022229,
+        "narHash": "sha256-BuMgiCSPlqg8aCA0lPVTlQK6C+vfI/e2QyQr3ozB8Hw=",
         "owner": "nixvital",
         "repo": "ml-pkgs",
-        "rev": "647c65ff10fdadd8ab262498f3ad017b22aac0b1",
+        "rev": "8f6da3d4b06f366d9c17bf7e5e98c4d79c5849df",
         "type": "github"
       },
       "original": {
@@ -531,7 +512,7 @@
     },
     "ml-pkgs_2": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": [
           "nixpkgs-unstable"
         ]
@@ -554,7 +535,7 @@
       "inputs": {
         "advisory-db": "advisory-db_2",
         "crane": "crane_3",
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_3",
         "nixpkgs": [
           "nixpkgs-unstable"
         ]
@@ -687,7 +668,7 @@
       "inputs": {
         "advisory-db": "advisory-db_5",
         "crane": "crane_7",
-        "flake-parts": "flake-parts_6",
+        "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "toylet-notes",
           "nixpkgs"
@@ -805,7 +786,7 @@
       "inputs": {
         "advisory-db": "advisory-db_4",
         "crane": "crane_5",
-        "flake-parts": "flake-parts_5",
+        "flake-parts": "flake-parts_4",
         "ml-pkgs": [
           "ml-pkgs"
         ],
