@@ -7,6 +7,7 @@ in {
     system = "x86_64-linux";
     modules = [
       ./fortress.nix
+      self.nixosModules.security-patches
     ];
   };
 

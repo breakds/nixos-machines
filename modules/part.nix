@@ -3,13 +3,18 @@
 let self = inputs.self;
 
 in {
-  imports = [ ./ollama/part.nix ./extra-mounts/part.nix ];
+  imports = [
+    ./ollama/part.nix
+    ./extra-mounts/part.nix
+    ./security-patches/part.nix
+  ];
 
   flake.nixosModules = {
     vital-base = import ./vital-base;
     vllm = import ./vllm;
 
     base-overlays = { config, lib, ... }: {
+      imports = [ self.nixosModules.security-patches ];
       config.nixpkgs.overlays = [
         inputs.muxwarden.overlays.default
         (final: prev: rec {
@@ -22,6 +27,7 @@ in {
               cudaCapabilities = [ "7.5" "8.6" "8.9" "12.0" ];
             };
             overlays = [
+              self.overlays.security-patches
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
             ] ++ lib.optionals (config.vital.coding-agent.shepherd.enable or true) [

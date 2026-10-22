@@ -15,6 +15,7 @@ in {
         # The base image that has gnome.
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
         ./with-nvidia.nix
+        self.nixosModules.security-patches
       ];
     };
 
@@ -24,6 +25,7 @@ in {
         # The base image that has gnome.
         "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix"
         ./standard.nix
+        self.nixosModules.security-patches
       ];
     };
   };
