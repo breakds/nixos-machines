@@ -53,7 +53,6 @@ in {
     machine-learning = import ./machine-learning.nix;
     flatpak = import ./flatpak.nix;
     niri = import ./niri.nix;
-    steam = import ./steam.nix;
     laptop = import ./laptop.nix;
 
     # Client side of tiny-share: makes `share` available on PATH and drops

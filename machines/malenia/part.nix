@@ -15,7 +15,6 @@ in {
       self.nixosModules.graphical
       self.nixosModules.builder-cache-valley
       self.nixosModules.iphone-connect
-      self.nixosModules.steam
       self.nixosModules.machine-learning
       self.nixosModules.flatpak
       self.nixosModules.prometheus-exporters

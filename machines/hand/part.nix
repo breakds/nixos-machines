@@ -16,7 +16,6 @@ in {
       self.nixosModules.laptop
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.steam
       self.nixosModules.niri
       self.nixosModules.flatpak
       self.nixosModules.localsend

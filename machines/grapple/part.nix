@@ -18,7 +18,6 @@ in {
       self.nixosModules.printing
       self.nixosModules.graphical
       self.nixosModules.iphone-connect
-      self.nixosModules.steam
       self.nixosModules.niri
       self.nixosModules.flatpak
       self.nixosModules.localsend

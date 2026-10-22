@@ -9,6 +9,8 @@
   networking.hostName = "claw";
   networking.hostId = "8d3da45b";
 
+  hardware.graphics.enable32Bit = false;
+
   boot.loader.systemd-boot.enable = false;
   boot.lanzaboote = {
     enable = true;
