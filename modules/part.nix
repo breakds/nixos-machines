@@ -27,13 +27,13 @@ in {
               cudaCapabilities = [ "7.5" "8.6" "8.9" "12.0" ];
             };
             overlays = [
-              self.overlays.security-patches
               inputs.ml-pkgs.overlays.gen-ai
               inputs.stt-server.overlays.default
             ] ++ lib.optionals (config.vital.coding-agent.shepherd.enable or true) [
               inputs.shepherd.overlays.default
             ] ++ [
               (import ../pkgs/cuda-13-overlay.nix)
+              self.overlays.security-patches
             ];
           };
           inherit (unstable)
