@@ -66,7 +66,29 @@
     distribution = prev.distribution.override { inherit buildGoModule; };
   };
 
-  flake.nixosModules.security-patches = {
+  flake.nixosModules.security-patches = { pkgs, lib, ... }: {
     nixpkgs.overlays = [ inputs.self.overlays.security-patches ];
+
+    # CVE-2026-111497: replace the shared decoder without rebuilding curl's
+    # entire dependency tree. Covers Node and Python, including unstable/32-bit.
+    # Remove once both nixpkgs pins supply Brotli 1.2.1 or newer. Bundled/static
+    # copies need their own updates; this only replaces shared libraries.
+    system.replaceDependencies.replacements = map (brotli: {
+      oldDependency = lib.getLib brotli;
+      newDependency = lib.getLib (brotli.overrideAttrs (_: {
+        version = "1.2.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "google";
+          repo = "brotli";
+          tag = "v1.2.1";
+          hash = "sha256-llY72cYffDv0ugsH0p89xIPEbElV4L8u7U/Fe8hT3gI=";
+        };
+      }));
+    }) (lib.filter (brotli: lib.versionOlder brotli.version "1.2.1")
+      (lib.unique ([ pkgs.brotli ]
+        ++ lib.optional (pkgs ? unstable) pkgs.unstable.brotli
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64
+          ([ pkgs.pkgsi686Linux.brotli ]
+            ++ lib.optional (pkgs ? unstable) pkgs.unstable.pkgsi686Linux.brotli))));
   };
 }
