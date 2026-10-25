@@ -25,6 +25,7 @@ in {
       self.nixosModules.base-overlays
       self.nixosModules.graphical
       self.nixosModules.machine-learning
+      self.nixosModules.coding-agent
       self.nixosModules.first-party-software
 
       self.nixosModules.ollama

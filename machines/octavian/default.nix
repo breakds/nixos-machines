@@ -42,6 +42,8 @@
 
   config = {
     vital.mainUser = "breakds";
+    vital.coding-agent.enabledAgents = [ "pi" ];
+    vital.development.profile = "light";
 
     services.openssh.settings.PasswordAuthentication = false;
     programs.gnupg.agent.enableSSHSupport = false;

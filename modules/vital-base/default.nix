@@ -39,16 +39,9 @@
     networking.usePredictableInterfaceNames = true;
 
     environment.systemPackages = with pkgs; [
-      gparted samba
+      samba
       (pass.withExtensions (exts: [ exts.pass-otp ]))
-      feh
       jq
-      google-chrome
-      tor-browser
-      scrot
-      dmenu
-      firefox
-      arandr
       vim
       git
       duf
@@ -56,6 +49,15 @@
       bat
       dust
       sbctl
+    ] ++ lib.optionals (config.vital.graphical.enable or false) [
+      gparted
+      feh
+      google-chrome
+      tor-browser
+      scrot
+      dmenu
+      firefox
+      arandr
     ];
 
     fonts.packages = with pkgs; [
