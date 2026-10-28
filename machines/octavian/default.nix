@@ -45,7 +45,20 @@
     vital.coding-agent.enabledAgents = [ "pi" ];
     vital.development.profile = "light";
 
-    services.openssh.settings.PasswordAuthentication = false;
+    services.openssh.settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      # Public SSH serves Git only; shell accounts require LAN or Tailscale.
+      AllowUsers = [
+        "forgejo"
+        "*@127.0.0.1"
+        "*@::1"
+        "*@10.77.1.0/24"
+        "*@fd85:6432:2320:1::/64"
+        "*@100.64.0.0/10"
+        "*@fd7a:115c:a1e0::/48"
+      ];
+    };
     programs.gnupg.agent.enableSSHSupport = false;
 
     users.users."breakds" = {
