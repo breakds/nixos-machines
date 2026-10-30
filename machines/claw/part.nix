@@ -26,6 +26,7 @@ in {
       self.nixosModules.qmk
       self.nixosModules.sunshine
       self.nixosModules.arduino
+      self.nixosModules.maker      
       self.nixosModules.post-box
 
       # Development Assistants

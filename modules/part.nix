@@ -54,6 +54,7 @@ in {
     flatpak = import ./flatpak.nix;
     niri = import ./niri.nix;
     laptop = import ./laptop.nix;
+    maker = import ./maker.nix;
 
     # Client side of tiny-share: makes `share` available on PATH and drops
     # the per-user config so `share put …` knows where to ssh. Server side
