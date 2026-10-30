@@ -58,6 +58,7 @@ in {
     redirectURL = "https://${info.domain}/oauth2/callback";
     httpAddress = "http://127.0.0.1:${toString info.port}";
     reverseProxy = true;
+    trustedProxyIP = [ "127.0.0.1" ];
     scope = "openid email profile";
     # Authorization already happened in kanidm (the gate-users scope map),
     # so any authenticated email is acceptable here.
