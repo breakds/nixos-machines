@@ -121,6 +121,7 @@ in {
 
     customComponents = with pkgs.home-assistant-custom-components;
       [ localtuya xiaomi_gateway3 ] ++ [
+        (haPkgs.callPackage ../../../pkgs/bambu_lab/package.nix { })
         (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix { })
         (haPkgs.callPackage ../../../pkgs/gree_ac/package.nix { })
       ];
