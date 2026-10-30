@@ -104,32 +104,52 @@ in {
         mode = "single";
         sequence = [
           {
-            condition = "template";
-            value_template = "{{ has_value('climate.gree_ac_office') }}";
+            variables.response.message = "Office AC is unavailable.";
           }
           {
-            "if" = [{
-              condition = "state";
-              entity_id = "climate.gree_ac_office";
-              state = "off";
-            }];
-            "then" = [
+            choose = [
               {
-                action = "climate.set_hvac_mode";
-                target.entity_id = "climate.gree_ac_office";
-                data.hvac_mode = "heat";
+                conditions = [{
+                  condition = "state";
+                  entity_id = "climate.gree_ac_office";
+                  state = "off";
+                }];
+                sequence = [
+                  {
+                    action = "climate.set_hvac_mode";
+                    target.entity_id = "climate.gree_ac_office";
+                    data.hvac_mode = "heat";
+                  }
+                  {
+                    action = "climate.set_temperature";
+                    target.entity_id = "climate.gree_ac_office";
+                    data.temperature = 19;
+                  }
+                  {
+                    variables.response.message =
+                      "Office AC is on, heating to 19 degrees.";
+                  }
+                ];
               }
               {
-                action = "climate.set_temperature";
-                target.entity_id = "climate.gree_ac_office";
-                data.temperature = 19;
+                conditions = [{
+                  condition = "template";
+                  value_template = "{{ has_value('climate.gree_ac_office') }}";
+                }];
+                sequence = [
+                  {
+                    action = "climate.set_hvac_mode";
+                    target.entity_id = "climate.gree_ac_office";
+                    data.hvac_mode = "off";
+                  }
+                  { variables.response.message = "Office AC is off."; }
+                ];
               }
             ];
-            "else" = [{
-              action = "climate.set_hvac_mode";
-              target.entity_id = "climate.gree_ac_office";
-              data.hvac_mode = "off";
-            }];
+          }
+          {
+            stop = "Return the result to the caller.";
+            response_variable = "response";
           }
         ];
       };
