@@ -97,6 +97,43 @@ in {
         stopBelow = 21;
       };
 
+      script.office_ac_toggle = {
+        alias = "Toggle Office AC";
+        description = "Heat to 19°C when off; otherwise turn off.";
+        icon = "mdi:air-conditioner";
+        mode = "single";
+        sequence = [
+          {
+            condition = "template";
+            value_template = "{{ has_value('climate.gree_ac_office') }}";
+          }
+          {
+            "if" = [{
+              condition = "state";
+              entity_id = "climate.gree_ac_office";
+              state = "off";
+            }];
+            "then" = [
+              {
+                action = "climate.set_hvac_mode";
+                target.entity_id = "climate.gree_ac_office";
+                data.hvac_mode = "heat";
+              }
+              {
+                action = "climate.set_temperature";
+                target.entity_id = "climate.gree_ac_office";
+                data.temperature = 19;
+              }
+            ];
+            "else" = [{
+              action = "climate.set_hvac_mode";
+              target.entity_id = "climate.gree_ac_office";
+              data.hvac_mode = "off";
+            }];
+          }
+        ];
+      };
+
       ffmpeg = { };
     };
 
