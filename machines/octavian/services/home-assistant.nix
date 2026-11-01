@@ -174,6 +174,7 @@ in {
       "go2rtc"
       "matter"
       "thread"
+      "wallbox"
     ];
 
     customComponents = with pkgs.home-assistant-custom-components;
