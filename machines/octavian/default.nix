@@ -25,7 +25,7 @@
     ./services/rustdesk.nix
     ./services/karakeep.nix
     ./services/atuin.nix
-    ./services/home-assistant.nix
+    ./services/home-assistant
     ./services/frigate.nix
     ./services/solar-assistant.nix
     ./services/komga.nix

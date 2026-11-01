@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
+# See README.md for solar hardware, power readings, and Wallbox verification.
 let
-  registry = (import ../../../data/service-registry.nix).home-assistant;
+  registry = (import ../../../../data/service-registry.nix).home-assistant;
   haPkgs = config.services.home-assistant.package.python3Packages;
 
   mkAcThermostat = { name, entity, coolAbove, coolTo, stopBelow
@@ -179,9 +180,9 @@ in {
 
     customComponents = with pkgs.home-assistant-custom-components;
       [ localtuya xiaomi_gateway3 ] ++ [
-        (haPkgs.callPackage ../../../pkgs/bambu_lab/package.nix { })
-        (haPkgs.callPackage ../../../pkgs/cync_lights/package.nix { })
-        (haPkgs.callPackage ../../../pkgs/gree_ac/package.nix { })
+        (haPkgs.callPackage ../../../../pkgs/bambu_lab/package.nix { })
+        (haPkgs.callPackage ../../../../pkgs/cync_lights/package.nix { })
+        (haPkgs.callPackage ../../../../pkgs/gree_ac/package.nix { })
       ];
 
     extraPackages = python-pkgs:
@@ -234,7 +235,7 @@ in {
   };
 
   services.matter-server =
-    let reg = (import ../../../data/service-registry.nix).matter-server;
+    let reg = (import ../../../../data/service-registry.nix).matter-server;
     in {
       enable = true;
       port = reg.port;
