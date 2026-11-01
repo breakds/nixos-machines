@@ -80,16 +80,51 @@ automation is configured in Home Assistant.
 
 See the [Wallbox integration documentation](https://www.home-assistant.io/integrations/wallbox/).
 
+## Charging test on 2026-11-01
+
+Tested through Home Assistant with the ID. Buzz connected. The starting current
+limit was 24 A and charging was enabled. All test limits stayed at or below 24 A.
+
+| Test | Observed result |
+| --- | --- |
+| Set 6 A | Charging power fell; a second test after resume settled at 1.51 kW. |
+| Set 12 A | Charging power increased; Wallbox reported 2.69–2.71 kW. |
+| Pause | Wallbox eventually reported Paused, switch off, and 0 kW. |
+| Resume after about three minutes | Charging restarted at 6 A without unplugging; status Charging, switch on, 1.51 kW. |
+| Restore starting state | Restored 24 A with charging enabled; Wallbox reported Charging and 5.50 kW. |
+
+EG4 total load fell when charging was reduced or paused, and rose when charging
+was increased or resumed. The home battery changed between charging and
+discharging as demand and solar production changed. This supports the confirmed
+interpretation that total load includes the garage charger.
+
+Commands were accepted in about one second, but Wallbox status/power feedback
+lagged by about 90 seconds. EG4 readings showed the physical load changes sooner.
+Successful command responses alone do not establish the resulting charging state.
+No Wallbox errors appeared in the Home Assistant journal during the test.
+
+Logs are on Octavian at
+`/var/lib/hass/hardware-tests/wallbox-20261101/events.jsonl`; `initial.json` in the
+same directory records the starting current limit and charging-switch state.
+
+### Detecting the car connection
+
+There is no dedicated plug sensor exposed by this integration. The status was
+Ready before the car was connected, Charging while drawing power, and Paused
+while still physically connected at zero power. These states can support a
+derived connection indicator; zero charging power alone cannot.
+
+Unavailable or offline data must not mean unplugged. The unplug/replug transition,
+charge-target state, and other status values still need verification before
+using such an indicator in automation.
+
 ## Checks before automation
 
 - Compare HA grid power with GridBOSS monitoring during nonzero utility import or
   export to confirm meter coverage and direction.
 - Compare battery charge level with the battery/EG4 display and confirm the power
   sign during both charging and discharging.
-- With the car below its charge target and schedules allowing charging, test
-  6 A then 12 A through HA; expect roughly 1.5 kW then 3 kW. Observe total load,
-  grid power, and battery power at the same time.
-- Test pause, then resume after several minutes without unplugging. Allow about
-  two minutes for cloud feedback. Also test resume after a longer idle period.
+- Test resume after a longer idle period; the completed test paused for about
+  three minutes.
 - Check charger status after unplug/replug and when the car reaches its charge
-  target. Read access is confirmed; actual charging commands remain untested.
+  target.
