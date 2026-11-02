@@ -35,36 +35,20 @@
         inherit buildGo127Module;
       };
 
-    # Applications that connect to HTTPS endpoints. Keep this list explicit;
-    # build tools and libraries must retain nixpkgs' original Go compiler.
-    syncthing = prev.syncthing.override {
-      inherit buildGoModule;
-      go = patchedGo126;
-    };
-    lego = prev.lego.override { inherit buildGoModule; };
-    oauth2-proxy = prev.oauth2-proxy.override { inherit buildGoModule; };
-    glance = prev.glance.override { inherit buildGoModule; };
-    grafana = prev.grafana.override { inherit buildGoModule; };
-    forgejo-lts = prev.forgejo-lts.override { inherit buildGoModule; };
-    prometheus = prev.prometheus.override { inherit buildGoModule; };
-    go2rtc = prev.go2rtc.override { inherit buildGoModule; };
-    ollama = prev.ollama.override { inherit buildGoModule; };
-    ollama-cuda = prev.ollama-cuda.override { inherit buildGoModule; };
-    gh = prev.gh.override { inherit buildGoModule; };
-    azure-storage-azcopy = prev.azure-storage-azcopy.override {
-      inherit buildGoModule;
-    };
+  } // builtins.mapAttrs (_: package:
+    # Packages use different Go builders across our two nixpkgs pins.
+    package.override (args: builtins.intersectAttrs args {
+      inherit buildGoModule buildGo127Module;
+      go = if args ? go && prev.lib.versionAtLeast args.go.version "1.27"
+        then patchedGo127 else patchedGo126;
+    })) {
+      # HTTPS clients only; build tools and libraries retain their compiler.
+      inherit (prev) syncthing lego oauth2-proxy glance grafana forgejo-lts
+        prometheus go2rtc ollama ollama-cuda gh azure-storage-azcopy;
 
-    # Docker also pulls images through its bundled containerd and CLI plugins.
-    docker = prev.docker.override {
-      inherit buildGoModule;
-      go = patchedGo126;
+      # Docker also pulls images through containerd and CLI plugins.
+      inherit (prev) docker containerd docker-buildx docker-compose distribution;
     };
-    containerd = prev.containerd.override { inherit buildGoModule; };
-    docker-buildx = prev.docker-buildx.override { inherit buildGoModule; };
-    docker-compose = prev.docker-compose.override { inherit buildGoModule; };
-    distribution = prev.distribution.override { inherit buildGoModule; };
-  };
 
   flake.nixosModules.security-patches = { pkgs, lib, extendModules, ... }: let
     systemWithoutReplacements = (extendModules {

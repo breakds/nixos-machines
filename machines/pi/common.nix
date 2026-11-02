@@ -3,6 +3,19 @@
 { config, lib, pkgs, ... }:
 
 {
+  # The pinned nixos-hardware Pi kernel predates the IPv4 fix. Preserve its
+  # Pi-specific drivers and backport the upstream fix until it catches up.
+  boot.kernelPatches = lib.optional
+    (lib.versionOlder config.boot.kernelPackages.kernel.version "6.12.113"
+      || (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.18"
+        && lib.versionOlder config.boot.kernelPackages.kernel.version "6.18.56")) {
+      name = "CVE-2026-98432";
+      patch = pkgs.fetchurl {
+        url = "https://github.com/gregkh/linux/commit/11a03ce3c4a62d84c10ccdfe47f8075006498568.patch";
+        hash = "sha256-LpyJGxpx/2FHp1u6ELS/ggUK0mhl8FFyDqaiwtuucD4=";
+      };
+    };
+
   time.timeZone = lib.mkDefault "America/Los_Angeles";
 
   # Enable to use non-free packages such as nvidia drivers

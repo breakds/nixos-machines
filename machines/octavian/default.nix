@@ -87,6 +87,9 @@
     # ZFS import safeguards for a root pool that does not exist.
     boot.zfs.forceImportRoot = false;
 
+    # ZFS 2.4.4 supports Linux through 7.2; use maintained LTS for this NAS.
+    boot.kernelPackages = pkgs.linuxPackages_6_18;
+
     # Allow sudo without password
     security.sudo.extraRules = [
       {

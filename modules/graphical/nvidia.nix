@@ -49,6 +49,18 @@ in {
 
     hardware = {
       nvidia.open = true;  # For using nvidia drivers >= 560
+
+      # NixOS 26.05 still defaults to 595.71.05, which cannot build on Linux
+      # 7.2+. Keep the production driver and its userspace libraries together.
+      nvidia.package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+        version = "595.112.07";
+        sha256_64bit = "sha256-Gjjs1Tii2mIypzMBhAY69Z6fyUbJCMylVb0HkJhIufA=";
+        sha256_aarch64 = "sha256-7qQuOKX9xS/wpKa+bEOqsS2euJjJu182vl+6UU6bxR0=";
+        openSha256 = "sha256-nQnXGCcvo4i7eGaVft3Xc9dRUPPH0v9Zi87cfI4i/Ys=";
+        settingsSha256 = "sha256-2bWSou/9J3EojhSRXBol/+yGGu2XZ6EuCptb5qXHM14=";
+        persistencedSha256 = "sha256-cGMEUXN7WPu822zZDLTSu6Owj8VXG4PNmhe9oKqMMKI=";
+      };
+
       # Kernel modesetting (KMS) is required for Wayland, PRIME sync, and
       # provides flicker-free boot, proper suspend/resume, and seamless VT switching.
       nvidia.modesetting.enable = true;

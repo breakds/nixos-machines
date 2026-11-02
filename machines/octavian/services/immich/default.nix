@@ -5,6 +5,10 @@ let registry = (import ../../../../data/service-registry.nix).immich;
 in {
   imports = [ ./oauth2.nix ];
 
+  # Preserve the deployed release during the kernel security update. Its
+  # known CVEs remain; remove this exception after the Immich 3 migration.
+  vital.insecurePackages = [ "immich-2.7.5" ];
+
   # Rebuild onnxruntime with CUDA so Immich's ML sidecar can use the Tesla T4.
   # Scoped to this module — does not flip nixpkgs.config.cudaSupport globally
   # (which would break packages like mxnet that mark cudaSupport as broken).
@@ -22,6 +26,13 @@ in {
       # python3.pkgs scope.
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
         (pyFinal: pyPrev: {
+          keras = pyPrev.keras.overrideAttrs (old: {
+            # This infinite-dataset multiprocessing test deadlocks in the
+            # sandbox. Keep the rest of Keras' test suite enabled.
+            disabledTests = (old.disabledTests or []) ++ [
+              "test_fit_with_data_adapter_py_dataset_multiprocessing_infinite"
+            ];
+          });
           rapidocr-onnxruntime = pyPrev.rapidocr-onnxruntime.overrideAttrs (_: {
             # pytest-check-hook is bound to doInstallCheck, not doCheck, so
             # only flipping doInstallCheck actually skips the failing tests.

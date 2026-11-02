@@ -2,7 +2,6 @@
 
 let
   kernelVersion = config.boot.kernelPackages.kernel.version;
-  hasNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
 
   # Copy Fail is fixed in mainline 7.0+, plus stable backports including
   # 6.19.12+, 6.18.22+, and the 6.12 LTS line currently in nixpkgs.
@@ -15,18 +14,23 @@ let
     || (lib.versionAtLeast kernelVersion "6.12.84"
       && lib.versionOlder kernelVersion "6.13");
 
-  # Linux 7.2 removed strncpy(), which nvidia-open 595.71.05 still calls.
-  # Drop the 7.1 pin once nixpkgs ships a driver that builds against 7.2.
-  patchedKernelPackages =
-    if hasNvidia then pkgs.linuxPackages_7_1 else pkgs.linuxPackages_latest;
-
 in {
-  boot.kernelPackages = lib.mkOverride 1100 patchedKernelPackages;
+  boot.kernelPackages = lib.mkOverride 1100 pkgs.linuxPackages_latest;
 
   assertions = [{
     assertion = copyFailIsFixed;
     message =
       "vital-base requires a kernel new enough for CVE-2026-31431 / Copy Fail.";
+  } {
+    assertion =
+      lib.versionAtLeast kernelVersion "7.3"
+      || (lib.versionAtLeast kernelVersion "7.2.10"
+        && lib.versionOlder kernelVersion "7.3")
+      || (lib.versionAtLeast kernelVersion "6.18.56"
+        && lib.versionOlder kernelVersion "6.19")
+      || (lib.versionAtLeast kernelVersion "6.12.113"
+        && lib.versionOlder kernelVersion "6.13");
+    message = "vital-base requires a kernel fixed for CVE-2026-98432.";
   }];
 
   # Emergency mitigation reference for CVE-2026-31431 / Copy Fail:
