@@ -8,9 +8,10 @@ let
     models = [{
       inherit model;
       gpu = "0,1";
-      max-context = 8192;
+      max-context = 524288;
       kv = "fp8";
-      parallel = 1;
+      parallel = 3;
+      slot-full-context = true;
       vision = "off";
     }];
     engine.ram-reserve-mib = 16384;
