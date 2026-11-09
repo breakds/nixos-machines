@@ -15,12 +15,13 @@ let
     }];
     engine.ram-reserve-mib = 16384;
     server = {
-      host = "127.0.0.1";
+      host = "0.0.0.0";
       port = 11081;
     };
   });
 in {
   environment.systemPackages = [ basalt ];
+  networking.firewall.allowedTCPPorts = [ 11081 ];
 
   systemd.services.basalt-main = {
     description = "Basalt DeepSeek inference server";
