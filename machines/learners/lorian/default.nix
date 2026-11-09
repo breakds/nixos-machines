@@ -12,6 +12,11 @@
   ];
 
   config = {
+    vital.coding-agent = {
+      enabledAgents = [ ];
+      shepherd.enable = false;
+    };
+
     networking = {
       hostName = "lorian";
       hostId = "8e549b2e";
