@@ -190,6 +190,8 @@
     # Measured acceptance is 0.73 over 3 positions (0.83 / 0.70 / 0.67), so
     # ~2.2 of every 3 drafted tokens land — worth keeping at 3.
     services.vllm.instances.main = {
+      # Disabled during the Basalt experiment; retain settings and on-disk caches.
+      enable = false;
       model = "unsloth/Qwen3.8-27B-NVFP4";
       tensorParallelSize = 2;
       gpuMemoryUtilization = 0.9178;
