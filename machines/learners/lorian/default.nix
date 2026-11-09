@@ -5,6 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./basalt.nix
     ../common.nix
     ../cassandra.nix
     ../../../users/xin.nix
