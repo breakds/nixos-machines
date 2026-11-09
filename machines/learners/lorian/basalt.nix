@@ -10,7 +10,7 @@ let
       gpu = "0,1";
       max-context = 524288;
       kv = "fp8";
-      parallel = 3;
+      parallel = 1;
       slot-full-context = true;
       vision = "off";
     }];
