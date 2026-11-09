@@ -1,0 +1,55 @@
+diff --git a/src/prefill/mmq/mmq_load_tiles.cuh b/src/prefill/mmq/mmq_load_tiles.cuh
+index 9ddc3985..9e6332cb 100644
+--- a/src/prefill/mmq/mmq_load_tiles.cuh
++++ b/src/prefill/mmq/mmq_load_tiles.cuh
+@@ -150,13 +150,12 @@ template <ggml_type type, int J, bool fallback> static __device__ __forceinline_
+         const block_iq1_s * bxi = (const block_iq1_s *) x + kbx0 + i*stride;
+ 
+         const int       qs_packed = get_int_b2(bxi->qs, kqsx);
+-        const uint8_t * qs        = (const uint8_t *) &qs_packed;
+ 
+         const int qh = bxi->qh[kqsx];
+ 
+ #pragma unroll
+         for (int l = 0; l < QR1_S/2; ++l) {
+-            const int grid = iq1s_grid_gpu[qs[l] | (((qh >> (3*l)) & 0x07) << 8)];
++            const int grid = iq1s_grid_gpu[packed_byte(qs_packed, l) | (((qh >> (3*l)) & 0x07) << 8)];
+ 
+             const int grid0 = (grid >> 0) & 0x0F0F0F0F;
+             const int grid1 = (grid >> 4) & 0x0F0F0F0F;
+diff --git a/tests/cuda/prefill_mmq_iq1s_test.cpp b/tests/cuda/prefill_mmq_iq1s_test.cpp
+index c32a018d..a3c0edb4 100644
+--- a/tests/cuda/prefill_mmq_iq1s_test.cpp
++++ b/tests/cuda/prefill_mmq_iq1s_test.cpp
+@@ -219,6 +219,14 @@ bool mmq_checks(ggml_type t, int64_t w_rows, int64_t w_cols, std::mt19937& rng)
+     const double rev_rel = diff(y, rev, counts[1]);
+ 
+     // the matvec the prompt path ran before, one column at a time on the same activations
++    // IQ1_S decode uses the grouped expert kernel, not native_mmvq.
++    if (t == GGML_TYPE_IQ1_S) {
++        const bool pass = alone_rel < 1e-5 && rev_rel < 1e-5;
++        std::printf("%s %lld x %lld: launch-independent rel RMS %.2e, row order %.2e  %s\n",
++                    ggml_type_name(t), (long long) w_rows, (long long) w_cols, alone_rel, rev_rel, pass ? "ok" : "FAIL");
++        return pass;
++    }
++
+     Dev dq1(kg::native_q8_1_bytes((int) w_cols, 1)), dv((size_t) w_rows * 4);
+     cudaStream_t st = nullptr;
+     ck(cudaStreamCreate(&st), "stream");
+@@ -260,6 +268,7 @@ int main() {
+         const char* what;
+     };
+     for (const Case& c : {Case{GGML_TYPE_IQ1_S, 4608, 5120, "IQ1_S gate+up 5120 -> 4608"},
++                          Case{GGML_TYPE_IQ1_S, 5120, 2304, "IQ1_S down 2304 -> 5120"},
+                           Case{GGML_TYPE_IQ1_M, 4608, 5120, "IQ1_M gate+up 5120 -> 4608"},
+                           Case{GGML_TYPE_IQ1_M, 5120, 2304, "IQ1_M down 2304 -> 5120"},
+                           Case{GGML_TYPE_IQ2_XXS, 5120, 2304, "IQ2_XXS down 2304 -> 5120"},
+@@ -273,7 +282,7 @@ int main() {
+         std::printf("%s: rel RMS %.2e, worst row %.2e, %.0f us/product (257 rows), %.1f int8 TOP/s  %s\n", c.what, r.rel_rms,
+                     r.worst_row, r.us, r.tops, pass ? "ok" : "FAIL");
+     }
+-    for (ggml_type t : {GGML_TYPE_IQ1_M, GGML_TYPE_IQ2_XXS, GGML_TYPE_IQ2_XS}) {
++    for (ggml_type t : {GGML_TYPE_IQ1_S, GGML_TYPE_IQ1_M, GGML_TYPE_IQ2_XXS, GGML_TYPE_IQ2_XS}) {
+         ok = mmq_checks(t, 4608, 5120, rng) && ok;
+         ok = mmq_checks(t, 5120, 2304, rng) && ok;
+     }

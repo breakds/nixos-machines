@@ -17,6 +17,9 @@ in cudaPackages.backendStdenv.mkDerivation {
     hash = "sha256-jmbTautmDwx25+bZiyj4561KBJ328/RktRScU/MQW+Q=";
   };
 
+  # Avoid corrupted IQ1_S prompt processing with CUDA 13.2.
+  patches = [ ./iq1s-prefill.patch ];
+
   nativeBuildInputs = [ cmake ninja makeWrapper autoAddDriverRunpath ];
   buildInputs = [ toolkit ];
 
