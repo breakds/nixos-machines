@@ -23,6 +23,14 @@
       hostId = "8e549b2e";
     };
 
+    security.sudo.extraRules = [{
+      users = [ "breakds" ];
+      commands = [{
+        command = "ALL";
+        options = [ "NOPASSWD" ];
+      }];
+    }];
+
     # Mitigate recurring RTX 5090 Xid 79 "fallen off the bus" events.
     # The failing device has consistently been the card at PCI 0000:61:00.0.
     #
