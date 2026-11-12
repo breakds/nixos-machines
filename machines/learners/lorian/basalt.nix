@@ -14,6 +14,7 @@ let
       slot-full-context = true;
       vision = "off";
     }];
+    engine.spec = 8;
     engine.ram-reserve-mib = 16384;
     server = {
       host = "0.0.0.0";
