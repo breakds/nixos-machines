@@ -1,4 +1,4 @@
-# From nixpkgs master; remove when our nixpkgs pin includes bambu_lab.
+# Based on nixpkgs; keep the cache-path patch until upstream fixes the upload API.
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/home-assistant/custom-components/bambu_lab/package.nix
 {
   lib,
@@ -26,6 +26,12 @@ buildHomeAssistantComponent (finalAttrs: {
   };
 
   dependencies = [ beautifulsoup4 ];
+
+  patches = [ ./restrict-cache-paths.patch ];
+
+  postPatch = ''
+    cp ${./test_cache_paths.py} tests/test_cache_paths.py
+  '';
 
   nativeCheckInputs = [
     paho-mqtt

@@ -38,7 +38,11 @@ in {
           };
           inherit (unstable)
             claude-code-bin codex pi-coding-agent ollama
-            home-assistant-custom-components stt-server niri shepherd;
+            stt-server niri shepherd;
+          home-assistant-custom-components = unstable.home-assistant-custom-components // {
+            bambu_lab = final.home-assistant.python3Packages.callPackage
+              ../nix/pkgs/bambu_lab/package.nix { };
+          };
           ollama-cuda = unstable.ollama-cuda or prev.ollama-cuda;
           shuriken = final.callPackage ../pkgs/shuriken { };
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel { };

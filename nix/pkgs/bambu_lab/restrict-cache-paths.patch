@@ -1,0 +1,36 @@
+--- a/custom_components/bambu_lab/__init__.py
++++ b/custom_components/bambu_lab/__init__.py
+@@ -307,13 +307,22 @@
+             # includes the serial) so we need to allow for that.
+-            base_cache_path = Path(coordinator.get_file_cache_directory()).parent
+-            local_path = str(base_cache_path / cache_path)
+-
+-            # local_path is of form '/config/www/media/ha-bambulab/<SERIAL>/prints/<file_size>-Fidgets_v14.3mf'
+-            #                    or '/config/www/media/ha-bambulab/<SERIAL>/prints/cache/<file_size>-Fidgets_v14.3mf'
+-            # Depending where the print source chose to put the file onto the printer.
+-            # Orca likes the root. Bambu Studio likes the cache directory.
+-            remote_path_index = cache_path.find('/prints/')
+-            if remote_path_index == -1:
+-                return web.json_response({"error": "cache_path invalid - does not include '/prints/'"}, status=400)
+-            remote_path = cache_path[remote_path_index+len('/prints'):]  # e.g., '/cache/Fidgets_v14.3mf'
++            printer_cache_path = Path(coordinator.get_file_cache_directory()).resolve()
++            base_cache_path = printer_cache_path.parent
++            if not isinstance(cache_path, str):
++                return web.json_response({"error": "Invalid cache path"}, status=400)
++            relative_path = Path(cache_path)
++            if (relative_path.is_absolute() or ".." in relative_path.parts
++                    or len(relative_path.parts) < 3 or relative_path.parts[1] != "prints"):
++                return web.json_response({"error": "Invalid cache path"}, status=400)
++
++            # Allow cross-printer uploads, but neither reads nor writes outside the cache.
++            local_path = (base_cache_path / relative_path).resolve()
++            print_path = Path(*relative_path.parts[2:])
++            destination_path = (printer_cache_path / "prints" / print_path).resolve()
++            try:
++                local_path.relative_to(base_cache_path)
++                destination_path.relative_to(printer_cache_path)
++            except ValueError:
++                return web.json_response({"error": "Access denied"}, status=403)
++            local_path = str(local_path)
++            remote_path = "/" + print_path.as_posix()
+             LOGGER.debug(f"EnsureCacheFileAPIView: local_path={local_path}, remote_path={remote_path}")
