@@ -197,7 +197,8 @@ rec {
     port = 7030;
   };
 
-  # All loopback-only. `app` is the one to open in a browser.
+  # `app` is the one to open in a browser. `runtime` and `gateway` are
+  # loopback-only.
   dccc = {
     ports = {
       app = 7400;
