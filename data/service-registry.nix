@@ -197,6 +197,16 @@ rec {
     port = 7030;
   };
 
+  # All loopback-only. `app` is the one to open in a browser.
+  dccc = {
+    ports = {
+      app = 7400;
+      pages = 7401;
+      runtime = 7410;
+      gateway = 7411;
+    };
+  };
+
   shepherd = {
     port = 10201;
   };

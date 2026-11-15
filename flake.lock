@@ -105,6 +105,21 @@
     },
     "crane": {
       "locked": {
+        "lastModified": 1793836618,
+        "narHash": "sha256-TREenflwEjxOSq292FYwbc3kEm7TDRtXCZRNWEdjBmg=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "79fd63528501446749c09f08cad486a58c7d173e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
         "lastModified": 1780099841,
         "narHash": "sha256-EVZd2RsbpreRUDSi9rBwPY+ZxoyMaiEBbZxxhljbaS4=",
         "owner": "ipetkov",
@@ -118,7 +133,7 @@
         "type": "github"
       }
     },
-    "crane_2": {
+    "crane_3": {
       "locked": {
         "lastModified": 1779130139,
         "narHash": "sha256-BLrtr42azquO7MdGFU5a7KiMl3YpFlTeIXqy1fT5GlQ=",
@@ -133,7 +148,7 @@
         "type": "github"
       }
     },
-    "crane_3": {
+    "crane_4": {
       "locked": {
         "lastModified": 1767319442,
         "narHash": "sha256-TXsJUc+nZflFGWLopUxHwdlxYY+ucxbF5IAPLEX5tc4=",
@@ -148,7 +163,7 @@
         "type": "github"
       }
     },
-    "crane_4": {
+    "crane_5": {
       "locked": {
         "lastModified": 1772560058,
         "narHash": "sha256-NuVKdMBJldwUXgghYpzIWJdfeB7ccsu1CC7B+NfSoZ8=",
@@ -163,7 +178,7 @@
         "type": "github"
       }
     },
-    "crane_5": {
+    "crane_6": {
       "locked": {
         "lastModified": 1767461147,
         "narHash": "sha256-TH/xTeq/RI+DOzo+c+4F431eVuBpYVwQwBxzURe7kcI=",
@@ -178,7 +193,7 @@
         "type": "github"
       }
     },
-    "crane_6": {
+    "crane_7": {
       "locked": {
         "lastModified": 1778106249,
         "narHash": "sha256-cM/AuKy5tMhwOOQIbha8ZRRMHVfNf7cv2aljIw+qoCg=",
@@ -193,7 +208,7 @@
         "type": "github"
       }
     },
-    "crane_7": {
+    "crane_8": {
       "locked": {
         "lastModified": 1768873933,
         "narHash": "sha256-CfyzdaeLNGkyAHp3kT5vjvXhA1pVVK7nyDziYxCPsNk=",
@@ -228,6 +243,30 @@
         "ref": "master",
         "repo": "nix-darwin",
         "type": "github"
+      }
+    },
+    "dccc": {
+      "inputs": {
+        "crane": "crane",
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794783309,
+        "narHash": "sha256-GSp5rVlIbIHAsZdoP3xIestdegd+PdALQbYNzDO2gXw=",
+        "ref": "refs/heads/main",
+        "rev": "5d538566211aa3721b0b7612a614c374087874c1",
+        "revCount": 20,
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/dccc"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/breakds/dccc"
       }
     },
     "flake-compat": {
@@ -398,7 +437,7 @@
     "glovebox": {
       "inputs": {
         "advisory-db": "advisory-db",
-        "crane": "crane",
+        "crane": "crane_2",
         "flake-parts": [
           "flake-parts"
         ],
@@ -464,7 +503,7 @@
     },
     "lanzaboote": {
       "inputs": {
-        "crane": "crane_2",
+        "crane": "crane_3",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -534,7 +573,7 @@
     "muxwarden": {
       "inputs": {
         "advisory-db": "advisory-db_2",
-        "crane": "crane_3",
+        "crane": "crane_4",
         "flake-parts": "flake-parts_3",
         "nixpkgs": [
           "nixpkgs-unstable"
@@ -667,7 +706,7 @@
     "reading-desk": {
       "inputs": {
         "advisory-db": "advisory-db_5",
-        "crane": "crane_7",
+        "crane": "crane_8",
         "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "toylet-notes",
@@ -691,6 +730,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "dccc": "dccc",
         "flake-parts": "flake-parts",
         "game-solutions": "game-solutions",
         "glovebox": "glovebox",
@@ -734,7 +774,7 @@
     "shepherd": {
       "inputs": {
         "advisory-db": "advisory-db_3",
-        "crane": "crane_4",
+        "crane": "crane_5",
         "flake-parts": [
           "flake-parts"
         ],
@@ -785,7 +825,7 @@
     "stt-server": {
       "inputs": {
         "advisory-db": "advisory-db_4",
-        "crane": "crane_5",
+        "crane": "crane_6",
         "flake-parts": "flake-parts_4",
         "ml-pkgs": [
           "ml-pkgs"
@@ -855,7 +895,7 @@
     },
     "tiny-share": {
       "inputs": {
-        "crane": "crane_6",
+        "crane": "crane_7",
         "flake-parts": [
           "flake-parts"
         ],

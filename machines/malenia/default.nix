@@ -7,6 +7,7 @@
     ../../modules/syncthing.nix
     ../../modules/localsend.nix
     ./services/shepherd-fleet.nix
+    ./services/dccc.nix
   ];
 
   config = {

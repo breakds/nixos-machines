@@ -60,6 +60,10 @@
     shepherd.inputs.nixpkgs.follows = "nixpkgs-unstable";
     shepherd.inputs.flake-parts.follows = "flake-parts";
     shepherd.inputs.tiny-share.follows = "tiny-share";
+
+    dccc.url = "git+ssh://git@github.com/breakds/dccc";
+    dccc.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    dccc.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs = { self, flake-parts, ... }@inputs:
