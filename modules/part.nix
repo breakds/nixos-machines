@@ -47,6 +47,9 @@ in {
           shuriken = final.callPackage ../pkgs/shuriken { };
           pass-fuzzel = final.callPackage ../pkgs/pass-fuzzel { };
           hunk = final.callPackage ../pkgs/hunk { };
+          zellij-unwrapped = final.callPackage ../nix/pkgs/zellij/package.nix {
+            inherit (prev) zellij-unwrapped;
+          };
         })
       ];
     };
