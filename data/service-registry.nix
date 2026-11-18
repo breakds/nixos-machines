@@ -75,6 +75,14 @@ rec {
     port = 28981;
   };
 
+  sftpgo = {
+    domain = "files.breakds.org";
+    ports = {
+      client = 18082; # Served through nginx.
+      admin = 18083; # Access through an SSH tunnel.
+    };
+  };
+
   immich = {
     domain = "pic.breakds.org";
     port = 2283;
