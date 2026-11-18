@@ -194,10 +194,16 @@
 
       # TODO(breakds): Make this per virtual host.
       clientMaxBodySize = "1000m";
+
+      virtualHosts."files.breakds.org" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".return = "503";
+      };
     };
 
     vital.services.filerun = {
-      enable = true;
+      enable = false;
       workDir = "/var/lib/filerun";
       port = 5962;
       domain = "files.breakds.org";
