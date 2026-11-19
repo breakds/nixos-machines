@@ -19,7 +19,6 @@
     ./services/media.nix
     # ./services/terraria.nix
     ./services/docker-registry.nix
-    ./services/paperless.nix
     ./services/sftpgo.nix
     ./services/game-solutions.nix
     ./services/glance.nix

@@ -48,8 +48,6 @@ let clock = {
           icon = "/assets/plex.svg"; }
         { title = "Grafana"; url = "https://grafana.breakds.org/";
           icon = "/assets/grafana.svg"; }
-        { title = "Paperless"; url = "https://paperless.breakds.org/";
-          icon = "/assets/paperless.svg"; }
         { title = "Kiseki"; url = "https://kiseki.breakds.org/";
           icon = "/assets/kiseki.png"; }
         { title = "Karakeep"; url = "https://karakeep.breakds.org/";

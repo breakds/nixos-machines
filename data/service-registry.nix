@@ -70,11 +70,6 @@ rec {
     };
   };
 
-  paperless = {
-    domain = "paperless.breakds.org";
-    port = 28981;
-  };
-
   sftpgo = {
     domain = "files.breakds.org";
     ports = {
