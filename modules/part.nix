@@ -103,7 +103,6 @@ in {
     localsend = import ./localsend.nix;
     qmk = import ./qmk.nix;
     sunshine = import ./sunshine.nix;
-    filerun = import ./filerun.nix; # TODO(breakds): Upgrade filerun
     arduino = import ./arduino.nix;
     printing = import ./priting.nix;
   };

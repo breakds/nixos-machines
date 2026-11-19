@@ -31,7 +31,6 @@ in {
       self.nixosModules.ollama
       self.nixosModules.glance
       self.nixosModules.prometheus-exporters
-      self.nixosModules.filerun
 
       inputs.toylet-notes.nixosModules.default
       inputs.stt-server.nixosModules.default

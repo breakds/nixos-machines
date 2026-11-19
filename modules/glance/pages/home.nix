@@ -36,8 +36,8 @@ let clock = {
       cache = "1m";
       title = "Host Services";
       sites = [
-        { title = "FileRun"; url = "https://files.breakds.org/";
-          icon = "/assets/filerun.png"; }
+        { title = "SFTPGo"; url = "https://files.breakds.org/";
+          icon = "https://files.breakds.org/static/favicon.png"; }
         { title = "Blog"; url = "https://www.breakds.org/";
           icon = "/assets/tech_blog.png"; }
         { title = "Docker"; url = "https://docker.breakds.org/";
