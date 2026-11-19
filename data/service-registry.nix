@@ -72,9 +72,10 @@ rec {
 
   sftpgo = {
     domain = "files.breakds.org";
+    adminDomain = "files-admin.breakds.net";
     ports = {
       client = 18082; # Served through nginx.
-      admin = 18083; # Access through an SSH tunnel.
+      admin = 18083; # Served through nginx on the home LAN.
     };
   };
 

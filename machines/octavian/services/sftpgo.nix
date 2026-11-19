@@ -4,7 +4,7 @@ let
   registry = import ../../../data/service-registry.nix;
   info = registry.sftpgo;
   clientURL = "https://${info.domain}";
-  adminURL = "http://127.0.0.1:${toString info.ports.admin}";
+  adminURL = "https://${info.adminDomain}";
   nasHome = "/srv/nas/user-files";
   privateFolders = [ "paperless" "other" ".filerun.trash" ];
   oidc = {
@@ -13,6 +13,15 @@ let
     config_url = "https://${registry.kanidm.domain}/oauth2/openid/sftpgo";
     username_field = "preferred_username";
     scopes = [ "openid" "profile" ];
+  };
+  # Both listeners receive HTTPS requests through the local nginx proxy.
+  proxySettings = {
+    proxy_allowed = [ "127.0.0.1" ];
+    client_ip_proxy_header = "X-Real-IP";
+    security = {
+      enabled = true;
+      https_proxy_headers = [ { key = "X-Forwarded-Proto"; value = "https"; } ];
+    };
   };
 in {
   age.secrets.kanidm-oauth-sftpgo = {
@@ -76,7 +85,7 @@ in {
     settings = {
       data_provider.users_base_dir = "/var/lib/sftpgo/users";
       httpd.bindings = [
-        {
+        (proxySettings // {
           address = "127.0.0.1";
           port = info.ports.client;
           disabled_login_methods = 8; # Disable the WebClient password form.
@@ -84,21 +93,15 @@ in {
           enable_web_admin = false;
           enable_rest_api = false;
           render_openapi = false;
-          proxy_allowed = [ "127.0.0.1" ];
-          client_ip_proxy_header = "X-Real-IP";
-          security = {
-            enabled = true;
-            https_proxy_headers = [ { key = "X-Forwarded-Proto"; value = "https"; } ];
-          };
-        }
-        {
+        })
+        (proxySettings // {
           address = "127.0.0.1";
           port = info.ports.admin;
           disabled_login_methods = 4; # Disable the WebAdmin password form.
           oidc = oidc // { redirect_base_url = adminURL; role_field = "sftpgo_role"; };
           enable_web_client = false;
           enable_rest_api = false;
-        }
+        })
       ];
     };
   };
@@ -143,5 +146,22 @@ in {
     enableACME = true;
     forceSSL = true;
     locations."/".proxyPass = "http://127.0.0.1:${toString info.ports.client}";
+  };
+
+  security.acme.certs."${info.adminDomain}" = {
+    dnsProvider = "cloudflare";
+    group = config.services.nginx.group;
+    environmentFile = "/home/breakds/certs/cloudflare.env";
+  };
+  services.nginx.virtualHosts."${info.adminDomain}" = {
+    forceSSL = true;
+    useACMEHost = info.adminDomain;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString info.ports.admin}";
+      extraConfig = ''
+        allow 10.77.1.0/24;
+        deny all;
+      '';
+    };
   };
 }
