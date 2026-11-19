@@ -5,6 +5,8 @@ let
   info = registry.sftpgo;
   clientURL = "https://${info.domain}";
   adminURL = "http://127.0.0.1:${toString info.ports.admin}";
+  nasHome = "/srv/nas/user-files";
+  privateFolders = [ "paperless" "other" ".filerun.trash" ];
   oidc = {
     client_id = "sftpgo";
     client_secret_file = config.age.secrets.kanidm-oauth-sftpgo.path;
@@ -46,7 +48,8 @@ in {
     # WebAdmin and WebClient use separate accounts for the same Kanidm identity.
     # Create missing accounts once; preserve later edits on restart.
     extraArgs = [ "--loaddata-mode" "1" ];
-    loadDataFile = pkgs.writeText "sftpgo-pilot-accounts.json" (builtins.toJSON {
+    extraReadWriteDirs = [ "${nasHome}/Uploads" ];
+    loadDataFile = pkgs.writeText "sftpgo-accounts.json" (builtins.toJSON {
       version = 17;
       admins = [ {
         username = "breakds";
@@ -58,8 +61,16 @@ in {
       users = [ {
         username = "breakds";
         status = 1;
-        home_dir = "/var/lib/sftpgo/users/pilot";
-        permissions."/" = [ "list" "download" "upload" "create_dirs" ];
+        home_dir = nasHome;
+        permissions = {
+          "/" = [ "list" "download" ];
+          "/Uploads" = [ "list" "download" "upload" "create_dirs" ];
+        };
+        filters.file_patterns = [ {
+          path = "/";
+          denied_patterns = privateFolders;
+          deny_policy = 1; # Hide the masked directories in WebClient.
+        } ];
       } ];
     });
     settings = {
@@ -94,11 +105,37 @@ in {
 
   systemd.services.sftpgo = {
     # SFTPGo discovers the issuer through nginx during startup.
-    after = [ "kanidm.service" "nginx.service" ];
+    after = [ "kanidm.service" "nginx.service" "zfs-mount.service" ];
+    unitConfig.RequiresMountsFor = "/srv/nas";
+    # The create-only seed preserves live accounts. Migrate the existing pilot
+    # once, expiring its public shares before their paths get a different root.
+    preStart = ''
+      if [ -f sftpgo.db ]; then
+        ${pkgs.sqlite}/bin/sqlite3 -bail sftpgo.db <<'SQL'
+        BEGIN IMMEDIATE;
+        CREATE TEMP VIEW pilot AS
+          SELECT id FROM users WHERE username = 'breakds' AND home_dir = '/var/lib/sftpgo/users/pilot';
+        DELETE FROM shares WHERE user_id IN (SELECT id FROM pilot);
+        WITH nas(account) AS (
+          SELECT json_extract(CAST(readfile('${config.services.sftpgo.loadDataFile}') AS TEXT), '$.users[0]')
+        )
+        UPDATE users SET
+          home_dir = json_extract(nas.account, '$.home_dir'),
+          permissions = json_extract(nas.account, '$.permissions'),
+          filters = json_set(COALESCE(CAST(filters AS TEXT), '{}'), '$.file_patterns',
+                             json_extract(nas.account, '$.filters.file_patterns')),
+          updated_at = CAST(unixepoch('subsec') * 1000 AS INTEGER)
+        FROM nas WHERE users.id IN (SELECT id FROM pilot);
+        COMMIT;
+      SQL
+      fi
+    '';
     serviceConfig = {
+      ExecCondition = "${pkgs.util-linux}/bin/findmnt --mountpoint /srv/nas --types zfs --source VAULT_ROOT/nas --noheadings";
       Restart = "on-failure";
       RestartSec = "10s";
-      InaccessiblePaths = [ "-/var/lib/filerun" ];
+      InaccessiblePaths = [ "-/var/lib/filerun" "-/srv/nas/web" "-/srv/nas/db" "-/var/lib/paperless" ]
+        ++ map (name: "${nasHome}/${name}") privateFolders;
     };
   };
 

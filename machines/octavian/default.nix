@@ -196,13 +196,6 @@
       clientMaxBodySize = "1000m";
     };
 
-    vital.services.filerun = {
-      enable = false;
-      workDir = "/var/lib/filerun";
-      port = 5962;
-      domain = "files.breakds.org";
-    };
-
     services.borgbackup = {
       repos.orbekk = {
         authorizedKeys = [
