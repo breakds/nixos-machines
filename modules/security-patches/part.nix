@@ -28,6 +28,20 @@
     buildGoModule = prev.buildGoModule.override { go = patchedGo126; };
     buildGo127Module = prev.buildGo127Module.override { go = patchedGo127; };
   in {
+    # CVE-2026-123633 and CVE-2026-123007 (HTTP/2). Remove once both pins
+    # ship nginxStable >= 1.30.7 (nixpkgs#589970).
+    nginxStable = if prev.lib.versionAtLeast prev.nginxStable.version "1.30.7" then
+      prev.nginxStable
+    else
+      prev.nginxStable.overrideAttrs (finalAttrs: _: {
+        version = "1.30.7";
+        nginxVersion = finalAttrs.version;
+        src = prev.fetchurl {
+          url = "https://nginx.org/download/nginx-${finalAttrs.version}.tar.gz";
+          hash = "sha256-JWW1yDcFDpWPcPsPc8SOK8pFQq00n9NW9G+wxyYQvG4=";
+        };
+      });
+
     tailscale = if prev.lib.versionAtLeast prev.tailscale.version "1.104.2" then
       prev.tailscale
     else
