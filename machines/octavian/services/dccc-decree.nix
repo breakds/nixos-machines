@@ -31,6 +31,9 @@ in {
         proxy_ssl_server_name on;
         proxy_ssl_name dccc.breakds.net;
         proxy_ssl_verify on;
+        # nginx checks 1 level by default; Let's Encrypt's chain needs 2, or 3
+        # through a cross-signed root.
+        proxy_ssl_verify_depth 3;
         proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
       '';
     };
