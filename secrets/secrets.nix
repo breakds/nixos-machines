@@ -13,4 +13,6 @@ in {
   "grafana-secret-key.age".publicKeys = [ breakdsMalenia octavian ];
   # CLOUDFLARE_EMAIL=... and CLOUDFLARE_API_KEY=..., for ACME DNS challenges.
   "cloudflare-env.age".publicKeys = [ breakdsMalenia octavian malenia ];
+  # The Index 01 ring's webhook signing secret, as entered in the Pebble app.
+  "dccc-ring-secret.age".publicKeys = [ breakdsMalenia malenia ];
 }

@@ -36,6 +36,7 @@
     ./services/forgejo
     ./services/kanidm.nix
     ./services/gate.nix
+    ./services/dccc-ring.nix
     ../../base/vpn.nix
     ../../base/vpn-tunnel.nix
   ];

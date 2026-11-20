@@ -201,14 +201,18 @@ rec {
     port = 7030;
   };
 
-  # `app` is the one to open in a browser. `runtime` and `gateway` are
-  # loopback-only.
+  # `app` is the one to open in a browser. `runtime`, `gateway`, and `ring`
+  # are loopback-only. `webhook` serves only POST /ring, for the Index 01
+  # ring; octavian passes it on from `ringDomain`.
   dccc = {
+    ringDomain = "ring.breakds.org";
     ports = {
       app = 7400;
       pages = 7401;
+      webhook = 7402;
       runtime = 7410;
       gateway = 7411;
+      ring = 7412;
     };
   };
 
