@@ -13,20 +13,20 @@ in {
     webhookPort = ports.webhook;
     runtimePort = ports.runtime;
     gatewayPort = ports.gateway;
-    ringPort = ports.ring;
+    decreePort = ports.decree;
     # HTTPS, for the microphone: https://dccc.breakds.net:7400.
     useACMEHost = "dccc.breakds.net";
 
-    # Recordings from the Index 01 ring, through ring.breakds.org on
+    # Recordings from the Index 01 ring, through decree.breakds.org on
     # octavian. The secret is the one entered in the Pebble app.
-    ring = {
+    decree = {
       enable = true;
-      secretFile = config.age.secrets.dccc-ring-secret.path;
+      secretFile = config.age.secrets.dccc-decree-secret.path;
     };
   };
 
   # Read by systemd as root (LoadCredential), so root may own it.
-  config.age.secrets.dccc-ring-secret.file = ../../../secrets/dccc-ring-secret.age;
+  config.age.secrets.dccc-decree-secret.file = ../../../secrets/dccc-decree-secret.age;
 
   # As home.breakds.net on octavian: a Cloudflare DNS challenge, for a name
   # that points at malenia's LAN address (DNS only, not proxied).
