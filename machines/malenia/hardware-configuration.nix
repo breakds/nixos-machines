@@ -29,8 +29,9 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home/breakds/draft" =
-    { device = "/dev/disk/by-label/DRAFT";
+  # The data of dccc boxes, one directory each (services/personal-box.nix).
+  fileSystems."/srv/boxes" =
+    { device = "/dev/disk/by-label/BOXES";
       fsType = "ext4";
       # Do not block booting if the disck is missing
       options = [ "auto" "nofail" ];

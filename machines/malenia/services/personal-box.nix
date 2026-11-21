@@ -58,6 +58,29 @@ in {
     localAddress = "10.56.1.2";
   };
 
+  # The box's data lives on the boxes drive: its root, and the workspaces
+  # of its workbenches. container@NAME requires both mounts, so without the
+  # drive the box does not start, rather than fill malenia's root.
+  fileSystems."/var/lib/nixos-containers/${name}" = {
+    device = "/srv/boxes/${name}/root";
+    fsType = "none";
+    options = [ "bind" "nofail" ];
+    depends = [ "/srv/boxes" ];
+  };
+  fileSystems."/var/lib/dccc/boxes/${name}" = {
+    device = "/srv/boxes/${name}/workspaces";
+    fsType = "none";
+    options = [ "bind" "nofail" ];
+    depends = [ "/srv/boxes" ];
+  };
+
+  systemd.services."container@${name}" = {
+    serviceConfig = {
+      MemoryMax = "16G";
+      CPUQuota = "800%";
+    };
+  };
+
   containers.${name}.config = {
     nixpkgs.pkgs = pkgs;
 
