@@ -107,6 +107,7 @@ in {
       curl
       kagiSearch
       w3m
+      poppler-utils
       # For a shell over ssh.
       tmux
       xh
