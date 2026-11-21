@@ -71,6 +71,12 @@ in {
       forgejo-cli
       jq
       curl
+      # For a shell over ssh.
+      tmux
+      xh
+      bat
+      fd
+      btop
     ];
 
     systemd.tmpfiles.rules = [
