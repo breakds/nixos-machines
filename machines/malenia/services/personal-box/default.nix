@@ -18,6 +18,7 @@ let
     { address = "10.77.1.1"; proto = "udp"; port = 53; }    # DNS
     { address = "10.77.1.1"; proto = "tcp"; port = 53; }
     { address = "10.77.1.128"; proto = "tcp"; port = 11081; } # basalt on lorian
+    { address = "10.77.1.131"; proto = "tcp"; port = 22; }    # Forgejo ssh on octavian
   ];
   private = [ "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16" "100.64.0.0/10" "169.254.0.0/16" ];
 
@@ -97,6 +98,30 @@ in {
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     programs.direnv.enable = true;
+
+    # The kirkwoods repo on git.breakds.org, through a deploy key made in the
+    # box (~/.ssh/kirkwoods). Forgejo's ssh does not answer at the public
+    # address, so git goes to octavian on the LAN.
+    programs.ssh.extraConfig = ''
+      Host git.breakds.org
+        HostName 10.77.1.131
+        User forgejo
+        IdentityFile ~/.ssh/kirkwoods
+        IdentitiesOnly yes
+    '';
+    programs.ssh.knownHosts."git.breakds.org" = {
+      hostNames = [ "git.breakds.org" "10.77.1.131" ];
+      publicKeyFile = ../../../../data/keys/octavian_host_ed25519.pub;
+    };
+    programs.git = {
+      enable = true;
+      config = {
+        user.name = "Break Yang";
+        user.email = "bds@breakds.org";
+        # Benches share one checkout of main.
+        pull.rebase = true;
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       pi-coding-agent
