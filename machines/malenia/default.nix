@@ -8,7 +8,7 @@
     ../../modules/localsend.nix
     ./services/shepherd-fleet.nix
     ./services/dccc.nix
-    ./services/personal-box.nix
+    ./services/personal-box
   ];
 
   config = {

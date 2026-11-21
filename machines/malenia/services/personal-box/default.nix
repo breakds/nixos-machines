@@ -52,6 +52,17 @@ let
     };
   });
 
+  # pi skills, one directory each under ./skills, linked into the box.
+  skills = builtins.attrNames (builtins.readDir ./skills);
+
+  # The command of the kagi-search skill. Break puts the key in the box by
+  # hand at ~/.config/kagi/api-key.
+  kagiSearch = pkgs.writeShellApplication {
+    name = "kagi-search";
+    runtimeInputs = [ pkgs.curl pkgs.jq ];
+    text = builtins.readFile ./skills/kagi-search/kagi-search.sh;
+  };
+
 in {
   services.dccc.boxes.${name} = {
     hostAddress = "10.56.1.1";
@@ -94,6 +105,8 @@ in {
       forgejo-cli
       jq
       curl
+      kagiSearch
+      w3m
       # For a shell over ssh.
       tmux
       xh
@@ -107,7 +120,10 @@ in {
       "d ${home}/.pi/agent 0755 ${user} ${group} -"
       "C ${home}/.pi/agent/settings.json 0644 ${user} ${group} - ${piSettings}"
       "L+ ${home}/.pi/agent/models.json - - - - ${piModels}"
-    ];
+      "d ${home}/.pi/agent/skills 0755 ${user} ${group} -"
+      "d ${home}/.config 0755 ${user} ${group} -"
+      "d ${home}/.config/kagi 0700 ${user} ${group} -"
+    ] ++ map (skill: "L+ ${home}/.pi/agent/skills/${skill} - - - - ${./skills + "/${skill}"}") skills;
   };
 
   # What leaves the box for the LAN: only the list above. dccc already closes
