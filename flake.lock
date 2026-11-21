@@ -256,11 +256,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795192154,
-        "narHash": "sha256-4+RIJzwMNNAuE1ST8oj32LR87cAv4UtpZrGCB0Sjnqs=",
+        "lastModified": 1795278317,
+        "narHash": "sha256-0E9WUxw/RfVuky5IkXvZfFkqKYktg7OZ9UWcpQDaoO8=",
         "ref": "refs/heads/main",
-        "rev": "6d99cdaacbed0d617781d20269efecc2339bc18f",
-        "revCount": 119,
+        "rev": "f24885e4869c44d188481dfc39f090bf09d3ab3b",
+        "revCount": 120,
         "type": "git",
         "url": "ssh://git@github.com/breakds/dccc"
       },
