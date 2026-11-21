@@ -207,7 +207,7 @@ rec {
   dccc = {
     decreeDomain = "decree.breakds.org";
     ports = {
-      app = 7400;
+      app = 443;
       pages = 7401;
       webhook = 7402;
       runtime = 7410;

@@ -14,7 +14,7 @@ in {
     runtimePort = ports.runtime;
     gatewayPort = ports.gateway;
     decreePort = ports.decree;
-    # HTTPS, for the microphone: https://dccc.breakds.net:7400.
+    # HTTPS, for the microphone: https://dccc.breakds.net/.
     useACMEHost = "dccc.breakds.net";
 
     # Recordings from the Index 01 ring, through decree.breakds.org on
@@ -24,6 +24,24 @@ in {
       secretFile = config.age.secrets.dccc-decree-secret.path;
     };
   };
+
+  # To the app: http://dccc.breakds.net/, and old bookmarks on 7400, both
+  # http:// and https://. Drop 7400 once nothing uses it.
+  config.services.nginx.virtualHosts.dccc-redirect = {
+    listen = [
+      { addr = "0.0.0.0"; port = 80; }
+      { addr = "0.0.0.0"; port = 7400; ssl = true; }
+    ];
+    addSSL = true;
+    useACMEHost = "dccc.breakds.net";
+    extraConfig = ''
+      # Plain HTTP on 7400: 301, not nginx's 400.
+      error_page 497 =301 https://dccc.breakds.net$request_uri;
+    '';
+    locations."/".return = "301 https://dccc.breakds.net$request_uri";
+  };
+
+  config.networking.firewall.allowedTCPPorts = [ 80 7400 ];
 
   # Read by systemd as root (LoadCredential), so root may own it.
   config.age.secrets.dccc-decree-secret.file = ../../../secrets/dccc-decree-secret.age;
