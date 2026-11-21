@@ -76,6 +76,7 @@ rec {
     ports = {
       client = 18082; # Served through nginx.
       admin = 18083; # Served through nginx on the home LAN.
+      webdav = 18084; # Served through nginx at /dav/.
     };
   };
 

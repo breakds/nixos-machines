@@ -14,7 +14,7 @@ let
     username_field = "preferred_username";
     scopes = [ "openid" "profile" ];
   };
-  # Both listeners receive HTTPS requests through the local nginx proxy.
+  # nginx terminates TLS and supplies the client address for Defender.
   proxySettings = {
     proxy_allowed = [ "127.0.0.1" ];
     client_ip_proxy_header = "X-Real-IP";
@@ -83,7 +83,14 @@ in {
       } ];
     });
     settings = {
+      common.defender.enabled = true;
       data_provider.users_base_dir = "/var/lib/sftpgo/users";
+      webdavd.bindings = [ {
+        address = "127.0.0.1";
+        port = info.ports.webdav;
+        prefix = "/dav";
+        inherit (proxySettings) proxy_allowed client_ip_proxy_header;
+      } ];
       httpd.bindings = [
         (proxySettings // {
           address = "127.0.0.1";
@@ -146,6 +153,7 @@ in {
     enableACME = true;
     forceSSL = true;
     locations."/".proxyPass = "http://127.0.0.1:${toString info.ports.client}";
+    locations."/dav/".proxyPass = "http://127.0.0.1:${toString info.ports.webdav}";
   };
 
   security.acme.certs."${info.adminDomain}" = {
