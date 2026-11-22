@@ -36,7 +36,8 @@ in {
         (lib.mkIf (builtins.elem "claude" agents) {
           # User specific claude code configurations
           ".claude/CLAUDE.md".source = ./AGENTS.md;
-          ".claude/settings.json".source = ./claude/settings.json;
+          # Claude watches the directory of the link target; keep it out of the /nix/store root.
+          ".claude/settings.json".source = "${./claude}/settings.json";
           ".claude/custom-scripts/statusline-script.sh".source = ./claude/custom-scripts/statusline-script.sh;
           ".claude/sound/cartoon-tiptoe-marimba-om-fx-1-00-03.mp3".source = ./sound/cartoon-tiptoe-marimba-om-fx-1-00-03.mp3;
           ".claude/sound/notification-alert-you-have-mail-zeroframe-audio-1-00-01.mp3".source = ./sound/notification-alert-you-have-mail-zeroframe-audio-1-00-01.mp3;
