@@ -57,7 +57,7 @@ in {
     # WebAdmin and WebClient use separate accounts for the same Kanidm identity.
     # Create missing accounts once; preserve later edits on restart.
     extraArgs = [ "--loaddata-mode" "1" ];
-    extraReadWriteDirs = [ "${nasHome}/Uploads" ];
+    extraReadWriteDirs = [ nasHome ];
     loadDataFile = pkgs.writeText "sftpgo-accounts.json" (builtins.toJSON {
       version = 17;
       admins = [ {
@@ -71,10 +71,7 @@ in {
         username = "breakds";
         status = 1;
         home_dir = nasHome;
-        permissions = {
-          "/" = [ "list" "download" ];
-          "/Uploads" = [ "list" "download" "upload" "create_dirs" ];
-        };
+        permissions."/" = [ "*" ];
         filters.file_patterns = [ {
           path = "/";
           denied_patterns = privateFolders;
