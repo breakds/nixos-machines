@@ -42,6 +42,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.gnumeric ];
+
     # Enable unfree as it can potentially use Nvidia drivers.
     nixpkgs.config.allowUnfree = true;
 
