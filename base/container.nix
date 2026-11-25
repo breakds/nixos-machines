@@ -14,7 +14,7 @@
     description = "The opereator of the container";
     extraGroups = [ "operator" "wheel" "networkmanager" "nginx" ];
     openssh.authorizedKeys.keyFiles =
-      [ ../data/keys/breakds_samaritan.pub ../data/keys/breakds_malenia.pub ];
+      [ ../data/keys/breakds_malenia.pub ];
   };
 
   # Allow the user "operator" to sudo without typing password
