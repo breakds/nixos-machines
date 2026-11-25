@@ -49,6 +49,7 @@
     services.openssh.settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
+      DenyUsers = [ "brent" "cassandra" "lhh" ];
       # Public SSH serves Git only; shell accounts require LAN or Tailscale.
       AllowUsers = [
         "forgejo"
@@ -230,8 +231,7 @@
     vital.vpn = {
       tailscale = true;
 
-      # Octavian holds Cassandra's work VPN so that her laptop can reach a few
-      # hosts behind it over SSH from anywhere. That VPN only accepts
+      # Octavian holds the work VPN for SSH access. That VPN only accepts
       # connections from this house's WAN address, which is why the tunnel
       # lives here rather than on the laptop.
       #
@@ -242,7 +242,7 @@
       tunnels = [{
         name = "work1";
         port = 23122;
-        authorizedKeyFiles = [ ../../data/keys/cassandra_zen.pub ../../data/keys/breakds_malenia.pub ];
+        authorizedKeyFiles = [ ../../data/keys/breakds_malenia.pub ];
       }];
     };
 

@@ -23,6 +23,8 @@
       hostId = "8e549b2e";
     };
 
+    services.openssh.settings.DenyUsers = [ "brent" "cassandra" ];
+
     security.sudo.extraRules = [{
       users = [ "breakds" ];
       commands = [{

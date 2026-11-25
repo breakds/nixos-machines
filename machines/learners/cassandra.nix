@@ -13,9 +13,6 @@
 	      "audio"
 	      "plugdev"  # Allow members to mount/umount removable devices via pmount.
       ];
-      openssh.authorizedKeys.keyFiles = [
-        ../../data/keys/cassandra_zen.pub
-      ];
     };
   };
 }
