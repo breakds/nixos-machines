@@ -2,19 +2,20 @@
 , autoAddDriverRunpath, python3 }:
 
 let
+  rev = "5b8a82c6b7e1069adbce42854e0732b2b19e4f32";
   python = python3.withPackages (ps: with ps; [
     numpy jinja2 markupsafe regex pyyaml tqdm pillow psutil
   ]);
   toolkit = cudaPackages.cudatoolkit;
 in cudaPackages.backendStdenv.mkDerivation {
   pname = "basalt-inference";
-  version = "0.3.2-unstable-2026-11-08";
+  version = "0.5.7-unstable-2026-11-25";
 
   src = fetchFromGitHub {
     owner = "jesdga95";
     repo = "basalt";
-    rev = "f19f69e68cdb5e6203a20b5c5563b1288fcb35a7";
-    hash = "sha256-jmbTautmDwx25+bZiyj4561KBJ328/RktRScU/MQW+Q=";
+    inherit rev;
+    hash = "sha256-9va1cSMwx+gFVM9urqbGDDkif2y3ZfBDPBYXQKX6Z2A=";
   };
 
   # Avoid corrupted IQ1_S prompt processing with CUDA 13.2.
@@ -31,11 +32,12 @@ in cudaPackages.backendStdenv.mkDerivation {
       --replace-fail 'BASALT_BENCH_FIXTURES="''${CMAKE_CURRENT_SOURCE_DIR}/data/bench"' "BASALT_BENCH_FIXTURES=\"$out/data/bench\"" \
       --replace-fail 'BASALT_BENCH_SOURCE_DIR="''${CMAKE_CURRENT_SOURCE_DIR}"' "BASALT_BENCH_SOURCE_DIR=\"$out\""
     substituteInPlace cmake/git_stamp.cmake \
-      --replace-fail 'set(_git unknown)' 'set(_git f19f69e68c)'
+      --replace-fail 'set(_git unknown)' 'set(_git ${builtins.substring 0 10 rev})'
   '';
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
+    "-DBASALT_MODELS=deepseek41"
     "-DCMAKE_CUDA_ARCHITECTURES=120"
     "-DCMAKE_CUDA_COMPILER=${toolkit}/bin/nvcc"
     "-DCMAKE_CUDA_HOST_COMPILER=${cudaPackages.backendStdenv.cc}/bin/g++"
@@ -53,6 +55,10 @@ in cudaPackages.backendStdenv.mkDerivation {
     runHook preCheck
     (
       cd ..
+      # The upstream flag-coverage test reads Qwen's parser even in a DeepSeek-only build.
+      substituteInPlace serve/tests/test_config.py \
+        --replace-fail 'src/models/qwen4exp/flags.cpp' 'src/models/deepseek41/adapter.cpp' \
+        --replace-fail 'body.index("--gpu-stages")' 'body.index("else return false;")'
       ${python}/bin/python -B -m unittest \
         serve.tests.test_config \
         serve.tests.test_deepseek41_dialect \

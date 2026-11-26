@@ -8,6 +8,7 @@ let
     models = [{
       inherit model;
       gpu = "0,1";
+      gpu-mode = "peer";
       max-context = 524288;
       kv = "fp8";
       parallel = 1;
@@ -19,6 +20,7 @@ let
     server = {
       host = "0.0.0.0";
       port = 11081;
+      totals-file = "/var/lib/basalt/totals.json";
     };
   });
 in {
