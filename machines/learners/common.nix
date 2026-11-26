@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../users/breakds-sudo.nix
     ../../base/dev/breakds-dev.nix
   ];
 

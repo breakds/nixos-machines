@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../users/breakds-sudo.nix
     ./hardware-configuration.nix
     ../../base/dev/breakds-dev.nix
     ../../modules/syncthing.nix
