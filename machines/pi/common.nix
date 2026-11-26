@@ -3,6 +3,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ../../base/ssh-host-keys.nix ];
+
   # The pinned nixos-hardware Pi kernel predates the IPv4 fix. Preserve its
   # Pi-specific drivers and backport the upstream fix until it catches up.
   boot.kernelPatches = lib.optional

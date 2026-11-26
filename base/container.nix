@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ./ssh-host-keys.nix ];
+
   boot.isContainer = true;
   services.openssh = {
     enable = lib.mkDefault true;

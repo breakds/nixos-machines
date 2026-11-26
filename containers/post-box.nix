@@ -62,6 +62,7 @@ in {
       localAddress = "${cfg.localIp}/${toString cfg.prefixLength}";
 
       config = { ... }: {
+        imports = [ ../base/ssh-host-keys.nix ];
         nixpkgs.pkgs = pkgs;
         system.stateVersion = config.system.stateVersion;
 

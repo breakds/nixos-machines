@@ -94,6 +94,7 @@ in {
   };
 
   containers.${name}.config = {
+    imports = [ ../../../../base/ssh-host-keys.nix ];
     nixpkgs.pkgs = pkgs;
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

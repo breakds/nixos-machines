@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ../../base/ssh-host-keys.nix ];
+
   config = {
     programs = {
       gnupg.agent = {

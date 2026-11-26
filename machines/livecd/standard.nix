@@ -1,6 +1,8 @@
 {config, pkgs, ...}:
 
 {
+  imports = [ ../../base/ssh-host-keys.nix ];
+
   config = {
     nixpkgs.config.allowUnfree = true;
     

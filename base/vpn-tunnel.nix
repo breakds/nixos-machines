@@ -115,6 +115,7 @@ let
       }];
 
       config = { ... }: {
+        imports = [ ./ssh-host-keys.nix ];
         system.stateVersion = config.system.stateVersion;
         nixpkgs.pkgs = pkgs;
 
