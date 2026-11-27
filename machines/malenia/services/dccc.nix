@@ -20,6 +20,10 @@ in {
     secrets = {
       enable = true;
       origin = "https://dccc.breakds.net";
+      kanidm = {
+        issuer = "https://${(import ../../../data/service-registry.nix).kanidm.domain}/oauth2/openid/dccc-secret";
+        clientId = "dccc-secret";
+      };
       actions.dns-list = {
         version = "1";
         entry = "cloudflare/dns-read";

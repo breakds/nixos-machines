@@ -79,6 +79,16 @@ in {
       # OAuth2 clients and capability groups are declared next to their
       # consuming services (e.g. monitor/grafana/oauth2.nix), not here.
       enable = true;
+
+      # Break manages membership privately after checking the account's passkey policy.
+      groups.dccc-secret-approvers.overwriteMembers = false;
+      systems.oauth2.dccc-secret = {
+        displayName = "dccc Secret grants";
+        public = true;
+        originUrl = [ "https://dccc.breakds.net/api/secret/callback" ];
+        originLanding = "https://dccc.breakds.net/secret-grants";
+        scopeMaps.dccc-secret-approvers = [ "openid" ];
+      };
     };
   };
 
