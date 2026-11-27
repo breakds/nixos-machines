@@ -5,7 +5,7 @@ let self = inputs.self;
 in {
   flake.nixosConfigurations.malenia = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit (inputs) nixpkgs-unstable; };
+    specialArgs = { inherit (inputs) nixpkgs-unstable dccc; };
     modules = [
       ./.
       inputs.agenix.nixosModules.default

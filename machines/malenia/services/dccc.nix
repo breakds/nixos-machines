@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, dccc, pkgs, ... }:
 
 let ports = (import ../../../data/service-registry.nix).dccc.ports;
 
@@ -16,6 +16,20 @@ in {
     decreePort = ports.decree;
     # HTTPS, for the microphone: https://dccc.breakds.net/.
     useACMEHost = "dccc.breakds.net";
+
+    secrets = {
+      enable = true;
+      origin = "https://dccc.breakds.net";
+      actions.dns-list = {
+        version = "1";
+        entry = "cloudflare/dns-read";
+        input = "value";
+        destination = "https://api.cloudflare.com/client/v4/zones/{zone-id}/dns_records";
+        parameters = [ "[0-9a-fA-F]{32}" ];
+        fields = [ "type" "name" "content" "ttl" "proxied" ];
+        program = "${dccc.packages.${pkgs.stdenv.hostPlatform.system}.dccc-secret}/bin/dccc-secret-dns-list";
+      };
+    };
 
     # Recordings from the Index 01 ring, through decree.breakds.org on
     # octavian. The secret is the one entered in the Pebble app.
