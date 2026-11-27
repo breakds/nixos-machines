@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../users/breakds-sudo.nix
     ./hardware-configuration.nix
     ./delegator.nix
     ../../users
