@@ -110,15 +110,6 @@ compatibility:
 - `services.pipewire.pulse.enable = true`
 - `security.rtkit.enable = true`
 
-### NetworkManager / Wireless Conflict
-
-The Raspberry Pi kiosk config lets NetworkManager own WiFi. 26.05 produced a
-conflict with `networking.wireless.enable`, so the kiosk config now uses:
-
-```nix
-networking.wireless.enable = lib.mkForce false;
-```
-
 ### OpenSSH Settings Duplicate Key
 
 Container config used `settings.passwordAuthentication`, while other config used
@@ -166,13 +157,11 @@ The final evaluation pass succeeded for every NixOS configuration in
 - `brock`
 - `claw`
 - `fortress`
-- `kiosk`
 - `liveCD`
 - `liveStandardCD`
 - `lorian`
 - `malenia`
 - `octavian`
-- `olden`
 - `radahn`
 
 The local `../nixos-home` Home Manager activation derivations also evaluated for:

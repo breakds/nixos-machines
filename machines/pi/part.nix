@@ -27,15 +27,5 @@ in {
         self.nixosModules.prometheus-exporters
       ];
     };
-
-    kiosk = inputs.nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        ./kiosk
-        ../../modules/vital-base/main-user.nix
-        inputs.nixos-hardware.nixosModules.raspberry-pi-4
-        self.nixosModules.base-overlays
-      ];
-    };
   };
 }

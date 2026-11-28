@@ -96,7 +96,6 @@
         ./machines/grapple/part.nix
         ./machines/ghostberry/part.nix
         ./machines/brock/part.nix
-        ./machines/olden/part.nix
         ./machines/pi/part.nix
         ./machines/livecd/part.nix
         ./containers/part.nix

@@ -55,7 +55,6 @@ in {
     };
 
     graphical = import ./graphical;
-    mpvKiosk = import ./mpv-kiosk.nix;
     iphone-connect = import ./iphone-connect.nix;
     machine-learning = import ./machine-learning.nix;
     flatpak = import ./flatpak.nix;
