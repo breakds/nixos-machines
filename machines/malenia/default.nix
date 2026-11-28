@@ -84,6 +84,13 @@
       mediainfo
     ];
 
+    # Agents run as breakds here. A cached passphrase would let any agent
+    # decrypt Break's pass store, so ask for it on every use.
+    programs.gnupg.agent.settings = {
+      default-cache-ttl = 0;
+      max-cache-ttl = 0;
+    };
+
     services.prometheus.exporters.node.enable = true;
 
     programs.skillful.skills = [

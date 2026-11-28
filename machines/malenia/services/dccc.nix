@@ -24,14 +24,6 @@ in {
         issuer = "https://${(import ../../../data/service-registry.nix).kanidm.domain}/oauth2/openid/dccc-secret";
         clientId = "dccc-secret";
       };
-      actions.dns-list = {
-        version = "1";
-        input = "value";
-        destination = "https://api.cloudflare.com/client/v4/zones/{zone-id}/dns_records";
-        parameters = [ "[0-9a-fA-F]{32}" ];
-        fields = [ "type" "name" "content" "ttl" "proxied" ];
-        program = "${dccc.packages.${pkgs.stdenv.hostPlatform.system}.dccc-secret}/bin/dccc-secret-dns-list";
-      };
     };
 
     # Recordings from the Index 01 ring, through decree.breakds.org on
