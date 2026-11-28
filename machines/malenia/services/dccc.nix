@@ -20,6 +20,8 @@ in {
     secrets = {
       enable = true;
       origin = "https://dccc.breakds.net";
+      # Read with the broker's read-only deploy key; `dccc secret sync` pulls it.
+      store = "ssh://forgejo@${(import ../../../data/service-registry.nix).forgejo.domain}/breakds/dccc-pass.git";
       kanidm = {
         issuer = "https://${(import ../../../data/service-registry.nix).kanidm.domain}/oauth2/openid/dccc-secret";
         clientId = "dccc-secret";
