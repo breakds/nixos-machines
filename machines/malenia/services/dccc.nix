@@ -26,7 +26,7 @@ in {
       };
       actions.dns-list = {
         version = "1";
-        entry = "cloudflare/dns-read";
+        entry = "cloudflare.com/breakds@gmail.com/api_key";
         input = "value";
         destination = "https://api.cloudflare.com/client/v4/zones/{zone-id}/dns_records";
         parameters = [ "[0-9a-fA-F]{32}" ];
