@@ -85,7 +85,11 @@ in {
       systems.oauth2.dccc-secret = {
         displayName = "dccc Secret grants";
         public = true;
-        originUrl = [ "https://dccc.breakds.net/api/secret/callback" ];
+        # The host broker's review, and the personal box broker's.
+        originUrl = [
+          "https://dccc.breakds.net/api/secret/callback"
+          "https://dccc.breakds.net/api/secret/box/personal/callback"
+        ];
         originLanding = "https://dccc.breakds.net/secret-grants";
         scopeMaps.dccc-secret-approvers = [ "openid" ];
       };

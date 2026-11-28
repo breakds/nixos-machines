@@ -100,6 +100,15 @@ in {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     programs.direnv.enable = true;
 
+    # The box's own secret broker: personal secrets in personal-pass, kept
+    # apart from malenia's dccc-pass; approved commands run here. The host
+    # reviews its requests in Secret grants (dccc docs/plans/secret-broker.md).
+    # git.breakds.org goes to octavian on the LAN, by the ssh config below.
+    services.dccc.secrets = {
+      enable = true;
+      store = "ssh://forgejo@git.breakds.org/breakds/personal-pass.git";
+    };
+
     # The kirkwoods repo on git.breakds.org, through a deploy key made in the
     # box (~/.ssh/kirkwoods). Forgejo's ssh does not answer at the public
     # address, so git goes to octavian on the LAN.
