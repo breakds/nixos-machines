@@ -91,6 +91,13 @@
       max-cache-ttl = 0;
     };
 
+    # malenia hosts dccc and every agent: a build that outgrows its share is
+    # slowed, then killed, instead of the whole host running out of memory.
+    systemd.services.nix-daemon.serviceConfig = {
+      MemoryHigh = "64G";
+      MemoryMax = "72G";
+    };
+
     services.prometheus.exporters.node.enable = true;
 
     programs.skillful.skills = [
